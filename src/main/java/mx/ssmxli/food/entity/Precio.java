@@ -15,6 +15,7 @@ public class Precio {
     private String tamano;
     @Column(name = "precio")
     private double precio;
+
     @ManyToOne
     @JoinColumn
     private Alimento alimento;
@@ -24,7 +25,5 @@ public class Precio {
         this.precio = precio;
     }
 
-    public Precio(){
-
-    }
+    public Precio(){}
 }

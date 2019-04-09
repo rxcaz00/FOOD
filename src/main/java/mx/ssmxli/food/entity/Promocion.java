@@ -3,6 +3,7 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,20 +19,19 @@ public class Promocion {
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "fechaI")
-    private String fechaI;
+    private Date fechaI;
     @Column(name = "caducidad")
-    private String caducidad;
+    private Date caducidad;
     @Column(name = "precio")
-    private String precio;
-    /*@Enumerated(EnumType.STRING)
+    private double precio;
     @Column(name = "disponibilidad")
-    private List<String> disponibilidad;*/
+    private String disponibilidad;
 
     @ManyToMany(mappedBy = "promociones")
     private Set<Alimento> alimentos = new HashSet<>();
 
 
-    public Promocion(String nombre, String fechaI, String caducidad, String precio) {
+    public Promocion(String nombre, Date fechaI, Date caducidad, double precio){
         this.nombre = nombre;
         this.fechaI = fechaI;
         this.caducidad = caducidad;
