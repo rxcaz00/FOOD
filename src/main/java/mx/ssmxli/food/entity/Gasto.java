@@ -14,7 +14,7 @@ public class Gasto {
     @Column(name = "id")
     private int id;
     @Column(name = "monto")
-    private Double monto;
+    private double monto;
     @Column(name = "fecha")
     private Date fecha;
     @Column(name = "descripcion")
@@ -26,7 +26,5 @@ public class Gasto {
         this.descripcion = descripcion;
     }
 
-    public Gasto(){
-
-    }
+    public Gasto(){}
 }

@@ -4,6 +4,7 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,8 +19,13 @@ public class Cliente {
     private String direccion;
     @Column(name = "correo")
     private String correo;
-    @Column(name = "RFC", length = 13)
+    @Column(name = "RFC", length = 15)
     private String RFC;
+    @Column(name = "puntos")
+    private int puntos;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private Set<Recibo> recibos;
 
     public Cliente(String nombre, String direccion, String telefono, String correo, String RFC) {
         this.nombre = nombre;
