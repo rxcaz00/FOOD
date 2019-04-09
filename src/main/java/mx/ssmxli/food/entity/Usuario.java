@@ -1,4 +1,4 @@
-package mx.ssmxli.food.Entity;
+package mx.ssmxli.food.entity;
 
 
 import lombok.Data;

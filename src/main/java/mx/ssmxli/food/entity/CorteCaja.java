@@ -1,8 +1,10 @@
-package mx.ssmxli.food.Entity;
+package mx.ssmxli.food.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -13,7 +15,7 @@ public class CorteCaja {
     @Column(name = "id")
     private int id;
     @Column(name = "fecha")
-    private String fecha;
+    private Date fecha;
     @Column(name = "caja")
     private double caja;
     @Column(name="corte")
@@ -23,7 +25,7 @@ public class CorteCaja {
     @Column(name = "tarjeta")
     private double tarjeta;
     @Column(name = "pago")
-    private  double pago;
+    private double pago;
     @Column(name = "compra")
     private double compra;
     @Column(name = "diferencia")
@@ -35,7 +37,7 @@ public class CorteCaja {
 
     public CorteCaja(){}
 
-    public CorteCaja(String fecha, double caja, double corte, double venta, double tarjeta, double pago, double compra, double diferencia, String elaboro, String reviso) {
+    public CorteCaja(Date fecha, double caja, double corte, double venta, double tarjeta, double pago, double compra, double diferencia, String elaboro, String reviso) {
         this.fecha = fecha;
         this.caja = caja;
         this.corte = corte;

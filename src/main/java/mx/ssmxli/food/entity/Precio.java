@@ -1,4 +1,4 @@
-package mx.ssmxli.food.Entity;
+package mx.ssmxli.food.entity;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Set;
@@ -15,9 +15,9 @@ public class Precio {
     private String tamano;
     @Column(name = "precio")
     private double precio;
-
-    @OneToMany(mappedBy = "precio", cascade = CascadeType.ALL)
-    private Set<Alimento> alimentos;
+    @ManyToOne
+    @JoinColumn
+    private Alimento alimento;
 
     public Precio(String tamano, double precio) {
         this.tamano = tamano;

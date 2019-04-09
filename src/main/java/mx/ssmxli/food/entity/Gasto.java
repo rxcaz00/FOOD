@@ -1,4 +1,4 @@
-package mx.ssmxli.food.Entity;
+package mx.ssmxli.food.entity;
 
 import lombok.Data;
 
@@ -14,13 +14,13 @@ public class Gasto {
     @Column(name = "id")
     private int id;
     @Column(name = "monto")
-    private String monto;
+    private Double monto;
     @Column(name = "fecha")
     private Date fecha;
     @Column(name = "descripcion")
     private String descripcion;
 
-    public Gasto(String monto, Date fecha, String descripcion) {
+    public Gasto(Double monto, Date fecha, String descripcion) {
         this.monto = monto;
         this.fecha = fecha;
         this.descripcion = descripcion;
