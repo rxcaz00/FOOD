@@ -33,7 +33,7 @@ public class ClienteController {
                                       @RequestParam(name = "telefono", required = false) String telefono){
         ClienteModel clienteModel = new ClienteModel();
         if(telefono != null){
-            clienteModel = clienteService.findClienteByTelModel(telefono);
+            clienteModel = clienteService.findClienteByTelefonoModel(telefono);
         }
         model.addAttribute("clienteModel", clienteModel);
         return ViewConstant.CLIENTE_FORM;

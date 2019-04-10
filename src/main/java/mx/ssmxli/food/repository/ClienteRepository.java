@@ -9,5 +9,5 @@ import java.io.Serializable;
 
 @Repository("clienteRepository")
 public interface ClienteRepository extends JpaRepository<Cliente, Serializable> {
-    public abstract Cliente findByTel(String telefono);
+    public abstract Cliente findByTelefono(String telefono);
 }

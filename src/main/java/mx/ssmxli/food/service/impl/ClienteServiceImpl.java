@@ -44,19 +44,19 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente findClienteByTel(String telefono) {
-        return clienteRepository.findByTel(telefono);
+    public Cliente findClienteByTelefono(String telefono) {
+        return clienteRepository.findByTelefono(telefono);
     }
 
-    public ClienteModel findClienteByTelModel(String telefono){
-        return clienteConverter.convertCliente2ClienteModel(findClienteByTel(telefono));
+    public ClienteModel findClienteByTelefonoModel(String telefono){
+        return clienteConverter.convertCliente2ClienteModel(findClienteByTelefono(telefono));
     }
 
     @Override
     public void removeCliente(String telfono) {
-        Cliente cliente  = findClienteByTel(telfono);
+        Cliente cliente  = findClienteByTelefono(telfono);
         if(cliente != null){
-            clienteRepository.delete(findClienteByTel(telfono));
+            clienteRepository.delete(findClienteByTelefono(telfono));
         }
     }
 

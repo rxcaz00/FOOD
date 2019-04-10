@@ -1,5 +1,8 @@
 package mx.ssmxli.food.model;
 
+import lombok.Data;
+
+@Data
 public class CorteCajaModel {
     public int id;
     public String fecha;

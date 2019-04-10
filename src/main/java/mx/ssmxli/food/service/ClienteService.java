@@ -13,10 +13,10 @@ public interface ClienteService {
 
     public abstract List<ClienteModel> listAllClientes();
 
-    public abstract Cliente findClienteByTel(String telefono);
+    public abstract Cliente findClienteByTelefono(String telefono);
 
     public abstract void removeCliente(String telefono);
 
-    public abstract ClienteModel findClienteByTelModel(String telefono);
+    public abstract ClienteModel findClienteByTelefonoModel(String telefono);
 }
 
