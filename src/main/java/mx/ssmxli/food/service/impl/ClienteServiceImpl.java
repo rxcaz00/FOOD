@@ -26,7 +26,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteModel addCliente(ClienteModel clienteModel) {
-        //Aquí nos pide una entidad, por lo tanto tenemos que transformar el contactModel a entidad
         Cliente temp=clienteConverter.convertToClienteModel2Cliente(clienteModel);
         Cliente cliente = clienteRepository.save(temp);
         return clienteConverter.convertCliente2ClienteModel(cliente);

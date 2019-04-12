@@ -1,0 +1,106 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>FOOD - Generar Corte de Caja</title>
+		<link href="../static/css/todo.css" th:href="@{css/todo.css}" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
+	</head>
+	<body>
+    <nav>
+        <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
+        <span class="menu-item"><a href="venta.html"><b>Venta</b></a></span>
+        <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
+        <div class="submenu" id="al">
+            <ul>
+                <li><a href="registrarAlimento.html">Registro</a></li>
+                <li><a href="modificarAlimento.html">Modificación</a></li>
+                <li><a href="eliminarAlimento.html">Eliminación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('pr','f2')"><img class="arrow" id="f2" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Promociones</b></span>
+        <div class="submenu" id="pr">
+            <ul>
+                <li><a href="registrarPromocion.html">Registro</a></li>
+                <li><a href="modificarPromocion.html">Modificación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('cl','f3')"><img class="arrow" id="f3" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Clientes</b></span>
+        <div class="submenu" id="cl">
+            <ul>
+                <li><a href="modificarCliente.html">Modificación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item"><a href="gastos.html"><b>Registro de Gastos</b></a></span>
+        <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item" onClick="show('cc','f4')"><img class="arrow" id="f4" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Corte de Caja</b></span>
+        <div class="submenu" id="cc">
+            <ul>
+                <li><a href="corteCaja.html">Generar actual</a></li>
+                <li><a href="corteCajaHistorial.html">Consultar historial</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('co','f5')"><img class="arrow" id="f5" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Configuración</b></span>
+        <div class="submenu" id="co">
+            <ul>
+                <li><a href="configSis.html">Sistema</a></li>
+                <li><a href="configAcceso.html">Acceso</a></li>
+            </ul>
+        </div>
+    </nav>
+        <div class="container">
+        	<b class="titulo">Generar Corte de Caja</b>
+			<div class="rol">
+				<a href="#">
+					<img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
+				</a>
+				<b>Gerente</b>
+			</div>
+            <hr size=4 color="#CCCCCC">
+            Introduzca la siguiente información para generar el corte de caja:
+            <br><br>
+            <div class="left">
+            <table>
+            	<tr>
+                	<td>Caja:</td>
+                    <td>$<input class="precio" type="number"></td>
+                </tr>
+                <tr>
+                	<td>Corte:</td>
+                    <td>$<input class="precio" type="number" readonly></td>
+                </tr>
+                <tr>
+                	<td>Ventas:</td>
+                    <td>$<input class="precio" type="number" readonly></td>
+                </tr>
+                <tr>
+                	<td>iZettle:</td>
+                    <td>$<input class="precio" type="number" readonly></td>
+                </tr>
+                <tr>
+                	<td>Pagos:</td>
+                    <td>$<input class="precio" type="number" readonly></td>
+                </tr>
+                <tr>
+                	<td>Compras:</td>
+                    <td>$<input class="precio" type="number"></td>
+                </tr>
+                <tr>
+                	<td>Diferencia:</td>
+                    <td>$<input class="precio" type="number" readonly></td>
+                </tr>
+                <tr>
+                	<td>Elaboró:</td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            </div>
+            <form>
+            	<input class="green" type="submit" value="Guardar"><br><br><br><br>
+            	<input class="yellow" type="submit" value="Imprimir" disabled>
+            </form>
+       	</div>
+    </body>
+</html>

@@ -1,0 +1,178 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	height: 100%;
+}
+
+nav {
+	padding: 0px 10px 10px 10px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	width: 200px;
+	font-size: 20px;
+	background-color: #C9C;
+}
+
+.logo {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.menu-item {
+	margin: 20px 5px;
+	display: block;
+	margin-top: -10px;
+}
+
+.menu-item:hover, a:hover {
+	color: white;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul, li {
+	list-style: none;
+}
+
+ul {
+	padding-left: 10px;
+	margin-top: -20px;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	float: right;
+	margin-left: 20px;
+	margin-top: 3px;
+}
+
+.container {
+	position: absolute;
+	top: 5px;
+	left: 230px;
+	right: 5px;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.titulo {
+	font-size: 30px;
+}
+
+.rol {
+	float: right;
+	margin-top: 1px;
+}
+
+.yellow, .green, .red, .agregar {
+	border-radius: 10px;
+	outline: none;
+}
+
+.yellow, .agregar {
+ 	background-color: #FC0;
+}
+
+.green {
+	background-color: #6C0;
+}
+
+.red {
+	background-color: #F33;
+}
+
+.list {
+	width: 50px;
+	height: 50px;
+	float: right;
+}
+
+.agregar {
+	float: right;
+	margin-right: 20px;
+}
+
+select {
+	margin-top: 10px;
+}
+
+input, select, textarea {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0px 5px 10px 5px;
+}
+
+.cross {
+	width: 20px;
+	height: 20px;
+}
+
+.precio {
+	width: 100px;
+}
+
+table {
+	width: 100%;
+}
+
+table, th, tr, td {
+	text-align: center;
+}
+
+.submenu {
+	visibility: hidden;
+	height: 10px;
+}
+
+.menu-separator {
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+.arrow {
+	width: 15px;
+	height: 15px;
+	float: right;
+}
+
+.nombre {
+	width: 80%;
+}
+
+input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+
+aside {
+	border: 1px solid black;
+	border-radius: 30px;
+	float: right;
+	width: 500px;
+	min-height: 450px;
+	padding: 10px;
+}
+
+.left, .right {
+	position: relative;
+	width: 47%;
+	height: 450px;
+	float: left;
+	padding: 10px;
+}
+
+.important {
+	color: red;
+}
