@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/registrarPromocion")
+@RequestMapping("/promocion")
 public class PromocionController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class PromocionController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/registrarPromocion/showPromociones";
+        return "redirect:/promocion/showPromocion";
     }
 
     @GetMapping("/promocionForm")
@@ -49,13 +49,13 @@ public class PromocionController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/registrarPromocion/showPromociones";
+        return "redirect:/promocion/showPromocion";
     }
 
-    @GetMapping("/showPromociones")
+    @GetMapping("/showPromocion")
     public ModelAndView showPromocion(){
         ModelAndView mav = new ModelAndView(ViewConstant.PROMOCION);
-        mav.addObject("registrarPromocion", promocionService.listAllPromociones());
+        mav.addObject("promocion", promocionService.listAllPromociones());
         return mav;
     }
 
