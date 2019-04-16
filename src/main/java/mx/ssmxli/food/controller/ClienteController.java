@@ -40,7 +40,7 @@ public class ClienteController {
     }
 
     @PostMapping("/addcliente")
-    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
+    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
     public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel,
                              Model model){
         log.info("Method: addCliente() -- Params: "+clienteModel.toString());

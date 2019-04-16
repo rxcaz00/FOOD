@@ -41,7 +41,7 @@ public class AlimentoController {
     }
 
     @PostMapping("/addalimento")
-    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
+    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de alimentoform
     public String addAlimento(@ModelAttribute(name = "alimentoModel")AlimentoModel alimentoModel,
                              Model model){
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());

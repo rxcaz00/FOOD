@@ -42,7 +42,7 @@ public class PrecioController {
     }
 
     @PostMapping("/addprecio")
-    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
+    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de precioform
     public String addContact(@ModelAttribute(name = "precioModel")PrecioModel precioModel,
                              Model model){
         log.info("Method: addPrecio() -- Params: "+precioModel.toString());

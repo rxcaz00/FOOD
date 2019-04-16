@@ -1,6 +1,7 @@
 package mx.ssmxli.food.model;
 
 import lombok.Data;
+import mx.ssmxli.food.entity.Precio;
 import mx.ssmxli.food.entity.Promocion;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ public class AlimentoModel {
     public String nombre;
     public String ingredientes;
     private Set<Promocion> promociones = new HashSet<Promocion>();
+    private Set<Precio> precios = new HashSet<Precio>();
 
     public AlimentoModel(){
 
