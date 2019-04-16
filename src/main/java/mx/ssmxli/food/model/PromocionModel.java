@@ -9,8 +9,9 @@ import java.util.Set;
 @Data
 public class PromocionModel {
     public int id;
+    public String nombre;
     public String fechaI;
-    public String getFechaF;
+    public String fechaF;
     public double precio;
     public String disponibilidad;
     private Set<Alimento> alimentos = new HashSet<Alimento>();

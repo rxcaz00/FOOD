@@ -10,5 +10,7 @@ public class ViewConstant {
     public static final String PRECIO_FORM = "precioform";
     public static final String PRECIO = "precio";
 
+    public static final String PROMOCION_FORM = "promocionform";
+    public static final String PROMOCION = "promocion";
 
 }

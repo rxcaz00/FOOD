@@ -20,8 +20,8 @@ public class Promocion {
     private String nombre;
     @Column(name = "fechaI")
     private Date fechaI;
-    @Column(name = "caducidad")
-    private Date caducidad;
+    @Column(name = "fechaF")
+    private Date fechaF;
     @Column(name = "precio")
     private double precio;
     @Column(name = "disponibilidad")
@@ -31,10 +31,10 @@ public class Promocion {
     private Set<Alimento> alimentos = new HashSet<>();
 
 
-    public Promocion(String nombre, Date fechaI, Date caducidad, double precio){
+    public Promocion(String nombre, Date fechaI, Date fechaF, double precio){
         this.nombre = nombre;
         this.fechaI = fechaI;
-        this.caducidad = caducidad;
+        this.fechaF = fechaF;
         this.precio = precio;
     }
 
