@@ -15,8 +15,6 @@ public interface ClienteService {
 
     public abstract Cliente findClienteByTelefono(String telefono);
 
-    public abstract void removeCliente(String telefono);
-
     public abstract ClienteModel findClienteByTelefonoModel(String telefono);
 }
 

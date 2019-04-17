@@ -1,6 +1,5 @@
 package mx.ssmxli.food.service.impl;
 
-
 import mx.ssmxli.food.component.AlimentoConverter;
 import mx.ssmxli.food.entity.Alimento;
 import mx.ssmxli.food.model.AlimentoModel;
@@ -24,26 +23,21 @@ public class AlimentoServiceImpl implements AlimentoService {
     @Qualifier("alimentoConverter")
     private AlimentoConverter alimentoConverter;
 
-    @Override
     public AlimentoModel addAlimento(AlimentoModel alimentoModel) {
-        //Aquí nos pide una entidad, por lo tanto tenemos que transformar el contactModel a entidad
-        Alimento temp=alimentoConverter.convertToAlimentoModel2Alimento(alimentoModel);
+        //Aquí nos pide una entidad, por lo tanto tenemos que transformar el modelo a entidad
+        Alimento temp = alimentoConverter.convertAlimentoModel2Alimento(alimentoModel);
         Alimento alimento = alimentoRepository.save(temp);
         return alimentoConverter.convertAlimento2AlimentoModel(alimento);
     }
 
-    @Override
     public List<AlimentoModel> listAllAlimentos() {
         List<Alimento> alimentos = alimentoRepository.findAll();
         List<AlimentoModel> alimentosModel = new ArrayList();
-        for(Alimento alimento : alimentos){
+        for(Alimento alimento : alimentos)
             alimentosModel.add(alimentoConverter.convertAlimento2AlimentoModel(alimento));
-
-        }
         return alimentosModel;
     }
 
-    @Override
     public Alimento findAlimentoById(int id) {
         return alimentoRepository.findById(id);
     }
@@ -52,14 +46,9 @@ public class AlimentoServiceImpl implements AlimentoService {
         return alimentoConverter.convertAlimento2AlimentoModel(findAlimentoById(id));
     }
 
-    @Override
     public void removeAlimento(int id) {
         Alimento alimento  = findAlimentoById(id);
-        if(alimento != null){
+        if(alimento != null)
             alimentoRepository.delete(findAlimentoById(id));
-        }
     }
-
-
 }
-

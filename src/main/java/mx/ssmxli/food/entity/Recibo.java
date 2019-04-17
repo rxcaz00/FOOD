@@ -13,12 +13,16 @@ public class Recibo {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+
     @Column(name = "fecha")
     private Date fecha;
+
     @Column(name = "total")
     private double total;
+
     @Column(name = "subtotal")
     private double subtotal;
+
     @Column(name = "notas")
     private String notas;
 
@@ -26,13 +30,7 @@ public class Recibo {
     @JoinColumn
     private Cliente cliente;
 
-    public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente) {
-        this.fecha = fecha;
-        this.total = total;
-        this.subtotal = subtotal;
-        this.notas = notas;
-        this.cliente = cliente;
-    }
+    public Recibo(){
 
-    public Recibo(){}
+    }
 }

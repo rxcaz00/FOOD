@@ -1,19 +1,29 @@
 package mx.ssmxli.food.constant;
 
 public class ViewConstant {
-    public static final String ALIMENTO_FORM = "registrarAlimento";
-    public static final String ALIMENTO = "alimento";
+    //Venta
+    public static final String VENTA = "venta";
 
-    public static final String CLIENTE_FORM = "clienteform";
-    public static final String CLIENTE = "cliente";
+    //Alimentos
+    public static final String ALIMENTO_NEW = "registrarAlimento";
+    public static final String ALIMENTO_UPDATE = "modificarAlimento";
+    public static final String ALIMENTO_DELETE = "eliminarAlimento";
 
-    public static final String PRECIO_FORM = "precioform";
-    public static final String PRECIO = "precio";
+    //Promociones
+    public static final String PROMOCION_NEW = "registrarPromocion";
+    public static final String PROMOCION_UPDATE = "modificarPromocion";
 
-    public static final String PROMOCION_FORM = "registrarPromocion";
-    public static final String PROMOCION = "promocion";
+    //Clientes
+    public static final String CLIENTE_UPDATE = "modificarCliente";
 
-    public static final String GASTO_FORM ="gastoform";
-    public static final String GASTO = "gasto";
+    //Corte de Caja
+    public static final String CORTE_CAJA = "corteCaja";
+    public static final String CORTE_CAJA_HISTORIAL = "corteCajaHistorial";
 
+    //Registro de Gastos
+    public static final String GASTO_FORM = "gastos";
+
+    //Configruación
+    public static final String CONFIG_SISTEMA = "configSis";
+    public static final String CONFIG_ACCESO = "configAcceso";
 }

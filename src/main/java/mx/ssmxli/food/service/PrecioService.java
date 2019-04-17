@@ -15,8 +15,6 @@ public interface PrecioService {
 
     public abstract Precio findPrecioById(int id);
 
-    public abstract void removePrecio(int id);
-
     public abstract PrecioModel findPrecioByIdModel(int id);
 }
 

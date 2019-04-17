@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Component("gastoConverter")
 public class GastoConverter {
-    public Gasto convertToGastoModel2Gasto(GastoModel gastoModel) throws Exception{
+    public Gasto convertGastoModel2Gasto(GastoModel gastoModel) throws Exception{
         String fecha = gastoModel.getFecha();
         Date fech = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 

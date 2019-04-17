@@ -1,4 +1,5 @@
 package mx.ssmxli.food.entity;
+
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,8 +14,10 @@ public class Alimento {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "ingredientes")
     private String ingredientes;
 
@@ -27,14 +30,7 @@ public class Alimento {
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
     private Set<Promocion> promociones;
 
-    public Alimento(String nombre, String ingredientes) {
-        this.nombre = nombre;
-        this.ingredientes = ingredientes;
+    public Alimento(){
+
     }
-
-        public Alimento(){
-
-        }
-    }
-
-
+}

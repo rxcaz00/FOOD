@@ -14,8 +14,6 @@ public interface PromocionService {
 
     public abstract Promocion findPromocionById(int id);
 
-    public abstract void removePromocion(int id);
-
     public abstract PromocionModel findPromocionByIdModel(int id);
 }
 

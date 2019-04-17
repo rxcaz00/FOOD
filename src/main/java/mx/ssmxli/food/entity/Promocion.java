@@ -16,29 +16,26 @@ public class Promocion {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "fechaI")
     private Date fechaI;
+
     @Column(name = "fechaF")
     private Date fechaF;
+
     @Column(name = "precio")
     private double precio;
+
     @Column(name = "disponibilidad")
     private String disponibilidad;
 
     @ManyToMany(mappedBy = "promociones")
     private Set<Alimento> alimentos = new HashSet<>();
 
+    public Promocion(){
 
-    public Promocion(String nombre, Date fechaI, Date fechaF, double precio){
-        this.nombre = nombre;
-        this.fechaI = fechaI;
-        this.fechaF = fechaF;
-        this.precio = precio;
     }
-
-
-
-    public Promocion(){}
 }

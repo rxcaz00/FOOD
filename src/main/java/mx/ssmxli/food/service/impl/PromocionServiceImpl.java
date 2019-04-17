@@ -23,38 +23,25 @@ public class PromocionServiceImpl implements PromocionService {
     @Qualifier("promocionConverter")
     private PromocionConverter promocionConverter;
 
-    @Override
     public PromocionModel addPromocion(PromocionModel promocionModel) throws Exception {
-        Promocion temp=promocionConverter.convertToPromocionModel2Promocion(promocionModel);
+        Promocion temp = promocionConverter.convertPromocionModel2Promocion(promocionModel);
         Promocion promocion = promocionRepository.save(temp);
         return promocionConverter.convertPromocion2PromocionModel(promocion);
     }
 
-    @Override
     public List<PromocionModel> listAllPromociones() {
         List<Promocion> promociones = promocionRepository.findAll();
         List<PromocionModel> promocionesModel = new ArrayList();
-        for(Promocion promocion : promociones){
+        for(Promocion promocion : promociones)
             promocionesModel.add(promocionConverter.convertPromocion2PromocionModel(promocion));
-
-        }
         return promocionesModel;
     }
 
-    @Override
     public Promocion findPromocionById(int id) {
         return promocionRepository.findById(id);
     }
 
     public PromocionModel findPromocionByIdModel(int id){
         return promocionConverter.convertPromocion2PromocionModel(findPromocionById(id));
-    }
-
-    @Override
-    public void removePromocion(int id) {
-        Promocion promocion  = findPromocionById(id);
-        if(promocion != null){
-            promocionRepository.delete(findPromocionById(id));
-        }
     }
 }

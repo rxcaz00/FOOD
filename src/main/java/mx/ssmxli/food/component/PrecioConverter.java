@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
     @Component("precioConverter")
     public class PrecioConverter {
-        public Precio convertToPrecioModel2Precio(PrecioModel precioModel){
+        public Precio convertPrecioModel2Precio(PrecioModel precioModel){
             Precio precio = new Precio();
             precio.setTamano(precioModel.getTamano());
             precio.setPrecio(precioModel.getPrecio());

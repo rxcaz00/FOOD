@@ -23,26 +23,21 @@ public class PrecioServiceImpl implements PrecioService {
     @Qualifier("precioConverter")
     private PrecioConverter precioConverter;
 
-    @Override
     public PrecioModel addPrecio(PrecioModel precioModel) {
-        //Aquí nos pide una entidad, por lo tanto tenemos que transformar el contactModel a entidad
-        Precio temp=precioConverter.convertToPrecioModel2Precio(precioModel);
+        //Aquí nos pide una entidad, por lo tanto tenemos que transformar el modelo a entidad
+        Precio temp=precioConverter.convertPrecioModel2Precio(precioModel);
         Precio precio = precioRepository.save(temp);
         return precioConverter.convertPrecio2PrecioModel(precio);
     }
 
-    @Override
     public List<PrecioModel> listAllPrecios() {
         List<Precio> precios = precioRepository.findAll();
         List<PrecioModel> preciosModel = new ArrayList();
-        for(Precio precio : precios){
+        for(Precio precio : precios)
             preciosModel.add(precioConverter.convertPrecio2PrecioModel(precio));
-
-        }
         return preciosModel;
     }
 
-    @Override
     public Precio findPrecioById(int id) {
         return precioRepository.findById(id);
     }
@@ -50,14 +45,4 @@ public class PrecioServiceImpl implements PrecioService {
     public PrecioModel findPrecioByIdModel(int id){
         return precioConverter.convertPrecio2PrecioModel(findPrecioById(id));
     }
-
-    @Override
-    public void removePrecio(int id) {
-        Precio precio  = findPrecioById(id);
-        if(precio != null){
-            precioRepository.delete(findPrecioById(id));
-        }
-    }
-
 }
-

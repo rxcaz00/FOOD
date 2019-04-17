@@ -10,7 +10,7 @@ import java.util.Date;
 @Component("promocionConverter")
 public class PromocionConverter {
 
-    public Promocion convertToPromocionModel2Promocion(PromocionModel promocionModel)throws Exception {
+    public Promocion convertPromocionModel2Promocion(PromocionModel promocionModel)throws Exception {
         String fecha = promocionModel.getFechaI();
         Date fech = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
         String fecha1 = promocionModel.getFechaF();

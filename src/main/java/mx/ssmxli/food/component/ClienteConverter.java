@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
     @Component("clienteConverter")
     public class ClienteConverter {
-        public Cliente convertToClienteModel2Cliente(ClienteModel clienteModel){
+        public Cliente convertClienteModel2Cliente(ClienteModel clienteModel){
             Cliente cliente = new Cliente();
 
             cliente.setNombre(clienteModel.getNombre());

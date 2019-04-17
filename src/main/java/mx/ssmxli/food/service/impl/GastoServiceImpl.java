@@ -23,25 +23,20 @@ public class GastoServiceImpl implements GastoService {
     @Qualifier("gastoConverter")
     private GastoConverter gastoConverter;
 
-    @Override
     public GastoModel addGasto(GastoModel gastoModel) throws Exception {
-        Gasto temp=gastoConverter.convertToGastoModel2Gasto(gastoModel);
+        Gasto temp = gastoConverter.convertGastoModel2Gasto(gastoModel);
         Gasto gasto = gastoRepository.save(temp);
         return gastoConverter.convertGasto2GastoModel(gasto);
     }
 
-    @Override
     public List<GastoModel> listAllGastos() {
         List<Gasto> gastos = gastoRepository.findAll();
         List<GastoModel> gastosModel = new ArrayList<>();
-        for(Gasto gasto : gastos){
+        for(Gasto gasto : gastos)
             gastosModel.add(gastoConverter.convertGasto2GastoModel(gasto));
-
-        }
         return gastosModel;
     }
 
-    @Override
     public Gasto findGastoById(int id) {
         return gastoRepository.findById(id);
     }
@@ -49,13 +44,4 @@ public class GastoServiceImpl implements GastoService {
     public GastoModel findGastoByIdModel(int id){
         return gastoConverter.convertGasto2GastoModel(findGastoById(id));
     }
-
-    @Override
-    public void removeGasto(int id) {
-        Gasto gasto  = findGastoById(id);
-        if(gasto != null){
-            gastoRepository.delete(findGastoById(id));
-        }
-    }
-
 }

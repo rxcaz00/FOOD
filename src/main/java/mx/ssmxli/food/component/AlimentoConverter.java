@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component("alimentoConverter")
 public class AlimentoConverter {
-    public Alimento convertToAlimentoModel2Alimento(AlimentoModel alimentoModel){
+    public Alimento convertAlimentoModel2Alimento(AlimentoModel alimentoModel){
         Alimento alimento = new Alimento();
         alimento.setId(alimentoModel.getId());
         alimento.setIngredientes(alimentoModel.getIngredientes());
