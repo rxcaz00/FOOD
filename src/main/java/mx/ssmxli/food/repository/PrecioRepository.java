@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
-@Repository("preciotRepository")
+@Repository("precioRepository")
 public interface PrecioRepository extends JpaRepository<Precio, Serializable> {
     public abstract Precio findById(int id);
 }

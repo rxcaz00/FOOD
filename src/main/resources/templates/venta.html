@@ -1,0 +1,172 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>FOOD - Venta</title>
+		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+        <link href="../static/css/venta.css" th:href="@{/css/venta.css}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
+	</head>
+	<body>
+    <nav>
+        <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
+        <span class="menu-item"><a href="venta.html"><b>Venta</b></a></span>
+        <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
+        <div class="submenu" id="al">
+            <ul>
+                <li><a href="registrarAlimento.html">Registro</a></li>
+                <li><a href="modificarAlimento.html">Modificación</a></li>
+                <li><a href="eliminarAlimento.html">Eliminación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('pr','f2')"><img class="arrow" id="f2" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Promociones</b></span>
+        <div class="submenu" id="pr">
+            <ul>
+                <li><a href="promocionform.html">Registro</a></li>
+                <li><a href="modificarPromocion.html">Modificación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('cl','f3')"><img class="arrow" id="f3" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Clientes</b></span>
+        <div class="submenu" id="cl">
+            <ul>
+                <li><a href="modificarCliente.html">Modificación</a></li>
+            </ul>
+        </div>
+        <span class="menu-item"><a href="gastos.html"><b>Registro de Gastos</b></a></span>
+        <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item" onClick="show('cc','f4')"><img class="arrow" id="f4" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Corte de Caja</b></span>
+        <div class="submenu" id="cc">
+            <ul>
+                <li><a href="corteCaja.html">Generar actual</a></li>
+                <li><a href="corteCajaHistorial.html">Consultar historial</a></li>
+            </ul>
+        </div>
+        <span class="menu-item" onClick="show('co','f5')"><img class="arrow" id="f5" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Configuración</b></span>
+        <div class="submenu" id="co">
+            <ul>
+                <li><a href="configSis.html">Sistema</a></li>
+                <li><a href="configAcceso.html">Acceso</a></li>
+            </ul>
+        </div>
+    </nav>
+        <div class="container">
+        	<b class="titulo">Venta de alimentos</b>
+			<div class="rol">
+				<a href="#">
+					<img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
+				</a>
+				<b>Gerente</b>
+			</div>
+            <hr size=4 color="#CCCCCC">
+            <form>
+            	Número de teléfono:
+            	<input type="number" size="20">
+            	<input class="yellow" type="submit" size="20" value="Buscar">
+                <div class="registrar">
+                	<b>¿Cliente nuevo?</b>
+                	<input class="yellow" type="submit" size="20" value="¡Regístralo!">
+                </div><br>
+                Nombre del cliente: <input type="text" class="nombre"><br>
+                Dirección: <input type="text" class="dir"><br>
+                Puntos: <input type="number">
+                RFC: <input type="text"><br>
+                <hr size=4 color="#CCCCCC">
+                DETALLES DE LA ORDEN
+                <hr size=4 color="#CCCCCC">
+                <aside>
+                	<table>
+                		<thead>
+                    		RESUMEN DE LA ORDEN <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}">
+                    	</thead>
+                    	<hr size=4 color="#CCCCCC">
+                    	<tbody>
+                    		<tr>
+                    			<th>Cant</th>
+                            	<th>Descripción</th>
+                            	<th>Precio</th>
+                            	<th>Total</th>
+                                <th></th>
+                        	</tr>
+                        	<tr>
+                        		<td>2</td>
+                            	<td>Rebanada Peperonni</td>
+                            	<td>40.00</td>
+                            	<td>80.00</td>
+                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
+                        	</tr>
+                        	<tr>
+                        		<td>1</td>
+                            	<td>Pasta Alfredo</td>
+                            	<td>80.00</td>
+                            	<td>80.00</td>
+                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
+                        	</tr>
+                            <tr>
+                            	<td>1</td>
+                                <td>
+                                	<i>Dúo 2 X 1</i><br>
+                                    Personal carnes<br>
+                                    Agua del día
+                                </td>
+                                <td>100.00</td>
+                                <td>100.00</td>
+                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
+                            </tr>
+                    	</tbody>
+                    	<tr>
+                        	<td></td>
+                           	<td></td>
+                           	<td>Total</td>
+                           	<td>$120.00</td>
+                        </tr>
+                	</table>
+                </aside>
+                <img class="cat" src="/imgs/dishes.png" th:src="@{/imgs/dishes.png}">
+                Alimentos
+                <br>
+                <select>
+                	<option value="id">Rebanada Peperonni</option>
+                </select>
+                <br>
+                Tamaño:
+                <select>
+                	<option value="id">CH</option>
+                    <option value="id">M</option>
+                    <option value="id">G</option>
+                </select>
+                <input class="agregar" type="submit" value="Agregar alimento">
+                <br><br>
+                <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
+                Promociones
+                <br>
+                <select>
+                	<option value="id">Dúo 2 X 1</option>
+                </select>
+                <input class="agregar" type="submit" value="Agregar promoción">
+                <br><br>
+                <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
+                Elija el tipo de orden:
+                <br>
+                <input type="radio" name="orden" value="1">Local
+                <input type="radio" name="orden" value="2">Domicilio
+                <br><br><br>
+                <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
+                Elija el método de pago:
+                <br>
+                <input type="radio" name="metodo" value="1">Efectivo
+                <input type="radio" name="metodo" value="2">Tarjeta
+                <br><br><br>
+                Marca la casilla si el cliente requiere cambio
+                <input type="checkbox" name="cambio" value="1">
+                <br>
+                Cantidad de cambio: $
+                <input type="number" name="dinero">
+                <br>
+                <input class="green" type="submit" value="Finalizar compra">
+                <input class="red" type="submit" value="Cancelar compra">
+        	</form>
+        </div>
+    </body>
+</html>
