@@ -1,7 +1,6 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
-import org.springframework.dao.DataAccessException;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,15 +13,16 @@ public class Comanda {
     @GeneratedValue
     @Column(name = "id")
     private int id;
-    @Column(name = "fecha")
-    private Date fecha;
-    @Column(name = "numeroMesa")
-    private int numeroMesa;
+    @Column(name = "numeroMesa", nullable = true)
+    private int numeroMesa;//Numero de mesa donde se entregara. Puede pedirse para llevar, asi que puede ser nulo
     @Column(name = "notas")
-    private String notas;
+    private String notas;//Alguna indicacion en la preparación
 
-    public Comanda(Date fecha, int numeroMesa, String notas) {
-        this.fecha = fecha;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recibo_id", referencedColumnName = "id")
+    private Recibo recibo;
+
+    public Comanda(int numeroMesa, String notas) {
         this.numeroMesa = numeroMesa;
         this.notas = notas;
     }
