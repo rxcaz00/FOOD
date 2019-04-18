@@ -7,6 +7,7 @@
 		<link href="../static/css/config.css" th:href="@{/css/config.css}" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
+		<link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 	</head>
 	<body>
 		<nav>
@@ -60,14 +61,17 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            Introduzca el IVA actual:
-            <input class="precio" type="number">%
-            <br>
-            Introduzca el porcentaje de retribución de compra:
-            <input class="precio" type="number">%
-            <br>
-            <input class="yellow" type="submit" value="Cargar configuración anterior">
-            <input class="green" type="submit" value="Guardar configuración">
+			<form action="#" th:action="@{/configuracion/addConfig}" th:object="${configuracionModel}" method="post">
+            	<input type="hidden" th:field="*{id}">
+				Introduzca el IVA actual:
+            	<input class="precio" type="number" th:field="*{iva}" th:value="${iva}" required>%
+            	<br>
+            	Introduzca el porcentaje de retribución de compra:
+            	<input class="precio" type="number" th:field="*{retribucion}" th:value="${retribucion}" required>%
+            	<br>
+				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
+				<button class="green" name="action" value="guardar" type="submit">Guardar configuración</button>
+			</form>
        	</div>
     </body>
 </html>

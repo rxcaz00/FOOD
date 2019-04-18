@@ -108,7 +108,7 @@ select {
 	margin-top: 10px;
 }
 
-input, select, textarea {
+input, select, textarea, button {
 	font-weight: bold;
 	font-size: 20px;
 	margin: 0px 5px 10px 5px;

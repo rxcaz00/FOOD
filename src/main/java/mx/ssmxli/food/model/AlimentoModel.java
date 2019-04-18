@@ -12,7 +12,6 @@ public class AlimentoModel {
     public String nombre;
     public String ingredientes;
     private Set<Promocion> promociones = new HashSet<Promocion>();
-    private Set<Precio> precios = new HashSet<Precio>();
 
     public AlimentoModel(){
 

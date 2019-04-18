@@ -11,7 +11,6 @@ public class AlimentoConverter {
         alimento.setId(alimentoModel.getId());
         alimento.setIngredientes(alimentoModel.getIngredientes());
         alimento.setNombre(alimentoModel.getNombre());
-        alimento.setPrecios(alimentoModel.getPrecios());
         alimento.setPromociones(alimentoModel.getPromociones());
         return alimento;
     }
@@ -21,7 +20,6 @@ public class AlimentoConverter {
         alimentoModel.setId(alimento.getId());
         alimentoModel.setIngredientes(alimento.getIngredientes());
         alimentoModel.setNombre(alimento.getNombre());
-        alimentoModel.setPrecios(alimento.getPrecios());
         alimentoModel.setPromociones(alimento.getPromociones());
         return alimentoModel;
     }
