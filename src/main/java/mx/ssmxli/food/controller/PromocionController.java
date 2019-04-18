@@ -35,6 +35,7 @@ public class PromocionController {
         return ViewConstant.PROMOCION_NEW;
     }
 
+
     @PostMapping(value = "/addpromocion", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
@@ -47,6 +48,8 @@ public class PromocionController {
         }
         return "redirect:/promocion/inicio";
     }
+
+
 
     /*
     @GetMapping("/showPromocion")
