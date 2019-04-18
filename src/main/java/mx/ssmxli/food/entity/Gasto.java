@@ -13,17 +13,24 @@ public class Gasto {
     @GeneratedValue
     @Column(name = "id")
     private int id;
-
+    @Column(name = "tipo")
+    private char tipo;//Si es (P)ago o (C)ompra
     @Column(name = "monto")
-    private double monto;
-
+    private double monto; //El monto del gasto
     @Column(name = "fecha")
-    private Date fecha;
-
+    private Date fecha; //Fecha del gasto
     @Column(name = "descripcion")
-    private String descripcion;
+    private String descripcion; //Descripcion del gasto
 
-    public Gasto(){
+    @ManyToOne
+    @JoinColumn
+    private Usuario usuario; //Quien registro el gasto
 
+    public Gasto(Double monto, Date fecha, String descripcion) {
+        this.monto = monto;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
     }
+
+    public Gasto(){}
 }

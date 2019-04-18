@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,26 +15,27 @@ public class Promocion {
     @GeneratedValue
     @Column(name = "id")
     private int id;
-
     @Column(name = "nombre")
-    private String nombre;
-
+    private String nombre;//Nombre de la promocion
     @Column(name = "fechaI")
-    private Date fechaI;
-
+    private Date fechaI;//Desde que fecha es valida la promocion
     @Column(name = "fechaF")
-    private Date fechaF;
-
+    private Date fechaF; //Hasta que fecha es valida la promocion
     @Column(name = "precio")
-    private double precio;
-
+    private double precio; //El precio de la promocion
     @Column(name = "disponibilidad")
-    private String disponibilidad;
+    private String disponibilidad; //Un string con los dias separados con ;
 
     @ManyToMany(mappedBy = "promociones")
-    private Set<Alimento> alimentos = new HashSet<>();
+    private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
 
-    public Promocion(){
 
+    public Promocion(String nombre, Date fechaI, Date fechaF, double precio){
+        this.nombre = nombre;
+        this.fechaI = fechaI;
+        this.fechaF = fechaF;
+        this.precio = precio;
     }
+
+    public Promocion(){}
 }

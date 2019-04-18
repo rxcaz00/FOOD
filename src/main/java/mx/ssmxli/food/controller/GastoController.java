@@ -58,11 +58,7 @@ public class GastoController {
         return mav;
     }
 
-    @GetMapping("/removeGasto")
-    public ModelAndView removeGasto(@RequestParam(name = "id", required = true) int id){
-        gastoService.removeGasto(id);
-        return showGasto();
-    }
+
 
 
 

@@ -59,11 +59,7 @@ public class ClienteController {
         return mav;
     }
 
-    @GetMapping("/removeCliente")
-    public ModelAndView removeContact(@RequestParam(name = "telefono", required = true) String telefono){
-        clienteService.removeCliente(telefono);
-        return showCliente();
-    }
+
 
 
 }

@@ -1,5 +1,4 @@
 package mx.ssmxli.food.entity;
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,15 +13,16 @@ public class Alimento {
     @GeneratedValue
     @Column(name = "id")
     private int id;
-
     @Column(name = "nombre")
     private String nombre;
-
     @Column(name = "ingredientes")
     private String ingredientes;
-
-    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL)
-    private Set<Precio> precios;
+    @Column(name = "categoria")
+    private String categoria;
+    @Column(name = "tamano", nullable = true)
+    private String tamano;
+    @Column(name = "precio")
+    private double precio;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "alimento_promocion",
@@ -30,7 +30,17 @@ public class Alimento {
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
     private Set<Promocion> promociones;
 
-    public Alimento(){
-
+    public Alimento(String nombre, String ingredientes, String categoria, String tamano, double precio) {
+        this.nombre = nombre;
+        this.ingredientes = ingredientes;
+        this.categoria = categoria;
+        this.tamano = tamano;
+        this.precio = precio;
     }
+
+        public Alimento(){
+
+        }
 }
+
+

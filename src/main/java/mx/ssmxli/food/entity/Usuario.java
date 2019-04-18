@@ -3,6 +3,7 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -20,7 +21,13 @@ public class Usuario {
     private String password;
 
     @Column(name = "nivel")
-    private String nivel;
+    private String nivel;//Indica que autoridad tiene el usuario.
+
+    @OneToMany(mappedBy = "elaboro", cascade = CascadeType.ALL)
+    private Set<CorteCaja> corteCajaElaborados;//CorteCaja que este usuario ha elaborado
+
+    @OneToMany(mappedBy = "reviso", cascade = CascadeType.ALL)
+    private Set<CorteCaja> corteCajaRevisados;//CorteCaja que este usuario ha revisado
 
     public Usuario(){
 

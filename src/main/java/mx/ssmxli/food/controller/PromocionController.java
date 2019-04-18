@@ -59,11 +59,7 @@ public class PromocionController {
         return mav;
     }
 
-    @GetMapping("/removePromocion")
-    public ModelAndView removePromocion(@RequestParam(name = "id", required = true) int id){
-        promocionService.removePromocion(id);
-        return showPromocion();
-    }
+
 
 
 }
