@@ -34,7 +34,7 @@ public class Recibo {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL)
-    private Set<ContenidoPedido> contenidosRecibo;
+    private Set<ContenidoRecibo> contenidosRecibo;
 
     @OneToOne(mappedBy = "recibo")
     private Comanda comanda;
