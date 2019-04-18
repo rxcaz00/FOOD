@@ -23,7 +23,7 @@ public class ViewConstant {
     //Registro de Gastos
     public static final String GASTO_FORM = "gastos";
 
-    //Configruación
+    //Configuración
     public static final String CONFIG_SISTEMA = "configSis";
     public static final String CONFIG_ACCESO = "configAcceso";
 }

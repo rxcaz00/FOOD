@@ -53,13 +53,8 @@ public class GastoController {
 
     @GetMapping("/showAGasto")
     public ModelAndView showGasto(){
-        ModelAndView mav = new ModelAndView(ViewConstant.GASTO);
+        ModelAndView mav = new ModelAndView(ViewConstant.GASTO_FORM);
         mav.addObject("gasto", gastoService.listAllGastos());
         return mav;
     }
-
-
-
-
-
 }

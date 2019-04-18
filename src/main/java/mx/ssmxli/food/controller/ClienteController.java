@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
@@ -25,9 +25,10 @@ public class ClienteController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/cliente/showCliente";
+        return "redirect:/clientes/showCliente";
     }
 
+    /*
     @GetMapping("/clienteForm")
     public String redirectClienteForm(Model model,
                                       @RequestParam(name = "telefono", required = false) String telefono){
@@ -38,6 +39,7 @@ public class ClienteController {
         model.addAttribute("clienteModel", clienteModel);
         return ViewConstant.CLIENTE_FORM;
     }
+     */
 
     @PostMapping("/addcliente")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
@@ -49,17 +51,16 @@ public class ClienteController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/cliente/showCliente";
+        return "redirect:/clientes/showCliente";
     }
 
+    /*
     @GetMapping("/showCliente")
     public ModelAndView showCliente(){
         ModelAndView mav = new ModelAndView(ViewConstant.CLIENTE);
-        mav.addObject("cliente", clienteService.listAllClientes());
+        mav.addObject("clientes", clienteService.listAllClientes());
         return mav;
     }
 
-
-
-
+     */
 }

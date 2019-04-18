@@ -36,7 +36,7 @@ public class PromocionController {
             promocionModel = promocionService.findPromocionByIdModel(id);
         }
         model.addAttribute("promocionModel", promocionModel);
-        return ViewConstant.PROMOCION_FORM;
+        return ViewConstant.PROMOCION_NEW;
     }
 
     @PostMapping("/addpromocion")
@@ -52,6 +52,7 @@ public class PromocionController {
         return "redirect:/promocion/showPromocion";
     }
 
+    /*
     @GetMapping("/showPromocion")
     public ModelAndView showPromocion(){
         ModelAndView mav = new ModelAndView(ViewConstant.PROMOCION);
@@ -59,9 +60,5 @@ public class PromocionController {
         return mav;
     }
 
-
-
-
+     */
 }
-
-
