@@ -60,10 +60,10 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/registrarPromocion/addpromocion}" th:object="${promocionModel}" method="post">
-                <input type="hidden" th:field="*{id}"></input>
+            <form action="#" th:action="@{/promocion/addpromocion}" th:object="${promocionModel}" method="post">
+                <input type="hidden" th:field="*{id}">
             Nombre de la promoción:
-                <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}"></input>
+                <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}">
             <hr size=4 color="#CCCCCC">
             <aside>
             <table>
@@ -97,15 +97,15 @@
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>
             Precio: $
-                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}"></>
+                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}">
             <br><br>
             Vigencia:
             <br>
             Fecha Inicio:
-            <input type="date" th:field="*{fechaI}" th:value="${fechaI}"></input>
+            <input type="date" th:field="*{fechaI}" th:value="${fechaI}">
             <br>
             Fecha Fin:
-            <input type="date" th:field="*{fechaF}" th:value="${fechaF}"></input>
+            <input type="date" th:field="*{fechaF}" th:value="${fechaF}">
             <br><br>
             Disponibilidad:
             <br>
@@ -117,7 +117,7 @@
             <input type="checkbox" value="S" th:field="*{disponibilidad}" th:value="${disponibilidad}">Sábado<br>
             <input type="checkbox" value="D" th:field="*{disponibilidad}" th:value="${disponibilidad}">Domingo<br>
             <form>
-        		<input class="green" type="submit" value="Registrar">
+        		<input class="green"  value="guardar"  type="submit">
                 <input class="red" type="submit" value="Cancelar registro">
         	</form>
        	</div>

@@ -25,21 +25,17 @@ public class PromocionController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/promocion/showPromocion";
+        return "redirect:/promocion/inicio";
     }
 
-    @GetMapping("/promocionForm")
-    public String redirectPromocionForm(Model model,
-                                      @RequestParam(name = "id", required = false) int id){
+    @GetMapping("/inicio")
+    public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
-        if(id != 0){
-            promocionModel = promocionService.findPromocionByIdModel(id);
-        }
-        model.addAttribute("promocionModel", promocionModel);
+        model.addAttribute("promocionModel",promocionModel);
         return ViewConstant.PROMOCION_NEW;
     }
 
-    @PostMapping("/addpromocion")
+    @PostMapping(value = "/addpromocion", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
                               Model model) throws Exception {
@@ -49,13 +45,13 @@ public class PromocionController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/promocion/showPromocion";
+        return "redirect:/promocion/inicio";
     }
 
     /*
     @GetMapping("/showPromocion")
     public ModelAndView showPromocion(){
-        ModelAndView mav = new ModelAndView(ViewConstant.PROMOCION);
+        ModelAndView mav = new ModelAndView(ViewConstant.PROMOCION_NEW);
         mav.addObject("promocion", promocionService.listAllPromociones());
         return mav;
     }
