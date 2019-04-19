@@ -25,17 +25,17 @@ public class CorteCajaController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/corteCaja/inicio";
+        return "redirect:/corteCaja/actual";
     }
 
-    @GetMapping("/inicio")
+    @GetMapping("/actual")
     public String inicio(Model model){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         model.addAttribute("corteCajaModel",corteCajaModel);
         return ViewConstant.CORTE_CAJA;
     }
 
-
+    /*
     @PostMapping(value = "/addcorteCaja", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de CorteCaja
     public String addCorteCaja(@ModelAttribute(name = "corteCajaModel")CorteCajaModel corteCajaModel,
@@ -48,6 +48,7 @@ public class CorteCajaController {
         }
         return "redirect:/corteCaja/inicio";
     }
+     */
 
 
 }
