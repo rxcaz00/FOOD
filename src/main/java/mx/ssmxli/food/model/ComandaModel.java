@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class ComandaModel {
 
-    public int id;
-    public String fecha;
-    public int numeroMesa;
-    public String notas;
+    private int id;
+    private String fecha;
+    private int numeroMesa;
+    private String notas;
 
     public ComandaModel(){
 

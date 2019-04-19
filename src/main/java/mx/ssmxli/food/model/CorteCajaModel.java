@@ -4,17 +4,17 @@ import lombok.Data;
 
 @Data
 public class CorteCajaModel {
-    public int id;
-    public String fecha;
-    public double caja;
-    public double corte;
-    public double venta;
-    public double tarjeta;
-    public double pago;
-    public double compra;
-    public double diferencia;
-    public String elaboro;
-    public String reviso;
+    private int id;
+    private String fecha;
+    private double caja;
+    private double corte;
+    private double venta;
+    private double tarjeta;
+    private double pago;
+    private double compra;
+    private double diferencia;
+    private String elaboro;
+    private String reviso;
 
     public CorteCajaModel(){
 

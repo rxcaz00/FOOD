@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class GastoModel {
-    public int id;
-    public double monto;
-    public String fecha;
-    public String descripcion;
+    private int id;
+    private double monto;
+    private String fecha;
+    private String descripcion;
 
     public GastoModel(){
 

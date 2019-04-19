@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class ReciboModel {
-    public int id;
-    public String fecha;
-    public String notas;
-    public double subtotal;
-    public double total;
+    private int id;
+    private String fecha;
+    private String notas;
+    private double subtotal;
+    private double total;
 
     public ReciboModel(){
 

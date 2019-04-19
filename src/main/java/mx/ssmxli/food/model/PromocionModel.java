@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 @Data
 public class PromocionModel {
-    public int id;
-    public String nombre;
-    public String fechaI;
-    public String fechaF;
-    public double precio;
-    public String disponibilidad;
+    private int id;
+    private String nombre;
+    private String fechaI;
+    private String fechaF;
+    private double precio;
+    private String disponibilidad;
     private Set<Alimento> alimentos = new HashSet<Alimento>();
 
     public PromocionModel(){

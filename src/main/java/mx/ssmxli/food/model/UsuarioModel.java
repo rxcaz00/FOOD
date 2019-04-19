@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class UsuarioModel {
-    public int id;
-    public String usuario;
-    public String password;
-    public String nivel;
+    private int id;
+    private String usuario;
+    private String password;
+    private String nivel;
 
     public UsuarioModel(){
 

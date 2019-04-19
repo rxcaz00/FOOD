@@ -8,9 +8,11 @@ import java.util.Set;
 
 @Data
 public class AlimentoModel {
-    public int id;
-    public String nombre;
-    public String ingredientes;
+    private int id;
+    private String nombre;
+    private String ingredientes;
+    private double precio;
+    private String categoria;
     private Set<Promocion> promociones = new HashSet<Promocion>();
 
     public AlimentoModel(){
