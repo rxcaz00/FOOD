@@ -23,7 +23,7 @@ public class GastoServiceImpl implements GastoService {
     @Qualifier("gastoConverter")
     private GastoConverter gastoConverter;
 
-    public GastoModel addGasto(GastoModel gastoModel) throws Exception {
+    public GastoModel addGasto(GastoModel gastoModel){
         Gasto temp = gastoConverter.convertGastoModel2Gasto(gastoModel);
         Gasto gasto = gastoRepository.save(temp);
         return gastoConverter.convertGasto2GastoModel(gasto);

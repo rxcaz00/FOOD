@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service("gastoService")
 public interface GastoService {
-    public abstract GastoModel addGasto(GastoModel gastoModel) throws Exception;
+    public abstract GastoModel addGasto(GastoModel gastoModel) ;
 
     public abstract List<GastoModel> listAllGastos();
 
