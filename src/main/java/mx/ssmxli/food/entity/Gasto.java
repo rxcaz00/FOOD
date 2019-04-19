@@ -22,14 +22,15 @@ public class Gasto {
     @Column(name = "descripcion")
     private String descripcion; //Descripcion del gasto
 
-    @ManyToOne
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn
     private Usuario usuario; //Quien registro el gasto
 
-    public Gasto(Double monto, Date fecha, String descripcion) {
+    public Gasto(Double monto, Date fecha, String descripcion, char tipo) {
         this.monto = monto;
         this.fecha = fecha;
         this.descripcion = descripcion;
+        this.tipo=tipo;
     }
 
     public Gasto(){}

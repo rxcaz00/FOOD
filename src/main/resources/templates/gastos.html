@@ -7,7 +7,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
 	</head>
-	<body>
+	<form>
 	<nav>
 		<img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
 		<span class="menu-item"><a href="venta.html"><b>Venta</b></a></span>
@@ -58,16 +58,23 @@
 				</a>
 				<b>Gerente</b>
 			</div>
+			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post">
             <hr size=4 color="#CCCCCC">
+				<input type="hidden" th:field="*{id}">
             Ingrese los siguientes datos de los gastos
             <br><br>
             Descripción:
-            <input class="nombre" type="text">
+            <input class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}">
             <br>
             Monto:
-            <input class="precio" type="number">
+            <input class="precio" type="number" th:field="*{monto}" th:value="${monto}">
             <br>
-            <input class="yellow" type="submit" value="Registrar">
+			Tipo:
+				<input type="text" th:field="*{tipo}" th:value="${tipo}">
+				<br>
+            <input class="yellow" type="submit" value="guardar" name="action">
+			</form>
        	</div>
+
     </body>
 </html>

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/gasto")
@@ -19,26 +21,15 @@ public class GastoController {
     @Qualifier("gastoServiceImpl")
     private GastoService gastoService;
 
-
     private static final Log log = LogFactory.getLog(PromocionController.class);
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/gasto/showGasto";
+        return "redirect:/gasto/muestraGasto";
     }
 
-    @GetMapping("/gastoForm")
-    public String redirectGastonForm(Model model,
-                                     @RequestParam(name = "id", required = false) int id){
-        GastoModel gastoModel = new GastoModel();
-        if(id != 0){
-            gastoModel = gastoService.findGastoByIdModel(id);
-        }
-        model.addAttribute("gastoModel", gastoModel);
-        return ViewConstant.GASTO_FORM;
-    }
 
-    @PostMapping("/addgasto")
+    @PostMapping(value = "/addgasto", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
     public String addGasto(@ModelAttribute(name = "gastoModel")GastoModel gastoModel,
                                Model model) throws Exception {
@@ -48,13 +39,14 @@ public class GastoController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/gasto/showGasto";
+        return "redirect:/gasto/muestraGasto";
     }
 
-    @GetMapping("/showAGasto")
-    public ModelAndView showGasto(){
-        ModelAndView mav = new ModelAndView(ViewConstant.GASTO_FORM);
-        mav.addObject("gasto", gastoService.listAllGastos());
-        return mav;
+
+    @GetMapping("/muestraGasto")
+    public String sistema(Model model){
+        GastoModel gastoModel = new GastoModel();
+        model.addAttribute("gastoModel", gastoModel);
+        return ViewConstant.GASTO_FORM;
     }
 }

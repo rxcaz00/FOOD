@@ -50,14 +50,4 @@ public class PromocionController {
     }
 
 
-
-    /*
-    @GetMapping("/showPromocion")
-    public ModelAndView showPromocion(){
-        ModelAndView mav = new ModelAndView(ViewConstant.PROMOCION_NEW);
-        mav.addObject("promocion", promocionService.listAllPromociones());
-        return mav;
-    }
-
-     */
 }
