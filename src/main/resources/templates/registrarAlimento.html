@@ -3,10 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>FOOD - Registrar Alimentos</title>
+
 		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
 		<link href="../static/css/alimentos.css" th:href="@{/css/alimentos.css}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 		<script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
+		<script src="fuzzyset.js"></script>
 	</head>
 	<body>
 	<nav>
@@ -60,53 +63,82 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            Nombre del alimento:
-            <input type="text" size="75">
-            <br>
-            <hr size=4 color="#CCCCCC">
-            <div class="left">
-            	Ingredientes del alimento:
-                <br><br>
-            	<textarea name="ingredientes"></textarea>
-            </div>
-            <div class="right">
-            	<form>
-                	Precios:
-                	<br><br>
-                	Tamaño: <input type="text" size="2">
-                	Precio: <input class="precio" type="number">
-                	<input class="agregar" type="submit" value="Agregar">
-                </form>
-                <br><br>
-                <table>
-                	<thead>
-                		LISTA DE PRECIOS
-                	</thead>
-                    <hr size=4 color="#CCCCCC">
-                    <tbody>
-                    	<tr>
-                    		<th>Tamaño</th>
-                            <th>Precio</th>
-                            <th></th>
-                       	</tr>
-                        <tr>
-                        	<td>CH</td>
-                            <td>$40.00</td>
-                            <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"></td>
-                        </tr>
-                        <tr>
-                        	<td>M</td>
-                            <td>$70.00</td>
-                            <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br><br>
-                <form>
-            		<input class="green" type="submit" value="Registrar">
-                	<input class="red" type="submit" value="Cancelar registro">
-            	</form>
-            </div>
-        </div>
+				<div class="jumbotron">
+					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST">
+						Nombre:
+                        <!--IGNORAR EL ERROR -->
+						<input list="nombres" size="35" th:value="${nombre}" th:field="*{nombre}" required>
+						Categoria:
+                        <!--IGNORAR EL ERROR -->
+						<input list="categorias" size="35" th:value="${categoria}" th:field="*{categoria}" required autocomplete="">
+						<br>
+						<hr size=4 color="#CCCCCC">
+						<div class="left">
+							Ingredientes:
+							<br><br>
+                            <!--IGNORAR EL ERROR -->
+							<textarea name="ingredientes" th:value="${ingredientes}" th:field="*{ingredientes}"></textarea>
+						</div>
+						<div class="right">
+                                <!--IGNORAR EL ERROR -->
+								Tamaño: <input list="tamanos" size="25" th:value="${tamano}" th:field="*{tamano}" required>
+							<br><br>
+                                <!--IGNORAR EL ERROR -->
+								Precio: <input class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step="any">
+							<!--	<input class="agregar" type="submit" value="Agregar">
+							<br><br>
+							 Aunque puede ser más rápido ingresar todos los precios y tamaño al mismo tiempo, por el momento
+							solo se ingresara un producto a la vez
+							<table>
+								<thead>
+									LISTA DE PRECIOS
+								</thead>
+								<hr size=4 color="#CCCCCC">
+								<tbody>
+									<tr>
+										<th>Tamaño</th>
+										<th>Precio</th>
+										<th></th>
+									</tr>
+								</tbody>
+							</table>
+							-->
+						</div>
+						<input class="green" type="submit" value="Registrar">
+					</form>
+					<a th:href="@{/alimentos/cancel}">
+						<button class="red" type="submit">Cancelar Registro</button>
+					</a>
+				</div>
+			</div>
+
+		<!--Datalists-->
+		<datalist id="nombres">
+
+		</datalist>
+
+		<datalist id="categorias">
+			<option value="Pizza">
+			<option value="Panini">
+			<option value="Pasta">
+			<option value="Bebida">
+			<option value="Entrada">
+		</datalist>
+
+		<datalist id="tamanos">
+			<option value="Tamaño Unico">
+			<option value="Rebanada">
+			<option value="Personal">
+			<option value="14&quot;">
+			<option value="16&quot;">
+			<option value="18&quot;">
+			<option value="Individual">
+			<option value="Para Compartir">
+			<option value="Chica">
+			<option value="Mediana">
+			<option value="Grande">
+			<option value="1/2 Orden">
+			<option value="Orden">
+		</datalist>
     </body>
 </html>

@@ -10,7 +10,6 @@ import java.util.Set;
 public class Alimento {
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private int id;
     @Column(name = "nombre")
@@ -30,7 +29,8 @@ public class Alimento {
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
     private Set<Promocion> promociones;
 
-    public Alimento(String nombre, String ingredientes, String categoria, String tamano, double precio) {
+    public Alimento(int id,String nombre, String ingredientes, String categoria, String tamano, double precio) {
+        this.id = id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.categoria = categoria;
