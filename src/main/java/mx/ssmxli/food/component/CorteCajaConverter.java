@@ -22,6 +22,8 @@ public class CorteCajaConverter {
         corteCaja.setVenta(corteCajaModel.getVenta());
         corteCaja.setTarjeta(corteCajaModel.getTarjeta());
         corteCaja.setDiferencia(corteCajaModel.getDiferencia());
+        corteCaja.setPago(corteCajaModel.getPago());
+        corteCaja.setCompra(corteCajaModel.getCompra());
 
         /*corteCaja.setElaboro(corteCajaModel.getElaboro());
         corteCaja.setReviso(corteCajaModel.getReviso());*/
@@ -36,6 +38,8 @@ public class CorteCajaConverter {
         corteCajaModel.setVenta(corteCaja.getVenta());
         corteCajaModel.setTarjeta(corteCaja.getTarjeta());
         corteCajaModel.setDiferencia(corteCaja.getDiferencia());
+        corteCajaModel.setPago(corteCaja.getPago());
+        corteCajaModel.setCompra(corteCaja.getCompra());
         return corteCajaModel;
     }
 

@@ -60,37 +60,43 @@
                 <b>Gerente</b>
             </div>
             <hr size=4 color="#CCCCCC">
+            <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post">
+                <input type="hidden" th:field="*{id}">
             Introduzca la siguiente información para generar el corte de caja:
             <br><br>
             <div class="left">
                 <table>
                     <tr>
+                        <td>Fecha de elaboración:</td>
+                        <td>$<input class="precio" type="Date" th:field="*{fecha}" th:value="${fecha}"></td>
+                    </tr>
+                    <tr>
                         <td>Caja:</td>
-                        <td>$<input class="precio" type="number"></td>
+                        <td>$<input class="precio" type="number" th:field="*{caja}" th:value="${caja}"></td>
                     </tr>
                     <tr>
                         <td>Corte:</td>
-                        <td>$<input class="precio" type="number" readonly></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{corte}" th:value="${corte}"></td>
                     </tr>
                     <tr>
                         <td>Ventas:</td>
-                        <td>$<input class="precio" type="number" readonly></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{venta}" th:value="${venta}"></td>
                     </tr>
                     <tr>
                         <td>iZettle:</td>
-                        <td>$<input class="precio" type="number" readonly></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{tarjeta}" th:value="${tarjeta}"></td>
                     </tr>
                     <tr>
                         <td>Pagos:</td>
-                        <td>$<input class="precio" type="number" readonly></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{pago}" th:value="${pago}"></td>
                     </tr>
                     <tr>
                         <td>Compras:</td>
-                        <td>$<input class="precio" type="number"></td>
+                        <td>$<input class="precio" type="number" th:field="*{compra}" th:value="${compra}"></td>
                     </tr>
                     <tr>
                         <td>Diferencia:</td>
-                        <td>$<input class="precio" type="number" readonly></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{diferencia}" th:value="${diferencia}"></td>
                     </tr>
                     <tr>
                         <td>Elaboró:</td>
@@ -99,7 +105,7 @@
                 </table>
             </div>
             <form>
-                <input class="green" type="submit" value="Guardar"><br><br><br><br>
+                <input class="green" name="action" value="guardar" type="submit"><br><br><br><br>
                 <input class="yellow" type="submit" value="Imprimir" disabled>
             </form>
         </div>

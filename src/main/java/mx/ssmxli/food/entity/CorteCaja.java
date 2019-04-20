@@ -26,6 +26,10 @@ public class CorteCaja {
     private double tarjeta; //Las ventas por tarjeta, a traves de izzetle
     @Column(name = "diferencia")
     private double diferencia; //La diferencia entre el corte y las ventas y gastos.
+    @Column(name = "pago")
+    private double pago; //
+    @Column(name = "compra")
+    private double compra; //
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "elaboro")
@@ -37,12 +41,15 @@ public class CorteCaja {
 
     public CorteCaja(){}
 
-    public CorteCaja(Date fecha, double caja, double corte, double venta, double tarjeta) {
+    public CorteCaja(Date fecha, double caja, double corte, double venta, double tarjeta, double diferencia, double pago, double compra) {
         this.fecha = fecha;
         this.caja = caja;
         this.corte = corte;
         this.venta = venta;
         this.tarjeta = tarjeta;
+        this.diferencia = diferencia;
+        this.pago = pago;
+        this.compra = compra;
     }
 
 

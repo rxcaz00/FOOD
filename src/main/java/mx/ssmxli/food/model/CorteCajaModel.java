@@ -10,9 +10,9 @@ public class CorteCajaModel {
     private double corte;
     private double venta;
     private double tarjeta;
+    private double diferencia;
     private double pago;
     private double compra;
-    private double diferencia;
     private String elaboro;
     private String reviso;
 

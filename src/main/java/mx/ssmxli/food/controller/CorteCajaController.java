@@ -35,7 +35,7 @@ public class CorteCajaController {
         return ViewConstant.CORTE_CAJA;
     }
 
-    /*
+
     @PostMapping(value = "/addcorteCaja", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de CorteCaja
     public String addCorteCaja(@ModelAttribute(name = "corteCajaModel")CorteCajaModel corteCajaModel,
@@ -46,9 +46,9 @@ public class CorteCajaController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/corteCaja/inicio";
+        return "redirect:/corteCaja/actual";
     }
-     */
+
 
 
 }
