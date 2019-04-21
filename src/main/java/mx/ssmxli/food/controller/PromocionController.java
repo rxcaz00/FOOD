@@ -1,7 +1,10 @@
 package mx.ssmxli.food.controller;
 
 import mx.ssmxli.food.constant.ViewConstant;
+import mx.ssmxli.food.entity.Alimento;
+import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.PromocionModel;
+import mx.ssmxli.food.service.AlimentoService;
 import mx.ssmxli.food.service.PromocionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/promocion")
 public class PromocionController {
@@ -19,6 +24,10 @@ public class PromocionController {
     @Autowired
     @Qualifier("promocionServiceImpl")
     private PromocionService promocionService;
+
+    @Autowired
+    @Qualifier("alimentoServiceImpl")
+    private AlimentoService alimentoService;
 
 
     private static final Log log = LogFactory.getLog(PromocionController.class);
@@ -31,7 +40,9 @@ public class PromocionController {
     @GetMapping("/inicio")
     public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
+        List<AlimentoModel> alimentoModels = alimentoService.listAllAlimentos();
         model.addAttribute("promocionModel",promocionModel);
+        model.addAttribute("alimentoModels", alimentoModels);
         return ViewConstant.PROMOCION_NEW;
     }
 

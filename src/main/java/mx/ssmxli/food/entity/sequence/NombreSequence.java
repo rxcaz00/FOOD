@@ -4,6 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Entidad estilo sequence
+ * Utilizada para llevar control de los identificadores de nombres de Alimento
+ * */
 @Data
 @Entity
 @Table(name = "nombre_sequence")

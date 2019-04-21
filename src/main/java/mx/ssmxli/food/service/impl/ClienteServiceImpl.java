@@ -44,4 +44,9 @@ public class ClienteServiceImpl implements ClienteService {
     public ClienteModel findClienteByTelefonoModel(String telefono){
         return clienteConverter.convertCliente2ClienteModel(findClienteByTelefono(telefono));
     }
+
+    @Override
+    public void removeCliente(String telefono) {
+        clienteRepository.delete(findClienteByTelefono(telefono));
+    }
 }

@@ -1,6 +1,11 @@
 package mx.ssmxli.food.service;
 
+import mx.ssmxli.food.entity.sequence.CategoriaSequence;
+import mx.ssmxli.food.entity.sequence.NombreSequence;
+import mx.ssmxli.food.entity.sequence.TamanoSequence;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("idManagerSevice")
 public interface IdManagerService {
@@ -15,5 +20,11 @@ public interface IdManagerService {
      * Regresa un id entero con el formato CCNNNTT. C=Categoria, N=Nombre y T=Tamaño.
      * @return int id
      * */
-    public int createID(String categoria, String nombre, String tamano);
+    public abstract int createID(String categoria, String nombre, String tamano);
+
+    public abstract List<CategoriaSequence> listAllCategoria();
+
+    public abstract List<NombreSequence> listAllNombre();
+
+    public abstract List<TamanoSequence> listAllTamano();
 }

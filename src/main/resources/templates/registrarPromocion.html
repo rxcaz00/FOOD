@@ -69,7 +69,7 @@
             <aside>
             <table>
                 		<thead>
-                    		Dúo 2 x 1 <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}">
+                    		<img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}">
                     	</thead>
                     	<hr size=4 color="#CCCCCC">
                     	<tbody>
@@ -78,27 +78,17 @@
                             	<th>Descripción</th>
                                 <th></th>
                         	</tr>
-                        	<tr>
-                        		<td>2</td>
-                            	<td>Pizza Personal</td>
-                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
-                        	</tr>
-                        	<tr>
-                        		<td>1</td>
-                            	<td>Agua del día</td>
-                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
-                        	</tr>
                     	</tbody>
                 	</table>
             </aside>
-            Alimentos que aplican:<input type="text" th:field="*{alimentos}" th:value="${alimentos}"></input>
+            Alimentos:
                 <select>
-            <option value="id">Pizza Personal</option>
-            </select>
+                    <option th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${alimento.nombre}">
+                </select>
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>
             Precio: $
-                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}">
+                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0">
             <br><br>
             Vigencia:
             <br>
@@ -118,8 +108,8 @@
             <input type="checkbox" value="S" th:field="*{disponibilidad}" th:value="${disponibilidad}">Sábado<br>
             <input type="checkbox" value="D" th:field="*{disponibilidad}" th:value="${disponibilidad}">Domingo<br>
             <form>
-        		<input class="green" name="action" value="guardar"  type="submit">
-                <input class="red" type="submit" value="Cancelar registro">
+        		<input class="green" name="action" value="Registrar"  type="submit">
+                <input class="red" type="submit" value="Cancelar Registro">
         	</form>
        	</div>
     </body>

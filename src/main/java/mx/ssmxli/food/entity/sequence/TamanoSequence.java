@@ -4,6 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+
+/**
+ * Entidad estilo sequence.
+ * Utilizada para llevar control de los identificadores de tamaños de Alimento.
+ * */
 @Data
 @Entity
 @Table(name = "tamano_sequence")

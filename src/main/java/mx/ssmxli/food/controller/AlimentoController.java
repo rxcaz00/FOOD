@@ -1,6 +1,9 @@
 package mx.ssmxli.food.controller;
 
 import mx.ssmxli.food.constant.ViewConstant;
+import mx.ssmxli.food.entity.sequence.CategoriaSequence;
+import mx.ssmxli.food.entity.sequence.NombreSequence;
+import mx.ssmxli.food.entity.sequence.TamanoSequence;
 import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.service.AlimentoService;
 import mx.ssmxli.food.service.IdManagerService;
@@ -37,10 +40,21 @@ public class AlimentoController {
     @GetMapping("/registrarAlimento")
     public String RedirectRegistrarAlimento(Model model, @RequestParam(name = "id", required = false, defaultValue = "0") int id){
         AlimentoModel alimentoModel = new AlimentoModel();
+        List<CategoriaSequence> categorias = idManagerService.listAllCategoria();
+        List<NombreSequence> nombres = idManagerService.listAllNombre();
+        List<TamanoSequence> tamanos = idManagerService.listAllTamano();
+
         if(id != 0){
             alimentoModel = alimentoService.findAlimentoByIdModel(id);
         }
+        //Añade las listas de Categorias, Nombres y Tamaños al modelo.
+        //Se usaran estas listas para mostrarlos como "Sugerencias" en los input text del HTML.
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("nombres", nombres);
+        model.addAttribute("tamanos", tamanos);
+
         model.addAttribute("alimentoModel", alimentoModel);
+
         return ViewConstant.ALIMENTO_NEW;
     }
 
@@ -52,9 +66,9 @@ public class AlimentoController {
         //Crear el ID en base a la categoria, nombre y tamaño
         alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
         if(alimentoService.addAlimento(alimentoModel) != null)
-            model.addAttribute("result", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
+            model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
-            model.addAttribute("result", 0);
+            model.addAttribute("resultRegistro", 0);
         return "redirect:/alimentos/showAlimento";
     }
 

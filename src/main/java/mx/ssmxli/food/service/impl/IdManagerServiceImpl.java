@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("idManagerServiceImpl")
 public class IdManagerServiceImpl implements IdManagerService {
     @Autowired
@@ -63,6 +65,21 @@ public class IdManagerServiceImpl implements IdManagerService {
         id += tamanoSequence.getValor();//"Guarda" el tamaño en los primeros 2 digitos
 
         return id;
+    }
+
+    @Override
+    public List<CategoriaSequence> listAllCategoria() {
+        return categoriaSequenceRepository.findAll();
+    }
+
+    @Override
+    public List<NombreSequence> listAllNombre() {
+        return nombreSequenceRepository.findAll();
+    }
+
+    @Override
+    public List<TamanoSequence> listAllTamano() {
+        return tamanoSequenceRepository.findAll();
     }
 
 }
