@@ -161,7 +161,7 @@
                 <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
                 Elija el tipo de orden:
                 <br>
-                <input type="radio" name="orden" value="1">Local
+                <input type="radio" name="orden" th:field="*{tipoOrden}" value="1" required>Local
                 <input type="radio" name="orden" value="2">Domicilio
                 <br><br><br>
                 <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">

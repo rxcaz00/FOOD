@@ -14,7 +14,7 @@ public class ReciboModel {
     private Cliente cliente;
     private char metodoPago;
     private Usuario usuario;
-
+    private char tipoOrden;
 
     public ReciboModel(){
 
