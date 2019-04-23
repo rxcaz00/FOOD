@@ -84,7 +84,7 @@
             </aside>
             Alimentos:
                 <select>
-                    <option th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${alimento.nombre}">
+                    <option th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}">
                 </select>
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>

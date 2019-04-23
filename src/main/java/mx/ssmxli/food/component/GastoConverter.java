@@ -9,6 +9,16 @@ import java.util.Date;
 
 @Component("gastoConverter")
 public class GastoConverter {
+    /**
+     *
+     * @param gastoModel
+     *
+     * Convierte un objeto de tipo "GastoModel" a un objeto de tipo "Gasto"
+     *
+     * @return gasto
+     * @throws Exception
+     * @author Danya
+     */
     public Gasto convertGastoModel2Gasto(GastoModel gastoModel) throws Exception {
 
         Gasto gasto = new Gasto();
@@ -20,6 +30,16 @@ public class GastoConverter {
         return gasto;
 
     }
+
+    /**
+     *
+     * @param gasto
+     *
+     * Convierte un objeto de tipo "Gasto" a un objeto de tipo "GastoModel"
+     *
+     * @return gastoModel
+     * @author Danya
+     */
     public GastoModel convertGasto2GastoModel(Gasto gasto){
         GastoModel gastoModel = new GastoModel();
         gastoModel.setId(gasto.getId());

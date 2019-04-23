@@ -6,6 +6,15 @@ import org.springframework.stereotype.Component;
 
 @Component("alimentoConverter")
 public class AlimentoConverter {
+    /**
+     *
+     * @param alimentoModel
+     *
+     * Convierte un objeto de tipo "AlimentoModel" a un objeto de tipo "Alimento"
+     *
+     * @return Alimento
+     * @author Danya
+     */
     public Alimento convertAlimentoModel2Alimento(AlimentoModel alimentoModel){
         Alimento alimento = new Alimento();
         alimento.setId(alimentoModel.getId());
@@ -18,6 +27,15 @@ public class AlimentoConverter {
         return alimento;
     }
 
+    /**
+     *
+     * @param alimento
+     *
+     * Convierte un objeto de tipo "Alimento" a un objeto de tipo "AlimentoModel"
+     *
+     * @return alimentoModel
+     * @author Danya
+     */
     public AlimentoModel convertAlimento2AlimentoModel(Alimento alimento){
         AlimentoModel alimentoModel = new AlimentoModel();
         alimentoModel.setId(alimento.getId());

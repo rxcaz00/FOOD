@@ -2,11 +2,15 @@ package mx.ssmxli.food.controller;
 
 import lombok.Data;
 import mx.ssmxli.food.constant.ViewConstant;
+import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.ClienteModel;
+import mx.ssmxli.food.model.PromocionModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.ClienteRepository;
 import mx.ssmxli.food.repository.UsuarioRepository;
+import mx.ssmxli.food.service.AlimentoService;
 import mx.ssmxli.food.service.ClienteService;
+import mx.ssmxli.food.service.PromocionService;
 import mx.ssmxli.food.service.VentaService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,6 +48,14 @@ public class VentaController {
     @Qualifier("usuarioRepository")
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    @Qualifier("alimentoServiceImpl")
+    private AlimentoService alimentoService;
+
+    @Autowired
+    @Qualifier("promocionServiceImpl")
+    private PromocionService promocionService;
+
     private static final Log log = LogFactory.getLog(VentaController.class);
 
     @GetMapping("/cancel")
@@ -55,8 +67,12 @@ public class VentaController {
     public String venta(Model model) {
         ReciboModel reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
+        List<AlimentoModel> alimentos = alimentoService.listAllAlimentos();
+        List<PromocionModel> promociones = promocionService.listAllPromociones();
         model.addAttribute("reciboModel",reciboModel);
         model.addAttribute("clienteModel",clienteModel);
+        model.addAttribute("alimentos",alimentos);
+        model.addAttribute("promociones",promociones);
         return ViewConstant.VENTA;
     }
 

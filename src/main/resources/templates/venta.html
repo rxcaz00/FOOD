@@ -140,27 +140,21 @@
                 </aside>
             </form>
 
-            <form>
+            <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
                 <img class="cat" src="/imgs/dishes.png" th:src="@{/imgs/dishes.png}">
                 Alimentos
                 <br>
                 <select>
-                	<option value="id">Rebanada Peperonni</option>
+                	<option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"></option>
                 </select>
                 <br>
-                Tamaño:
-                <select>
-                	<option value="id">CH</option>
-                    <option value="id">M</option>
-                    <option value="id">G</option>
-                </select>
                 <input class="agregar" type="submit" value="Agregar alimento">
                 <br><br>
                 <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
                 Promociones
                 <br>
                 <select>
-                	<option value="id">Dúo 2 X 1</option>
+                	<option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
                 </select>
                 <input class="agregar" type="submit" value="Agregar promoción">
                 <br><br>

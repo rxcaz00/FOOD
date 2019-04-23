@@ -8,6 +8,15 @@ import java.util.Date;
 
 @Component("ventaConverter")
 public class VentaConverter {
+    /**
+     *
+     * @param reciboModel
+     *
+     * Convierte un objeto de tipo "ReciboModel" a un objeto de tipo "Recibo"
+     *
+     * @return recibo
+     * @author Roberto
+     */
     public Recibo convertReciboModel2Recibo(ReciboModel reciboModel) {
         Recibo recibo = new Recibo();
         recibo.setCliente(reciboModel.getCliente());
@@ -22,6 +31,15 @@ public class VentaConverter {
         return recibo;
     }
 
+    /**
+     *
+     * @param recibo
+     *
+     * Convierte un objeto de tipo "Recibo" a un objeto de tipo "ReciboModel"
+     *
+     * @return reciboModel
+     * @author Roberto
+     */
     public ReciboModel convertRecibo2ReciboModel(Recibo recibo) {
         ReciboModel reciboModel = new ReciboModel();
         reciboModel.setCliente(recibo.getCliente());

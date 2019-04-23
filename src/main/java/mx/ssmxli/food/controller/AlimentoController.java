@@ -99,7 +99,7 @@ public class AlimentoController {
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
             model.addAttribute("resultRegistro", 0);
-        return "redirect:/alimentos/showAlimento";
+        return "redirect:/venta/venta";
     }
 
     @GetMapping("/showAlimento")

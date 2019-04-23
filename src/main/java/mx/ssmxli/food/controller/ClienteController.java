@@ -26,11 +26,28 @@ public class ClienteController {
     private static final Log log = LogFactory.getLog(ClienteController.class);
 
     @GetMapping("/cancel")
+    /**
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     *
+     * @author Roberto
+     * */
     public String cancel(){
         return "redirect:/clientes/showCliente";
     }
 
     @GetMapping("/newCliente")
+    /**
+     *
+     * @param model
+     *
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     *
+     * @author Roberto
+     * */
     public String redirectClienteForm(Model model){
         ClienteModel clienteModel = new ClienteModel();
         model.addAttribute("clienteModel", clienteModel);
