@@ -34,7 +34,7 @@ public class PromocionController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/promocion/inicio";
+        return "redirect:/promociones/registrarPromocion";
     }
 
     @GetMapping("/registrarPromocion")
@@ -46,8 +46,8 @@ public class PromocionController {
         return ViewConstant.PROMOCION_NEW;
     }
 
-
-    @PostMapping(value = "/addpromocion", params = "action=guardar")
+    //Guarda los registros
+    @PostMapping(value = "/addpromocion", params = "action=Guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de registrarPromocion
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
                               Model model) throws Exception {

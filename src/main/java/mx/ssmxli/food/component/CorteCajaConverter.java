@@ -10,12 +10,13 @@ import java.util.Date;
 
 @Component("corteCajaConverter")
 public class CorteCajaConverter {
+    //Conversion de Modelo a Entidad
     public CorteCaja convertCorteCajaModel2CorteCaja(CorteCajaModel corteCajaModel)throws Exception {
 
         CorteCaja corteCaja = new CorteCaja();
 
         corteCaja.setId(corteCajaModel.getId());
-        corteCaja.setFecha(new Date());
+        corteCaja.setFecha(new Date());//Fecha del dia de hoy
         corteCaja.setCaja(corteCajaModel.getCaja());
         corteCaja.setCorte(corteCajaModel.getCorte());
         corteCaja.setVenta(corteCajaModel.getVenta());
@@ -36,6 +37,7 @@ public class CorteCajaConverter {
         corteCaja.setReviso(usuarioService.findByUsername(corteCajaModel.getReviso()));*/
         return corteCaja;
     }
+    //Conversion de Entidad a modelo
     public CorteCajaModel convertCorteCaja2CorteCajaModel(CorteCaja corteCaja){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         corteCajaModel.setId(corteCaja.getId());

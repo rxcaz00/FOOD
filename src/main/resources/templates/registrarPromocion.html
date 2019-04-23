@@ -7,6 +7,7 @@
 		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
 	</head>
 	<body>
@@ -61,7 +62,7 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/promocion/addpromocion}" th:object="${promocionModel}" method="post" onsubmit = "validate(event, this);">
+            <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit = "validate(event, this);">
                 <input type="hidden" th:field="*{id}">
             Nombre de la promoción:
                 <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
@@ -107,9 +108,10 @@
             <input type="checkbox" th:field="*{dias[4]}">Viernes<br>
             <input type="checkbox" th:field="*{dias[5]}">Sábado<br>
             <input type="checkbox" th:field="*{dias[6]}">Domingo<br>
-                <input class="green" name="action" value="guardar" type="submit" onclick='alert("Agregado exitosamente")'>
+                <input class="green" name="action" value="Guardar" type="submit">
                 <input class="red" type="submit" value="Cancelar Registro">
-        	</form>
+
+            </form>
        	</div>
     </body>
 </html>

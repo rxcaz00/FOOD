@@ -14,7 +14,7 @@ public class PromocionModel {
     private String fechaF;
     private double precio;
     private Set<Alimento> alimentos = new HashSet<Alimento>();
-    private boolean [] dias = {false,false,false,false,false,false,false};
+    private boolean [] dias = {false,false,false,false,false,false,false};//se asigna el valor de false
 
 
     public PromocionModel(){

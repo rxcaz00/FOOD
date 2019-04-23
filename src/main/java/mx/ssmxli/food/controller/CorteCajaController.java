@@ -36,7 +36,7 @@ public class CorteCajaController {
         return ViewConstant.CORTE_CAJA;
     }
 
-
+    //Guarda los registros
     @PostMapping(value = "/addcorteCaja", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de CorteCaja
     public String addCorteCaja(@ModelAttribute(name = "corteCajaModel")CorteCajaModel corteCajaModel,
