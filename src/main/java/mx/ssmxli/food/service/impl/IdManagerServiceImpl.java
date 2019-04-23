@@ -48,7 +48,7 @@ public class IdManagerServiceImpl implements IdManagerService {
         //Si no encontro la categoria entonces...
         if(categoriaSequence == null)
             //Registrar la nueva categoria
-            categoriaSequence = categoriaSequenceRepository.save(new CategoriaSequence(categoria.toUpperCase()));
+            categoriaSequence = categoriaSequenceRepository.save(new CategoriaSequence(categoria));
 
         //Si no encontro el nombre entonces...
         if(nombreSequence == null)

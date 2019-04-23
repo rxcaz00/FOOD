@@ -52,7 +52,6 @@ public class AlimentoController {
         model.addAttribute("categorias", categorias);
         model.addAttribute("nombres", nombres);
         model.addAttribute("tamanos", tamanos);
-
         model.addAttribute("alimentoModel", alimentoModel);
 
         return ViewConstant.ALIMENTO_NEW;
