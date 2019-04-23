@@ -64,7 +64,7 @@
             <form action="#" th:action="@{/promocion/addpromocion}" th:object="${promocionModel}" method="post">
                 <input type="hidden" th:field="*{id}">
             Nombre de la promoción:
-                <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}">
+                <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
             <hr size=4 color="#CCCCCC">
             <aside>
             <table>
@@ -88,27 +88,26 @@
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>
             Precio: $
-                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0">
+                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" required>
             <br><br>
             Vigencia:
             <br>
             Fecha Inicio:
-            <input type="date" th:field="*{fechaI}" th:value="${fechaI}">
+            <input type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
             <br>
             Fecha Fin:
-            <input type="date" th:field="*{fechaF}" th:value="${fechaF}">
+            <input type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
             <br><br>
             Disponibilidad:
             <br>
-            <input type="checkbox" value="L" th:field="*{disponibilidad}" th:value="${disponibilidad}">Lunes<br>
-            <input type="checkbox" value="M" th:field="*{disponibilidad}" th:value="${disponibilidad}">Martes<br>
-            <input type="checkbox" value="X" th:field="*{disponibilidad}" th:value="${disponibilidad}">Miércoles<br>
-            <input type="checkbox" value="J" th:field="*{disponibilidad}" th:value="${disponibilidad}">Jueves<br>
-            <input type="checkbox" value="V" th:field="*{disponibilidad}" th:value="${disponibilidad}">Viernes<br>
-            <input type="checkbox" value="S" th:field="*{disponibilidad}" th:value="${disponibilidad}">Sábado<br>
-            <input type="checkbox" value="D" th:field="*{disponibilidad}" th:value="${disponibilidad}">Domingo<br>
-            <form>
-        		<input class="green" name="action" value="Registrar"  type="submit">
+            <input type="checkbox" th:field="*{dias[0]}">Lunes<br>
+            <input type="checkbox" th:field="*{dias[1]}">Martes<br>
+            <input type="checkbox" th:field="*{dias[2]}">Miércoles<br>
+            <input type="checkbox" th:field="*{dias[3]}">Jueves<br>
+            <input type="checkbox" th:field="*{dias[4]}">Viernes<br>
+            <input type="checkbox" th:field="*{dias[5]}">Sábado<br>
+            <input type="checkbox" th:field="*{dias[6]}">Domingo<br>
+        		<input class="green" name="action" value="guardar"  type="submit">
                 <input class="red" type="submit" value="Cancelar Registro">
         	</form>
        	</div>

@@ -71,7 +71,12 @@
             <input class="precio" type="number" th:field="*{monto}" th:value="${monto}">
             <br>
 			Tipo:
-				<input type="text" th:field="*{tipo}" th:value="${tipo}">
+				<br>
+				<!--<input type="text" th:field="*{tipo}" th:value="${tipo}">!-->
+				<select th:field="*{tipo}">
+					<option value="C" text="C"> Compra </option>
+					<option value="P" text="*P"> Pago </option>
+				</select>
 				<br>
             <input class="yellow" type="submit" value="guardar" name="action">
 			</form>

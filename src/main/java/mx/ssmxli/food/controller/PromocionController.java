@@ -48,7 +48,7 @@ public class PromocionController {
 
 
     @PostMapping(value = "/addpromocion", params = "action=guardar")
-    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de contactform
+    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de registrarPromocion
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
                               Model model) throws Exception {
         log.info("Method: addPromocion() -- Params: "+promocionModel.toString());
