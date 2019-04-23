@@ -1,6 +1,7 @@
 package mx.ssmxli.food.model;
 
 import lombok.Data;
+import mx.ssmxli.food.entity.Usuario;
 
 @Data
 public class CorteCajaModel {
@@ -13,8 +14,8 @@ public class CorteCajaModel {
     private double diferencia;
     private double pago;
     private double compra;
-    private String elaboro;
-    private String reviso;
+    private Usuario elaboro;
+    private Usuario reviso;
 
     public CorteCajaModel(){
 

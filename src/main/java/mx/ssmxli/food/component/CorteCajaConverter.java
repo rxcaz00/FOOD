@@ -11,12 +11,11 @@ import java.util.Date;
 @Component("corteCajaConverter")
 public class CorteCajaConverter {
     public CorteCaja convertCorteCajaModel2CorteCaja(CorteCajaModel corteCajaModel)throws Exception {
-        String fecha = corteCajaModel.getFecha();
-        Date fech = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+
         CorteCaja corteCaja = new CorteCaja();
 
         corteCaja.setId(corteCajaModel.getId());
-        corteCaja.setFecha(fech);
+        corteCaja.setFecha(new Date());
         corteCaja.setCaja(corteCajaModel.getCaja());
         corteCaja.setCorte(corteCajaModel.getCorte());
         corteCaja.setVenta(corteCajaModel.getVenta());
@@ -24,9 +23,8 @@ public class CorteCajaConverter {
         corteCaja.setDiferencia(corteCajaModel.getDiferencia());
         corteCaja.setPago(corteCajaModel.getPago());
         corteCaja.setCompra(corteCajaModel.getCompra());
-
-        /*corteCaja.setElaboro(corteCajaModel.getElaboro());
-        corteCaja.setReviso(corteCajaModel.getReviso());*/
+        corteCaja.setElaboro(corteCajaModel.getElaboro());
+        corteCaja.setReviso(corteCajaModel.getReviso());
         return corteCaja;
     }
     public CorteCajaModel convertCorteCaja2CorteCajaModel(CorteCaja corteCaja){
@@ -40,6 +38,8 @@ public class CorteCajaConverter {
         corteCajaModel.setDiferencia(corteCaja.getDiferencia());
         corteCajaModel.setPago(corteCaja.getPago());
         corteCajaModel.setCompra(corteCaja.getCompra());
+        corteCajaModel.setElaboro(corteCaja.getElaboro());
+        corteCajaModel.setReviso(corteCaja.getReviso());
         return corteCajaModel;
     }
 

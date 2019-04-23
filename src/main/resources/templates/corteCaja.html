@@ -67,10 +67,6 @@
             <div class="left">
                 <table>
                     <tr>
-                        <td>Fecha de elaboración:</td>
-                        <td>$<input class="precio" type="Date" th:field="*{fecha}" th:value="${fecha}"></td>
-                    </tr>
-                    <tr>
                         <td>Caja:</td>
                         <td>$<input class="precio" type="number" th:field="*{caja}" th:value="${caja}"></td>
                     </tr>
@@ -100,7 +96,11 @@
                     </tr>
                     <tr>
                         <td>Elaboró:</td>
-                        <td><input type="text"></td>
+                        <td><input type="text" readonly th:field="*{elaboro}" th:value="${elaboro}"></td>
+                    </tr>
+                    <tr>
+                        <td>Revisó:</td>
+                        <td><input type="text" readonly th:field="*{reviso}" th:value="${reviso}"></td>
                     </tr>
                 </table>
             </div>

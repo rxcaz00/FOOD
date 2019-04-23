@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -28,39 +30,35 @@ public class ClienteController {
         return "redirect:/clientes/showCliente";
     }
 
-    /*
-    @GetMapping("/clienteForm")
-    public String redirectClienteForm(Model model,
-                                      @RequestParam(name = "telefono", required = false) String telefono){
+    @GetMapping("/newCliente")
+    public String redirectClienteForm(Model model){
         ClienteModel clienteModel = new ClienteModel();
-        if(telefono != null){
-            clienteModel = clienteService.findClienteByTelefonoModel(telefono);
-        }
         model.addAttribute("clienteModel", clienteModel);
-        return ViewConstant.CLIENTE_FORM;
+        return ViewConstant.VENTA;
     }
-     */
 
-    @PostMapping("/addcliente")
+    @PostMapping(value = "/addCliente", params = "action=registrar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
     public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel,
                              Model model){
         log.info("Method: addCliente() -- Params: "+clienteModel.toString());
-        if(clienteService.addCliente(clienteModel) != null){
+        if(clienteService.addCliente(clienteModel) != null)
             model.addAttribute("result", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
-        }else{
+        else
             model.addAttribute("result", 0);
+
+        return "redirect:/clientes/newCliente";
+    }
+
+    @PostMapping(value = "/addCliente", params = "action=buscar")
+    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
+    public String findCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel, Model model) {
+        List<ClienteModel> clientes = clienteService.listAllClientes();
+        for (ClienteModel c : clientes) {
+            if (c.getTelefono().equals(clienteModel.getTelefono())) {
+                model.addAttribute("clienteModel", c);
+            }
         }
-        return "redirect:/clientes/showCliente";
+        return ViewConstant.VENTA;
     }
-
-    /*
-    @GetMapping("/showCliente")
-    public ModelAndView showCliente(){
-        ModelAndView mav = new ModelAndView(ViewConstant.CLIENTE);
-        mav.addObject("clientes", clienteService.listAllClientes());
-        return mav;
-    }
-
-     */
 }
