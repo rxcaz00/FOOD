@@ -30,11 +30,12 @@ public class Promocion {
     private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
 
 
-    public Promocion(String nombre, Date fechaI, Date fechaF, double precio){
+    public Promocion(String nombre, Date fechaI, Date fechaF, double precio, String disponibilidad){
         this.nombre = nombre;
         this.fechaI = fechaI;
         this.fechaF = fechaF;
         this.precio = precio;
+        this.disponibilidad = disponibilidad;
     }
 
     public Promocion(){}

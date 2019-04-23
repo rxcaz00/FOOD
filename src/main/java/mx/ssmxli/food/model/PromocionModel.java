@@ -13,8 +13,9 @@ public class PromocionModel {
     private String fechaI;
     private String fechaF;
     private double precio;
-    private String disponibilidad;
     private Set<Alimento> alimentos = new HashSet<Alimento>();
+    private boolean [] dias = {false,false,false,false,false,false,false};
+
 
     public PromocionModel(){
 
