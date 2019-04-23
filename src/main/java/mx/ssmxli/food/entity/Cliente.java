@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name="cliente")
 public class Cliente {
     @Id
-    @Column(name = "telefono")
+    @Column(name = "telefono", unique = true, nullable = false, length = 10)
     private String telefono;
     @Column(name = "nombre")
     private String nombre;

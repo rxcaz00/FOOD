@@ -61,18 +61,27 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form>
+            <form action="#" th:action="@{/clientes/addCliente}" th:object="${clienteModel}" method="post">
             	Número de teléfono:
-            	<input type="number" size="20">
-            	<input class="yellow" type="submit" size="20" value="Buscar">
+            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}">
+                <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
                 <div class="registrar">
                 	<b>¿Cliente nuevo?</b>
-                	<input class="yellow" type="submit" size="20" value="¡Regístralo!">
+                    <button class="yellow" type="submit" size="20" name="action" value="registrar">¡Registralo!</button>
                 </div><br>
-                Nombre del cliente: <input type="text" class="nombre"><br>
-                Dirección: <input type="text" class="dir"><br>
-                Puntos: <input type="number">
-                RFC: <input type="text"><br>
+                Nombre del cliente:
+                <input type="text" class="nombre" th:field="*{nombre}" th:value="${nombre}"><br>
+                Dirección:
+                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}"><br>
+                Correo:
+                <input type="text" class="dir" th:field="*{correo}" th:value="${correo}"><br>
+                Puntos:
+                <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
+                RFC:
+                <input type="text" th:field="*{RFC}" th:value="${RFC}"><br>
+            </form>
+
+            <form>
                 <hr size=4 color="#CCCCCC">
                 DETALLES DE LA ORDEN
                 <hr size=4 color="#CCCCCC">

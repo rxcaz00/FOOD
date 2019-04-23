@@ -9,20 +9,25 @@ import org.springframework.stereotype.Component;
     public class ClienteConverter {
         public Cliente convertClienteModel2Cliente(ClienteModel clienteModel){
             Cliente cliente = new Cliente();
-
-            cliente.setNombre(clienteModel.getNombre());
-            cliente.setDireccion(clienteModel.getDireccion());
             cliente.setCorreo(clienteModel.getCorreo());
+            cliente.setDireccion(clienteModel.getDireccion());
+            cliente.setNombre(clienteModel.getNombre());
             cliente.setRFC(clienteModel.getRFC());
+            cliente.setPuntos(clienteModel.getPuntos());
+            cliente.setRecibos(clienteModel.getRecibos());
+            cliente.setTelefono(clienteModel.getTelefono());
             return cliente;
         }
 
         public ClienteModel convertCliente2ClienteModel(Cliente cliente ){
             ClienteModel clienteModel = new ClienteModel();
-            clienteModel.setNombre(cliente.getNombre());
-            clienteModel.setDireccion(cliente.getDireccion());
             clienteModel.setCorreo(cliente.getCorreo());
+            clienteModel.setDireccion(cliente.getDireccion());
+            clienteModel.setNombre(cliente.getNombre());
             clienteModel.setRFC(cliente.getRFC());
+            clienteModel.setPuntos(cliente.getPuntos());
+            clienteModel.setRecibos(cliente.getRecibos());
+            clienteModel.setTelefono(cliente.getTelefono());
             return clienteModel;
         }
 }
