@@ -8,7 +8,7 @@ import java.util.Date;
 public class GastoModel {
     public int id;
     public double monto;
-    public Date fecha;
+    public String fecha;
     public String descripcion;
     public char tipo;
 
