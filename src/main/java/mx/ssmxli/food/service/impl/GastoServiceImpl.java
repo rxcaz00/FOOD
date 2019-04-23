@@ -44,4 +44,9 @@ public class GastoServiceImpl implements GastoService {
     public GastoModel findGastoByIdModel(int id){
         return gastoConverter.convertGasto2GastoModel(findGastoById(id));
     }
+
+    @Override
+    public void removeGasto(int id) {
+
+    }
 }

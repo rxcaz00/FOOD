@@ -23,8 +23,17 @@ public class CorteCajaConverter {
         corteCaja.setDiferencia(corteCajaModel.getDiferencia());
         corteCaja.setPago(corteCajaModel.getPago());
         corteCaja.setCompra(corteCajaModel.getCompra());
-        corteCaja.setElaboro(corteCajaModel.getElaboro());
-        corteCaja.setReviso(corteCajaModel.getReviso());
+        //Borrar ya que se tengan las capas de usuario
+        Usuario testUser = new Usuario();
+        testUser.setId(1);
+        testUser.setNivel("gerente");
+        testUser.setPassword("1111");
+        testUser.setUsuario("prueba");
+        corteCaja.setElaboro(testUser);
+        corteCaja.setReviso(testUser);
+        /*Descomentar ya que se tengan las capas de usuario
+        corteCaja.setElaboro(usuarioService.findByUsername(corteCajaModel.getElaboro()));
+        corteCaja.setReviso(usuarioService.findByUsername(corteCajaModel.getReviso()));*/
         return corteCaja;
     }
     public CorteCajaModel convertCorteCaja2CorteCajaModel(CorteCaja corteCaja){
@@ -38,8 +47,8 @@ public class CorteCajaConverter {
         corteCajaModel.setDiferencia(corteCaja.getDiferencia());
         corteCajaModel.setPago(corteCaja.getPago());
         corteCajaModel.setCompra(corteCaja.getCompra());
-        corteCajaModel.setElaboro(corteCaja.getElaboro());
-        corteCajaModel.setReviso(corteCaja.getReviso());
+        corteCajaModel.setElaboro(corteCaja.getElaboro().getUsuario());
+        corteCajaModel.setReviso(corteCaja.getReviso().getUsuario());
         return corteCajaModel;
     }
 
