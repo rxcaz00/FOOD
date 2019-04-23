@@ -37,10 +37,10 @@ public class ClienteController {
         return ViewConstant.VENTA;
     }
 
+    /*
     @PostMapping(value = "/addCliente", params = "action=registrar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
-    public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel,
-                             Model model){
+    public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel, Model model){
         log.info("Method: addCliente() -- Params: "+clienteModel.toString());
         if(clienteService.addCliente(clienteModel) != null)
             model.addAttribute("result", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
@@ -61,4 +61,5 @@ public class ClienteController {
         }
         return ViewConstant.VENTA;
     }
+     */
 }

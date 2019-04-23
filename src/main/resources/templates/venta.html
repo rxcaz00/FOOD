@@ -16,7 +16,7 @@
 	<body>
     <nav>
         <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
-        <span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
+        <span class="menu-item"><a href="/../venta/venta"><b>Venta</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
         <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
         <div class="submenu" id="al">
@@ -65,7 +65,8 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/clientes/addCliente}" th:object="${clienteModel}" method="post">
+
+            <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post">
             	Número de teléfono:
             	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}">
                 <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
@@ -137,6 +138,9 @@
                         </tr>
                 	</table>
                 </aside>
+            </form>
+
+            <form>
                 <img class="cat" src="/imgs/dishes.png" th:src="@{/imgs/dishes.png}">
                 Alimentos
                 <br>
