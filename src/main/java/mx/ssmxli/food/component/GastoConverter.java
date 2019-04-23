@@ -18,7 +18,7 @@ public class GastoConverter {
         gasto.setMonto(gastoModel.getMonto());
         gasto.setTipo(gastoModel.getTipo());
         return gasto;
-        
+
     }
     public GastoModel convertGasto2GastoModel(Gasto gasto){
         GastoModel gastoModel = new GastoModel();
