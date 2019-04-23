@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "tamano_sequence")
 public class TamanoSequence {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "valor")
     private int valor;
     @Column(name = "nombre")
