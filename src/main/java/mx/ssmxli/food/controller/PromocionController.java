@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/promocion")
+@RequestMapping("/promociones")
 public class PromocionController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class PromocionController {
         return "redirect:/promocion/inicio";
     }
 
-    @GetMapping("/inicio")
+    @GetMapping("/registrarPromocion")
     public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
         List<AlimentoModel> alimentoModels = alimentoService.listAllAlimentos();
@@ -57,7 +57,7 @@ public class PromocionController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/promocion/inicio";
+        return "redirect:/promociones/registrarPromocion";
     }
 
 
