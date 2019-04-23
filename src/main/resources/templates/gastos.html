@@ -65,14 +65,14 @@
             Ingrese los siguientes datos de los gastos
             <br><br>
             Descripción:
-            <input class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}">
+            <input class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}" required>
             <br>
             Monto:
-            <input class="precio" type="number" th:field="*{monto}" th:value="${monto}">
+            <input class="precio" type="number" th:field="*{monto}" th:value="${monto}" min="0" required>
             <br>
 			Tipo:
 				<!--<input type="text" th:field="*{tipo}" th:value="${tipo}">!-->
-				<select th:field="*{tipo}">
+				<select th:field="*{tipo}" required>
 					<option value="C" text="C"> Compra </option>
 					<option value="P" text="*P"> Pago </option>
 				</select>
