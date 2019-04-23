@@ -33,11 +33,25 @@ public class PromocionController {
     private static final Log log = LogFactory.getLog(PromocionController.class);
 
     @GetMapping("/cancel")
+    /**
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     * @author Diana
+     * */
     public String cancel(){
         return "redirect:/promociones/registrarPromocion";
     }
 
     @GetMapping("/registrarPromocion")
+    /**
+     * @param model
+     *
+     * Método que carga la información a mostrar en la vista
+     *
+     * @return String
+     * @author Diana
+     */
     public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
         List<AlimentoModel> alimentoModels = alimentoService.listAllAlimentos();
