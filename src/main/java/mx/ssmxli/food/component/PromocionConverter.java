@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Component("promocionConverter")
 public class PromocionConverter {
-
+//Convierte el modelo a la entidad
     public Promocion convertPromocionModel2Promocion(PromocionModel promocionModel)throws Exception {
         String fecha = promocionModel.getFechaI();
         Date fech = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);

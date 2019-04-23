@@ -61,7 +61,7 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/promocion/addpromocion}" th:object="${promocionModel}" method="post">
+            <form action="#" th:action="@{/promocion/addpromocion}" th:object="${promocionModel}" method="post" onsubmit = "validate(event, this);">
                 <input type="hidden" th:field="*{id}">
             Nombre de la promoción:
                 <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
@@ -107,7 +107,7 @@
             <input type="checkbox" th:field="*{dias[4]}">Viernes<br>
             <input type="checkbox" th:field="*{dias[5]}">Sábado<br>
             <input type="checkbox" th:field="*{dias[6]}">Domingo<br>
-        		<input class="green" name="action" value="guardar"  type="submit">
+                <input class="green" name="action" value="guardar" type="submit" onclick='alert("Agregado exitosamente")'>
                 <input class="red" type="submit" value="Cancelar Registro">
         	</form>
        	</div>
