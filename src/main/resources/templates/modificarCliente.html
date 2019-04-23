@@ -6,49 +6,49 @@
 		<link href="../static/css/clientes.css" th:href="@{/css/clientes.css}" rel="stylesheet" type="text/css">
 		<link href="../static/css/todo.css" th:href="@{css/todo.css}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-		<script type="text/javascript" src="../static/js/script.js" th:src="@{'js/script.js'}"></script>
 		<link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+		<script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
 	</head>
 	<body>
 	<nav>
 		<img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
-		<span class="menu-item"><a href="venta.html"><b>Venta</b></a></span>
+		<span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
 		<hr class="menu-separator" size=2 color="#FFFF66">
 		<span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
 		<div class="submenu" id="al">
 			<ul>
-				<li><a href="registrarAlimento.html">Registro</a></li>
-				<li><a href="modificarAlimento.html">Modificación</a></li>
-				<li><a href="eliminarAlimento.html">Eliminación</a></li>
+				<li><a href="/../alimentos/registrarAlimento">Registro</a></li>
+				<li><a href="/../alimentos/modificarAlimento">Modificación</a></li>
+				<li><a href="/../alimentos/eliminarAlimento">Eliminación</a></li>
 			</ul>
 		</div>
 		<span class="menu-item" onClick="show('pr','f2')"><img class="arrow" id="f2" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Promociones</b></span>
 		<div class="submenu" id="pr">
 			<ul>
-				<li><a href="registrarPromocion.html">Registro</a></li>
-				<li><a href="modificarPromocion.html">Modificación</a></li>
+				<li><a href="/../promociones/registrarPromocion">Registro</a></li>
+				<li><a href="/../promociones/modificarPromocion">Modificación</a></li>
 			</ul>
 		</div>
 		<span class="menu-item" onClick="show('cl','f3')"><img class="arrow" id="f3" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Clientes</b></span>
 		<div class="submenu" id="cl">
 			<ul>
-				<li><a href="modificarCliente.html">Modificación</a></li>
+				<li><a href="/../clientes/modificarCliente">Modificación</a></li>
 			</ul>
 		</div>
-		<span class="menu-item"><a href="gastos.html"><b>Registro de Gastos</b></a></span>
+		<span class="menu-item"><a href="/../gasto/muestraGasto"><b>Registro de Gastos</b></a></span>
 		<hr class="menu-separator" size=2 color="#FFFF66">
 		<span class="menu-item" onClick="show('cc','f4')"><img class="arrow" id="f4" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Corte de Caja</b></span>
 		<div class="submenu" id="cc">
 			<ul>
-				<li><a href="corteCaja.html">Generar actual</a></li>
-				<li><a href="corteCajaHistorial.html">Consultar historial</a></li>
+				<li><a href="/../corteCaja/actual">Generar actual</a></li>
+				<li><a href="/../corteCaja/historial">Consultar historial</a></li>
 			</ul>
 		</div>
 		<span class="menu-item" onClick="show('co','f5')"><img class="arrow" id="f5" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Configuración</b></span>
 		<div class="submenu" id="co">
 			<ul>
-				<li><a href="configSis.html">Sistema</a></li>
-				<li><a href="configAcceso.html">Acceso</a></li>
+				<li><a href="/../configuracion/sistema">Sistema</a></li>
+				<li><a href="/../configuracion/acceso">Acceso</a></li>
 			</ul>
 		</div>
 	</nav>
