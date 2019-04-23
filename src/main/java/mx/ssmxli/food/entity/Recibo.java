@@ -24,6 +24,8 @@ public class Recibo {
     private String notas;//Alguna indicacion especial en la entrega
     @Column(name = "metodoPago")
     private char metodoPago;//Si se pago con (T)arjeta o (E)fectivo
+    @Column(name = "tipoOrden")
+    private char tipoOrden;//Si es (L)ocal o a (D)omicilio
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn

@@ -14,8 +14,8 @@ public class CorteCajaModel {
     private double diferencia;
     private double pago;
     private double compra;
-    private Usuario elaboro;
-    private Usuario reviso;
+    private String elaboro;
+    private String reviso;
 
     public CorteCajaModel(){
 

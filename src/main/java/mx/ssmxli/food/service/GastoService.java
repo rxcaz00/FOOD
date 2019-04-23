@@ -15,4 +15,6 @@ public interface GastoService {
     public abstract Gasto findGastoById(int id);
 
     public abstract GastoModel findGastoByIdModel(int id);
+
+    public abstract void removeGasto(int id);
 }
