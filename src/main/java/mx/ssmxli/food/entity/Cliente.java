@@ -15,6 +15,14 @@ public class Cliente {
     private String telefono;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellidos")
+    private String apellidos;
+    /*
+    @Column(name = "apellidoPaterno")
+    private String apellidoPaterno;
+    @Column(name = "apellidoMaterno")
+    private String apellidoMaterno;
+     */
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "correo", nullable = true)

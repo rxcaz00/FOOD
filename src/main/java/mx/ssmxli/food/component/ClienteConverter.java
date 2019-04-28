@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
             cliente.setCorreo(clienteModel.getCorreo());
             cliente.setDireccion(clienteModel.getDireccion());
             cliente.setNombre(clienteModel.getNombre());
+            cliente.setApellidos(clienteModel.getApellidos());
+            /*
+            cliente.setApellidoPaterno(clienteModel.getApellidoPaterno());
+            cliente.setApellidoMaterno(clienteModel.getApellidoMaterno());
+             */
             cliente.setRFC(clienteModel.getRFC());
             cliente.setPuntos(clienteModel.getPuntos());
             cliente.setRecibos(clienteModel.getRecibos());
@@ -24,6 +29,11 @@ import org.springframework.stereotype.Component;
             clienteModel.setCorreo(cliente.getCorreo());
             clienteModel.setDireccion(cliente.getDireccion());
             clienteModel.setNombre(cliente.getNombre());
+            clienteModel.setApellidos(cliente.getApellidos());
+            /*
+            clienteModel.setApellidoPaterno(cliente.getApellidoPaterno());
+            clienteModel.setApellidoMaterno(cliente.getApellidoMaterno());
+             */
             clienteModel.setRFC(cliente.getRFC());
             clienteModel.setPuntos(cliente.getPuntos());
             clienteModel.setRecibos(cliente.getRecibos());

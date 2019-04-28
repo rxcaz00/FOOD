@@ -7,9 +7,9 @@ import mx.ssmxli.food.entity.Usuario;
 public class CorteCajaModel {
     private int id;
     private String fecha;
-    private double caja;
+    private double dineroInicial;
     private double corte;
-    private double venta;
+    private double efectivo;
     private double tarjeta;
     private double diferencia;
     private double pago;

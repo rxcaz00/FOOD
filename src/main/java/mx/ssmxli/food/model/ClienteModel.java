@@ -8,6 +8,11 @@ import java.util.Set;
 @Data
 public class ClienteModel {
     private String nombre;
+    private String apellidos;
+    /*
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+     */
     private String direccion;
     private String telefono;
     private String correo;

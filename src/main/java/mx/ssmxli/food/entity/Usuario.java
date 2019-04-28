@@ -10,15 +10,22 @@ import java.util.Set;
 @Table(name="usuario")
 public class Usuario {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int id;
     @Column(name = "usuario")
     private String usuario;
     @Column(name = "password")
     private String password;
     @Column(name = "nivel")
     private String nivel;//Indica que autoridad tiene el usuario.
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "apellidos")
+    private String apellidos;
+    /*
+    @Column(name = "apellidoPaterno")
+    private String apellidoPaterno;
+    @Column(name = "apellidoMaterno")
+    private String apellidoMaterno;
+     */
 
     @OneToMany(mappedBy = "elaboro", cascade = CascadeType.ALL)
     private Set<CorteCaja> corteCajaElaborados;//CorteCaja que este usuario ha elaborado

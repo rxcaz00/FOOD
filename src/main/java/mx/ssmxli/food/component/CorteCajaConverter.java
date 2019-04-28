@@ -16,19 +16,20 @@ public class CorteCajaConverter {
 
         corteCaja.setId(corteCajaModel.getId());
         corteCaja.setFecha(new Date());
-        corteCaja.setCaja(corteCajaModel.getCaja());
+        corteCaja.setDineroInicial(corteCajaModel.getDineroInicial());
         corteCaja.setCorte(corteCajaModel.getCorte());
-        corteCaja.setVenta(corteCajaModel.getVenta());
+        corteCaja.setEfectivo(corteCajaModel.getEfectivo());
         corteCaja.setTarjeta(corteCajaModel.getTarjeta());
         corteCaja.setDiferencia(corteCajaModel.getDiferencia());
         corteCaja.setPago(corteCajaModel.getPago());
         corteCaja.setCompra(corteCajaModel.getCompra());
         //Borrar ya que se tengan las capas de usuario
         Usuario testUser = new Usuario();
-        testUser.setId(1);
         testUser.setNivel("gerente");
         testUser.setPassword("1111");
         testUser.setUsuario("prueba");
+        testUser.setNombre("John");
+        testUser.setApellidos("Doe");
         corteCaja.setElaboro(testUser);
         corteCaja.setReviso(testUser);
         /*Descomentar ya que se tengan las capas de usuario
@@ -40,9 +41,9 @@ public class CorteCajaConverter {
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         corteCajaModel.setId(corteCaja.getId());
         corteCajaModel.setFecha(corteCaja.getFecha().toString());
-        corteCajaModel.setCaja(corteCaja.getCaja());
+        corteCajaModel.setDineroInicial(corteCaja.getDineroInicial());
         corteCajaModel.setCorte(corteCaja.getCorte());
-        corteCajaModel.setVenta(corteCaja.getVenta());
+        corteCajaModel.setEfectivo(corteCaja.getEfectivo());
         corteCajaModel.setTarjeta(corteCaja.getTarjeta());
         corteCajaModel.setDiferencia(corteCaja.getDiferencia());
         corteCajaModel.setPago(corteCaja.getPago());
