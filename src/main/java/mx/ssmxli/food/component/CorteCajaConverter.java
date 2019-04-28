@@ -10,8 +10,17 @@ import java.util.Date;
 
 @Component("corteCajaConverter")
 public class CorteCajaConverter {
+    /**
+     *
+     * @param corteCajaModel
+     *
+     * Convierte un objeto de tipo "CorteCajaModel" a un objeto de tipo "CorteCaja"
+     *
+     * @return corteCaja
+     * @throws Exception
+     * @author Diana
+     */
     public CorteCaja convertCorteCajaModel2CorteCaja(CorteCajaModel corteCajaModel)throws Exception {
-
         CorteCaja corteCaja = new CorteCaja();
 
         corteCaja.setId(corteCajaModel.getId());
@@ -37,6 +46,16 @@ public class CorteCajaConverter {
         corteCaja.setReviso(usuarioService.findByUsername(corteCajaModel.getReviso()));*/
         return corteCaja;
     }
+
+    /**
+     *
+     * @param corteCaja
+     *
+     * Convierte un objeto de tipo "CorteCaja" a un objeto de tipo "CorteCajaModel"
+     *
+     * @return corteCajaModel
+     * @author Diana
+     */
     public CorteCajaModel convertCorteCaja2CorteCajaModel(CorteCaja corteCaja){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         corteCajaModel.setId(corteCaja.getId());

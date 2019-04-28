@@ -25,18 +25,32 @@ public class CorteCajaController {
     private static final Log log = LogFactory.getLog(CorteCajaController.class);
 
     @GetMapping("/cancel")
+    /**
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     * @author Diana
+     * */
     public String cancel(){
         return "redirect:/corteCaja/actual";
     }
 
     @GetMapping("/actual")
+    /**
+     * @param model
+     *
+     * Método que carga la información a mostrar en la vista
+     *
+     * @return String
+     * @author Diana
+     */
     public String inicio(Model model){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         model.addAttribute("corteCajaModel",corteCajaModel);
         return ViewConstant.CORTE_CAJA;
     }
 
-
+    //Guarda los registros
     @PostMapping(value = "/addcorteCaja", params = "action=guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de CorteCaja
     public String addCorteCaja(@ModelAttribute(name = "corteCajaModel")CorteCajaModel corteCajaModel,

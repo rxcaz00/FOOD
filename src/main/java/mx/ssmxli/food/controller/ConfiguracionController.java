@@ -27,11 +27,26 @@ public class ConfiguracionController {
     private static final Log log = LogFactory.getLog(ConfiguracionController.class);
 
     @GetMapping("/cancel")
+    /**
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     * @author Roberto
+     * */
     public String cancel() {
         return "redirect:/configuracion/sistema";
     }
 
     @PostMapping(value = "/addConfig", params = "action=guardar")
+    /**
+     * @param configuracionModel
+     * @param model
+     *
+     * Método para guardar la configuración del sistema "FOOD".
+     *
+     * @return String
+     * @author Roberto
+     */
     public String addConfig(@ModelAttribute(name = "configuracionModel")ConfiguracionModel configuracionModel, Model model) {
         log.info("Method: addConfig() -- Params: " + configuracionModel.toString());
         if(configuracionService.addConfiguracion(configuracionModel) != null)
@@ -42,6 +57,15 @@ public class ConfiguracionController {
     }
 
     @PostMapping(value = "/addConfig", params = "action=cargar")
+    /**
+     * @param configuracionModel
+     * @param model
+     *
+     * Método para cargar la última configuración del sistema "FOOD".
+     *
+     * @return String
+     * @author Roberto
+     */
     public String load(@ModelAttribute(name = "configuracionModel")ConfiguracionModel configuracionModel, Model model) {
         List<ConfiguracionModel> configuracionesModel = configuracionService.listAllConfiguraciones();
         configuracionModel = configuracionesModel.get(configuracionesModel.size() - 1);
@@ -51,6 +75,14 @@ public class ConfiguracionController {
     }
 
     @GetMapping("/sistema")
+    /**
+     * @param model
+     *
+     * Método que carga la información a mostrar en la vista
+     *
+     * @return String
+     * @author Roberto
+     */
     public String sistema(Model model) {
         ConfiguracionModel configuracionModel = new ConfiguracionModel();
         model.addAttribute("configuracionModel",configuracionModel);

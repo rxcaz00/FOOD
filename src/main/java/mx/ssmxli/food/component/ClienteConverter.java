@@ -7,6 +7,16 @@ import org.springframework.stereotype.Component;
 
     @Component("clienteConverter")
     public class ClienteConverter {
+
+        /**
+         *
+         * @param clienteModel
+         *
+         * Convierte un objeto de tipo "ClienteModel" a un objeto de tipo "Cliente"
+         *
+         * @return cliente
+         * @author Roberto
+         */
         public Cliente convertClienteModel2Cliente(ClienteModel clienteModel){
             Cliente cliente = new Cliente();
             cliente.setCorreo(clienteModel.getCorreo());
@@ -24,6 +34,15 @@ import org.springframework.stereotype.Component;
             return cliente;
         }
 
+        /**
+         *
+         * @param cliente
+         *
+         * Convierte un objeto de tipo "Cliente" a un objeto de tipo "ClienteModel"
+         *
+         * @return clienteModel
+         * @author Roberto
+         */
         public ClienteModel convertCliente2ClienteModel(Cliente cliente ){
             ClienteModel clienteModel = new ClienteModel();
             clienteModel.setCorreo(cliente.getCorreo());

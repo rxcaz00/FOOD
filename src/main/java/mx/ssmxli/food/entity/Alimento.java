@@ -13,15 +13,15 @@ public class Alimento {
     @Column(name = "id")
     private int id;
     @Column(name = "nombre")
-    private String nombre;
+    private String nombre;//nombre del alimento
     @Column(name = "ingredientes")
-    private String ingredientes;
+    private String ingredientes;//ingredientes del alimento
     @Column(name = "categoria")
-    private String categoria;
+    private String categoria;//En que categoria del menu se encuentra el alimento
     @Column(name = "tamano", nullable = true)
-    private String tamano;
+    private String tamano;//tamaño del alimento
     @Column(name = "precio")
-    private double precio;
+    private double precio;//precio del alimento
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "alimento_promocion",

@@ -9,7 +9,16 @@ import java.util.Date;
 
 @Component("promocionConverter")
 public class PromocionConverter {
-//Convierte el modelo a la entidad
+    /**
+     *
+     * @param promocionModel
+     *
+     * Convierte un objeto de tipo "PromocionModel" a un objeto de "Promocion"
+     *
+     * @return promocion
+     * @throws Exception
+     * @author Diana
+     */
     public Promocion convertPromocionModel2Promocion(PromocionModel promocionModel)throws Exception {
         String fecha = promocionModel.getFechaI();
         Date fech = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
@@ -37,6 +46,15 @@ public class PromocionConverter {
         return promocion;
     }
 
+    /**
+     *
+     * @param promocion
+     *
+     * Convierte un objeto de tipo "Promocion" a un objeto de tipo "PromocionModel"
+     *
+     * @return promocionModel
+     * @author Diana
+     */
     public PromocionModel convertPromocion2PromocionModel(Promocion promocion){
         boolean [] arreglo = new boolean [7];
         PromocionModel promocionModel = new PromocionModel();

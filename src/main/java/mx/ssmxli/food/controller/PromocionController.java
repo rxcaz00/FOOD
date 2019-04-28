@@ -33,11 +33,25 @@ public class PromocionController {
     private static final Log log = LogFactory.getLog(PromocionController.class);
 
     @GetMapping("/cancel")
+    /**
+     * Te redirecciona a la direccion que indica el String de retorno
+     *
+     * @return String
+     * @author Diana
+     * */
     public String cancel(){
-        return "redirect:/promocion/inicio";
+        return "redirect:/promociones/registrarPromocion";
     }
 
     @GetMapping("/registrarPromocion")
+    /**
+     * @param model
+     *
+     * Método que carga la información a mostrar en la vista
+     *
+     * @return String
+     * @author Diana
+     */
     public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
         List<AlimentoModel> alimentoModels = alimentoService.listAllAlimentos();
@@ -46,8 +60,8 @@ public class PromocionController {
         return ViewConstant.PROMOCION_NEW;
     }
 
-
-    @PostMapping(value = "/addpromocion", params = "action=guardar")
+    //Guarda los registros
+    @PostMapping(value = "/addpromocion", params = "action=Guardar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de registrarPromocion
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
                               Model model) throws Exception {
