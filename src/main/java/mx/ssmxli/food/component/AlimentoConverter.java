@@ -20,7 +20,6 @@ public class AlimentoConverter {
         alimento.setId(alimentoModel.getId());
         alimento.setIngredientes(alimentoModel.getIngredientes());
         alimento.setNombre(alimentoModel.getNombre());
-        alimento.setPromociones(alimentoModel.getPromociones());
         alimento.setPrecio(alimentoModel.getPrecio());
         alimento.setCategoria(alimentoModel.getCategoria());
         alimento.setTamano(alimentoModel.getTamano());
@@ -41,7 +40,6 @@ public class AlimentoConverter {
         alimentoModel.setId(alimento.getId());
         alimentoModel.setIngredientes(alimento.getIngredientes());
         alimentoModel.setNombre(alimento.getNombre());
-        alimentoModel.setPromociones(alimento.getPromociones());
         alimentoModel.setPrecio(alimento.getPrecio());
         alimentoModel.setCategoria(alimento.getCategoria());
         alimentoModel.setTamano(alimento.getTamano());

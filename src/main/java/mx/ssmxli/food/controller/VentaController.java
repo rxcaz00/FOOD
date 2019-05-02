@@ -16,12 +16,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -60,10 +58,10 @@ public class VentaController {
 
     @GetMapping("/cancel")
     public String cancel() {
-        return "redirect:/venta/venta";
+        return "redirect:/venta";
     }
 
-    @GetMapping("/venta")
+    @GetMapping("")
     public String venta(Model model) {
         ReciboModel reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
@@ -84,7 +82,7 @@ public class VentaController {
         else
             model.addAttribute("result", 0);
 
-        return "redirect:/venta/venta";
+        return "redirect:/venta";
     }
 
 
@@ -111,6 +109,19 @@ public class VentaController {
         else
             model.addAttribute("result",0);
 
-        return "redirect:/venta/venta";
+        return "redirect:/venta";
+    }
+
+    /**
+     * Añade el alimento seleccionado en el SELECT o INPUT TEXT de venta.html a la lista de compras.
+     * El id lo recibe del HTML en forma de JSON.
+     *
+     * @param @RequestBody int
+     * @author Andrés
+     * */
+    @RequestMapping(value = "/addAlimento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody AlimentoModel addAlimento(@RequestBody int alimentoId){
+        System.out.println("Felicidades");
+        return alimentoService.findAlimentoByIdModel(alimentoId);
     }
 }

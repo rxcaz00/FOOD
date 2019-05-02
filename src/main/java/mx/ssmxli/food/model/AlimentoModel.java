@@ -14,7 +14,6 @@ public class AlimentoModel {
     private double precio;
     private String categoria;
     private String tamano;
-    private Set<Promocion> promociones = new HashSet<Promocion>();
 
     public AlimentoModel(){
 

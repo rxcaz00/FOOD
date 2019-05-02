@@ -6,11 +6,13 @@ import java.util.Date;
 
 @Data
 public class GastoModel {
-    public int id;
-    public double monto;
-    public String fecha;
-    public String descripcion;
-    public char tipo;
+    private int id;
+    private double monto;
+    private String fecha;
+    private String descripcion;
+    private char tipo;
+    private String usuario;
+
 
     public GastoModel(){
 
