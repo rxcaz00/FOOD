@@ -20,7 +20,7 @@
 	<body>
     <nav>
         <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
-        <span class="menu-item"><a href="/../venta/venta"><b>Venta</b></a></span>
+        <span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
         <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
         <div class="submenu" id="al">
@@ -72,28 +72,30 @@
 
             <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post">
             	Número de teléfono:
-            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}">
+            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344">
                 <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
                 <div class="registrar">
                 	<b>¿Cliente nuevo?</b>
                     <button class="yellow" type="submit" size="20" name="action" value="registrar">¡Registralo!</button>
                 </div><br>
                 Nombre del cliente:
-                <input type="text" class="nombre" th:field="*{nombre}" th:value="${nombre}"><br>
+                <input type="text" size="30" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
+                <input type="text" size="45" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
                 Dirección:
-                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}"><br>
+                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
                 Correo:
-                <input type="text" class="dir" th:field="*{correo}" th:value="${correo}"><br>
+                <input type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
                 Puntos:
                 <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
                 RFC:
-                <input type="text" th:field="*{RFC}" th:value="${RFC}"><br>
+                <input type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000"><br>
             </form>
 
             <form>
                 <hr size=4 color="#CCCCCC">
                 DETALLES DE LA ORDEN
                 <hr size=4 color="#CCCCCC">
+                <!--
                 <aside>
                 	<table>
                 		<thead>
@@ -108,7 +110,6 @@
                             	<th>Total</th>
                                 <th></th>
                         	</tr>
-                            <!--
                         	<tr>
                         		<td>2</td>
                             	<td>Rebanada Peperonni</td>
@@ -134,18 +135,16 @@
                                 <td>100.00</td>
                                 <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
                             </tr>
-                            -->
                     	</tbody>
-                        <!--
                     	<tr>
                         	<td></td>
                            	<td></td>
                            	<td>Total</td>
                            	<td>$120.00</td>
                         </tr>
-                        -->
                 	</table>
                 </aside>
+                -->
             </form>
 
             <!--AÑADIR ALIMENTO A LA LISTA DE COMPRA-->
@@ -194,28 +193,79 @@
                 });
             </script>
 
-            <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
-                <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
-                Elija el tipo de orden:
-                <br>
-                <input type="radio" name="orden" th:field="*{tipoOrden}" value="1" required>Local
-                <input type="radio" name="orden" value="2">Domicilio
-                <br><br><br>
-                <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
-                Elija el método de pago:
-                <br>
-                <input type="radio" name="metodo" value="1">Efectivo
-                <input type="radio" name="metodo" value="2">Tarjeta
-                <br><br><br>
-                Marca la casilla si el cliente requiere cambio
-                <input type="checkbox" name="cambio" value="1">
-                <br>
-                Cantidad de cambio: $
-                <input type="number" name="dinero">
-                <br>
+            <form>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Importe</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="precio" type="number">
+                        </td>
+                        <td>
+                            <input class="venta" type="text">
+                        </td>
+                        <td>
+                            <input class="precio" type="number">
+                        </td>
+                        <td>
+                            <input class="precio" type="number" readonly>
+                        </td>
+                        <td>
+                            <input class="precio" type="number" readonly>
+                        </td>
+                        <td>
+                            <img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="total">Total: $</td>
+                        <td>100.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
+                            <br>
+                            Elija el tipo de orden:
+                            <br>
+                            <input type="radio" name="orden" value="1" required>Local
+                            <input type="radio" name="orden" value="2">Domicilio
+                        </td>
+                        <td colspan="3">
+                            <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
+                            <br>
+                            Elija el método de pago:
+                            <br>
+                            <input type="radio" name="metodo" value="1">Efectivo
+                            <input type="radio" name="metodo" value="2">Tarjeta
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+
+                        </td>
+                        <td colspan="3">
+                            Marca la casilla si el cliente requiere cambio
+                            <input type="checkbox" name="cambio" value="1">
+                            <br>
+                            Cantidad de cambio: $
+                            <input class="precio" type="number" name="dinero">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
                 <input class="green" type="submit" value="Finalizar compra">
                 <input class="red" type="submit" value="Cancelar compra">
-        	</form>
+            </form>
         </div>
     </body>
 </html>

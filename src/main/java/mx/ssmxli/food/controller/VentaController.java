@@ -94,6 +94,7 @@ public class VentaController {
             if (c.getTelefono().equals(clienteModel.getTelefono())) {
                 model.addAttribute("clienteModel", c);
                 telefono = c.getTelefono();
+                break;
             }
         }
         return ViewConstant.VENTA;

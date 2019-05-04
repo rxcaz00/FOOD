@@ -63,11 +63,14 @@
             <hr size=4 color="#CCCCCC">
 			<form action="#" th:action="@{/configuracion/addConfig}" th:object="${configuracionModel}" method="post">
             	<input type="hidden" th:field="*{id}">
+				Introduzca el dinero inicial en caja:
+				<input class="precio" type="number" th:field="*{dineroInicial}" th:value="${dineroInicial}" min="0" required>
+				<br>
 				Introduzca el IVA actual:
-            	<input class="precio" type="number" th:field="*{iva}" th:value="${iva}" min="0" max="100" required>%
+            	<input class="precio" type="number" th:field="*{iva}" th:value="${iva}" min="0" max="100" step=".01" required>%
             	<br>
             	Introduzca el porcentaje de retribución de compra:
-            	<input class="precio" type="number" th:field="*{retribucion}" th:value="${retribucion}" min="0" max="100" required>%
+            	<input class="precio" type="number" th:field="*{retribucion}" th:value="${retribucion}" min="0" max="100" step=".01" required>%
             	<br>
 				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
 				<button class="green" name="action" value="guardar" type="submit">Guardar configuración</button>

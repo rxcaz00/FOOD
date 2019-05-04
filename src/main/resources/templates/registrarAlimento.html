@@ -84,7 +84,7 @@
 								Tamaño: <input list="tamanos" size="25" th:value="${tamano}" th:field="*{tamano}" required>
 							<br><br>
                                 <!--IGNORAR EL ERROR -->
-								Precio: $<input class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step="any">
+								Precio: $<input class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
 						</div>
 						<input class="green" type="submit" value="Registrar">
 					</form>
