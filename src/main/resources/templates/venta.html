@@ -16,6 +16,8 @@
 
         <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--Este JS utiliza funciones de JQuery, por lo que se debe de importar despues de este-->
+        <script type="text/javascript" src="../static/js/venta.js" th:src="@{'/js/venta.js'}"></script>
 	</head>
 	<body>
     <nav>
@@ -88,7 +90,7 @@
                 Puntos:
                 <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
                 RFC:
-                <input type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000"><br>
+                <input type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
             </form>
 
             <form>
@@ -155,7 +157,7 @@
                 <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"></option>
             </select>
             <br>
-            <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento">
+            <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento" onClick="addAlimento()">
             <br><br>
             <!--AÑADIR PROMOCION A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
@@ -166,32 +168,6 @@
             </select>
             <input class="agregar" type="submit" value="Agregar promoción">
             <br><br>
-            <script type="text/javascript">
-                /**
-                 * Script AJAX para obtener un alimento a partir del alimento seleccionado en el SELECT #selectAlimento
-                 * @author Andrés
-                 * */
-                $('#addAlimento').click(function(event) {
-                    $.ajax({
-                        url : 'venta/addAlimento',
-                        type : "POST",
-                        data : JSON.stringify($('#selectAlimento').val()),
-                        processData: false,
-                        contentType : 'application/json',
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("Accept", "application/json");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success : function(result){
-                            alert(result.id +"\n"+ result.nombre + "\n" + result.categoria + "\n" + result.tamano);
-                        },
-                        error : function(e){
-                            alert("Error: " + e);
-                        }
-                    });
-                    event.preventDefault();
-                });
-            </script>
 
             <form>
                 <table>
