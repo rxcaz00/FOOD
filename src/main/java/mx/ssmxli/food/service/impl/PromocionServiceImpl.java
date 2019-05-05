@@ -44,4 +44,8 @@ public class PromocionServiceImpl implements PromocionService {
     public PromocionModel findPromocionByIdModel(int id){
         return promocionConverter.convertPromocion2PromocionModel(findPromocionById(id));
     }
+
+    public Promocion convertPromocionModel2Promocion(PromocionModel promocionModel) throws Exception{
+        return promocionConverter.convertPromocionModel2Promocion(promocionModel);
+    }
 }

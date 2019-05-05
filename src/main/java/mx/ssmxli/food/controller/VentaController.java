@@ -1,11 +1,10 @@
 package mx.ssmxli.food.controller;
 
-import javafx.util.converter.LocalDateStringConverter;
 import lombok.Data;
-import mx.ssmxli.food.component.AlimentoConverter;
 import mx.ssmxli.food.constant.ViewConstant;
 import mx.ssmxli.food.entity.Alimento;
 import mx.ssmxli.food.entity.ContenidoRecibo;
+import mx.ssmxli.food.entity.Promocion;
 import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.ClienteModel;
 import mx.ssmxli.food.model.PromocionModel;
@@ -25,14 +24,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -93,12 +88,28 @@ public class VentaController {
         LocalDate hoy = LocalDate.now();
         List<PromocionModel> promociones = new ArrayList<>();
         for (PromocionModel promo: allPromociones) {
-           /* //Parsea las fechas de inicio y de fin de la promocion
-            LocalDate fechaI = LocalDate.parse(promo.getFechaI());
-            LocalDate fechaF = LocalDate.parse(promo.getFechaF());
+            //En vez de parsear de String a Date las fechas de inicio y fin, simplemente obtengo la entidad promocion a
+            //partir de el ID de PromocionModel.
+            //Tenia una funcion a traves de promocionService para buscar a traves del ID del modelo, pero para reducir las
+            //consultas a base de datos preferi convertir de PromocionModel a Promocion.
+            Promocion temp = null;
+            try {
+                temp = promocionService.findPromocionById(promocionService.convertPromocionModel2Promocion(promo).getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //Parsea las fechas de inicio y de fin de la promocion. La fecha de la promocion esta en Date
+            //pero la fecha actual esta en LocalDate.
+
+            //Se necesita obtener el Instant de la fecha, luego definir la Zona a traves del ID de la zona predeterminada del sistema.
+            //Por ultimo se parsea a LocalDate.
+            LocalDate fechaI = temp.getFechaI().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaF = temp.getFechaF().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
             //Compara las fechas de la promocion con la de hoy. Si hoy es igual o mayor a la fecha de inicio y menor a la fecha
             // de fin entonces se pasa a la siguiente condicion
-            if ((hoy.isAfter(fechaI)||hoy.isEqual(fechaI))&&(hoy.isBefore(fechaF)||hoy.isEqual(fechaF)))*/
+            if ((hoy.isAfter(fechaI)||hoy.isEqual(fechaI))&&(hoy.isBefore(fechaF)||hoy.isEqual(fechaF)))
                 //Calendar.DAY_OF_WEEK regresa el dia de la semana en formato numero del 1 al 7, de Lunes a Domingo
                 if (promo.getDias()[(hoy.getDayOfWeek().getValue() - 1)]) //Al ser de 1 a 7, le restamos 1 para que empiece en 0
                     //Como la vigencia y disponibilidad de la promocion son validas, entonces se agregara al model
@@ -136,7 +147,7 @@ public class VentaController {
             }
         }
         return ViewConstant.VENTA;
-    }
+    }//end findCliente
 
     @PostMapping("/addVenta")
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
@@ -151,12 +162,14 @@ public class VentaController {
             model.addAttribute("result",0);
 
         return "redirect:/venta";
-    }
+    }//end addVenta
 
     /**
      *
      * Añade el alimento seleccionado en el SELECT o INPUT TEXT de venta.html a la lista de compras.
      * El id lo recibe del HTML en forma de JSON. De igual manera regresa un AlimentoModel en formato JSON.
+     *
+     * A partir de la informacion recibida construye la entidad contenidoRecibo y la añade a la variable global contenidosRecibo
      *
      * @param @RequestBody int
      * @return @ResponseBody AlimentoModel

@@ -15,6 +15,8 @@ public interface PromocionService {
     public abstract Promocion findPromocionById(int id);
 
     public abstract PromocionModel findPromocionByIdModel(int id);
+
+    public abstract Promocion convertPromocionModel2Promocion(PromocionModel promocionModel) throws Exception;
 }
 
 

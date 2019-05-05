@@ -159,6 +159,7 @@
             <br>
             <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento" onClick="addAlimento()">
             <br><br>
+
             <!--AÑADIR PROMOCION A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
             Promociones
@@ -182,7 +183,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input class="precio" type="number">
+                            <input class="precio" type="number" readonly>
                         </td>
                         <td>
                             <input class="venta" type="text">
