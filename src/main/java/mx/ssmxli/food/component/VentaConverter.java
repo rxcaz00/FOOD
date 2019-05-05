@@ -27,6 +27,7 @@ public class VentaConverter {
         recibo.setSubtotal(reciboModel.getSubtotal());
         recibo.setTotal(reciboModel.getTotal());
         recibo.setUsuario(reciboModel.getUsuario());
+        recibo.setContenidosRecibo(reciboModel.getContenidosRecibo());
 
         return recibo;
     }
@@ -50,6 +51,7 @@ public class VentaConverter {
         reciboModel.setSubtotal(recibo.getSubtotal());
         reciboModel.setTotal(recibo.getTotal());
         reciboModel.setUsuario(recibo.getUsuario());
+        reciboModel.setContenidosRecibo(recibo.getContenidosRecibo());
         return reciboModel;
     }
 }

@@ -4,7 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -36,7 +37,7 @@ public class Recibo {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL)
-    private Set<ContenidoRecibo> contenidosRecibo;
+    private List<ContenidoRecibo> contenidosRecibo;
 
     @OneToOne(mappedBy = "recibo")
     private Comanda comanda;

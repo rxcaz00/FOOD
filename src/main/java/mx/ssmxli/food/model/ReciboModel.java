@@ -2,7 +2,10 @@ package mx.ssmxli.food.model;
 
 import lombok.Data;
 import mx.ssmxli.food.entity.Cliente;
+import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Usuario;
+
+import java.util.List;
 
 @Data
 public class ReciboModel {
@@ -15,6 +18,7 @@ public class ReciboModel {
     private char metodoPago;
     private Usuario usuario;
     private char tipoOrden;
+    private List<ContenidoRecibo> contenidosRecibo;
 
     public ReciboModel(){
 

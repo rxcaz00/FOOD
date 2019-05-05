@@ -16,6 +16,8 @@
 
         <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--El script venta necesitan funciones de JQuery, por lo que se debe de importar despues de JQuery.-->
+        <script type="text/javascript" src="../static/js/venta.js" th:src="@{'/js/venta.js'}"></script>
 	</head>
 	<body>
     <nav>
@@ -72,16 +74,18 @@
 
             <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post">
             	Número de teléfono:
-            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}">
+            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}" required>
                 <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
                 <div class="registrar">
                 	<b>¿Cliente nuevo?</b>
                     <button class="yellow" type="submit" size="20" name="action" value="registrar">¡Registralo!</button>
                 </div><br>
-                Nombre del cliente:
-                <input type="text" class="nombre" th:field="*{nombre}" th:value="${nombre}"><br>
+                Nombre:
+                <input type="text" class="nombre" th:field="*{nombre}" th:value="${nombre}" required>
+                Apellidos:
+                <input type="text" class="apellido" th:field="*{apellidos}" th:value="${apellidos}" required><br>
                 Dirección:
-                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}"><br>
+                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" required><br>
                 Correo:
                 <input type="text" class="dir" th:field="*{correo}" th:value="${correo}"><br>
                 Puntos:
@@ -153,11 +157,11 @@
             Alimentos
             <br>
             <select id="selectAlimento">
-                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"></option>
+                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.categoria + ' - ' + alimento.nombre + ' ' + alimento.tamano}"></option>
             </select>
-            <br>
-            <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento">
+            <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento" onClick="addAlimento()">
             <br><br>
+
             <!--AÑADIR PROMOCION A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
             Promociones
@@ -167,52 +171,26 @@
             </select>
             <input class="agregar" type="submit" value="Agregar promoción">
             <br><br>
-            <script type="text/javascript">
-                /**
-                 * Script AJAX para obtener un alimento a partir del alimento seleccionado en el SELECT #selectAlimento
-                 * @author Andrés
-                 * */
-                $('#addAlimento').click(function(event) {
-                    $.ajax({
-                        url : 'venta/addAlimento',
-                        type : "POST",
-                        data : JSON.stringify($('#selectAlimento').val()),
-                        processData: false,
-                        contentType : 'application/json',
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("Accept", "application/json");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success : function(result){
-                            alert(result.id +"\n"+ result.nombre + "\n" + result.categoria + "\n" + result.tamano);
-                        },
-                        error : function(e){
-                            alert("Error: " + e);
-                        }
-                    });
-                    event.preventDefault();
-                });
-            </script>
 
             <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
                 <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
                 Elija el tipo de orden:
                 <br>
                 <input type="radio" name="orden" th:field="*{tipoOrden}" value="1" required>Local
-                <input type="radio" name="orden" value="2">Domicilio
+                <input type="radio" name="orden" th:field="*{tipoOrden}" value="2">Domicilio
                 <br><br><br>
                 <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
                 Elija el método de pago:
                 <br>
-                <input type="radio" name="metodo" value="1">Efectivo
+                <input type="radio" name="metodo" value="1" required>Efectivo
                 <input type="radio" name="metodo" value="2">Tarjeta
                 <br><br><br>
-                Marca la casilla si el cliente requiere cambio
+                <!--Marca la casilla si el cliente requiere cambio
                 <input type="checkbox" name="cambio" value="1">
                 <br>
                 Cantidad de cambio: $
                 <input type="number" name="dinero">
-                <br>
+                <br>-->
                 <input class="green" type="submit" value="Finalizar compra">
                 <input class="red" type="submit" value="Cancelar compra">
         	</form>

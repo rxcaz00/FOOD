@@ -1,7 +1,11 @@
 package mx.ssmxli.food.controller;
 
+import javafx.util.converter.LocalDateStringConverter;
 import lombok.Data;
+import mx.ssmxli.food.component.AlimentoConverter;
 import mx.ssmxli.food.constant.ViewConstant;
+import mx.ssmxli.food.entity.Alimento;
+import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.ClienteModel;
 import mx.ssmxli.food.model.PromocionModel;
@@ -21,6 +25,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -29,6 +41,7 @@ import java.util.List;
 public class VentaController {
     private String telefono;
     private String usuario = "prueba";
+    private List<ContenidoRecibo> contenidosRecibo;
 
     @Autowired
     @Qualifier("ventaServiceImpl")
@@ -61,18 +74,43 @@ public class VentaController {
         return "redirect:/venta";
     }
 
+    /**
+     * Crea los modelos necesarios para empezar la venta. Llena de información los modelos de Alimentos y Promocion.
+     * Aunque recibe todas las promociones registradas, solo manda a la vista las que son validas el dia de hoy.
+     *
+     * @author Roberto
+     * @author Andrés
+     * */
     @GetMapping("")
     public String venta(Model model) {
         ReciboModel reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
+        contenidosRecibo = new ArrayList<>();
         List<AlimentoModel> alimentos = alimentoService.listAllAlimentos();
-        List<PromocionModel> promociones = promocionService.listAllPromociones();
+        List<PromocionModel> allPromociones = promocionService.listAllPromociones();
+
+        //Revisa la fecha actual y solo añade las promociones validas el dia de hoy
+        LocalDate hoy = LocalDate.now();
+        List<PromocionModel> promociones = new ArrayList<>();
+        for (PromocionModel promo: allPromociones) {
+           /* //Parsea las fechas de inicio y de fin de la promocion
+            LocalDate fechaI = LocalDate.parse(promo.getFechaI());
+            LocalDate fechaF = LocalDate.parse(promo.getFechaF());
+            //Compara las fechas de la promocion con la de hoy. Si hoy es igual o mayor a la fecha de inicio y menor a la fecha
+            // de fin entonces se pasa a la siguiente condicion
+            if ((hoy.isAfter(fechaI)||hoy.isEqual(fechaI))&&(hoy.isBefore(fechaF)||hoy.isEqual(fechaF)))*/
+                //Calendar.DAY_OF_WEEK regresa el dia de la semana en formato numero del 1 al 7, de Lunes a Domingo
+                if (promo.getDias()[(hoy.getDayOfWeek().getValue() - 1)]) //Al ser de 1 a 7, le restamos 1 para que empiece en 0
+                    //Como la vigencia y disponibilidad de la promocion son validas, entonces se agregara al model
+                    promociones.add(promo);
+        }//end foreach
+
         model.addAttribute("reciboModel",reciboModel);
         model.addAttribute("clienteModel",clienteModel);
         model.addAttribute("alimentos",alimentos);
         model.addAttribute("promociones",promociones);
         return ViewConstant.VENTA;
-    }
+    }//end venta
 
     @PostMapping(value = "/addCliente", params = "action=registrar")
     public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel, Model model){
@@ -83,7 +121,7 @@ public class VentaController {
             model.addAttribute("result", 0);
 
         return "redirect:/venta";
-    }
+    }//end addCliente
 
 
     @PostMapping(value = "/addCliente", params = "action=buscar")
@@ -103,6 +141,8 @@ public class VentaController {
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
         reciboModel.setCliente(clienteRepository.findByTelefono(telefono));
         reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
+        reciboModel.setContenidosRecibo(contenidosRecibo);
+
         log.info("Method: addVenta() -- Params: " + reciboModel.toString());
         if(ventaService.addRecibo(reciboModel) != null)
             model.addAttribute("result", 1);
@@ -113,15 +153,22 @@ public class VentaController {
     }
 
     /**
+     *
      * Añade el alimento seleccionado en el SELECT o INPUT TEXT de venta.html a la lista de compras.
-     * El id lo recibe del HTML en forma de JSON.
+     * El id lo recibe del HTML en forma de JSON. De igual manera regresa un AlimentoModel en formato JSON.
      *
      * @param @RequestBody int
+     * @return @ResponseBody AlimentoModel
      * @author Andrés
      * */
     @RequestMapping(value = "/addAlimento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody AlimentoModel addAlimento(@RequestBody int alimentoId){
-        System.out.println("Felicidades");
-        return alimentoService.findAlimentoByIdModel(alimentoId);
+        Alimento alimento = alimentoService.findAlimentoById(alimentoId);
+        ContenidoRecibo temporalContenidoRecibo = new ContenidoRecibo();
+        temporalContenidoRecibo.setAlimento(alimento);
+        temporalContenidoRecibo.setPrecio(alimento.getPrecio());
+        System.out.println(temporalContenidoRecibo.getAlimento().getNombre() + " " + temporalContenidoRecibo.getPrecio());
+        contenidosRecibo.add(temporalContenidoRecibo);
+        return alimentoService.findAlimentoByIdModel(alimento.getId());
     }
 }

@@ -148,7 +148,11 @@ table, th, tr, td {
 }
 
 .nombre {
-	width: 80%;
+	width: 30%;
+}
+
+.apellido {
+	width: 50%;
 }
 
 input[type=checkbox] {
