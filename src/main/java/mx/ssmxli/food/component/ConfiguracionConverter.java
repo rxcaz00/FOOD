@@ -18,6 +18,7 @@ public class ConfiguracionConverter {
     public Configuracion convertConfiguracionModel2Configuracion(ConfiguracionModel configuracionModel) {
         Configuracion configuracion = new Configuracion();
         configuracion.setId(configuracionModel.getId());
+        configuracion.setDineroInicial(configuracionModel.getDineroInicial());
         configuracion.setIva(configuracionModel.getIva());
         configuracion.setRetribucion(configuracionModel.getRetribucion());
         return configuracion;
@@ -35,6 +36,7 @@ public class ConfiguracionConverter {
     public ConfiguracionModel convertConfiguracion2ConfiguracionModel(Configuracion configuracion) {
         ConfiguracionModel configuracionModel = new ConfiguracionModel();
         configuracionModel.setId(configuracion.getId());
+        configuracionModel.setDineroInicial(configuracion.getDineroInicial());
         configuracionModel.setIva(configuracion.getIva());
         configuracionModel.setRetribucion(configuracion.getRetribucion());
         return configuracionModel;

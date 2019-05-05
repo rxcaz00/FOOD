@@ -11,7 +11,7 @@
     <body>
     <nav>
         <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
-        <span class="menu-item"><a href="/../venta/venta"><b>Venta</b></a></span>
+        <span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
         <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
         <div class="submenu" id="al">
@@ -68,39 +68,39 @@
                 <table>
                     <tr>
                         <td>Dinero incial:</td>
-                        <td>$<input class="precio" type="number" th:field="*{caja}" th:value="${caja}" min="0" required></td>
+                        <td>$<input class="precio" type="number" th:field="*{caja}" th:value="${caja}" min="0" step=".01" required></td>
                     </tr>
                     <tr>
                         <td>Corte:</td>
-                        <td>$<input class="precio" type="number"  th:field="*{corte}" th:value="${corte}" min="0"  required></td>
+                        <td>$<input class="precio" type="number"  th:field="*{corte}" th:value="${corte}" min="0" step=".01"  required></td>
                     </tr>
                     <tr>
                         <td>Efectivo:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{venta}" th:value="${venta}"></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{venta}" th:value="${venta}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Tarjeta:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{tarjeta}" th:value="${tarjeta}"></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{tarjeta}" th:value="${tarjeta}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Pagos:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{pago}" th:value="${pago}"></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{pago}" th:value="${pago}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Compras:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{compra}" th:value="${compra}" ></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{compra}" th:value="${compra}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Diferencia:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{diferencia}" th:value="${diferencia}"></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{diferencia}" th:value="${diferencia}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Elaboró:</td>
-                        <td><input type="text" readonly th:field="*{elaboro}" th:value="${elaboro}"></td>
+                        <td><input type="text" readonly th:field="*{elaboro}" th:value="${elaboro}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Revisó:</td>
-                        <td><input type="text" readonly th:field="*{reviso}" th:value="${reviso}"></td>
+                        <td><input type="text" readonly th:field="*{reviso}" th:value="${reviso}" step=".01"></td>
                     </tr>
                 </table>
             </div>

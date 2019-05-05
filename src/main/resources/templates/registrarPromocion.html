@@ -12,7 +12,7 @@
 	<body>
     <nav>
         <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
-        <span class="menu-item"><a href="/../venta/venta"><b>Venta</b></a></span>
+        <span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
         <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
         <div class="submenu" id="al">
@@ -88,7 +88,7 @@
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>
             Precio: $
-                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" required>
+                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
             <br><br>
             Vigencia:
             <br>
