@@ -18,7 +18,7 @@ public class AlimentoConverter {
     public Alimento convertAlimentoModel2Alimento(AlimentoModel alimentoModel){
         Alimento alimento = new Alimento();
         alimento.setId(alimentoModel.getId());
-        alimento.setIngredientes(alimentoModel.getIngredientes());
+        alimento.setDescripcion(alimentoModel.getDescripcion());
         alimento.setNombre(alimentoModel.getNombre());
         alimento.setPrecio(alimentoModel.getPrecio());
         alimento.setCategoria(alimentoModel.getCategoria());
@@ -38,7 +38,7 @@ public class AlimentoConverter {
     public AlimentoModel convertAlimento2AlimentoModel(Alimento alimento){
         AlimentoModel alimentoModel = new AlimentoModel();
         alimentoModel.setId(alimento.getId());
-        alimentoModel.setIngredientes(alimento.getIngredientes());
+        alimentoModel.setDescripcion(alimento.getDescripcion());
         alimentoModel.setNombre(alimento.getNombre());
         alimentoModel.setPrecio(alimento.getPrecio());
         alimentoModel.setCategoria(alimento.getCategoria());

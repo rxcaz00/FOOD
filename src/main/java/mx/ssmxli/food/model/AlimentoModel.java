@@ -10,7 +10,7 @@ import java.util.Set;
 public class AlimentoModel {
     private int id;
     private String nombre;
-    private String ingredientes;
+    private String descripcion;
     private double precio;
     private String categoria;
     private String tamano;

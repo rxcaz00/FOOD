@@ -14,8 +14,8 @@ public class Alimento {
     private int id;
     @Column(name = "nombre")
     private String nombre;//nombre del alimento
-    @Column(name = "ingredientes")
-    private String ingredientes;//ingredientes del alimento
+    @Column(name = "descripcion")
+    private String descripcion;//breve descripcion del alimento
     @Column(name = "categoria")
     private String categoria;//En que categoria del menu se encuentra el alimento
     @Column(name = "tamano", nullable = true)
@@ -29,10 +29,10 @@ public class Alimento {
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
     private Set<Promocion> promociones;
 
-    public Alimento(int id,String nombre, String ingredientes, String categoria, String tamano, double precio) {
+    public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
         this.id = id;
         this.nombre = nombre;
-        this.ingredientes = ingredientes;
+        this.descripcion = descripcion;
         this.categoria = categoria;
         this.tamano = tamano;
         this.precio = precio;
