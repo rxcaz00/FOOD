@@ -37,3 +37,11 @@
 	text-align: right;
 	border: none;
 }
+
+.nom {
+	width: 30%;
+}
+
+.app {
+	width: 45%;
+}
