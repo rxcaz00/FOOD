@@ -184,3 +184,16 @@ aside {
 .important {
 	color: red;
 }
+
+thead {
+	background-color: gainsboro;
+}
+
+th, td {
+	padding: 10px;
+	border-bottom: 1px solid darkgray;
+}
+
+.disabled {
+	background-color: #fff792;
+}

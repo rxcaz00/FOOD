@@ -6,36 +6,47 @@
         <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
-        <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
     </head>
     <body>
     <nav>
         <img class="logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
         <span class="menu-item"><a href="/../venta"><b>Venta</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item"><a href="/../alimentos/consultaAlimentos"><b>Alimentos</b></a></span>
+        <!--
         <span class="menu-item" onClick="show('al','f1')"><img class="arrow" id="f1" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Alimentos</b></span>
         <div class="submenu" id="al">
             <ul>
                 <li><a href="/../alimentos/registrarAlimento">Registro</a></li>
-                <li><a href="/../alimentos/modificarAlimento">Modificación</a></li>
-                <li><a href="/../alimentos/eliminarAlimento">Eliminación</a></li>
+                <li><a href="/../alimentos/consultaAlimentos">Consulta</a></li>
             </ul>
         </div>
+        -->
+        <span class="menu-item"><a href="/../promociones/consultaPromociones"><b>Promociones</b></a></span>
+        <!--
         <span class="menu-item" onClick="show('pr','f2')"><img class="arrow" id="f2" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Promociones</b></span>
         <div class="submenu" id="pr">
             <ul>
                 <li><a href="/../promociones/registrarPromocion">Registro</a></li>
-                <li><a href="/../promociones/modificarPromocion">Modificación</a></li>
+                <li><a href="/../promociones/consultaPromociones">Consulta</a></li>
             </ul>
         </div>
+        -->
+        <span class="menu-item"><a href="/../clientes/consultaClientes"><b>Clientes</b></a></span>
+        <!--
         <span class="menu-item" onClick="show('cl','f3')"><img class="arrow" id="f3" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Clientes</b></span>
         <div class="submenu" id="cl">
             <ul>
                 <li><a href="/../clientes/modificarCliente">Modificación</a></li>
             </ul>
         </div>
+        -->
+        <hr class="menu-separator" size=2 color="#FFFF66">
         <span class="menu-item"><a href="/../gasto/muestraGasto"><b>Registro de Gastos</b></a></span>
         <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item"><a href="/../corteCaja/actual"><b>Corte de Caja</b></a></span>
+        <span class="menu-item"><a href="/../corteCaja/historial"><b>Historial de Corte</b></a></span>
+        <!--
         <span class="menu-item" onClick="show('cc','f4')"><img class="arrow" id="f4" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Corte de Caja</b></span>
         <div class="submenu" id="cc">
             <ul>
@@ -43,6 +54,11 @@
                 <li><a href="/../corteCaja/historial">Consultar historial</a></li>
             </ul>
         </div>
+        -->
+        <hr class="menu-separator" size=2 color="#FFFF66">
+        <span class="menu-item"><a href="/../configuracion/sistema"><b>Configuración</b></a></span>
+        <span class="menu-item"><a href="/../configuracion/acceso"><b>Control Usuarios</b></a></span>
+        <!--
         <span class="menu-item" onClick="show('co','f5')"><img class="arrow" id="f5" src="/imgs/expand-button.png" th:src="@{/imgs/expand-button.png}"><b>Configuración</b></span>
         <div class="submenu" id="co">
             <ul>
@@ -50,6 +66,7 @@
                 <li><a href="/../configuracion/acceso">Acceso</a></li>
             </ul>
         </div>
+        -->
     </nav>
         <div class="container">
             <b class="titulo">Generar Corte de Caja</b>

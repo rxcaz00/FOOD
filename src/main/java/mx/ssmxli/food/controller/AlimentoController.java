@@ -95,14 +95,15 @@ public class AlimentoController {
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());
         //Crear el ID en base a la categoria, nombre y tamaño
         alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
+        alimentoModel.setHabilitado(true);
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
             model.addAttribute("resultRegistro", 0);
-        return "redirect:/venta/venta";
+        return "redirect:/alimentos/consultaAlimentos";
     }
 
-    @GetMapping("/showAlimento")
+    @GetMapping("/consultaAlimentos")
     /**
      * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los
      * alimentos.
@@ -110,7 +111,7 @@ public class AlimentoController {
      * @author Danya
      * */
     public ModelAndView showAlimento(){
-        ModelAndView mav = new ModelAndView(ViewConstant.VENTA);
+        ModelAndView mav = new ModelAndView(ViewConstant.SHOW_ALIMENTO);
         mav.addObject("alimentos", alimentoService.listAllAlimentos());//Añadir todos los alimentos al modelo
         return mav;
     }
