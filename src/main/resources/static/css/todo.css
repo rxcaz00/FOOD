@@ -119,6 +119,12 @@ input, select, textarea, button {
 	height: 20px;
 }
 
+.cross-right {
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+
 .precio, .solicitar {
 	width: 100px;
 }

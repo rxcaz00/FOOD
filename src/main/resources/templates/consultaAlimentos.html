@@ -12,6 +12,8 @@
     <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
     <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 </head>
 <body>
@@ -84,13 +86,25 @@
         <b>Gerente</b>
     </div>
     <hr size=4 color="#CCCCCC">
-    <table>
-        <thead >
+    <table id="tabla">
+        <thead>
             <tr>
-                <th>Categoría</th>
-                <th>Nombre</th>
-                <th>Tamaño</th>
-                <th>Precio</th>
+                <th onclick="sortTableText(0)">
+                    Categoría
+                    <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                </th>
+                <th onclick="sortTableText(1)">
+                    Nombre
+                    <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                </th>
+                <th onclick="sortTableText(2)">
+                    Tamaño
+                    <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                </th>
+                <th onclick="sortTableNumber(3)">
+                    Precio
+                    <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                </th>
                 <th></th>
             </tr>
         </thead>
