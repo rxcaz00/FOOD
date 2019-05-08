@@ -22,6 +22,8 @@ public class Alimento {
     private String tamano;//tamaño del alimento
     @Column(name = "precio")
     private double precio;//precio del alimento
+    @Column(name = "habilitado")
+    private boolean habilitado; //Variable para borrado logico
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "alimento_promocion",

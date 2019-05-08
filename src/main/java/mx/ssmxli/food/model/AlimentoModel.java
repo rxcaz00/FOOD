@@ -14,6 +14,7 @@ public class AlimentoModel {
     private double precio;
     private String categoria;
     private String tamano;
+    private boolean habilitado;
 
     public AlimentoModel(){
 

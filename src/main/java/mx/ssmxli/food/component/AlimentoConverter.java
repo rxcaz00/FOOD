@@ -23,6 +23,7 @@ public class AlimentoConverter {
         alimento.setPrecio(alimentoModel.getPrecio());
         alimento.setCategoria(alimentoModel.getCategoria());
         alimento.setTamano(alimentoModel.getTamano());
+        alimento.setHabilitado(alimentoModel.isHabilitado());
         return alimento;
     }
 
@@ -43,6 +44,7 @@ public class AlimentoConverter {
         alimentoModel.setPrecio(alimento.getPrecio());
         alimentoModel.setCategoria(alimento.getCategoria());
         alimentoModel.setTamano(alimento.getTamano());
+        alimentoModel.setHabilitado(alimento.isHabilitado());
         return alimentoModel;
     }
 }

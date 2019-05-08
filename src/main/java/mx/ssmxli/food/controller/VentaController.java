@@ -81,8 +81,16 @@ public class VentaController {
         ReciboModel reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
         contenidosRecibo = new ArrayList<>();
-        List<AlimentoModel> alimentos = alimentoService.listAllAlimentos();
-        List<PromocionModel> allPromociones = promocionService.listAllPromociones();
+
+        List<AlimentoModel> allAlimentos = alimentoService.listAllAlimentos();//Lista con TODOS los alimentos
+        List<PromocionModel> allPromociones = promocionService.listAllPromociones();//Lista con TODAS las promociones
+
+        //Revisa si el alimento esta habilitado o no, y solo añade al modelo los habilitados
+        List<AlimentoModel> alimentos = new ArrayList<>();
+        for(AlimentoModel alimentoTemp : allAlimentos){
+            if(alimentoTemp.isHabilitado())
+                alimentos.add(alimentoTemp);
+        }
 
         //Revisa la fecha actual y solo añade las promociones validas el dia de hoy
         LocalDate hoy = LocalDate.now();
