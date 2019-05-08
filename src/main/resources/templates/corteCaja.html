@@ -62,21 +62,21 @@
             <hr size=4 color="#CCCCCC">
             <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post">
                 <input type="hidden" th:field="*{id}">
-            Introduzca la siguiente información para generar el corte de caja:
+            Introduzca los campos marcados en color verde para gerenar el corte de caja:
             <br><br>
             <div class="left">
                 <table>
                     <tr>
                         <td>Dinero incial:</td>
-                        <td>$<input class="precio" type="number" th:field="*{caja}" th:value="${caja}" min="0" step=".01" required></td>
+                        <td>$<input class="solicitar" type="number" th:field="*{dineroInicial}" th:value="${dineroInicial}" min="0" step=".01" required></td>
                     </tr>
                     <tr>
                         <td>Corte:</td>
-                        <td>$<input class="precio" type="number"  th:field="*{corte}" th:value="${corte}" min="0" step=".01"  required></td>
+                        <td>$<input class="solicitar" type="number"  th:field="*{corte}" th:value="${corte}" min="0" step=".01"  required></td>
                     </tr>
                     <tr>
                         <td>Efectivo:</td>
-                        <td>$<input class="precio" type="number" readonly th:field="*{venta}" th:value="${venta}" step=".01"></td>
+                        <td>$<input class="precio" type="number" readonly th:field="*{efectivo}" th:value="${efectivo}" step=".01"></td>
                     </tr>
                     <tr>
                         <td>Tarjeta:</td>
@@ -105,7 +105,7 @@
                 </table>
             </div>
             <form>
-                <input class="green" name="action" value="guardar" type="submit"><br><br><br><br>
+                <button class="green" name="action" value="guardar" type="submit">Guardar</button><br><br><br><br>
                 <input class="yellow" type="submit" value="Imprimir" disabled>
             </form>
         </div>

@@ -31,3 +31,17 @@
 .precio {
 	text-align: right;
 }
+
+.show_precio {
+	width: 100px;
+	text-align: right;
+	border: none;
+}
+
+.nom {
+	width: 30%;
+}
+
+.app {
+	width: 45%;
+}

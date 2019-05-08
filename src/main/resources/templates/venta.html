@@ -81,8 +81,8 @@
                     <button class="yellow" type="submit" size="20" name="action" value="registrar">¡Registralo!</button>
                 </div><br>
                 Nombre del cliente:
-                <input type="text" size="30" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-                <input type="text" size="45" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+                <input type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
+                <input type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
                 Dirección:
                 <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
                 Correo:
@@ -183,7 +183,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input class="precio" type="number" readonly>
+                            <input class="precio" type="number">
                         </td>
                         <td>
                             <input class="venta" type="text">
@@ -192,10 +192,10 @@
                             <input class="precio" type="number">
                         </td>
                         <td>
-                            <input class="precio" type="number" readonly>
+                            <input class="show_precio" type="number" readonly>
                         </td>
                         <td>
-                            <input class="precio" type="number" readonly>
+                            <input class="show_precio" type="number" readonly>
                         </td>
                         <td>
                             <img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}">

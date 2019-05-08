@@ -119,8 +119,12 @@ input, select, textarea, button {
 	height: 20px;
 }
 
-.precio {
+.precio, .solicitar {
 	width: 100px;
+}
+
+.solicitar {
+	border-color: #66CC00;
 }
 
 table {
