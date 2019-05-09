@@ -15,4 +15,6 @@ public interface ConfiguracionService {
     public abstract Configuracion findConfiguracionById(int id);
 
     public abstract ConfiguracionModel findConfiguracionByIdModel(int id);
+
+    public abstract ConfiguracionModel findLastConfiguracion();
 }

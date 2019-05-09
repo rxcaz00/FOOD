@@ -2,8 +2,10 @@ package mx.ssmxli.food.controller;
 
 import mx.ssmxli.food.constant.ViewConstant;
 import mx.ssmxli.food.entity.Usuario;
+import mx.ssmxli.food.model.ConfiguracionModel;
 import mx.ssmxli.food.model.CorteCajaModel;
 import mx.ssmxli.food.service.CorteCajaService;
+import mx.ssmxli.food.service.ConfiguracionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/corteCaja")
 public class CorteCajaController {
@@ -20,6 +24,9 @@ public class CorteCajaController {
     @Autowired
     @Qualifier("corteCajaServiceImpl")
     private CorteCajaService corteCajaService;
+    @Autowired
+    @Qualifier("configuracionServiceImpl")
+    private ConfiguracionService configuracionService;
 
 
     private static final Log log = LogFactory.getLog(CorteCajaController.class);
@@ -46,7 +53,10 @@ public class CorteCajaController {
      */
     public String inicio(Model model){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
+        ConfiguracionModel configuracionModel = configuracionService.findLastConfiguracion();
+        corteCajaModel.setDineroInicial(configuracionModel.getDineroInicial());
         model.addAttribute("corteCajaModel",corteCajaModel);
+
         return ViewConstant.CORTE_CAJA;
     }
 

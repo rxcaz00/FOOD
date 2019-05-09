@@ -7,7 +7,7 @@ public class ViewConstant {
     //Alimentos
     public static final String ALIMENTO_NEW = "registrarAlimento";
     public static final String ALIMENTO_UPDATE = "modificarAlimento";
-    public static final String ALIMENTO_DELETE = "eliminarAlimento";
+    public static final String SHOW_ALIMENTO = "consultaAlimentos";
 
     //Promociones
     public static final String PROMOCION_NEW = "registrarPromocion";
