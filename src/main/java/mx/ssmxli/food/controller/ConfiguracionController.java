@@ -67,8 +67,7 @@ public class ConfiguracionController {
      * @author Roberto
      */
     public String load(@ModelAttribute(name = "configuracionModel")ConfiguracionModel configuracionModel, Model model) {
-        List<ConfiguracionModel> configuracionesModel = configuracionService.listAllConfiguraciones();
-        configuracionModel = configuracionesModel.get(configuracionesModel.size() - 1);
+        configuracionModel = configuracionService.findLastConfiguracion();
         configuracionModel.setId(configuracionModel.getId() + 1);
         model.addAttribute("configuracionModel",configuracionModel);
         return ViewConstant.CONFIG_SISTEMA;

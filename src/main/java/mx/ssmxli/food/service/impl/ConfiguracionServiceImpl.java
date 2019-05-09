@@ -44,4 +44,9 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
     public ConfiguracionModel findConfiguracionByIdModel(int id) {
         return configuracionConverter.convertConfiguracion2ConfiguracionModel(findConfiguracionById(id));
     }
+
+    public ConfiguracionModel findLastConfiguracion() {
+        List<ConfiguracionModel> configuracionesModel = listAllConfiguraciones();
+        return configuracionesModel.get(configuracionesModel.size() - 1);
+    }
 }
