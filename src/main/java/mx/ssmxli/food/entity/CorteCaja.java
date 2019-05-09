@@ -32,11 +32,11 @@ public class CorteCaja {
     @Column(name = "compra")
     private double compra; //Gastos que se realizan fuera de la pizzeria, por lo que se tiene que sacar el dinero del local.
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "elaboro")
     private Usuario elaboro;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reviso")
     private Usuario reviso;
 

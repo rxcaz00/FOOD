@@ -18,7 +18,7 @@ public class Comanda {
     @Column(name = "notas")
     private String notas;//Alguna indicacion en la preparación
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recibo_id", referencedColumnName = "id")
     private Recibo recibo;
 

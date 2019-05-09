@@ -17,15 +17,15 @@ public class ContenidoRecibo {
     private double precio;//El precio. Se guarda aparte de el alimento por si cambia el precio
                         // del alimento no afecte recibos anteriores
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Alimento alimento;//El alimento que se esta vendiendo
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn
     private Recibo recibo;//A que recibo corresponde
 
-    @ManyToMany(mappedBy = "contenidosPedido")
+    @ManyToMany(mappedBy = "contenidosPedido", fetch = FetchType.EAGER)
     private Set<IngredienteExtra> ingredientesExtra;
 
 

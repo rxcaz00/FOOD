@@ -28,18 +28,18 @@ public class Recibo {
     @Column(name = "tipoOrden")
     private char tipoOrden;//Si es (L)ocal o a (D)omicilio
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn
     private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ContenidoRecibo> contenidosRecibo;
 
-    @OneToOne(mappedBy = "recibo")
+    @OneToOne(mappedBy = "recibo", fetch = FetchType.EAGER)
     private Comanda comanda;
 
     public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente) {

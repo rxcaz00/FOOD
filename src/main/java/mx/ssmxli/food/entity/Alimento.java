@@ -25,7 +25,7 @@ public class Alimento {
     @Column(name = "habilitado")
     private boolean habilitado; //Variable para borrado logico
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "alimento_promocion",
             joinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))

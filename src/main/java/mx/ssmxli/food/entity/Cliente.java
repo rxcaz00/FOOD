@@ -32,7 +32,7 @@ public class Cliente {
     @Column(name = "puntos")
     private int puntos;//Se obtiene un porcentaje de la compra como puntos.
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Recibo> recibos;//Las compras que ha realizado el cliente
 
     public Cliente(String nombre, String direccion, String telefono, String correo, String RFC) {

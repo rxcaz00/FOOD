@@ -26,7 +26,7 @@ public class Promocion {
     @Column(name = "disponibilidad")
     private String disponibilidad; //Un string con los dias separados con ;
 
-    @ManyToMany(mappedBy = "promociones")
+    @ManyToMany(mappedBy = "promociones", fetch = FetchType.EAGER)
     private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
 
 

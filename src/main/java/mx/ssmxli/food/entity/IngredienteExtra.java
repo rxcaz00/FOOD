@@ -18,7 +18,7 @@ public class IngredienteExtra {
     @Column(name = "precio")
     private double precio;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "ingredienteextra_contenidorecibo",
                 joinColumns = @JoinColumn(name = "ingredienteextra_id", referencedColumnName = "id"),
                 inverseJoinColumns = @JoinColumn(name = "contenidorecibo_id", referencedColumnName = "id"))

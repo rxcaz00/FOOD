@@ -22,7 +22,7 @@ public class Gasto {
     @Column(name = "descripcion")
     private String descripcion; //Descripcion del gasto
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn
     private Usuario usuario; //Quien registro el gasto
 
