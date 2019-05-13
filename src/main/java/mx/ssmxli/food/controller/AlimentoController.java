@@ -80,6 +80,31 @@ public class AlimentoController {
         return ViewConstant.ALIMENTO_NEW;
     }
 
+
+    @GetMapping("/modificarAlimento")
+    /**
+     * @param Model
+     * @param int (@RequestParam, required = false)
+     *
+     * Modifica el alimento en base al ID.
+     * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los
+     * alimentos.
+     *
+     *
+     * @return ModelAndView
+     *
+     * @author Diana
+     * */
+    public String redirectModificarAlimento(Model model,
+                                            @RequestParam(name = "id", required = false) int id){
+        AlimentoModel alimentoModel = new AlimentoModel();
+        if(id != 0){
+            alimentoModel = alimentoService.findAlimentoByIdModel(id);
+        }
+        model.addAttribute("alimentoModel", alimentoModel);
+        return ViewConstant.ALIMENTO_UPDATE;
+    }
+
     @PostMapping("/addAlimento")
     /**
      * @param AlimentoModel (@ModelAttribute)
@@ -94,7 +119,9 @@ public class AlimentoController {
                              Model model){
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());
         //Crear el ID en base a la categoria, nombre y tamaño
-        alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
+        if(alimentoModel.getId()==0) {
+            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(), alimentoModel.getNombre(), alimentoModel.getTamano()));
+        }
         alimentoModel.setHabilitado(true);
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
