@@ -2,6 +2,7 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -29,7 +30,10 @@ public class Alimento {
     @JoinTable(name = "alimento_promocion",
             joinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
-    private Set<Promocion> promociones;
+    private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
+
+    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
         this.id = id;

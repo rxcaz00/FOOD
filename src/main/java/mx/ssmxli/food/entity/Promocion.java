@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -28,6 +29,9 @@ public class Promocion {
 
     @ManyToMany(mappedBy = "promociones", fetch = FetchType.EAGER)
     private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
+
+    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ContenidoPromocion> contenidosPromocion; //Las veces que se ha vendido la promocion
 
 
     public Promocion(String nombre, Date fechaI, Date fechaF, double precio, String disponibilidad){

@@ -3,7 +3,6 @@
  * @author Andrés
  * */
 function addAlimento() {
-    //$('#addAlimento').click(function(event) {
         $.ajax({
             url: '/venta/addAlimento',
             type: "POST",
@@ -22,5 +21,29 @@ function addAlimento() {
             }
         });
         event.preventDefault();
-    //});
+}
+
+/**
+ * Script AJAX para obtener una promocion y sus alimentos a partir de la promocion seleccionada en el SELECT #selectPromocion
+ * @author Andrés
+ * */
+function addPromocion(){
+    $.ajax({
+       url: '/venta/addPromocion',
+       type: 'POST',
+       data: JSON.stringify($('#selectPromocion').val()),
+       processData: false,
+       contentType: 'application/json',
+       beforeSend: function(xhr){
+           xhr.setRequestHeader("Accept", "application/json");
+           xhr.setRequestHeader("Content-Type", "application/json");
+       },
+       success: function(result){
+           alert("Promocion registrada");
+       },
+       error: function(e){
+           alert("Error: " + e);
+       }
+    });
+    event.preventDefault();
 }

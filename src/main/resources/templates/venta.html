@@ -79,6 +79,7 @@
         </div>
         -->
     </nav>
+    <span th:if="${result==0}"> <script>alert("Funciono");</script></span>
         <div class="container">
         	<b class="titulo">Venta de alimentos</b>
 			<div class="rol">
@@ -184,10 +185,10 @@
             <select>
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
-            <input class="agregar" type="submit" value="Agregar promoción">
+            <input class="agregar" type="submit" value="Agregar promoción" id="addPromocion" onClick="addPromocion()">
             <br><br>
 
-            <form>
+            <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
                 <table>
                     <tbody>
                     <tr>

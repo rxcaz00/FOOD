@@ -51,4 +51,21 @@ public class AlimentoServiceImpl implements AlimentoService {
         if(alimento != null)
             alimentoRepository.delete(findAlimentoById(id));
     }
+
+    /**
+     * Similar al método listAllAlimentos, la diferencia es que solo regresa los AlimentoModel de
+     * los alimentos que SI estan habilitados
+     *
+     *@return List<AlimentoModel>
+     *@author Andrés
+     * */
+    public List<AlimentoModel> listAllAlimentosHabilitados(){
+        List<Alimento> alimentos = alimentoRepository.findAll();
+        List<AlimentoModel> alimentosModel = new ArrayList();
+        for(Alimento alimento : alimentos) {
+            if(alimento.isHabilitado())
+                alimentosModel.add(alimentoConverter.convertAlimento2AlimentoModel(alimento));
+        }
+        return alimentosModel;
+    }
 }

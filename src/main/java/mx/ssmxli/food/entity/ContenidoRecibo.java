@@ -3,6 +3,7 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -14,8 +15,7 @@ public class ContenidoRecibo {
     @Column(name = "id")
     private int id;
     @Column(name = "precio")
-    private double precio;//El precio. Se guarda aparte de el alimento por si cambia el precio
-                        // del alimento no afecte recibos anteriores
+    private double precio;//El precio del alimento al momento de la venta
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
@@ -25,8 +25,12 @@ public class ContenidoRecibo {
     @JoinColumn
     private Recibo recibo;//A que recibo corresponde
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn
+    private ContenidoPromocion contenidoPromocion;
+
     @ManyToMany(mappedBy = "contenidosPedido", fetch = FetchType.EAGER)
-    private Set<IngredienteExtra> ingredientesExtra;
+    private List<IngredienteExtra> ingredientesExtra;
 
 
     public ContenidoRecibo(double precio, Alimento alimento, Recibo recibo) {

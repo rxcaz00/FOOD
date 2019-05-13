@@ -17,5 +17,7 @@ public interface AlimentoService {
     public abstract void removeAlimento(int id);
 
     public abstract AlimentoModel findAlimentoByIdModel(int id);
+
+    public abstract List<AlimentoModel> listAllAlimentosHabilitados();
 }
 
