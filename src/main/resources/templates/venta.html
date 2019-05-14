@@ -182,7 +182,7 @@
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
             Promociones
             <br>
-            <select>
+            <select id="selectPromocion">
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
             <input class="agregar" type="submit" value="Agregar promoción" id="addPromocion" onClick="addPromocion()">

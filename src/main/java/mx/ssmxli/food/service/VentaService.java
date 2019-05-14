@@ -17,4 +17,5 @@ public interface VentaService {
     public abstract ReciboModel findReciboByIdModel(int id);
 
  */
+    public abstract Recibo convertReciboModel2Recibo(ReciboModel reciboModel);
 }

@@ -26,4 +26,8 @@ public class VentaServiceImpl implements VentaService {
         return ventaConverter.convertRecibo2ReciboModel(recibo);
 
     }
+
+    public Recibo convertReciboModel2Recibo(ReciboModel reciboModel){
+        return ventaConverter.convertReciboModel2Recibo(reciboModel);
+    }
 }

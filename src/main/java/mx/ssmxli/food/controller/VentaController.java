@@ -37,6 +37,7 @@ public class VentaController {
     private String telefono;
     private String usuario = "prueba";
     private List<ContenidoRecibo> contenidosRecibo;
+    private ReciboModel reciboModel;
 
     @Autowired
     @Qualifier("ventaServiceImpl")
@@ -78,7 +79,7 @@ public class VentaController {
      * */
     @GetMapping("")
     public String venta(Model model) {
-        ReciboModel reciboModel = new ReciboModel();
+        reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
         contenidosRecibo = new ArrayList<>();
 
@@ -124,7 +125,7 @@ public class VentaController {
         reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
         reciboModel.setContenidosRecibo(contenidosRecibo);
 
-        log.info("Method: addVenta() -- Params: " + reciboModel.toString());
+        //log.info("Method: addVenta() -- Params: " + reciboModel.toString());
         if(ventaService.addRecibo(reciboModel) != null)
             model.addAttribute("result", 1);
         else
@@ -150,6 +151,7 @@ public class VentaController {
         ContenidoRecibo temporalContenidoRecibo = new ContenidoRecibo();
         temporalContenidoRecibo.setAlimento(alimento);
         temporalContenidoRecibo.setPrecio(alimento.getPrecio());
+        temporalContenidoRecibo.setRecibo(ventaService.convertReciboModel2Recibo(reciboModel));
         System.out.println(temporalContenidoRecibo.getAlimento().getNombre() + " " + temporalContenidoRecibo.getPrecio());
         contenidosRecibo.add(temporalContenidoRecibo);
         return alimentoService.findAlimentoByIdModel(alimento.getId());
@@ -161,7 +163,11 @@ public class VentaController {
      * */
     @RequestMapping(value = "/addPromocion", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody PromocionModel addPromocion(@RequestBody int promocionID){
-        return promocionService.findPromocionByIdModel(promocionID);
+        PromocionModel promocion = promocionService.findPromocionByIdModel(promocionID);
+
+        System.out.println(promocion.getNombre() + promocion.getAlimentos());
+
+        return promocion;
     }
 
 }

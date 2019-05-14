@@ -17,15 +17,15 @@ public class ContenidoRecibo {
     @Column(name = "precio")
     private double precio;//El precio del alimento al momento de la venta
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn
     private Alimento alimento;//El alimento que se esta vendiendo
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn
     private Recibo recibo;//A que recibo corresponde
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn
     private ContenidoPromocion contenidoPromocion;
 
