@@ -22,7 +22,6 @@ public class CorteCajaConverter {
      */
     public CorteCaja convertCorteCajaModel2CorteCaja(CorteCajaModel corteCajaModel)throws Exception {
         CorteCaja corteCaja = new CorteCaja();
-
         corteCaja.setId(corteCajaModel.getId());
         corteCaja.setFecha(new Date());
         corteCaja.setDineroInicial(corteCajaModel.getDineroInicial());
@@ -59,7 +58,9 @@ public class CorteCajaConverter {
     public CorteCajaModel convertCorteCaja2CorteCajaModel(CorteCaja corteCaja){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         corteCajaModel.setId(corteCaja.getId());
-        corteCajaModel.setFecha(corteCaja.getFecha().toString());
+        corteCajaModel.setFecha(
+                new SimpleDateFormat("yyyy-MM-dd")
+                        .format(corteCaja.getFecha()));
         corteCajaModel.setDineroInicial(corteCaja.getDineroInicial());
         corteCajaModel.setCorte(corteCaja.getCorte());
         corteCajaModel.setEfectivo(corteCaja.getEfectivo());

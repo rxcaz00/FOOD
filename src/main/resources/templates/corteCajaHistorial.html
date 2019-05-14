@@ -5,6 +5,9 @@
 		<title>FOOD - Historial de Corte de Caja</title>
 		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+        <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
         <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 	</head>
 	<body>
@@ -72,36 +75,46 @@
         	<b class="titulo">Consulta de Historial de Corte de Caja</b>
 			<div class="rol">
 				<a href="#">
-					<img class="icon" src="/imgs/logout.png" th:src="/imgs/logout.png">
+					<img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
 				</a>
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <table>
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th onclick="sortTableDate(0)">
+                            Fecha
+                            <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                        </th>
+                        <th onclick="sortTableNumber(1)">
+                            Corte
+                            <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                        </th>
+                        <th onclick="sortTableText(2)">
+                            Elaboró
+                            <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                        </th>
+                        <th onclick="sortTableText(3)">
+                            Revisión
+                            <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
                 <tbody>
-                	<tr>
-                    	<th>Fecha</th>
-                        <th>Corte</th>
-                        <th>Elaboró</th>
-                        <th>Revisión</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                    	<td>10/04/2019</td>
-                        <td>$1245.90</td>
-                        <td>Juan Perez</td>
-                        <td><img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}"><span class="important">Revisar</span></td>
+                    <tr th:each="corteCaja : ${cortes}">
+                    	<td th:text="${corteCaja.fecha}"></td>
+                        <td th:text="${corteCaja.corte}"></td>
+                        <td th:text="${corteCaja.elaboro}"></td>
+                        <td><img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}"><span class="important" th:text="${corteCaja.reviso}"></span></td>
                         <td><img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}"></td>
-                        <td><img class="cross" src="/imgs/printer.png" th:src="@{/imgs/printer.png}"></td>
-                    </tr>
-                    <tr>
-                    	<td>04/04/2019</td>
-                        <td>$1799.35</td>
-                        <td>Raúl Durán</td>
-                        <td>Fernando Juárez</td>
-                        <td><img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}"></td>
-                        <td><img class="cross" src="/imgs/printer.png" th:src="@{/imgs/printer.png}"></td>
+                        <td>
+                            <a th:href="@{/corteCaja/createPDF}">
+                                <img class="cross" src="/imgs/printer.png" th:src="@{/imgs/printer.png}">
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
