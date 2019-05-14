@@ -121,8 +121,8 @@ public class AlimentoController {
         //Crear el ID en base a la categoria, nombre y tamaño
         if(alimentoModel.getId()==0) {
             alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(), alimentoModel.getNombre(), alimentoModel.getTamano()));
+            alimentoModel.setHabilitado(true);
         }
-        alimentoModel.setHabilitado(true);
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else

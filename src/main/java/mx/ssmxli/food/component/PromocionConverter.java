@@ -60,8 +60,12 @@ public class PromocionConverter {
         PromocionModel promocionModel = new PromocionModel();
         promocionModel.setId(promocion.getId());
         promocionModel.setNombre(promocion.getNombre());
-        promocionModel.setFechaI(promocion.getFechaI().toString());
-        promocionModel.setFechaF(promocion.getFechaF().toString());
+        promocionModel.setFechaI(
+                new SimpleDateFormat("yyyy-MM-dd")
+                        .format(promocion.getFechaI()));
+        promocionModel.setFechaF(
+                new SimpleDateFormat("yyyy-MM-dd")
+                        .format(promocion.getFechaF()));
         promocionModel.setPrecio(promocion.getPrecio());
         String [] split = promocion.getDisponibilidad().split(";");
         for (int y = 0; y<promocionModel.getDias().length; y++){

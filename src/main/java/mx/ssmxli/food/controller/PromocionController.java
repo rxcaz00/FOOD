@@ -71,8 +71,23 @@ public class PromocionController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/promociones/registrarPromocion";
+        return "redirect:/promociones/consultaPromociones";
     }
 
+    @GetMapping("/consultaPromociones")
+    /**
+     *
+     * Método que regresa una vista la cual es la consulta de promociones,
+     * y un modelo que son todas las promociones registradas en el sistema.
+     *
+     * @return ModelAndView Regresa la vista y los objetos.
+     *
+     * @author Roberto
+     */
+    public ModelAndView showPromociones() {
+        ModelAndView mav = new ModelAndView(ViewConstant.SHOW_PROMOCION);
+        mav.addObject("promociones",promocionService.listAllPromociones());
+        return mav;
+    }
 
 }

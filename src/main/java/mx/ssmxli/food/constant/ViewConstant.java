@@ -12,9 +12,11 @@ public class ViewConstant {
     //Promociones
     public static final String PROMOCION_NEW = "registrarPromocion";
     public static final String PROMOCION_UPDATE = "modificarPromocion";
+    public static final String SHOW_PROMOCION = "consultaPromociones";
 
     //Clientes
     public static final String CLIENTE_UPDATE = "modificarCliente";
+    public static final String SHOW_CLIENTE = "consultaCliente";
 
     //Corte de Caja
     public static final String CORTE_CAJA = "corteCaja";
