@@ -72,7 +72,7 @@
     -->
 </nav>
 <div class="container">
-    <b class="titulo">Registro de Alimentos</b>
+    <b class="titulo">Modificacion de Alimentos</b>
     <div class="rol">
         <a href="#">
             <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
@@ -85,29 +85,42 @@
             <input type="hidden" th:field="*{id}"></input>
             Nombre:
             <!--IGNORAR EL ERROR -->
-            <input list="nombres" size="35" th:value="${nombre}" th:field="*{nombre}" required>
+            <input id="nombre" list="nombres" size="35" th:value="${nombre}" th:field="*{nombre}" required>
             Categoria:
             <!--IGNORAR EL ERROR -->
-            <input list="categorias" size="35" th:value="${categoria}" th:field="*{categoria}" required autocomplete="">
+            <input id="categoria" list="categorias" size="35" th:value="${categoria}" th:field="*{categoria}" required autocomplete="">
             <br>
             <hr size=4 color="#CCCCCC">
             <div class="left">
                 Descripción:
                 <br><br>
                 <!--IGNORAR EL ERROR -->
-                <textarea name="descripcion" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
+                <textarea  id="descripcion" name="descripcion" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
             </div>
             <div class="right">
                 <!--IGNORAR EL ERROR -->
-                Tamaño: <input list="tamanos" size="25" th:value="${tamano}" th:field="*{tamano}" required>
+                Tamaño: <input  id="tamaño" list="tamanos" size="25" th:value="${tamano}" th:field="*{tamano}" required>
                 <br><br>
                 <!--IGNORAR EL ERROR -->
-                Precio: $<input class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
+                Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
                 <br><br>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
             </div>
+            <script>
+                function validar() {
+                    var nombre, categoria, precio, tamaño,descripcion;
+                    descripcion = document.getElementById("descripcion").value;
+                    precio = document.getElementById("precio").value;
+                    categoria = document.getElementById("categoria").value;
+                    tamaño = document.getElementById("tamaño").value;
+                    if (precio.length!=0||descripcion!=""||categoria!=""||tamaño!=""||nombre!=""){
+                        alert("agregado exitosamente");
+                        return true;
+                    }
+                }
+            </script>
 
-            <input class="green" type="submit" value="Guardar Cambios">
+            <input class="green" type="submit" value="Guardar Cambios" onclick="validar">
         </form>
         <a th:href="@{/alimentos/cancel}">
             <button class="red" type="submit">Cancelar Registro</button>
