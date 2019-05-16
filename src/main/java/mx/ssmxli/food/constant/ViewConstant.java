@@ -16,7 +16,7 @@ public class ViewConstant {
 
     //Clientes
     public static final String CLIENTE_UPDATE = "modificarCliente";
-    public static final String SHOW_CLIENTE = "consultaCliente";
+    public static final String SHOW_CLIENTE = "consultaClientes";
 
     //Corte de Caja
     public static final String CORTE_CAJA = "corteCaja";

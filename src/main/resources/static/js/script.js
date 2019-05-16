@@ -164,3 +164,11 @@ function sortTableDate(n) {
 		}
 	}
 }
+
+function mostrar() {
+	document.getElementById("message").show();
+}
+
+function ocultar() {
+	document.getElementById("message").close();
+}
