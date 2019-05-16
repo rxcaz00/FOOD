@@ -3,7 +3,6 @@ package mx.ssmxli.food.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -32,26 +31,13 @@ public class CorteCaja {
     @Column(name = "compra")
     private double compra; //Gastos que se realizan fuera de la pizzeria, por lo que se tiene que sacar el dinero del local.
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "elaboro")
     private Usuario elaboro;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviso")
     private Usuario reviso;
 
     public CorteCaja(){}
-
-    public CorteCaja(Date fecha, double dineroInicial, double corte, double efectivo, double tarjeta, double diferencia, double pago, double compra, Usuario elaboro, Usuario reviso) {
-        this.fecha = fecha;
-        this.dineroInicial = dineroInicial;
-        this.corte = corte;
-        this.efectivo = efectivo;
-        this.tarjeta = tarjeta;
-        this.diferencia = diferencia;
-        this.pago = pago;
-        this.compra = compra;
-        this.elaboro = elaboro;
-        this.reviso = reviso;
-    }
 }
