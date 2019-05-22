@@ -6,13 +6,12 @@ import mx.ssmxli.food.entity.Recibo;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.ContenidoReciboRepository;
-import mx.ssmxli.food.repository.VentaRepository;
+import mx.ssmxli.food.repository.ReciboRepository;
 import mx.ssmxli.food.service.ConfiguracionService;
 import mx.ssmxli.food.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,8 @@ import java.util.List;
 public class VentaServiceImpl implements VentaService {
 
     @Autowired
-    @Qualifier("ventaRepository")
-    private VentaRepository ventaRepository;
+    @Qualifier("reciboRepository")
+    private ReciboRepository reciboRepository;
 
     @Autowired
     @Qualifier("contenidoReciboRepository")
@@ -38,7 +37,7 @@ public class VentaServiceImpl implements VentaService {
 
     public ReciboModel addRecibo(ReciboModel reciboModel) {
         Recibo temp = ventaConverter.convertReciboModel2Recibo(reciboModel);
-        Recibo recibo = ventaRepository.save(temp);
+        Recibo recibo = reciboRepository.save(temp);
         return ventaConverter.convertRecibo2ReciboModel(recibo);
 
     }
@@ -60,7 +59,7 @@ public class VentaServiceImpl implements VentaService {
 
     public ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo){
         Recibo temp = ventaConverter.convertReciboModel2Recibo(reciboModel);
-        Recibo recibo = ventaRepository.save(temp);
+        Recibo recibo = reciboRepository.save(temp);
         double total = 0.0;
         double subtotal = 0.0;
         if(recibo.getContenidosRecibo()==null)
@@ -74,7 +73,7 @@ public class VentaServiceImpl implements VentaService {
         subtotal = total * (1-(configuracionService.findLastConfiguracion().getIva()/100));
         recibo.setTotal(total);
         recibo.setSubtotal(subtotal);
-        recibo = ventaRepository.save(recibo);
+        recibo = reciboRepository.save(recibo);
 
         return ventaConverter.convertRecibo2ReciboModel(recibo);
     }

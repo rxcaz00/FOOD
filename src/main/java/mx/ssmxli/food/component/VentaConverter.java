@@ -5,7 +5,7 @@ import mx.ssmxli.food.entity.Recibo;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.AlimentoRepository;
-import mx.ssmxli.food.repository.VentaRepository;
+import mx.ssmxli.food.repository.ReciboRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -17,8 +17,8 @@ import java.util.List;
 @Component("ventaConverter")
 public class VentaConverter {
     @Autowired
-    @Qualifier("ventaRepository")
-    VentaRepository ventaRepository;
+    @Qualifier("reciboRepository")
+    ReciboRepository reciboRepository;
 
     @Autowired
     @Qualifier("alimentoRepository")
@@ -104,7 +104,7 @@ public class VentaConverter {
 
         contenidoRecibo.setId(contenidoReciboModel.getId());
         contenidoRecibo.setPrecio(contenidoReciboModel.getPrecio());
-        contenidoRecibo.setRecibo(ventaRepository.findReciboById(contenidoReciboModel.getIdRecibo()));
+        contenidoRecibo.setRecibo(reciboRepository.findReciboById(contenidoReciboModel.getIdRecibo()));
         contenidoRecibo.setAlimento(alimentoRepository.findById(contenidoReciboModel.getIdAlimento()));
 
         return contenidoRecibo;
