@@ -1,0 +1,34 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+</head>
+<body>
+    <div class="todo">
+        <div class="login">
+            <form>
+                <b class="titulo">INICIO DE SESIÓN</b>
+                <br><br>
+                <hr size="5" color="#000000" width="100%">
+                <br>
+                <input type="text" placeholder="Usuario" required>
+                <br>
+                <input type="password" placeholder="Contraseña" required>
+                <br><br>
+                <button class="ingresar">Ingresar</button>
+            </form>
+        </div>
+        <div class="logo-food">
+            <img class="food" src="/imgs/logo-food.png" th:src="@{/imgs/logo-food.png}">
+        </div>
+    </div>
+</body>
+</html>

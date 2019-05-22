@@ -108,16 +108,20 @@
                     	<td th:text="${corteCaja.fecha}"></td>
                         <td th:text="${corteCaja.corte}"></td>
                         <td th:text="${corteCaja.elaboro}"></td>
-                        <td><img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}"><span class="important" th:text="${corteCaja.reviso}"></span></td>
-                        <td><img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}"></td>
                         <td>
-                            <a th:href="@{/corteCaja/createPDF}">
+                            <img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}">
+                            <span class="important" th:text="${corteCaja.reviso}"></span>
+                        </td>
+                        <td><img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}" onclick="mostrar()"></td>
+                        <td>
+                            <a>
                                 <img class="cross" src="/imgs/printer.png" th:src="@{/imgs/printer.png}">
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
        	</div>
     </body>
 </html>

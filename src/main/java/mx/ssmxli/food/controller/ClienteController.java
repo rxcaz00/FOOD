@@ -79,4 +79,20 @@ public class ClienteController {
         return ViewConstant.VENTA;
     }
      */
+
+    @GetMapping("/consultaClientes")
+    /**
+     *
+     * Regresa un modelo y una vista, donde la vista será la consulta de los clientes,
+     * y el modelo serán los clientes registrados en el sistema.
+     *
+     * @return ModelAndView
+     *
+     * @author Roberto
+     */
+    public ModelAndView showClientes() {
+        ModelAndView mav = new ModelAndView(ViewConstant.SHOW_CLIENTE);
+        mav.addObject("clientes",clienteService.listAllClientes());
+        return mav;
+    }
 }

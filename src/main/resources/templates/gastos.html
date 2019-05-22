@@ -6,6 +6,7 @@
 		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	</head>
 	<body>
 	<nav>
@@ -76,26 +77,40 @@
 				</a>
 				<b>Gerente</b>
 			</div>
-			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post">
+			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post" onsubmit="return validar()">
             <hr size=4 color="#CCCCCC">
 				<input type="hidden" th:field="*{id}">
             Ingrese los siguientes datos de los gastos
             <br><br>
             Descripción:
-            <input class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}" required>
+            <input id="descripcion" class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}" required>
             <br>
             Monto:
-            <input class="precio" type="number" th:field="*{monto}" th:value="${monto}" min="0" step=".01" required>
+            <input  id="monto" class="precio" type="number" th:field="*{monto}" th:value="${monto}" min="0" step=".01" required>
             <br>
 			Tipo:
-				<select th:field="*{tipo}" required>
+				<select id ="tipo" th:field="*{tipo}" required>
 					<option value="C" text="C"> Compra </option>
 					<option value="P" text="*P"> Pago </option>
 				</select>
 				<br>
-            <input class="yellow" type="submit" value="guardar" name="action">
+				<script>
+					function validar() {
+						var descripcion, tipo, monto;
+						descripcion = document.getElementById("descripcion").value;
+						monto = document.getElementById("monto").value;
+						tipo = document.getElementById("tipo").value;
+						if (monto.length!=0||descripcion!=""||tipo!=""){
+							alert("agregado exitosamente");
+							return true;
+						}
+					}
+				</script>
+
+            <input class="yellow" type="submit" value="guardar" name="action" onclick="validar">
 			</form>
        	</div>
+
 
     </body>
 </html>

@@ -78,10 +78,10 @@
 				<b>Gerente</b>
 			</div>
             <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit = "validate(event, this);">
+            <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit="return validar()">
                 <input type="hidden" th:field="*{id}">
             Nombre de la promoción:
-                <input type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
+                <input id="nombre" type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
             <hr size=4 color="#CCCCCC">
             <aside>
             <table>
@@ -100,20 +100,20 @@
             </aside>
             Alimentos:
                 <select>
-                    <option th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}">
+                    <option id="alimento" th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}">
                 </select>
             <img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
             <br>
             Precio: $
-                <input class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
+                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
             <br><br>
             Vigencia:
             <br>
             Fecha Inicio:
-            <input type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
+            <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
             <br>
             Fecha Fin:
-            <input type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
+            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
             <br><br>
             Disponibilidad:
             <br>
@@ -124,7 +124,22 @@
             <input type="checkbox" th:field="*{dias[4]}">Viernes<br>
             <input type="checkbox" th:field="*{dias[5]}">Sábado<br>
             <input type="checkbox" th:field="*{dias[6]}">Domingo<br>
-                <input class="green" name="action" value="Guardar" type="submit">
+
+                <script>
+                    function validar() {
+                        var nombre, precio,fechaI,fechaF, alimento;
+                        nombre = document.getElementById("nombre").value;
+                        precio = document.getElementById("precio").value;
+                        alimento = document.getElementById("alimento").value;
+                        fechaI = document.getElementById("fi").value;
+                        fechaF = document.getElementById("ff").value;
+                        if (precio.length!=0||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""){
+                            alert("agregado exitosamente");
+                            return true;
+                        }
+                    }
+                </script>
+                <input class="green" name="action" value="Guardar" type="submit" onclick="validar">
                 <input class="red" type="submit" value="Cancelar Registro">
 
             </form>

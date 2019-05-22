@@ -90,25 +90,67 @@
 			</div>
             <hr size=4 color="#CCCCCC">
 
-            <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post">
+            <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()">
             	Número de teléfono:
-            	<input type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344">
+            	<input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" maxlength="10">
                 <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
                 <div class="registrar">
                 	<b>¿Cliente nuevo?</b>
-                    <button class="yellow" type="submit" size="20" name="action" value="registrar">¡Registralo!</button>
+                    <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar()">¡Registralo!</button>
                 </div><br>
                 Nombre del cliente:
-                <input type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-                <input type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+                <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
+                <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
                 Dirección:
-                <input type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
+                <input id="dir" type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
                 Correo:
-                <input type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
+                <input id="correo" type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
                 Puntos:
                 <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
                 RFC:
-                <input type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
+                <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
+
+                <!--
+                <script>
+                    function validar() {
+                        var telefono, nombre, apellido, dir, correo, rfc, rfcConv;
+                        telefono = document.getElementById("telefono").value;
+                        nombre = document.getElementById("nombre").value;
+                        apellido = document.getElementById("apellido").value;
+                        dir = document.getElementById("dir").value;
+                        rfc = document.getElementById("rfc").value;
+                        rfcConv=rfc.toUpperCase();
+                        rfcChar= rfc.charAt(0);
+                        rfcChar1=rfc.charAt(1);
+                        rfcChar2=rfc.charAt(2);
+
+                        
+                        /*if (isDigit(rfcChar)||isDigit(rfcChar1)||isDigit(rfcChar2)){
+                            alert("los primero 3 caracteres deben ser letras")
+                           return false;
+                        }*/
+
+                        if(rfc!=rfcConv){
+                            alert("RFC debe ser en mayusculas")
+                            return false;
+                        }
+
+                        if(rfc.length>13 || rfc.length<12){
+                            alert("formato de RFC incorrecto")
+                            return false;
+                        }
+
+                        if (telefono!=""||nombre!=""||apellido!=""||dir!=""||correo!=""||rfc!=""||rfc.length>=12 && rfc.length<=13){
+                            alert("agregado exitosamente" );
+                            return true;
+                        }
+
+
+
+
+                    }
+                </script>
+                -->
             </form>
 
             <form>
