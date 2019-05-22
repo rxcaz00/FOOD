@@ -44,9 +44,7 @@ public class Alimento {
         this.precio = precio;
     }
 
-        public Alimento(){
-
-        }
+    public Alimento(){}
 }
 
 

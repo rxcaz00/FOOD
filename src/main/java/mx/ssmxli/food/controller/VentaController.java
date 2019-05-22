@@ -4,11 +4,7 @@ import lombok.Data;
 import mx.ssmxli.food.constant.ViewConstant;
 import mx.ssmxli.food.entity.Alimento;
 import mx.ssmxli.food.entity.ContenidoRecibo;
-import mx.ssmxli.food.entity.Promocion;
-import mx.ssmxli.food.model.AlimentoModel;
-import mx.ssmxli.food.model.ClienteModel;
-import mx.ssmxli.food.model.PromocionModel;
-import mx.ssmxli.food.model.ReciboModel;
+import mx.ssmxli.food.model.*;
 import mx.ssmxli.food.repository.ClienteRepository;
 import mx.ssmxli.food.repository.UsuarioRepository;
 import mx.ssmxli.food.service.AlimentoService;
@@ -24,9 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +29,7 @@ import java.util.List;
 public class VentaController {
     private String telefono;
     private String usuario = "prueba";
-    private List<ContenidoRecibo> contenidosRecibo;
+    private List<ContenidoReciboModel> contenidosRecibo = new ArrayList<>();
     private ReciboModel reciboModel;
 
     @Autowired
@@ -81,7 +74,6 @@ public class VentaController {
     public String venta(Model model) {
         reciboModel = new ReciboModel();
         ClienteModel clienteModel = new ClienteModel();
-        contenidosRecibo = new ArrayList<>();
 
         List<AlimentoModel> alimentos = alimentoService.listAllAlimentosHabilitados();//Lista con TODOS los alimentos habilitados
         List<PromocionModel> promociones = promocionService.listAllPromocionesValidas();//Lista con TODAS las promociones validas
@@ -123,13 +115,14 @@ public class VentaController {
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
         reciboModel.setCliente(clienteRepository.findByTelefono(telefono));
         reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
-        reciboModel.setContenidosRecibo(contenidosRecibo);
 
         //log.info("Method: addVenta() -- Params: " + reciboModel.toString());
-        if(ventaService.addRecibo(reciboModel) != null)
+        if(ventaService.addRecibo(reciboModel, contenidosRecibo) != null)
             model.addAttribute("result", 1);
         else
             model.addAttribute("result",0);
+
+        contenidosRecibo = new ArrayList<>();
 
         return "redirect:/venta";
     }//end addVenta
@@ -149,11 +142,12 @@ public class VentaController {
     public @ResponseBody AlimentoModel addAlimento(@RequestBody int alimentoId){
         Alimento alimento = alimentoService.findAlimentoById(alimentoId);
         ContenidoRecibo temporalContenidoRecibo = new ContenidoRecibo();
+
         temporalContenidoRecibo.setAlimento(alimento);
         temporalContenidoRecibo.setPrecio(alimento.getPrecio());
-        temporalContenidoRecibo.setRecibo(ventaService.convertReciboModel2Recibo(reciboModel));
         System.out.println(temporalContenidoRecibo.getAlimento().getNombre() + " " + temporalContenidoRecibo.getPrecio());
-        contenidosRecibo.add(temporalContenidoRecibo);
+        contenidosRecibo.add(ventaService.convertContenidoRecibo2ContenidoReciboModel(temporalContenidoRecibo));
+
         return alimentoService.findAlimentoByIdModel(alimento.getId());
     }
 
@@ -161,7 +155,7 @@ public class VentaController {
      *
      * @author Andrés
      * */
-    @RequestMapping(value = "/addPromocion", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/findPromocion", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody PromocionModel addPromocion(@RequestBody int promocionID){
         PromocionModel promocion = promocionService.findPromocionByIdModel(promocionID);
 

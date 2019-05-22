@@ -18,7 +18,7 @@ public class ReciboModel {
     private char metodoPago;
     private Usuario usuario;
     private char tipoOrden;
-    private List<ContenidoRecibo> contenidosRecibo;
+    private List<ContenidoReciboModel> contenidosRecibo;
 
     public ReciboModel(){
 
