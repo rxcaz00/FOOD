@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Error 403</title>
+    <link href="../../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="../../static/css/no-system.css" th:href="@{/css/no-system.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+</head>
+<body>
+<div class="todo">
+    <div class="central">
+        <b class="titulo">Error 403</b>
+        <br>
+        Acceso denegado
+        <br><br>
+        <img class="images" src="../static/imgs/access-denied.png" th:src="@{/imgs/access-denied.png}">
+        <a href="">
+            <div class="redirect">
+                <img class="cat" src="../static/imgs/back-arrow.png" th:src="@{/imgs/back-arrow.png}">
+            </div>
+        </a>
+        <br><br><br><br><br>
+        <a href="/../venta">
+            <div class="redirect">
+                <img class="cat" src="../static/imgs/home-icon.png" th:src="@{/imgs/home-icon.png}">
+            </div>
+        </a>
+    </div>
+    <div class="logo-food">
+        <img class="food" src="/imgs/logo-food.png" th:src="@{/imgs/logo-food.png}">
+    </div>
+</div>
+</body>
+</html>

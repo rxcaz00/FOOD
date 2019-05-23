@@ -114,7 +114,7 @@ public class VentaController {
     @PostMapping("/addVenta")
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
         reciboModel.setCliente(clienteRepository.findByTelefono(telefono));
-        reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
+        //reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
 
         //log.info("Method: addVenta() -- Params: " + reciboModel.toString());
         if(ventaService.addRecibo(reciboModel, contenidosRecibo) != null)

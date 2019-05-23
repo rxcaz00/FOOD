@@ -20,7 +20,7 @@ body {
     background-color: rgb(0,0,0,0.5);
 }
 
-.login {
+.central {
     border-radius: 30px;
     position: absolute;
     top: 20%;
@@ -69,4 +69,30 @@ input:hover, input:focus {
 
 button:hover {
     color: white;
+}
+
+.images {
+    height: 200px;
+    width: 200px;
+    float: left;
+    margin-left: 80px;
+}
+
+.redirect {
+    background-color: #FFCC00;
+    padding: 5px;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    float: right;
+}
+
+.redirect:hover {
+    background-color: #db8c52;
+}
+
+.cat {
+    width: 60px;
+    height: 60px;
 }
