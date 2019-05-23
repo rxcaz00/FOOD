@@ -28,4 +28,9 @@ public class ViewConstant {
     //Configuración
     public static final String CONFIG_SISTEMA = "configSis";
     public static final String CONFIG_ACCESO = "configAcceso";
+
+    //Login
+    public static final String LOGIN = "login";
+
+    //Usuarios
 }
