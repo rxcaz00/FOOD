@@ -224,16 +224,16 @@
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
             Promociones
             <br>
-            <select>
+            <select id="selectPromocion">
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
-            <input class="agregar" type="submit" value="Agregar promoción" id="addPromocion" onClick="addPromocion()">
+            <input class="agregar" type="submit" value="Agregar promoción" id="addPromocion" onClick="findPromocion()">
             <br><br>
 
             <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
                 <table>
                     <tbody>
-                    <tr>
+                    <!--<tr>
                         <th>Código</th>
                         <th>Descripción</th>
                         <th>Cantidad</th>
@@ -267,23 +267,23 @@
                         <td></td>
                         <td class="total">Total: $</td>
                         <td>100.00</td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td colspan="3">
                             <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
                             <br>
                             Elija el tipo de orden:
                             <br>
-                            <input type="radio" name="orden" value="1" required>Local
-                            <input type="radio" name="orden" value="2">Domicilio
+                            <input type="radio" name="orden" value="L" th:field="*{tipoOrden}" required>Local
+                            <input type="radio" name="orden" value="D" th:field="*{tipoOrden}">Domicilio
                         </td>
                         <td colspan="3">
                             <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
                             <br>
                             Elija el método de pago:
                             <br>
-                            <input type="radio" name="metodo" value="1">Efectivo
-                            <input type="radio" name="metodo" value="2">Tarjeta
+                            <input type="radio" name="metodo" value="E" th:field="*{metodoPago}" required>Efectivo
+                            <input type="radio" name="metodo" value="T" th:field="*{metodoPago}">Tarjeta
                         </td>
                     </tr>
                     <tr>

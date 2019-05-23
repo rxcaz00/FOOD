@@ -37,11 +37,10 @@ public class AlimentoController {
      * Te redirecciona a la direccion que indica el String de retorno
      *
      * @return String
-     *
      * @author Danya
      * */
     public String cancel(){
-        return "redirect:/alimentos/showAlimento";
+        return "redirect:/alimentos/consultaAlimentos";
     }
 
     @GetMapping("/registrarAlimento")
@@ -76,33 +75,9 @@ public class AlimentoController {
         model.addAttribute("nombres", nombres);
         model.addAttribute("tamanos", tamanos);
         model.addAttribute("alimentoModel", alimentoModel);
+        model.addAttribute("id", id);
 
         return ViewConstant.ALIMENTO_NEW;
-    }
-
-
-    @GetMapping("/modificarAlimento")
-    /**
-     * @param Model
-     * @param int (@RequestParam, required = false)
-     *
-     * Modifica el alimento en base al ID.
-     * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los
-     * alimentos.
-     *
-     *
-     * @return ModelAndView
-     *
-     * @author Diana
-     * */
-    public String redirectModificarAlimento(Model model,
-                                            @RequestParam(name = "id", required = false) int id){
-        AlimentoModel alimentoModel = new AlimentoModel();
-        if(id != 0){
-            alimentoModel = alimentoService.findAlimentoByIdModel(id);
-        }
-        model.addAttribute("alimentoModel", alimentoModel);
-        return ViewConstant.ALIMENTO_UPDATE;
     }
 
     @PostMapping("/addAlimento")
@@ -118,9 +93,10 @@ public class AlimentoController {
     public String addAlimento(@ModelAttribute(name = "alimentoModel")AlimentoModel alimentoModel,
                              Model model){
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());
-        //Crear el ID en base a la categoria, nombre y tamaño
-        if(alimentoModel.getId()==0) {
-            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(), alimentoModel.getNombre(), alimentoModel.getTamano()));
+        //Si el ID es igual a 0 significa que es alimento nuevo, sino es un alimento ya creado
+        if(alimentoModel.getId() == 0){
+            //Crear el ID en base a la categoria, nombre y tamaño
+            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
             alimentoModel.setHabilitado(true);
         }
         if(alimentoService.addAlimento(alimentoModel) != null)

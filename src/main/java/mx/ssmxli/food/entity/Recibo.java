@@ -5,6 +5,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,14 +39,14 @@ public class Recibo {
     @JoinColumn
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recibo", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)//Se utiliza esta linea para arreglar un bug
                                         //el cual se da al tener mas de una relacion @...ToMany con FetchType.EAGER
-    private List<ContenidoRecibo> contenidosRecibo;//Los alimentos que se estan vendiendo
+    private List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();//Los alimentos que se estan vendiendo
 
-    @OneToMany(mappedBy = "recibo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recibo", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<ContenidoPromocion> contenidoPromociones;//Las promociones que se estan vendiendo
+    private List<ContenidoPromocion> contenidoPromociones = new ArrayList<>();//Las promociones que se estan vendiendo
 
     @OneToOne(mappedBy = "recibo", fetch = FetchType.EAGER)
     private Comanda comanda;

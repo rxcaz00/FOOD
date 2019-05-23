@@ -1,0 +1,72 @@
+* {
+    font-size: 20px;
+}
+
+body {
+    background-image: url("../imgs/background-login.png");
+    animation: moveIt 10s linear infinite;
+}
+
+@keyframes moveIt {
+    from {background-position: right;}
+}
+
+.todo {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: rgb(0,0,0,0.5);
+}
+
+.login {
+    border-radius: 30px;
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 30%;
+    right: 30%;
+    background-color: whitesmoke;
+    padding: 30px;
+    text-align: center;
+}
+
+.logo-food {
+    height: 100px;
+    position: fixed;
+    bottom: -1px;
+    right: 1%;
+    padding: 5px;
+    background-color: white;
+}
+
+.food {
+    height: 100px;
+}
+
+input, button {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    outline: none;
+    font-size: 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+input {
+    border: 1px solid #db8c52;
+}
+
+button {
+    background-color: #db8c52;
+}
+
+input:hover, input:focus {
+    background-color: #dbab83;
+}
+
+button:hover {
+    color: white;
+}

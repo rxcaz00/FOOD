@@ -115,7 +115,7 @@
                 <td th:if="${alimento.habilitado == true}" th:text="${alimento.tamano}"></td>
                 <td th:if="${alimento.habilitado == true}" th:text="${alimento.precio}"></td>
                 <td th:if="${alimento.habilitado == true}">
-                    <a href="#" th:href="@{/alimentos/modificarAlimento?id=__${alimento.id}__}">
+                    <a href="#" th:href="@{/alimentos/registrarAlimento?id=__${alimento.id}__}">
                         <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                     </a>
                 </td>
@@ -132,7 +132,7 @@
                 <td class="disabled" th:if="${alimento.habilitado == false}" th:text="${alimento.tamano}"></td>
                 <td class="disabled" th:if="${alimento.habilitado == false}" th:text="${alimento.precio}"></td>
                 <td class="disabled" th:if="${alimento.habilitado == false}">
-                    <a href="#" th:href="@{/alimentos/modificarAlimento?id=__${alimento.id}__}">
+                    <a href="#" th:href="@{/alimentos/registrarAlimento?id=__${alimento.id}__}">
                         <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                     </a>
                 </td>

@@ -32,7 +32,7 @@ public class Alimento {
             inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
     private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
 
-    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL)
     private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
@@ -44,9 +44,7 @@ public class Alimento {
         this.precio = precio;
     }
 
-        public Alimento(){
-
-        }
+    public Alimento(){}
 }
 
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
-@Repository("ventaRepository")
-public interface VentaRepository extends JpaRepository<Recibo, Serializable> {
+@Repository("reciboRepository")
+public interface ReciboRepository extends JpaRepository<Recibo, Serializable> {
     public abstract Recibo findReciboById(int id);
 }
