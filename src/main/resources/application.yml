@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/food?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: admin
+    password: root
     maxActive: 10
     maxIdle: 5
     minIdle: 2

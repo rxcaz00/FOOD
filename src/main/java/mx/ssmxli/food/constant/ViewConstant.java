@@ -33,4 +33,7 @@ public class ViewConstant {
     public static final String LOGIN = "login";
 
     //Usuarios
+    public static final String USUARIO_NEW = "registrarUsuario";
+    public static final String SHOW_USUARIO = "consultaUsuarios";
+    public static final String USUARIO_UPDATE = "modificarUsuario";
 }
