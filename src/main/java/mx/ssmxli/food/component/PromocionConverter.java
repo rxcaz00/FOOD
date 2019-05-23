@@ -68,18 +68,21 @@ public class PromocionConverter {
                         .format(promocion.getFechaF()));
         promocionModel.setPrecio(promocion.getPrecio());
         String [] split = promocion.getDisponibilidad().split(";");
+        StringBuilder disponibilidad = new StringBuilder();
         for (int y = 0; y<promocionModel.getDias().length; y++){
             if(!split[y].equals("-")){
                 arreglo[y] = true;
+                disponibilidad.append(split[y] + ", ");
             }
             else{
                 arreglo[y]= false;
             }
 
         }
+        String disponibilidadF = disponibilidad.toString().substring(0,disponibilidad.length() - 2);
+        promocionModel.setDisponibilidad(disponibilidadF);
         promocionModel.setDias(arreglo);
         promocionModel.setAlimentos(promocion.getAlimentos());
         return promocionModel;
     }
 }
-
