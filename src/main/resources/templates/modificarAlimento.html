@@ -85,10 +85,12 @@
             <input type="hidden" th:field="*{id}"></input>
             Nombre:
             <!--IGNORAR EL ERROR -->
-            <input id="nombre" list="nombres" size="35" th:value="${nombre}" th:field="*{nombre}" required>
+            <input id="nombre" class="invalido"  size="20" th:value="${nombre}" th:field="*{nombre}" readonly>
             Categoria:
             <!--IGNORAR EL ERROR -->
-            <input id="categoria" list="categorias" size="35" th:value="${categoria}" th:field="*{categoria}" required autocomplete="">
+            <input id="categoria" class="invalido"  size="20" th:value="${categoria}" th:field="*{categoria}" readonly>
+            <!--IGNORAR EL ERROR -->
+            Tamaño: <input  id="tamaño" class="invalido" size="20" th:value="${tamano}" th:field="*{tamano}" readonly>
             <br>
             <hr size=4 color="#CCCCCC">
             <div class="left">
@@ -98,9 +100,6 @@
                 <textarea  id="descripcion" name="descripcion" th:value="${descripcion}" th:field="*{descripcion}"></textarea>
             </div>
             <div class="right">
-                <!--IGNORAR EL ERROR -->
-                Tamaño: <input  id="tamaño" list="tamanos" size="25" th:value="${tamano}" th:field="*{tamano}" required>
-                <br><br>
                 <!--IGNORAR EL ERROR -->
                 Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
                 <br><br>
@@ -123,40 +122,10 @@
             <input class="green" type="submit" value="Guardar Cambios" onclick="validar">
         </form>
         <a th:href="@{/alimentos/cancel}">
-            <button class="red" type="submit">Cancelar Registro</button>
+            <button class="red" type="submit">Cancelar Modificación</button>
         </a>
     </div>
 </div>
 
-<!--Datalists-->
-<datalist id="nombres">
-    <option th:each="nombre : ${nombres}" th:value="${nombre.nombre}">
-</datalist>
-
-<datalist id="categorias">
-    <option th:each="categoria : ${categorias}" th:value="${categoria.nombre}">
-        <!--<option value="Pizza">
-        <option value="Panini">
-        <option value="Pasta">
-        <option value="Bebida">
-        <option value="Entrada">-->
-</datalist>
-
-<datalist id="tamanos" >
-    <option th:each="tamano : ${tamanos}" th:value="${tamano.nombre}">
-        <!--<option value="Tamaño Unico">
-        <option value="Rebanada">
-        <option value="Personal">
-        <option value="14&quot;">
-        <option value="16&quot;">
-        <option value="18&quot;">
-        <option value="Individual">
-        <option value="Para Compartir">
-        <option value="Chica">
-        <option value="Mediana">
-        <option value="Grande">
-        <option value="1/2 Orden">
-        <option value="Orden">-->
-</datalist>
 </body>
 </html>

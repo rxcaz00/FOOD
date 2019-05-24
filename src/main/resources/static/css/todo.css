@@ -223,3 +223,8 @@ th, td {
 	background-color: #CC99CC;
 	color: #66CC00;
 }
+
+.invalido{
+	background-color: #eaedf2;
+	cursor: not-allowed;
+}

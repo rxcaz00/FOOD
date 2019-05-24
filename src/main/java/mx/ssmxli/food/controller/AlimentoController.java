@@ -77,7 +77,11 @@ public class AlimentoController {
         model.addAttribute("alimentoModel", alimentoModel);
         model.addAttribute("id", id);
 
-        return ViewConstant.ALIMENTO_NEW;
+        //Si id es igual a 0, se llamara al template de registrar, de otra manera se llamara al de modificar
+        if(id == 0)
+            return ViewConstant.ALIMENTO_NEW;
+        else
+            return ViewConstant.ALIMENTO_UPDATE;
     }
 
     @PostMapping("/addAlimento")
