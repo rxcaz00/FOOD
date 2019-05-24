@@ -17,11 +17,18 @@ public class TamanoSequence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "valor")
     private int valor;
-    @Column(name = "nombre")
+    @Column(name = "nombre", unique = true)
     private String nombre;
+    @Column(name = "enabled")
+    private boolean enabled;
 
-    public TamanoSequence(String nombre) {
+    public TamanoSequence(String nombre){
         this.nombre = nombre;
+    }
+
+    public TamanoSequence(String nombre, boolean enabled) {
+        this.nombre = nombre;
+        this.enabled = enabled;
     }
 
     public TamanoSequence() {

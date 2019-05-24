@@ -9,6 +9,20 @@ public class ViewConstant {
     public static final String ALIMENTO_UPDATE = "modificarAlimento";
     public static final String SHOW_ALIMENTO = "consultaAlimentos";
 
+    //ID Manager
+        //Nombre
+    public static final String ID_SHOW_NOMBRE = "consultaNombres";
+    public static final String ID_NEW_NOMBRE = "registrarNombre";
+    public static final String ID_UPDATE_NOMBRE = "modificarNombre";
+        //Categoria
+    public static final String ID_SHOW_CATEGORIA = "consultaCategorias";
+    public static final String ID_NEW_CATEGORIA = "registrarCategoria";
+    public static final String ID_UPDATE_CATEGORIA = "modificarCategoria";
+        //Tamano
+    public static final String ID_SHOW_TAMANO = "consultaTamanos";
+    public static final String ID_NEW_TAMANO = "registrarTamano";
+    public static final String ID_UPDATE_TAMANO = "modificarTamano";
+
     //Promociones
     public static final String PROMOCION_NEW = "registrarPromocion";
     public static final String PROMOCION_UPDATE = "modificarPromocion";

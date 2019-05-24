@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("idManagerServiceImpl")
@@ -67,19 +68,96 @@ public class IdManagerServiceImpl implements IdManagerService {
         return id;
     }
 
+    /**
+     * Regresa una lista con todos los TamanoSequence
+     *
+     * @return List<TamanoSequence>
+     * @author Andrés
+     * */
     @Override
     public List<CategoriaSequence> listAllCategoria() {
         return categoriaSequenceRepository.findAll();
     }
 
+    /**
+     * Regresa una lista con todos los NombreSequence
+     *
+     * @return List<NombreSequence>
+     * @author Andrés
+     * */
     @Override
     public List<NombreSequence> listAllNombre() {
         return nombreSequenceRepository.findAll();
     }
 
+    /**
+     * Regresa una lista con todos los TamanoSequence
+     *
+     * @return List<TamanoSequence>
+     * @author Andrés
+     * */
     @Override
     public List<TamanoSequence> listAllTamano() {
         return tamanoSequenceRepository.findAll();
+    }
+
+
+    /**
+     * Regresa una lista con todos los CategoriaSequence habilitados
+     *
+     * @return List<CategoriaSequence>
+     * @author Andrés
+     * */
+    @Override
+    public List<CategoriaSequence> listAllEnabledCategoria() {
+        List<CategoriaSequence> categoriaList = new ArrayList<>();
+        List<CategoriaSequence> temp = listAllCategoria();
+
+        for (CategoriaSequence categoria: temp) {
+            if(categoria.isEnabled())
+                categoriaList.add(categoria);
+        }
+
+        return categoriaList;
+    }
+
+
+    /**
+     * Regresa una lista con todos los NombreSequence habilitados
+     *
+     * @return List<NombreSequence>
+     * @author Andrés
+     * */
+    @Override
+    public List<NombreSequence> listAllEnabledNombre() {
+        List<NombreSequence> nombreList = new ArrayList<>();
+        List<NombreSequence> temp = listAllNombre();
+
+        for(NombreSequence nombre : temp){
+            if(nombre.isEnabled())
+                nombreList.add(nombre);
+        }
+
+        return nombreList;
+    }
+
+    /**
+     * Regresa una lista con todos los TamanoSequence habilitados
+     *
+     * @return List<TamanoSequence>
+     * @author Andrés
+     * */
+    @Override
+    public List<TamanoSequence> listAllEnabledTamano() {
+        List<TamanoSequence> tamanoList = new ArrayList<>();
+        List<TamanoSequence> temp = listAllTamano();
+
+        for(TamanoSequence tamano : temp){
+            if(tamano.isEnabled())
+                tamanoList.add(tamano);
+        }
+
+        return tamanoList;
     }
 
 }
