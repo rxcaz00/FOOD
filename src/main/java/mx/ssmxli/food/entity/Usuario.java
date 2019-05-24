@@ -27,10 +27,10 @@ public class Usuario {
     private String apellidoMaterno;
      */
 
-    @OneToMany(mappedBy = "elaboro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "elaboro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CorteCaja> corteCajaElaborados;//CorteCaja que este usuario ha elaborado
 
-    @OneToMany(mappedBy = "reviso", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CorteCaja> corteCajaRevisados;//CorteCaja que este usuario ha revisado
 
     public Usuario(String usuario, String password, String nivel) {
