@@ -9,4 +9,6 @@ import java.io.Serializable;
 @Repository("nombreSequenceRepository")
 public interface NombreSequenceRepository extends JpaRepository<NombreSequence, Serializable> {
     public abstract NombreSequence findByNombreIgnoreCase(String nombre);
+
+    public abstract NombreSequence findByValor(int valor);
 }

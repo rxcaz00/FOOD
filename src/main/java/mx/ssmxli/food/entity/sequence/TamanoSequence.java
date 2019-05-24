@@ -22,6 +22,11 @@ public class TamanoSequence {
     @Column(name = "enabled")
     private boolean enabled;
 
+    //Categoria a la que pertenece este tamaño
+    @ManyToOne
+    @JoinColumn
+    private CategoriaSequence categoria;
+
     public TamanoSequence(String nombre){
         this.nombre = nombre;
     }

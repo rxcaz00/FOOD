@@ -3,6 +3,7 @@ package mx.ssmxli.food.entity.sequence;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Entidad estilo sequence
@@ -20,6 +21,14 @@ public class CategoriaSequence {
     private String nombre;
     @Column(name = "enabled")
     private boolean enabled;
+
+    //Nombres que pertenecen a esta categoria
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<NombreSequence> nombreSequences;
+
+    //Tamaños que pertenecen a esta categoria
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<TamanoSequence> tamanoSequences;
 
     public CategoriaSequence(String nombre){
         this.nombre = nombre;

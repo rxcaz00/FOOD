@@ -21,6 +21,11 @@ public class NombreSequence {
     @Column(name = "enabled")
     private boolean enabled;
 
+    //Categoria a la que pertenece este Nombre
+    @ManyToOne
+    @JoinColumn
+    private CategoriaSequence categoria;
+
     public NombreSequence(String nombre){
         this.nombre = nombre;
     }

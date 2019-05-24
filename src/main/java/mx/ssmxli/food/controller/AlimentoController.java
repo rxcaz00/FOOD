@@ -59,18 +59,16 @@ public class AlimentoController {
      * */
     public String RedirectRegistrarAlimento(Model model, @RequestParam(name = "id", required = false, defaultValue = "0") int id){
         AlimentoModel alimentoModel = new AlimentoModel();
-        //Se traen todos las categorias, los nombres y tamaños de la base de datos
-        List<CategoriaSequence> categorias = idManagerService.listAllCategoria();
-        List<NombreSequence> nombres = idManagerService.listAllNombre();
-        List<TamanoSequence> tamanos = idManagerService.listAllTamano();
+        //Se traen todos las categorias, los nombres y tamaños habilitados
+        List<CategoriaSequence> categorias = idManagerService.listAllEnabledCategoria();
+        List<NombreSequence> nombres = idManagerService.listAllEnabledNombre();
+        List<TamanoSequence> tamanos = idManagerService.listAllEnabledTamano();
 
         //Si el ID es diferente a 0, significa que se hará una modificación
         if(id != 0){
             alimentoModel = alimentoService.findAlimentoByIdModel(id);
         }
 
-        //Añade las listas de Categorias, Nombres y Tamaños al modelo.
-        //Se usaran estas listas para mostrarlos como "Sugerencias" en los input text del HTML.
         model.addAttribute("categorias", categorias);
         model.addAttribute("nombres", nombres);
         model.addAttribute("tamanos", tamanos);
@@ -93,7 +91,6 @@ public class AlimentoController {
      * @return String
      * @author Danya
      * */
-    //El ModelAttribute corresponde con el th:object que utilizamos en la vista de alimentoform
     public String addAlimento(@ModelAttribute(name = "alimentoModel")AlimentoModel alimentoModel,
                              Model model){
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());
@@ -101,13 +98,13 @@ public class AlimentoController {
         if(alimentoModel.getId() == 0){
             //Crear el ID en base a la categoria, nombre y tamaño
             alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
-            alimentoModel.setHabilitado(true);
+            alimentoModel.setHabilitado(true); //El alimento esta habilitado de manera predeterminada
         }
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
             model.addAttribute("resultRegistro", 0);
-        return "redirect:/alimentos/consultaAlimentos";
+        return ViewConstant.SHOW_ALIMENTO;
     }
 
     @GetMapping("/consultaAlimentos")
@@ -123,16 +120,21 @@ public class AlimentoController {
         return mav;
     }
 
+    /*
+        Los alimentos ya no se eliminan, solo se inhabilitan. Si dejamos este codigo sin descomentar, es posible eliminarlo ingresando
+        el id directamente en el URL. Se deja el código por si se desea implementar la eliminación en un futuro.
+
     @GetMapping("/removeAlimento")
-    /**
+    /
      * @param int (@RequestParam required)
      * Elimina el alimento en base al ID que recibe. Como salida manda a llamar a showAlimento(), que de igual manera
      * esta regresando un ModelAndView.
      * @return ModelAndView
      * @author Danya
-     * */
+     * /
     public ModelAndView removeAlimento(@RequestParam(name = "id", required = true) int id){
         alimentoService.removeAlimento(id);//Eliminar el alimento por ID
         return showAlimento();
     }
+    */
 }

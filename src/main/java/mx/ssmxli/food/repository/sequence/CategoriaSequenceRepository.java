@@ -9,4 +9,6 @@ import java.io.Serializable;
 @Repository("categoriaSequenceRepository")
 public interface CategoriaSequenceRepository extends JpaRepository<CategoriaSequence, Serializable> {
     public abstract CategoriaSequence findByNombreIgnoreCase(String nombre);
+
+    public abstract CategoriaSequence findByValor(int valor);
 }

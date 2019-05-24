@@ -9,4 +9,6 @@ import java.io.Serializable;
 @Repository("tamanoSequenceRepository")
 public interface TamanoSequenceRepository extends JpaRepository<TamanoSequence, Serializable> {
     public abstract TamanoSequence findByNombreIgnoreCase(String nombre);
+
+    public abstract TamanoSequence findByValor(int valor);
 }
