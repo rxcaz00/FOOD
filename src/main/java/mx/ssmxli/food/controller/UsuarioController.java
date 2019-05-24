@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
     @Qualifier("usuarioServiceImpl")
@@ -31,13 +31,29 @@ public class UsuarioController {
         return "redirect:/usuario/registrarUsuario";
     }
 
+    @GetMapping("/registrarUsuario")
+    /**
+     * @param Model
+     *
+     * Regresa una instancia del UsuarioModel para ser utilizado en la vista
+     *
+     * @return String regresa la vista
+     *
+     * @author Roberto
+     */
+    public String inicio(Model model) {
+        UsuarioModel usuarioModel = new UsuarioModel();
+        model.addAttribute("usuarioModel", usuarioModel);
+        return ViewConstant.USUARIO_NEW;
+    }
+
     //Guarda usuario
-    @PostMapping(value = "/addusuario", params = "action=guardar")
+    @PostMapping(value = "/addUsuario")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de usuarios
     public String addUsuario(@ModelAttribute(name = "usuarioModel") UsuarioModel usuarioModel,
                            Model model) {
 
-        log.info("Method: addGasto() -- Params: "+usuarioModel.toString());
+        log.info("Method: addUsuario() -- Params: "+usuarioModel.toString());
 
         if(usuarioService.addUsuario(usuarioModel) != null){
             model.addAttribute("result", 1);
@@ -46,7 +62,7 @@ public class UsuarioController {
             model.addAttribute("result", 0);
         }
 
-        return "redirect:/usuario/consultaUsuario";
+        return "redirect:/usuarios/consultaUsuario";
     }
 
     /* @param model
@@ -57,7 +73,7 @@ public class UsuarioController {
      *
      * @author Danya
      */
-    @GetMapping("/consultaUsuario")
+    @GetMapping("/consultaUsuarios")
     public ModelAndView showUsuarios() {
         ModelAndView mav = new ModelAndView(ViewConstant.SHOW_USUARIO);
         mav.addObject("usuarios",usuarioService.listAllUsuarios());
