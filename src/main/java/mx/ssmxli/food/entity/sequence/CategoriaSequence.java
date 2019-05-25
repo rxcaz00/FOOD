@@ -19,8 +19,8 @@ public class CategoriaSequence {
     private int valor;
     @Column(name = "nombre", unique = true)
     private String nombre;
-    @Column(name = "enabled")
-    private boolean enabled;
+    @Column(name = "habilitado")
+    private boolean habilitado;
 
     //Nombres que pertenecen a esta categoria
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
@@ -34,8 +34,8 @@ public class CategoriaSequence {
         this.nombre = nombre;
     }
 
-    public CategoriaSequence(String nombre, boolean enabled) {
-        this.enabled = enabled;
+    public CategoriaSequence(String nombre, boolean habilitado) {
+        this.habilitado = habilitado;
         this.nombre = nombre;
     }
 

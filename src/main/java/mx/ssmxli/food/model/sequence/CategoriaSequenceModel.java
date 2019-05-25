@@ -9,7 +9,7 @@ import java.util.List;
 public class CategoriaSequenceModel {
     private int valor;
     private String nombre;
-    private boolean enabled;
+    private boolean habilitado;
     private List<NombreSequenceModel> nombreSequenceModels;
     private List<TamanoSequenceModel> tamanoSequenceModels;
 

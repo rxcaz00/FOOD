@@ -29,7 +29,7 @@ public class IdManagerConverter {
 
         categoriaSequenceModel.setValor(categoriaSequence.getValor());
         categoriaSequenceModel.setNombre(categoriaSequence.getNombre());
-        categoriaSequenceModel.setEnabled(categoriaSequence.isEnabled());
+        categoriaSequenceModel.setHabilitado(categoriaSequence.isHabilitado());
 
         for (NombreSequence nombre : categoriaSequence.getNombreSequences()){
             nombreTemp.add(convertNombre2NombreModel(nombre));
@@ -51,7 +51,7 @@ public class IdManagerConverter {
 
         categoriaSequence.setValor(categoriaSequenceModel.getValor());
         categoriaSequence.setNombre(categoriaSequenceModel.getNombre());
-        categoriaSequence.setEnabled(categoriaSequenceModel.isEnabled());
+        categoriaSequence.setHabilitado(categoriaSequenceModel.isHabilitado());
 
         for(NombreSequenceModel nombreModel : categoriaSequenceModel.getNombreSequenceModels()){
             nombreTemp.add(convertNombreModel2Nombre(nombreModel));
@@ -74,10 +74,10 @@ public class IdManagerConverter {
 
         nombreSequenceModel.setValor(nombreSequence.getValor());
         nombreSequenceModel.setNombre(nombreSequence.getNombre());
-        nombreSequenceModel.setEnabled(nombreSequence.isEnabled());
-        nombreSequenceModel.setCategoria(convertCategoria2CategoriaModel(nombreSequence.getCategoria()));
-        /*nombreSequenceModel.setValor_Categoria(nombreSequence.getCategoria().getValor());
-        nombreSequenceModel.setNombre_Categoria(nombreSequence.getCategoria().getNombre());*/
+        nombreSequenceModel.setHabilitado(nombreSequence.isHabilitado());
+        /*nombreSequenceModel.setCategoria(convertCategoria2CategoriaModel(nombreSequence.getCategoria()));*/
+        nombreSequenceModel.setValor_Categoria(nombreSequence.getCategoria().getValor());
+        nombreSequenceModel.setNombre_Categoria(nombreSequence.getCategoria().getNombre());
 
         return nombreSequenceModel;
     }
@@ -87,9 +87,9 @@ public class IdManagerConverter {
 
         nombreSequence.setValor(nombreSequenceModel.getValor());
         nombreSequence.setNombre(nombreSequenceModel.getNombre());
-        nombreSequence.setEnabled(nombreSequenceModel.isEnabled());
-        nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getCategoria().getValor()));
-        /*nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getValor_Categoria()));*/
+        nombreSequence.setHabilitado(nombreSequenceModel.isHabilitado());
+        /*nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getCategoria().getValor()));*/
+        nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getValor_Categoria()));
 
         return nombreSequence;
     }
@@ -101,8 +101,10 @@ public class IdManagerConverter {
 
         tamanoSequenceModel.setValor(tamanoSequence.getValor());
         tamanoSequenceModel.setNombre(tamanoSequence.getNombre());
-        tamanoSequenceModel.setEnabled(tamanoSequence.isEnabled());
-        tamanoSequenceModel.setCategoria(convertCategoria2CategoriaModel(tamanoSequence.getCategoria()));
+        tamanoSequenceModel.setHabilitado(tamanoSequence.isHabilitado());
+        /*tamanoSequenceModel.setCategoria(convertCategoria2CategoriaModel(tamanoSequence.getCategoria()));*/
+        tamanoSequenceModel.setValor_Categoria(tamanoSequence.getCategoria().getValor());
+        tamanoSequenceModel.setNombre_Categoria(tamanoSequence.getCategoria().getNombre());
 
         return tamanoSequenceModel;
     }
@@ -112,8 +114,9 @@ public class IdManagerConverter {
 
         tamanoSequence.setValor(tamanoSequenceModel.getValor());
         tamanoSequence.setNombre(tamanoSequenceModel.getNombre());
-        tamanoSequence.setEnabled(tamanoSequenceModel.isEnabled());
-        tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getCategoria().getValor()));
+        tamanoSequence.setHabilitado(tamanoSequenceModel.isHabilitado());
+        /*tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getCategoria().getValor()));*/
+        tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getValor_Categoria()));
 
         return tamanoSequence;
     }

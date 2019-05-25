@@ -19,8 +19,8 @@ public class TamanoSequence {
     private int valor;
     @Column(name = "nombre", unique = true)
     private String nombre;
-    @Column(name = "enabled")
-    private boolean enabled;
+    @Column(name = "habilitado")
+    private boolean habilitado;
 
     //Categoria a la que pertenece este tamaño
     @ManyToOne
@@ -31,9 +31,9 @@ public class TamanoSequence {
         this.nombre = nombre;
     }
 
-    public TamanoSequence(String nombre, boolean enabled) {
+    public TamanoSequence(String nombre, boolean habilitado) {
         this.nombre = nombre;
-        this.enabled = enabled;
+        this.habilitado = habilitado;
     }
 
     public TamanoSequence() {

@@ -18,8 +18,8 @@ public class NombreSequence {
     private int valor;
     @Column(name = "nombre", unique = true)
     private String nombre;
-    @Column(name = "enabled")
-    private boolean enabled;
+    @Column(name = "habilitado")
+    private boolean habilitado;
 
     //Categoria a la que pertenece este Nombre
     @ManyToOne
@@ -30,8 +30,8 @@ public class NombreSequence {
         this.nombre = nombre;
     }
 
-    public NombreSequence(String nombre, boolean enabled) {
-        this.enabled = enabled;
+    public NombreSequence(String nombre, boolean habilitado) {
+        this.habilitado = habilitado;
         this.nombre = nombre;
     }
 

@@ -5,6 +5,9 @@ import mx.ssmxli.food.entity.sequence.CategoriaSequence;
 import mx.ssmxli.food.entity.sequence.NombreSequence;
 import mx.ssmxli.food.entity.sequence.TamanoSequence;
 import mx.ssmxli.food.model.AlimentoModel;
+import mx.ssmxli.food.model.sequence.CategoriaSequenceModel;
+import mx.ssmxli.food.model.sequence.NombreSequenceModel;
+import mx.ssmxli.food.model.sequence.TamanoSequenceModel;
 import mx.ssmxli.food.service.AlimentoService;
 import mx.ssmxli.food.service.IdManagerService;
 import org.apache.commons.logging.Log;
@@ -43,6 +46,7 @@ public class AlimentoController {
         return "redirect:/alimentos/consultaAlimentos";
     }
 
+
     @GetMapping("/registrarAlimento")
     /**
      * @param Model
@@ -60,9 +64,9 @@ public class AlimentoController {
     public String RedirectRegistrarAlimento(Model model, @RequestParam(name = "id", required = false, defaultValue = "0") int id){
         AlimentoModel alimentoModel = new AlimentoModel();
         //Se traen todos las categorias, los nombres y tamaños habilitados
-        List<CategoriaSequence> categorias = idManagerService.listAllEnabledCategoria();
-        List<NombreSequence> nombres = idManagerService.listAllEnabledNombre();
-        List<TamanoSequence> tamanos = idManagerService.listAllEnabledTamano();
+        List<CategoriaSequenceModel> categorias = idManagerService.listAllEnabledCategorias();
+        List<NombreSequenceModel> nombres = idManagerService.listAllEnabledNombres();
+        List<TamanoSequenceModel> tamanos = idManagerService.listAllEnabledTamanos();
 
         //Si el ID es diferente a 0, significa que se hará una modificación
         if(id != 0){
@@ -117,6 +121,7 @@ public class AlimentoController {
     public ModelAndView showAlimento(){
         ModelAndView mav = new ModelAndView(ViewConstant.SHOW_ALIMENTO);
         mav.addObject("alimentos", alimentoService.listAllAlimentos());//Añadir todos los alimentos al modelo
+        mav.addObject("exists",idManagerService.existsCategoria());//Si no hay categorias registradas no permite registrar alimento
         return mav;
     }
 
