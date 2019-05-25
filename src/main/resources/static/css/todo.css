@@ -228,3 +228,8 @@ th, td {
 	background-color: #eaedf2;
 	cursor: not-allowed;
 }
+
+.btnDesactivado{
+	cursor: not-allowed;
+	opacity: 0.6;
+}

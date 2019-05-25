@@ -1,5 +1,6 @@
 // JavaScript Document
 
+//Funcion generica para acomodar tablas por columna texto
 function sortTableText(n) {
 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 	table = document.getElementById("tabla");
@@ -54,7 +55,7 @@ function sortTableText(n) {
 		}
 	}
 }
-
+//Funcion generica para acomodar tablas por columna numerica
 function sortTableNumber(n) {
 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 	table = document.getElementById("tabla");
@@ -110,6 +111,7 @@ function sortTableNumber(n) {
 	}
 }
 
+//Funcion generica para acomodar tabla por columna fecha
 function sortTableDate(n) {
 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 	table = document.getElementById("tabla");
@@ -171,4 +173,11 @@ function mostrar() {
 
 function ocultar() {
 	document.getElementById("message").close();
+}
+
+//Al presionar OK, te redirecciona a la pagina de registro de categorias [WIP]
+function redirectCategoria(){
+	if(confirm("No hay categorias registradas. ¿Deseas registrar una?")){
+		window.location = "../idManager/registrarCategoria";
+	}
 }

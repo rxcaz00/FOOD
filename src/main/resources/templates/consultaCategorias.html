@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>FOOD - Categorías</title>
+
+    <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+</head>
+<body>
+<nav th:replace="fragments.html :: nav"></nav>
+
+<div class="container">
+    <b class="titulo">Consulta de Categorías</b>
+    <div class="rol">
+        <a href="#">
+            <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
+        </a>
+        <b>Gerente</b>
+    </div>
+    <hr size=4 color="#CCCCCC">
+    <table id="tabla">
+        <thead>
+        <tr>
+            <th onclick="sortTableNumber(0)">
+                Valor
+                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+            </th>
+            <th onclick="sortTableText(1)">
+                Categoría
+                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
+            </th>
+            <!--SELECT con los Nombres y Tamaños que pertenecen a Categoria-->
+            <th>Nombres</th>
+            <th>Tamaños</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="categoria : ${categorias}">
+
+            <td th:if="${categoria.habilitado == true}" th:text="${categoria.valor}"></td>
+            <td th:if="${categoria.habilitado == true}" th:text="${categoria.nombre}"></td>
+            <td>
+                <select>
+                    <option th:each="nombre : ${categoria.nombreSequenceModels}" th:text="${nombre.nombre}"></option>
+                </select>
+            </td>
+            <td th:if="${categoria.habilitado == true}">
+                <select>
+                    <option th:each="tamano : ${categoria.tamanoSequenceModels}" th:text="${tamano.nombre}"></option>
+                </select>
+            </td>
+            <td th:if="${categoria.habilitado == true}">
+                <a href="#" th:href="@{/idManager/registrarCategoria?id=__${categoria.valor}__}">
+                    <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+                </a>
+            </td>
+
+            <td class="disabled" th:if="${categoria.habilitado == false}" th:text="${categoria.valor}"></td>
+            <td class="disabled" th:if="${categoria.habilitado == false}" th:text="${categoria.nombre}"></td>
+            <td class="disabled" th:if="${categoria.habilitado == false}">
+                <select>
+                    <option th:each="nombre : ${categoria.nombreSequenceModels}" th:text="${nombre.nombre}"></option>
+                </select>
+            </td>
+            <td class="disabled" th:if="${categoria.habilitado == false}">
+                <select>
+                    <option th:each="tamano : ${categoria.tamanoSequenceModels}" th:text="${tamano.nombre}"></option>
+                </select>
+            </td>
+            <td class="disabled" th:if="${categoria.habilitado == false}">
+                <a href="#" th:href="@{/idManager/registrarCategoria?id=__${categoria.valor}__}">
+                    <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" th:href="@{/idManager/registrarCategoria}">
+        <button type="submit" class="nuevo">Agregar Nueva Categoria</button>
+    </a>
+</div>
+</body>
+</html>

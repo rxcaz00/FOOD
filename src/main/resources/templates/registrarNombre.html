@@ -6,29 +6,17 @@
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <title>FOOD - Registrar Usuario</title>
+
+    <title>FOOD - Registro Nombre</title>
+
     <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
     <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
     <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 </head>
 <body>
 <nav th:replace="fragments.html :: nav"></nav>
-
-<div class="container">
-    <b class="titulo">Registro de Usuario</b>
-    <div class="rol">
-        <a href="#">
-            <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-        </a>
-        <b>Gerente</b>
-    </div>
-    <hr size=4 color="#CCCCCC">
-        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post">
-            Nombre del usuario:
-            <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-            <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
-        </form>
-</div>
 </body>
 </html>
