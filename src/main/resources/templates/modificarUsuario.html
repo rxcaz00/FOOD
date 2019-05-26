@@ -24,20 +24,20 @@
         <b>Gerente</b>
     </div>
     <hr size=4 color="#CCCCCC">
-        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post">
-            Nombre del usuario:
-            <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-            <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
-            Usuario:
-            <input id="usuario" type="text" class="app" th:field="*{usuario}" th:value="${usuario}" placeholder="Usuario"><br>
-            Password:
-            <input id="password" type="password" class="app" th:field="*{password}" th:value="${password}"><br>
-            Nivel:
-            <input id="nivel" type="text" class="app" th:field="*{nivel}" th:value="${nivel}" placeholder="Nivel"><br>
+    <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post">
+        Nombre del usuario:
+        <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
+        <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+        Usuario:
+        <input id="usuario" type="text" class="app" th:field="*{usuario}" th:value="${usuario}" placeholder="Usuario"><br>
+        Password:
+        <input id="password" type="password" class="app" th:field="*{password}" th:value="${password}"><br>
+        Nivel:
+        <input id="nivel" type="text" class="app" th:field="*{nivel}" th:value="${nivel}" placeholder="Nivel"><br>
 
-            <input class="green" type="submit" value="Registrar Usuario" >
+        <input class="green" type="submit" value="Registrar Usuario" >
 
-        </form>
+    </form>
     <a th:href="@{/usuarios/cancel}">
         <button class="red" type="submit">Cancelar Registro</button>
     </a>

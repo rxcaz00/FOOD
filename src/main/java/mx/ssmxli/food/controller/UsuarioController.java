@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -28,7 +25,7 @@ public class UsuarioController {
 
     @GetMapping("/cancel")
     public String cancel(){
-        return "redirect:/usuario/registrarUsuario";
+        return "redirect:/usuarios/registrarUsuario";
     }
 
     @GetMapping("/registrarUsuario")
@@ -62,7 +59,7 @@ public class UsuarioController {
             model.addAttribute("result", 0);
         }
 
-        return "redirect:/usuarios/consultaUsuario";
+        return "redirect:/usuarios/consultaUsuarios";
     }
 
     /* @param model
@@ -79,7 +76,28 @@ public class UsuarioController {
         mav.addObject("usuarios",usuarioService.listAllUsuarios());
         return mav;
     }
-
+    @GetMapping("/modificarUsuario")
+    /**
+     * @param Model
+     * @param int (@RequestParam, required = false)
+     *
+     * Modifica el usuario en base al ID.
+     * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los usuarios.
+     *
+     *
+     * @return ModelAndView
+     *
+     * @author Diana
+     * */
+    public String redirectModificarUsuario(Model model,
+                                           @RequestParam(name = "usuario", required = false) String usuario){
+        UsuarioModel usuarioModel = new UsuarioModel();
+        if(usuario!= null){
+            usuarioModel = usuarioService.findUsuarioByUsuarioModel(usuario);
+        }
+        model.addAttribute("usuarioModel", usuarioModel);
+        return ViewConstant.USUARIO_UPDATE;
+    }
 
 
 }
