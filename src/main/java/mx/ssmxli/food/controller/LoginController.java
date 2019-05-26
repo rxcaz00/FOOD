@@ -18,7 +18,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         UsuarioModel usuarioModel = new UsuarioModel();
-        model.addAttribute("usarioModel",usuarioModel);
+        model.addAttribute("usuarioModel",usuarioModel);
 
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");

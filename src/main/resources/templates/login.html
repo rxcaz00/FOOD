@@ -16,8 +16,6 @@
         <div class="central">
             <form action="#" th:action="@{/login}" th:object="${usuarioModel}" method="post">
                 <b class="titulo">INICIO DE SESIÓN</b>
-                <span th:text="${message}"></span>
-                <span th:text="${error}"></span>
                 <br><br>
                 <hr size="5" color="#000000" width="100%">
                 <br>
@@ -26,7 +24,8 @@
                 Contraseña: <input type="password" name="password" class="form-control" th:field="*{password}" th:value="${password}" placeholder="Contraseña" required></input>
                 <br/>
                 <br/>
-
+                <span th:text="${message}"></span>
+                <span th:text="${error}"></span>
                 <button class="ingresar">Ingresar</button>
 
             </form>
