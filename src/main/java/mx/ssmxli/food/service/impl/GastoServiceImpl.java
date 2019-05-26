@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service("gastoServiceImpl")
@@ -48,5 +50,20 @@ public class GastoServiceImpl implements GastoService {
     @Override
     public void removeGasto(int id) {
 
+    }
+
+    public double getTotal(char tipo) {
+        List<Gasto> gastos = gastoRepository.findAll();
+        double total = 0;
+        for(Gasto gasto : gastos) {
+            try {
+                if (new SimpleDateFormat("dd-MM-yyyy").format(gasto.getFecha()) == new SimpleDateFormat("dd-MM-yyyy").format(new Date())
+                        && gasto.getTipo() == tipo)
+                    total += gasto.getMonto();
+            } catch (Exception e) {
+
+            }
+        }
+        return total;
     }
 }
