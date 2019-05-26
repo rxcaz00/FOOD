@@ -7,6 +7,7 @@ import mx.ssmxli.food.repository.UsuarioRepository;
 import mx.ssmxli.food.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +23,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Qualifier("usuarioConverter")
     private UsuarioConverter usuarioConverter;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Override
     public UsuarioModel addUsuario(UsuarioModel usuarioModel)  {
+        usuarioModel.setPassword(bCryptPasswordEncoder.encode(usuarioModel.getPassword()));
         Usuario temp = usuarioConverter.convertUsuarioModel2Usuario(usuarioModel);
         Usuario usuario = usuarioRepository.save(temp);
         return usuarioConverter.convertUsuario2UsuarioModel(usuario);
