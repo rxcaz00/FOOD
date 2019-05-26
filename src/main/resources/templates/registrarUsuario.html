@@ -27,7 +27,16 @@
         <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post">
             Nombre del usuario:
             <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-            <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+            <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)">
+            Nivel:
+            <select id ="nivel" th:field="*{nivel}" required>
+                <option value="G" text="G">Gerente</option>
+                <option value="E" text="*E">Empleado</option>
+            </select>
+            <br><br>
+            Nombre de usuario: <input id="username" type="text" th:field="*{usuario}" th:value="${usuario}">
+            Contraseña: <input id="password" type="text" th:field="*{password}" th:value="${password}"><br><br><br>
+            <input type="submit" class="green" value="Registrar Usuario">
         </form>
 </div>
 </body>
