@@ -15,7 +15,27 @@ public interface IdManagerService {
 
     public abstract int createID(String categoria, String nombre, String tamano);
 
-    public abstract boolean existsCategoria();
+    public abstract int createID(int categoria, int nombre, int tamano);
+
+    public abstract boolean categoriaExists();
+
+    public abstract CategoriaSequenceModel addCategoria(CategoriaSequenceModel categoriaSequence);
+
+    public abstract NombreSequenceModel addNombre(NombreSequenceModel nombreModel);
+
+    public abstract TamanoSequenceModel addTamano(TamanoSequenceModel tamanoModel);
+
+    public abstract CategoriaSequence findCategoriaByValor(int valor);
+
+    public abstract NombreSequence findNombreByValor(int valor);
+
+    public abstract TamanoSequence findTamanoByValor(int valor);
+
+    public abstract CategoriaSequenceModel findCategoriaModelByValor(int valor);
+
+    public abstract NombreSequenceModel findNombreModelByValor(int valor);
+
+    public abstract TamanoSequenceModel findTamanoModelByValor(int valor);
 
     public abstract List<CategoriaSequenceModel> listAllCategorias();
 
@@ -27,7 +47,13 @@ public interface IdManagerService {
 
     public abstract List<NombreSequenceModel> listAllEnabledNombres();
 
+    /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+    public abstract List<NombreSequenceModel> listAllEnabledNombresByCategoria(int categoria);*/
+
     public abstract List<TamanoSequenceModel> listAllEnabledTamanos();
+
+    /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+    public abstract List<TamanoSequenceModel> listAllEnabledTamanosByCategoria(int categoria);*/
 
     public abstract CategoriaSequenceModel convertCategoria2CategoriaModel(CategoriaSequence categoriaSequence);
 

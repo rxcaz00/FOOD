@@ -39,10 +39,12 @@
                 Nombre
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
             </th>
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
             <th onclick="sortTableText(2)">
                 Categoría
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>
+            </th>-->
             <th></th>
         </tr>
         </thead>
@@ -51,20 +53,24 @@
 
             <td th:if="${tamano.habilitado == true}" th:text="${tamano.valor}"></td>
             <td th:if="${tamano.habilitado == true}" th:text="${tamano.nombre}"></td>
-            <td th:if="${tamano.habilitado == true}" th:text="${tamano.nombre_Categoria}">
-            </td>
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+            <td th:if="${tamano.habilitado == true}" th:text="${tamano.nombre_Categoria}"></td>-->
+
             <td th:if="${tamano.habilitado == true}">
-                <a href="#">
+                <a href="#" th:href="@{/idManager/registrarTamano?valor=__${tamano.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
 
             <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.valor}"></td>
             <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.nombre}"></td>
-            <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.nombre_Categoria}">
-            </td>
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+            <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.nombre_Categoria}"></td>-->
+
             <td class="disabled" th:if="${tamano.habilitado == false}">
-                <a href="#">
+                <a href="#" th:href="@{/idManager/registrarTamano?valor=__${tamano.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
@@ -73,7 +79,7 @@
         </tr>
         </tbody>
     </table>
-    <div th:if="${exists}"><a href="#">
+    <div th:if="${exists}"><a href="#" th:href="@{/idManager/registrarTamano}">
         <button type="submit" class="nuevo">Agregar Nuevo Tamaño</button>
     </a></div>
     <div th:if="${!exists}">

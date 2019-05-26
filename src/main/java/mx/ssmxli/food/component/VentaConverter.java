@@ -94,7 +94,7 @@ public class VentaConverter {
         contenidoReciboModel.setId(contenidoRecibo.getId());
         contenidoReciboModel.setPrecio(contenidoRecibo.getPrecio());
         contenidoReciboModel.setIdAlimento(contenidoRecibo.getAlimento().getId());
-        contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getNombre());
+        contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getNombreSequence().getNombre());
 
         return contenidoReciboModel;
     }

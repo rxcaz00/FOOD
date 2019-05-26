@@ -78,6 +78,16 @@ public class IdManagerServiceImpl implements IdManagerService {
         return id;
     }
 
+    @Override
+    public int createID(int categoria, int nombre, int tamano) {
+        int id = 0;
+
+        id += (categoria * 100000);//"Guarda" la categoria en los ultimos digitos a partir del 6to
+        id += (nombre * 100);//"Guarda" el nombre entre el 5to y el 3er digito
+        id += tamano;//"Guarda" el tamaño en los primeros 2 digitos
+        return id;
+    }
+
     /**
      * Verifica si existen o no categorias registradas.
      * True = Si hay categorias
@@ -87,13 +97,68 @@ public class IdManagerServiceImpl implements IdManagerService {
      * @author Andrés
      * */
     @Override
-    public boolean existsCategoria() {
+    public boolean categoriaExists() {
         boolean exists = true;
 
         if(listAllCategorias().isEmpty())
             exists = false;
 
         return exists;
+    }
+
+    //Registros
+    @Override
+    public CategoriaSequenceModel addCategoria(CategoriaSequenceModel categoriaModel) {
+        CategoriaSequence categoriaTemp = convertCategoriaModel2Categoria(categoriaModel);
+        CategoriaSequence categoria = categoriaSequenceRepository.save(categoriaTemp);
+        return convertCategoria2CategoriaModel(categoria);
+    }
+
+    @Override
+    public NombreSequenceModel addNombre(NombreSequenceModel nombreModel) {
+        NombreSequence nombreTemp = convertNombreModel2Nombre(nombreModel);
+        NombreSequence nombre = nombreSequenceRepository.save(nombreTemp);
+        return convertNombre2NombreModel(nombre);
+    }
+
+    @Override
+    public TamanoSequenceModel addTamano(TamanoSequenceModel tamanoModel) {
+        TamanoSequence tamanoTemp = convertTamanoModel2Tamano(tamanoModel);
+        TamanoSequence tamano = tamanoSequenceRepository.save(tamanoTemp);
+        return convertTamano2TamanoModel(tamano);
+    }
+
+    //FindByValor
+        //Entidades
+    @Override
+    public CategoriaSequence findCategoriaByValor(int valor) {
+        return categoriaSequenceRepository.findByValor(valor);
+    }
+
+    @Override
+    public NombreSequence findNombreByValor(int valor) {
+        return nombreSequenceRepository.findByValor(valor);
+    }
+
+    @Override
+    public TamanoSequence findTamanoByValor(int valor) {
+        return tamanoSequenceRepository.findByValor(valor);
+    }
+
+    //Modelos
+    @Override
+    public CategoriaSequenceModel findCategoriaModelByValor(int valor) {
+        return convertCategoria2CategoriaModel(findCategoriaByValor(valor));
+    }
+
+    @Override
+    public NombreSequenceModel findNombreModelByValor(int valor) {
+        return convertNombre2NombreModel(findNombreByValor(valor));
+    }
+
+    @Override
+    public TamanoSequenceModel findTamanoModelByValor(int valor) {
+        return convertTamano2TamanoModel(findTamanoByValor(valor));
     }
 
 
@@ -193,6 +258,26 @@ public class IdManagerServiceImpl implements IdManagerService {
         return nombreList;
     }
 
+    /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+        //NOMBRES HABILITADOS POR CATEGORIA
+    /**
+     * Retorna una lista con todos los nombres habilitados que pertenezcan a una categoria en especifico
+     *
+     * @param categoria
+     * @return List<NombreSequenceModel>
+     * @author Andrés
+     * /
+    @Override
+    public List<NombreSequenceModel> listAllEnabledNombresByCategoria(int categoria) {
+        List<NombreSequenceModel> enabledNombres = listAllEnabledNombres();
+        List<NombreSequenceModel> enabledNombresByCat = new ArrayList<>();
+        for(NombreSequenceModel nombre : enabledNombres){
+            if(nombre.getValor_Categoria() == categoria)
+                enabledNombresByCat.add(nombre);
+        }
+        return enabledNombresByCat;
+    }*/
+
     /**
      * Regresa una lista con todos los TamanoSequence habilitados
      *
@@ -211,6 +296,26 @@ public class IdManagerServiceImpl implements IdManagerService {
 
         return tamanoList;
     }
+
+    /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+    /**
+     * Retorna una lista con todos los tamaños habilitados que pertenezan a una categoría en especifico
+     *
+     * @param categoria
+     * @retun List<TamanoSequenceModel>
+     * @author Andrés
+     * /
+    @Override
+    public List<TamanoSequenceModel> listAllEnabledTamanosByCategoria(int categoria) {
+        List<TamanoSequenceModel> enabledTamanos = listAllEnabledTamanos();
+        List<TamanoSequenceModel> enabledTamanosByCategoria = new ArrayList<>();
+
+        for(TamanoSequenceModel tamano : enabledTamanos)
+            if(tamano.getValor_Categoria() == categoria)
+                enabledTamanosByCategoria.add(tamano);
+
+        return enabledTamanosByCategoria;
+    }*/
 
 
     //CONVERTIDORES
