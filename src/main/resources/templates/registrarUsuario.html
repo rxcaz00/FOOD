@@ -24,18 +24,32 @@
         <b>Gerente</b>
     </div>
     <hr size=4 color="#CCCCCC">
-        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post">
+        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post" onsubmit="return validar()">
             Nombre del usuario:
-            <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-            <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+            <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
+            <input id="apellidos" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)" required><br>
             Usuario:
-            <input id="usuario" type="text" class="app" th:field="*{usuario}" th:value="${usuario}" placeholder="Usuario"><br>
+            <input id="usuario" type="text" class="app" th:field="*{usuario}" th:value="${usuario}" placeholder="Usuario" required><br>
             Password:
-            <input id="password" type="password" class="app" th:field="*{password}" th:value="${password}"><br>
+            <input id="password" type="password" class="app" th:field="*{password}" th:value="${password}" required><br>
             Nivel:
-            <input id="nivel" type="text" class="app" th:field="*{nivel}" th:value="${nivel}" placeholder="Nivel"><br>
+            <input id="nivel" type="text" class="app" th:field="*{nivel}" th:value="${nivel}" placeholder="Nivel" required><br>
 
-            <input class="green" type="submit" value="Registrar Usuario" >
+            <script>
+                function validar() {
+                    var nombre, apellidos,usuario,password, nivel;
+                    nombre = document.getElementById("nombre").value;
+                    apellidos = document.getElementById("apellidos").value;
+                    usuario = document.getElementById("usuario").value;
+                    password = document.getElementById("password").value;
+                    nivel = document.getElementById("nivel").value;
+                    if (nombre!=""||apellidos!=""||usuario!=""||password!=""||nivel!=""){
+                        alert("agregado exitosamente");
+                        return true;
+                    }
+                }
+            </script>
+            <input class="green" name="action" value="Guardar" type="submit" onclick="validar">
 
         </form>
     <a th:href="@{/usuarios/cancel}">
