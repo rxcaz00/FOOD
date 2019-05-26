@@ -1,6 +1,7 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -27,9 +28,11 @@ public class Usuario {
     private String apellidoMaterno;
      */
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "elaboro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CorteCaja> corteCajaElaborados;//CorteCaja que este usuario ha elaborado
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "reviso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CorteCaja> corteCajaRevisados;//CorteCaja que este usuario ha revisado
 

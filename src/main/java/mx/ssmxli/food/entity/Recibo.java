@@ -1,6 +1,7 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -39,11 +40,13 @@ public class Recibo {
     @JoinColumn
     private Usuario usuario;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "recibo", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)//Se utiliza esta linea para arreglar un bug
                                         //el cual se da al tener mas de una relacion @...ToMany con FetchType.EAGER
     private List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();//Los alimentos que se estan vendiendo
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "recibo", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<ContenidoPromocion> contenidoPromociones = new ArrayList<>();//Las promociones que se estan vendiendo

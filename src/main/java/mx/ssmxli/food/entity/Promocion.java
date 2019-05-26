@@ -1,6 +1,7 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,12 +28,14 @@ public class Promocion {
     @Column(name = "disponibilidad")
     private String disponibilidad; //Un string con los dias separados con ;
 
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(name = "alimento_promocion",
             joinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"))
     private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ContenidoPromocion> contenidosPromocion; //Las veces que se ha vendido la promocion
 

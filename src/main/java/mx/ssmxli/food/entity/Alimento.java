@@ -1,5 +1,6 @@
 package mx.ssmxli.food.entity;
 import lombok.Data;
+import lombok.ToString;
 import mx.ssmxli.food.entity.sequence.CategoriaSequence;
 import mx.ssmxli.food.entity.sequence.NombreSequence;
 import mx.ssmxli.food.entity.sequence.TamanoSequence;
@@ -43,10 +44,12 @@ public class Alimento {
     @JoinColumn
     private TamanoSequence tamanoSequence;//El tamaño que tiene el alimento
 
-    @ManyToMany(mappedBy = "alimentos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "alimentos", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
 
-    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     /*public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {

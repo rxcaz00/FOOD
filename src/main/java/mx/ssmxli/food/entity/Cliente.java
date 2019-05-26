@@ -2,6 +2,7 @@ package mx.ssmxli.food.entity;
 
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -32,6 +33,7 @@ public class Cliente {
     @Column(name = "puntos")
     private int puntos;//Se obtiene un porcentaje de la compra como puntos.
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Recibo> recibos;//Las compras que ha realizado el cliente
 

@@ -1,6 +1,7 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class ContenidoRecibo {
     @JoinColumn
     private ContenidoPromocion contenidoPromocion;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "contenidosPedido", fetch = FetchType.EAGER)
     private List<IngredienteExtra> ingredientesExtra;
 

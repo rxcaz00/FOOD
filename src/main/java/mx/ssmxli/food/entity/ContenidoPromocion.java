@@ -1,6 +1,7 @@
 package mx.ssmxli.food.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ContenidoPromocion {
     @Column(name = "precio")
     private double precio;//El precio de la promocion al momento de la venta
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "contenidoPromocion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ContenidoRecibo> contenidosRecibo;//Que alimentos se seleccionaron para la promocion
                                                    //Se utiliza contenidoRecibo para poder poner ingredientes extra
