@@ -24,13 +24,16 @@ public class IdManagerConverter {
         //Entidad a Modelo
     public CategoriaSequenceModel convertCategoria2CategoriaModel(CategoriaSequence categoriaSequence){
         CategoriaSequenceModel categoriaSequenceModel = new CategoriaSequenceModel();
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         List<NombreSequenceModel> nombreTemp = new ArrayList<>();
-        List<TamanoSequenceModel> tamanoTemp = new ArrayList<>();
+        List<TamanoSequenceModel> tamanoTemp = new ArrayList<>();*/
 
         categoriaSequenceModel.setValor(categoriaSequence.getValor());
         categoriaSequenceModel.setNombre(categoriaSequence.getNombre());
         categoriaSequenceModel.setHabilitado(categoriaSequence.isHabilitado());
 
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         for (NombreSequence nombre : categoriaSequence.getNombreSequences()){
             nombreTemp.add(convertNombre2NombreModel(nombre));
         }
@@ -39,20 +42,23 @@ public class IdManagerConverter {
         for (TamanoSequence tamano : categoriaSequence.getTamanoSequences()){
             tamanoTemp.add(convertTamano2TamanoModel(tamano));
         }
-        categoriaSequenceModel.setTamanoSequenceModels(tamanoTemp);
+        categoriaSequenceModel.setTamanoSequenceModels(tamanoTemp);*/
 
         return categoriaSequenceModel;
     }
         //Modelo a Entidad
     public CategoriaSequence convertCategoriaModel2Categoria(CategoriaSequenceModel categoriaSequenceModel){
         CategoriaSequence categoriaSequence = new CategoriaSequence();
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         List<NombreSequence> nombreTemp = new ArrayList<>();
-        List<TamanoSequence> tamanoTemp = new ArrayList<>();
+        List<TamanoSequence> tamanoTemp = new ArrayList<>();*/
 
         categoriaSequence.setValor(categoriaSequenceModel.getValor());
         categoriaSequence.setNombre(categoriaSequenceModel.getNombre());
         categoriaSequence.setHabilitado(categoriaSequenceModel.isHabilitado());
 
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         for(NombreSequenceModel nombreModel : categoriaSequenceModel.getNombreSequenceModels()){
             nombreTemp.add(convertNombreModel2Nombre(nombreModel));
         }
@@ -61,7 +67,7 @@ public class IdManagerConverter {
         for(TamanoSequenceModel tamanoModel : categoriaSequenceModel.getTamanoSequenceModels()){
             tamanoTemp.add(convertTamanoModel2Tamano(tamanoModel));
         }
-        categoriaSequence.setTamanoSequences(tamanoTemp);
+        categoriaSequence.setTamanoSequences(tamanoTemp);*/
 
         return categoriaSequence;
     }
@@ -76,8 +82,10 @@ public class IdManagerConverter {
         nombreSequenceModel.setNombre(nombreSequence.getNombre());
         nombreSequenceModel.setHabilitado(nombreSequence.isHabilitado());
         /*nombreSequenceModel.setCategoria(convertCategoria2CategoriaModel(nombreSequence.getCategoria()));*/
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         nombreSequenceModel.setValor_Categoria(nombreSequence.getCategoria().getValor());
-        nombreSequenceModel.setNombre_Categoria(nombreSequence.getCategoria().getNombre());
+        nombreSequenceModel.setNombre_Categoria(nombreSequence.getCategoria().getNombre());*/
 
         return nombreSequenceModel;
     }
@@ -89,7 +97,9 @@ public class IdManagerConverter {
         nombreSequence.setNombre(nombreSequenceModel.getNombre());
         nombreSequence.setHabilitado(nombreSequenceModel.isHabilitado());
         /*nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getCategoria().getValor()));*/
-        nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getValor_Categoria()));
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+        nombreSequence.setCategoria(categoriaSequenceRepository.findByValor(nombreSequenceModel.getValor_Categoria()));*/
 
         return nombreSequence;
     }
@@ -103,8 +113,10 @@ public class IdManagerConverter {
         tamanoSequenceModel.setNombre(tamanoSequence.getNombre());
         tamanoSequenceModel.setHabilitado(tamanoSequence.isHabilitado());
         /*tamanoSequenceModel.setCategoria(convertCategoria2CategoriaModel(tamanoSequence.getCategoria()));*/
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
         tamanoSequenceModel.setValor_Categoria(tamanoSequence.getCategoria().getValor());
-        tamanoSequenceModel.setNombre_Categoria(tamanoSequence.getCategoria().getNombre());
+        tamanoSequenceModel.setNombre_Categoria(tamanoSequence.getCategoria().getNombre());*/
 
         return tamanoSequenceModel;
     }
@@ -116,7 +128,9 @@ public class IdManagerConverter {
         tamanoSequence.setNombre(tamanoSequenceModel.getNombre());
         tamanoSequence.setHabilitado(tamanoSequenceModel.isHabilitado());
         /*tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getCategoria().getValor()));*/
-        tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getValor_Categoria()));
+
+        /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+        tamanoSequence.setCategoria(categoriaSequenceRepository.findByValor(tamanoSequenceModel.getValor_Categoria()));*/
 
         return tamanoSequence;
     }

@@ -145,7 +145,7 @@ public class VentaController {
 
         temporalContenidoRecibo.setAlimento(alimento);
         temporalContenidoRecibo.setPrecio(alimento.getPrecio());
-        System.out.println(temporalContenidoRecibo.getAlimento().getNombre() + " " + temporalContenidoRecibo.getPrecio());
+        System.out.println(temporalContenidoRecibo.getAlimento().getNombreSequence() + " " + temporalContenidoRecibo.getPrecio());
         contenidosRecibo.add(ventaService.convertContenidoRecibo2ContenidoReciboModel(temporalContenidoRecibo));
 
         return alimentoService.findAlimentoByIdModel(alimento.getId());

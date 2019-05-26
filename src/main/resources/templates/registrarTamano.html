@@ -17,6 +17,36 @@
     <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 </head>
 <body>
-<nav th:replace="fragments.html :: nav"></nav>
+    <nav th:replace="fragments.html :: nav"></nav>
+    <div class="container">
+        <b class="titulo">Registro de Tamaño</b>
+        <div class="rol">
+            <a href="#">
+                <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
+            </a>
+            <b>Gerente</b>
+        </div>
+        <hr size=4 color="#CCCCCC">
+        <div class="jumbotron">
+            <form action="#" th:action="@{/idManager/addTamano}" th:object="${tamanoModel}" method="post">
+                <input type="hidden" th:field="*{valor}">
+                <!--Quite esta parte por problemas a la hora de mostrarlos por la categoria seleccionada
+                Categoria:
+                <select th:if="${!edit}" th:field="*{valor_Categoria}">
+                    <option th:each="categoria : ${categorias}" th:value="${categoria.valor}" th:text="${'[' + categoria.valor + '] ' + categoria.nombre}"></option>
+                </select>
+                <input class="invalido" th:value="${tamanoModel.nombre_Categoria}" th:if="${edit}">
+                <br>-->
+                Nombre:
+                <input type="text" th:field="*{nombre}" th:value="${nombre}"/>
+                Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
+                <br>
+                <input class="green" type="submit" value="Guardar">
+            </form>
+            <a th:href="@{/idManager/cancelTamano}">
+                <button class="red" type="submit">Cancelar</button>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

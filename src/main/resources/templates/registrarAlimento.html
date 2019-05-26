@@ -8,7 +8,10 @@
 		<link href="../static/css/alimentos.css" th:href="@{/css/alimentos.css}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
-		<script type = "text/javascript" src="../static/js/fuzzyset.js"></script>
+
+		<!--RESPETAR EL ORDEN EN LOS QUE SE IMPORTAN LOS SCRIPT-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
 	</head>
 	<body>
 	<nav th:replace="fragments.html :: nav"></nav>
@@ -25,22 +28,29 @@
 				<div class="jumbotron">
 					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST" onsubmit="return validar()">
 						Categoria:
-						<!--IGNORAR EL ERROR -->
-						<select id="categoria">
-							<option th:each="categoria : ${categorias}" th:value="${categoria.valor}" th:text="${'[' + categoria.valor + '] ' + categoria.nombre}"></option>
+						<select id="selectCategoria" th:field="*{categoria_Valor}" required>
+							<option th:each="categoria : ${categorias}" th:value="${categoria.valor}"
+									th:text="${categoria.nombre}" th:title="${'Valor: '+categoria.valor}"></option>
 						</select>
-                        <a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
+                        <a href="#" onclick="addCategoria()" title="Añadir Categoría" >
+							<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
+						</a>
 						Nombre:
-                        <!--IGNORAR EL ERROR -->
-						<select id="nombre">
-							<option th:each="nombre : ${nombres}" th:value="${nombre.valor}" th:text="${'[' + nombre.valor + '] ' + nombre.nombre}">
+						<select id="selectNombre" th:field="*{nombre_Valor}" required>
+							<option th:each="nombre : ${nombres}" th:value="${nombre.valor}"
+									th:text="${nombre.nombre}" th:title="${'Valor: ' + nombre.valor}" ></option>
 						</select>
-						<a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
+						<a href="#" onclick="addNombre()" title="Añadir Nombre">
+							<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
+						</a>
 						Tamaño:
-						<select id="tamaño">
-							<option th:each="tamano : ${tamanos}" th:value="${tamano.valor}" th:text="${'[' + tamano.valor + '] ' + tamano.nombre}"></option>
+						<select id="selectTamano" th:field="*{tamano_Valor}" required>
+							<option th:each="tamano : ${tamanos}" th:value="${tamano.valor}"
+									th:text="${tamano.nombre}" th:title="${'Valor: ' + tamano.valor}"></option>
 						</select>
-						<a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
+						<a href="#" onclick="addTamano()" title="Añadir Tamaño">
+							<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">
+						</a>
 						<br>
 						<hr size=4 color="#CCCCCC">
 						<div class="left">

@@ -8,8 +8,10 @@ public class TamanoSequenceModel {
     private String nombre;
     private boolean habilitado;
     /*private CategoriaSequenceModel categoria;*/
+
+    /*Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
     private int valor_Categoria;
-    private String nombre_Categoria;
+    private String nombre_Categoria;*/
 
     public TamanoSequenceModel() {
     }

@@ -39,9 +39,11 @@
                 Categoría
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
             </th>
-            <!--SELECT con los Nombres y Tamaños que pertenecen a Categoria-->
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
             <th>Nombres</th>
-            <th>Tamaños</th>
+            <th>Tamaños</th>-->
+
             <th></th>
         </tr>
         </thead>
@@ -50,7 +52,9 @@
 
             <td th:if="${categoria.habilitado == true}" th:text="${categoria.valor}"></td>
             <td th:if="${categoria.habilitado == true}" th:text="${categoria.nombre}"></td>
-            <td>
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+            <td th:if="${categoria.habilitado == true}">
                 <select>
                     <option th:each="nombre : ${categoria.nombreSequenceModels}" th:text="${nombre.nombre}"></option>
                 </select>
@@ -59,15 +63,18 @@
                 <select>
                     <option th:each="tamano : ${categoria.tamanoSequenceModels}" th:text="${tamano.nombre}"></option>
                 </select>
-            </td>
+            </td>-->
+
             <td th:if="${categoria.habilitado == true}">
-                <a href="#" th:href="@{/idManager/registrarCategoria?id=__${categoria.valor}__}">
+                <a href="#" th:href="@{/idManager/registrarCategoria?valor=__${categoria.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
 
             <td class="disabled" th:if="${categoria.habilitado == false}" th:text="${categoria.valor}"></td>
             <td class="disabled" th:if="${categoria.habilitado == false}" th:text="${categoria.nombre}"></td>
+
+            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
             <td class="disabled" th:if="${categoria.habilitado == false}">
                 <select>
                     <option th:each="nombre : ${categoria.nombreSequenceModels}" th:text="${nombre.nombre}"></option>
@@ -77,9 +84,10 @@
                 <select>
                     <option th:each="tamano : ${categoria.tamanoSequenceModels}" th:text="${tamano.nombre}"></option>
                 </select>
-            </td>
+            </td>-->
+
             <td class="disabled" th:if="${categoria.habilitado == false}">
-                <a href="#" th:href="@{/idManager/registrarCategoria?id=__${categoria.valor}__}">
+                <a href="#" th:href="@{/idManager/registrarCategoria?valor=__${categoria.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>

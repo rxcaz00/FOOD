@@ -1,9 +1,6 @@
 package mx.ssmxli.food.controller;
 
 import mx.ssmxli.food.constant.ViewConstant;
-import mx.ssmxli.food.entity.sequence.CategoriaSequence;
-import mx.ssmxli.food.entity.sequence.NombreSequence;
-import mx.ssmxli.food.entity.sequence.TamanoSequence;
 import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.sequence.CategoriaSequenceModel;
 import mx.ssmxli.food.model.sequence.NombreSequenceModel;
@@ -19,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -98,17 +96,17 @@ public class AlimentoController {
     public String addAlimento(@ModelAttribute(name = "alimentoModel")AlimentoModel alimentoModel,
                              Model model){
         log.info("Method: addAlimento() -- Params: "+alimentoModel.toString());
-        //Si el ID es igual a 0 significa que es alimento nuevo, sino es un alimento ya creado
+        //Si el ID es igual a 0 significa que es alimento nuevo, si no es un alimento ya creado
         if(alimentoModel.getId() == 0){
             //Crear el ID en base a la categoria, nombre y tamaño
-            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
+            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria_Valor(),alimentoModel.getNombre_Valor(),alimentoModel.getTamano_Valor()));
             alimentoModel.setHabilitado(true); //El alimento esta habilitado de manera predeterminada
         }
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
             model.addAttribute("resultRegistro", 0);
-        return ViewConstant.SHOW_ALIMENTO;
+        return "redirect:/alimentos/"+ViewConstant.SHOW_ALIMENTO;
     }
 
     @GetMapping("/consultaAlimentos")
@@ -121,9 +119,10 @@ public class AlimentoController {
     public ModelAndView showAlimento(){
         ModelAndView mav = new ModelAndView(ViewConstant.SHOW_ALIMENTO);
         mav.addObject("alimentos", alimentoService.listAllAlimentos());//Añadir todos los alimentos al modelo
-        mav.addObject("exists",idManagerService.existsCategoria());//Si no hay categorias registradas no permite registrar alimento
         return mav;
     }
+
+
 
     /*
         Los alimentos ya no se eliminan, solo se inhabilitan. Si dejamos este codigo sin descomentar, es posible eliminarlo ingresando

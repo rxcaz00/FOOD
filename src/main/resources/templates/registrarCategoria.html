@@ -18,5 +18,30 @@
 </head>
 <body>
 <nav th:replace="fragments.html :: nav"></nav>
+
+<div class="container">
+    <b class="titulo">Registro de Categoria</b>
+    <div class="rol">
+        <a href="#">
+            <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
+        </a>
+        <b>Gerente</b>
+    </div>
+    <hr size=4 color="#CCCCCC">
+    <div class="jumbotron">
+        <form action="#" th:action="@{/idManager/addCategoria}" th:object="${categoriaModel}" method="post">
+            <input type="hidden" th:field="*{valor}"/>
+            Nombre:
+            <input type="text" th:field="*{nombre}" th:value="${nombre}"/>
+            Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
+            <br>
+            <input class="green" type="submit" value="Guardar">
+        </form>
+
+        <a th:href="@{/idManager/cancelCategoria}">
+            <button class="red" type="submit">Cancelar</button>
+        </a>
+    </div>
+</div>
 </body>
 </html>

@@ -27,12 +27,16 @@
             <input type="hidden" th:field="*{id}"></input>
             Nombre:
             <!--IGNORAR EL ERROR -->
+            <input type="hidden" th:field="*{nombre_Valor}">
             <input id="nombre" class="invalido"  size="20" th:value="${nombre}" th:field="*{nombre}" readonly>
             Categoria:
             <!--IGNORAR EL ERROR -->
+            <input type="hidden" th:field="*{categoria_Valor}">
             <input id="categoria" class="invalido"  size="20" th:value="${categoria}" th:field="*{categoria}" readonly>
             <!--IGNORAR EL ERROR -->
-            Tamaño: <input  id="tamaño" class="invalido" size="20" th:value="${tamano}" th:field="*{tamano}" readonly>
+            Tamaño:
+            <input type="hidden" th:field="*{tamano_Valor}">
+            <input  id="tamaño" class="invalido" size="20" th:value="${tamano}" th:field="*{tamano}" readonly>
             <br>
             <hr size=4 color="#CCCCCC">
             <div class="left">

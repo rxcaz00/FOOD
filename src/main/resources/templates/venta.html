@@ -150,7 +150,8 @@
             Alimentos
             <br>
             <select id="selectAlimento">
-                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"></option>
+                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"
+                        th:title="${'$'+alimento.precio}"></option>
             </select>
             <br>
             <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento" onClick="addAlimento()">

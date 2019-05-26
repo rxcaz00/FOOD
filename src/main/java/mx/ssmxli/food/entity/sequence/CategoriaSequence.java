@@ -1,8 +1,11 @@
 package mx.ssmxli.food.entity.sequence;
 
 import lombok.Data;
+import lombok.ToString;
+import mx.ssmxli.food.entity.Alimento;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,13 +25,18 @@ public class CategoriaSequence {
     @Column(name = "habilitado")
     private boolean habilitado;
 
-    //Nombres que pertenecen a esta categoria
+   /* Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
+   //Nombres que pertenecen a esta categoria
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    private List<NombreSequence> nombreSequences;
+    private List<NombreSequence> nombreSequences = new ArrayList<>();
 
     //Tamaños que pertenecen a esta categoria
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    private List<TamanoSequence> tamanoSequences;
+    private List<TamanoSequence> tamanoSequences = new ArrayList<>();*/
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "categoriaSequence", cascade = CascadeType.ALL)
+    private List<Alimento> alimentos = new ArrayList<>();
 
     public CategoriaSequence(String nombre){
         this.nombre = nombre;
