@@ -39,7 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();*/
         http
                 .authorizeRequests()
-                .anyRequest().permitAll()
+                //A lo que pueden entrar Empleado y Gerente
+                    .antMatchers("/venta").hasAnyAuthority("GERENTE", "EMPLEADO")
+                //A lo que puede entrar solo el Gerente
+                    .antMatchers("/usuarios/*").hasAuthority("GERENTE")
                 .and().formLogin()
                 .loginPage("/login").permitAll()
                 .and().logout().permitAll();
