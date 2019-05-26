@@ -14,19 +14,19 @@
 <body>
     <div class="todo">
         <div class="central">
-            <form action="#" th:action="@{/login}" th:object="${usuarioModel}" method="post">
+            <form action="#" th:action="@{/login}" method="post">
                 <b class="titulo">INICIO DE SESIÓN</b>
                 <br><br>
                 <hr size="5" color="#000000" width="100%">
                 <br>
-                <input type="text" name="username" class="form-control"  th:field="*{usuario}" th:value="${usuario}" placeholder="Usuario"  required></input>
+                <input type="text" name="username" class="form-control"   placeholder="Usuario"  required></input>
                 <br/>
-                <input type="password" name="password" class="form-control" th:field="*{password}" th:value="${password}" placeholder="Contraseña" required></input>
+                <input type="password" name="password" class="form-control" placeholder="Contraseña" required></input>
                 <br/>
                 <br/>
                 <span th:text="${message}"></span>
                 <span th:text="${error}"></span>
-                <button class="ingresar">Ingresar</button>
+                <button class="ingresar" type="submit">Ingresar</button>
 
             </form>
         </div>
