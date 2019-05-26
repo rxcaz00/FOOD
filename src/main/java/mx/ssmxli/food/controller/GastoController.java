@@ -32,7 +32,7 @@ public class GastoController {
 
 
     //Guarda los gastos
-    @PostMapping(value = "/addgasto", params = "action=guardar")
+    @PostMapping("/addgasto")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de gastos
     public String addGasto(@ModelAttribute(name = "gastoModel") GastoModel gastoModel,
                                Model model) throws Exception {

@@ -12,6 +12,7 @@ import mx.ssmxli.food.model.CorteCajaModel;
 import mx.ssmxli.food.model.PdfModel;
 import mx.ssmxli.food.service.CorteCajaService;
 import mx.ssmxli.food.service.ConfiguracionService;
+import mx.ssmxli.food.service.GastoService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,14 @@ public class CorteCajaController {
     @Autowired
     @Qualifier("corteCajaServiceImpl")
     private CorteCajaService corteCajaService;
+
     @Autowired
     @Qualifier("configuracionServiceImpl")
     private ConfiguracionService configuracionService;
 
+    @Autowired
+    @Qualifier("gastoServiceImpl")
+    private GastoService gastoService;
 
     private static final Log log = LogFactory.getLog(CorteCajaController.class);
 
@@ -67,6 +72,8 @@ public class CorteCajaController {
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         ConfiguracionModel configuracionModel = configuracionService.findLastConfiguracion();
         corteCajaModel.setDineroInicial(configuracionModel.getDineroInicial());
+        corteCajaModel.setCompra(gastoService.getTotal('C'));
+        corteCajaModel.setPago(gastoService.getTotal('P'));
         model.addAttribute("corteCajaModel",corteCajaModel);
 
         return ViewConstant.CORTE_CAJA;

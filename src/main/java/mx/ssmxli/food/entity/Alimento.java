@@ -43,14 +43,11 @@ public class Alimento {
     @JoinColumn
     private TamanoSequence tamanoSequence;//El tamaño que tiene el alimento
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "alimento_promocion",
-            joinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
-    private Set<Promocion> promociones = new HashSet<>();//Las promociones en las que aplica el alimento
+    @ManyToMany(mappedBy = "alimentos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
 
-    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL)
-    private List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();//Las veces que se ha vendido el alimento
+    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     /*public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
         this.id = id;

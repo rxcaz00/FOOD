@@ -27,7 +27,10 @@ public class Promocion {
     @Column(name = "disponibilidad")
     private String disponibilidad; //Un string con los dias separados con ;
 
-    @ManyToMany(mappedBy = "promociones", fetch = FetchType.EAGER)
+    @ManyToMany
+    @JoinTable(name = "alimento_promocion",
+            joinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"))
     private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
 
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

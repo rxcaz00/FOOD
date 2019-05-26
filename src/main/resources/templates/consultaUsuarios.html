@@ -57,7 +57,7 @@
                     <td th:text="${usuario.usuario}"></td>
                     <td th:text="${usuario.nivel}"></td>
                     <td>
-                        <a href="#" th:href="@{/usuarios/registrarUsuario?id=__${usuario.usuario}__}">
+                        <a href="#" th:href="@{/usuarios/modificarUsuario?usuario=__${usuario.usuario}__}">
                             <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                         </a>
                     </td>
