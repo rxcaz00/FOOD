@@ -26,19 +26,19 @@
 					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST" onsubmit="return validar()">
 						Categoria:
 						<!--IGNORAR EL ERROR -->
-						<select id="categoria">
-							<option th:each="categoria : ${categorias}" th:value="${categoria.valor}" th:text="${'[' + categoria.valor + '] ' + categoria.nombre}"></option>
+						<select id="categoria" th:field="*{categoria}">
+							<option th:each="categoria : ${categorias}" th:value="${categoria.nombre}" th:text="${'[' + categoria.valor + '] ' + categoria.nombre}"></option>
 						</select>
                         <a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
 						Nombre:
                         <!--IGNORAR EL ERROR -->
-						<select id="nombre">
-							<option th:each="nombre : ${nombres}" th:value="${nombre.valor}" th:text="${'[' + nombre.valor + '] ' + nombre.nombre}">
+						<select id="nombre" th:field="*{nombre}">
+							<option th:each="nombre : ${nombres}" th:value="${nombre.nombre}" th:text="${'[' + nombre.valor + '] ' + nombre.nombre}">
 						</select>
 						<a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
 						Tamaño:
-						<select id="tamaño">
-							<option th:each="tamano : ${tamanos}" th:value="${tamano.valor}" th:text="${'[' + tamano.valor + '] ' + tamano.nombre}"></option>
+						<select id="tamaño" th:field="*{tamano}">
+							<option th:each="tamano : ${tamanos}" th:value="${tamano.nombre}" th:text="${'[' + tamano.valor + '] ' + tamano.nombre}"></option>
 						</select>
 						<a><img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}"></a>
 						<br>
@@ -61,7 +61,7 @@
 								precio = document.getElementById("precio").value;
 								categoria = document.getElementById("categoria").value;
 								tamaño = document.getElementById("tamaño").value;
-								if (precio.length!=0||descripcion!=""||categoria!=""||tamaño!=""||nombre!=""){
+								if (precio.length!=0&&descripcion!=""&&categoria!=""&&tamaño!=""&&nombre!=""){
 									alert("agregado exitosamente");
 									return true;
 								}

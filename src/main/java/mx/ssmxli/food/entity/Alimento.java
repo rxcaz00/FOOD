@@ -26,13 +26,10 @@ public class Alimento {
     @Column(name = "habilitado")
     private boolean habilitado; //Variable para borrado logico
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "alimento_promocion",
-            joinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "alimentos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
 
-    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {

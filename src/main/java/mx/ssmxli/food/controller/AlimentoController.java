@@ -101,14 +101,15 @@ public class AlimentoController {
         //Si el ID es igual a 0 significa que es alimento nuevo, sino es un alimento ya creado
         if(alimentoModel.getId() == 0){
             //Crear el ID en base a la categoria, nombre y tamaño
-            alimentoModel.setId(idManagerService.createID(alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
+            alimentoModel.setId(idManagerService.createID(
+                    alimentoModel.getCategoria(),alimentoModel.getNombre(),alimentoModel.getTamano()));
             alimentoModel.setHabilitado(true); //El alimento esta habilitado de manera predeterminada
         }
         if(alimentoService.addAlimento(alimentoModel) != null)
             model.addAttribute("resultRegistro", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
             model.addAttribute("resultRegistro", 0);
-        return ViewConstant.SHOW_ALIMENTO;
+        return "redirect:/alimentos/consultaAlimentos";
     }
 
     @GetMapping("/consultaAlimentos")
