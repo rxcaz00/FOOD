@@ -12,12 +12,7 @@
 
     <div class="container">
         <b class="titulo">Generar Corte de Caja</b>
-        <div class="rol">
-            <a href="#">
-                <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-            </a>
-            <b>Gerente</b>
-        </div>
+        <div th:replace="fragments.html :: rol"></div>
         <hr size=4 color="#CCCCCC">
         <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post">
             <input type="hidden" th:field="*{id}">

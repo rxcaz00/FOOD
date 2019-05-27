@@ -17,12 +17,7 @@
 
 <div class="container">
     <b class="titulo">Registro de Usuario</b>
-    <div class="rol">
-        <a href="#">
-            <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-        </a>
-        <b>Gerente</b>
-    </div>
+    <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
     <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post" onsubmit="return validar()">
         Nombre del usuario:

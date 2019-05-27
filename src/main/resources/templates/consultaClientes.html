@@ -21,12 +21,7 @@
 
 <div class="container">
     <b class="titulo">Consulta de Clientes</b>
-    <div class="rol">
-        <a href="#">
-            <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-        </a>
-        <b>Gerente</b>
-    </div>
+    <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
     <table id="tabla">
         <thead>

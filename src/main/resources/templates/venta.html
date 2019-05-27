@@ -24,12 +24,7 @@
     <span th:if="${result==0}"> <script>alert("Funciono");</script></span>
         <div class="container">
         	<b class="titulo">Venta de alimentos</b>
-			<div class="rol">
-				<a href="#">
-					<img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-				</a>
-				<b>Gerente</b>
-			</div>
+            <div th:replace="fragments.html :: rol"></div>
             <hr size=4 color="#CCCCCC">
 
             <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()">
@@ -150,6 +145,7 @@
             Alimentos
             <br>
             <select id="selectAlimento">
+                <!--<option th:if="${}"></option>-->
                 <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"
                         th:title="${'$'+alimento.precio}"></option>
             </select>

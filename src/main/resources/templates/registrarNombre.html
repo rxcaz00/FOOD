@@ -20,12 +20,7 @@
     <nav th:replace="fragments.html :: nav"></nav>
     <div class="container">
         <b class="titulo">Registro de Nombre</b>
-        <div class="rol">
-            <a href="#">
-                <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-            </a>
-            <b>Gerente</b>
-        </div>
+        <div th:replace="fragments.html :: rol"></div>
         <hr size=4 color="#CCCCCC">
         <div class="jumbotron">
             <form action="#" th:action="@{/idManager/addNombre}" th:object="${nombreModel}" method="post">

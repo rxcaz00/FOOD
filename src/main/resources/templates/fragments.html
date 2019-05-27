@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <!--ESTE HTML SOLAMENTE SIRVE PARA ALMACENAR FRAGMENTS DE THYMELEAF.-->
     <meta charset="utf-8">
@@ -78,10 +79,11 @@
 </nav>
 
 <div th:fragment="rol" class="rol">
-    <a href="/logout" th:href="@{/logout}">
-        <img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-    </a>
-    <b>Gerente</b>
+    <form th:action="@{/logout}" method="post">
+        Usuario: <span sec:authentication="name"></span>
+        <input type="image" class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}" title="CERRAR SESIÓN">
+    </form>
+
 </div>
 
 </body>

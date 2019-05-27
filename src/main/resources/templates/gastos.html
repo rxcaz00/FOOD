@@ -12,12 +12,7 @@
 
         <div class="container">
         	<b class="titulo">Registro de Gastos</b>
-			<div class="rol">
-				<a href="#">
-					<img class="icon" src="/imgs/logout.png" th:src="@{/imgs/logout.png}">
-				</a>
-				<b>Gerente</b>
-			</div>
+			<div th:replace="fragments.html :: rol"></div>
 			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post" onsubmit="return validar()">
             <hr size=4 color="#CCCCCC">
 				<input type="hidden" th:field="*{id}">
