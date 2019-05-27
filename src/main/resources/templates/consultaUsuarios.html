@@ -27,15 +27,15 @@
             <thead>
                 <tr>
                     <th onclick="sortTableText(0)">
-                        Nombre
+                        Usuario
                         <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                     </th>
                     <th onclick="sortTableText(1)">
-                        Apellidos
+                        Nombre
                         <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                     </th>
                     <th onclick="sortTableText(2)">
-                        Usuario
+                        Apellidos
                         <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                     </th>
                     <th onclick="sortTableText(4)">
@@ -47,14 +47,19 @@
             </thead>
             <tbody>
                 <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.usuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.apellidos}"></td>
-                    <td th:text="${usuario.usuario}"></td>
                     <td th:text="${usuario.nivel}"></td>
-                    <td>
+                    <!--Solo permite editar si el usuario de la tabla es diferente al usuario actual-->
+                    <td th:unless="${currentUser == usuario.usuario}">
                         <a href="#" th:href="@{/usuarios/modificarUsuario?usuario=__${usuario.usuario}__}">
                             <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                         </a>
+                    </td>
+                    <!--Si el usuario actual y el usuario en la tabla son iguales, no permite editar-->
+                    <td th:if="${currentUser == usuario.usuario}">
+                        <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}" style="cursor: not-allowed">
                     </td>
                 </tr>
             </tbody>

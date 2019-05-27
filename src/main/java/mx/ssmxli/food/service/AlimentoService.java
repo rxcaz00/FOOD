@@ -19,5 +19,9 @@ public interface AlimentoService {
     public abstract AlimentoModel findAlimentoByIdModel(int id);
 
     public abstract List<AlimentoModel> listAllAlimentosHabilitados();
+
+    public abstract AlimentoModel convertAlimento2AlimentoModel(Alimento alimento);
+
+    public abstract Alimento convertAlimentoModel2Alimento(AlimentoModel alimentoModel);
 }
 

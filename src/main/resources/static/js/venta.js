@@ -29,7 +29,7 @@ function addAlimento() {
  * */
 function addPromocion(){
     $.ajax({
-       url: '/venta/addPromocion',
+       url: '/venta/findPromocion',
        type: 'POST',
        data: JSON.stringify($('#selectPromocion').val()),
        processData: false,
@@ -75,6 +75,17 @@ function addAlimento1() {
     event.preventDefault();
 }
 
+//Actualiza el form para mostrar el cliente al encontrarlo
+function updateCliente() {
+    var url = '/venta/findCliente';
+
+    if ($('#telefono').val() != '') {
+        url = url + '/' + $('#telefono').val();
+    }
+
+    //Al parecer se deben de mandar los datos al contenedor del form, no al form
+    $("#clienteLoad").load(url);
+}
 
 function mostrarMaldad() {
 

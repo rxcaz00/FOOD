@@ -30,13 +30,16 @@ public class Recibo {
     @Column(name = "metodoPago")
     private char metodoPago;//Si se pago con (T)arjeta o (E)fectivo
     @Column(name = "tipoOrden")
-    private char tipoOrden;//Si es (L)ocal o a (D)omicilio
+    private char tipoOrden;//Si es (L)ocal, a (D)omicilio o para (R)ecoger
+    @Column(name = "numeroMesa", nullable = true)
+    private int numeroMesa;
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+
+    @ManyToOne(optional = true)
     @JoinColumn
     private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn
     private Usuario usuario;
 
@@ -54,12 +57,13 @@ public class Recibo {
     @OneToOne(mappedBy = "recibo", fetch = FetchType.EAGER)
     private Comanda comanda;
 
-    public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente) {
+    public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente, int numeroMesa) {
         this.fecha = fecha;
         this.total = total;
         this.subtotal = subtotal;
         this.notas = notas;
         this.cliente = cliente;
+        this.numeroMesa = numeroMesa;
     }
 
     public Recibo(){}

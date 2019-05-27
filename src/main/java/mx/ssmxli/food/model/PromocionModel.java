@@ -1,11 +1,10 @@
 package mx.ssmxli.food.model;
 
 import lombok.Data;
-import mx.ssmxli.food.entity.Alimento;
-import mx.ssmxli.food.entity.Promocion;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.List;
+
 @Data
 public class PromocionModel {
     private int id;
@@ -14,7 +13,7 @@ public class PromocionModel {
     private String fechaF;
     private double precio;
     private String disponibilidad;
-    private Set<Alimento> alimentos;
+    private List<AlimentoModel> alimentos;
     private boolean [] dias = {false,false,false,false,false,false,false};//se asigna el valor de false
 
 

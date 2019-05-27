@@ -1,14 +1,26 @@
 package mx.ssmxli.food.component;
 
+import mx.ssmxli.food.entity.Alimento;
 import mx.ssmxli.food.entity.Promocion;
+import mx.ssmxli.food.model.AlimentoModel;
 import mx.ssmxli.food.model.PromocionModel;
+import mx.ssmxli.food.service.AlimentoService;
+import mx.ssmxli.food.service.PromocionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Component("promocionConverter")
 public class PromocionConverter {
+    @Autowired
+    @Qualifier("alimentoServiceImpl")
+    private AlimentoService alimentoService;
+
     /**
      *
      * @param promocionModel
@@ -25,6 +37,7 @@ public class PromocionConverter {
         String fecha1 = promocionModel.getFechaF();
         Date fech1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha1);
         Promocion promocion = new Promocion();
+        List<Alimento> alimentos = new ArrayList<>();
 
         StringBuilder disponibilidad = new StringBuilder();
         String [] letra = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"};
@@ -42,7 +55,10 @@ public class PromocionConverter {
         promocion.setFechaF(fech1);
         promocion.setPrecio(promocionModel.getPrecio());
         promocion.setDisponibilidad(disponibilidad.toString());
-        promocion.setAlimentos(promocionModel.getAlimentos());
+        for(AlimentoModel alimentoModel : promocionModel.getAlimentos()){
+            alimentos.add(alimentoService.convertAlimentoModel2Alimento(alimentoModel));
+        }
+        promocion.setAlimentos(alimentos);
         return promocion;
     }
 
@@ -58,6 +74,8 @@ public class PromocionConverter {
     public PromocionModel convertPromocion2PromocionModel(Promocion promocion){
         boolean [] arreglo = new boolean [7];
         PromocionModel promocionModel = new PromocionModel();
+        List<AlimentoModel> alimentoModels = new ArrayList<>();
+
         promocionModel.setId(promocion.getId());
         promocionModel.setNombre(promocion.getNombre());
         promocionModel.setFechaI(
@@ -77,12 +95,17 @@ public class PromocionConverter {
             else{
                 arreglo[y]= false;
             }
-
         }
+
         String disponibilidadF = disponibilidad.toString().substring(0,disponibilidad.length() - 2);
         promocionModel.setDisponibilidad(disponibilidadF);
         promocionModel.setDias(arreglo);
-        promocionModel.setAlimentos(promocion.getAlimentos());
+
+        for(Alimento alimento : promocion.getAlimentos()){
+            alimentoModels.add(alimentoService.convertAlimento2AlimentoModel(alimento));
+        }
+        promocionModel.setAlimentos(alimentoModels);
+
         return promocionModel;
     }
 }

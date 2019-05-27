@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -26,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 //A lo que puede entrar solo el Gerente
                 .antMatchers("/js/**",
@@ -35,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/usuarios/*",
                         "/alimentos/*",
-                        "/promociones/*").hasAuthority("GERENTE")
+                        "/promociones/*",
+                        "/configuracion/*").hasAuthority("GERENTE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

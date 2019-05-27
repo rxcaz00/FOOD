@@ -7,10 +7,7 @@ import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.model.*;
 import mx.ssmxli.food.repository.ClienteRepository;
 import mx.ssmxli.food.repository.UsuarioRepository;
-import mx.ssmxli.food.service.AlimentoService;
-import mx.ssmxli.food.service.ClienteService;
-import mx.ssmxli.food.service.PromocionService;
-import mx.ssmxli.food.service.VentaService;
+import mx.ssmxli.food.service.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +24,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/venta")
 public class VentaController {
-    private String telefono;
-    private String usuario = "prueba";
+    private String telefono = "";
     private List<ContenidoReciboModel> contenidosRecibo = new ArrayList<>();
     private ReciboModel reciboModel;
 
@@ -41,12 +37,8 @@ public class VentaController {
     private ClienteService clienteService;
 
     @Autowired
-    @Qualifier("clienteRepository")
-    private ClienteRepository clienteRepository;
-
-    @Autowired
-    @Qualifier("usuarioRepository")
-    private UsuarioRepository usuarioRepository;
+    @Qualifier("usuarioServiceImpl")
+    private UsuarioService usuarioService;
 
     @Autowired
     @Qualifier("alimentoServiceImpl")
@@ -55,6 +47,10 @@ public class VentaController {
     @Autowired
     @Qualifier("promocionServiceImpl")
     private PromocionService promocionService;
+
+    @Autowired
+    @Qualifier("securityServiceImpl")
+    private SecurityService securityService;
 
     private static final Log log = LogFactory.getLog(VentaController.class);
 
@@ -93,7 +89,7 @@ public class VentaController {
         else
             model.addAttribute("result", 0);
 
-        return "redirect:/venta";
+        return "fragments :: cliente";
     }//end addCliente
 
 
@@ -104,19 +100,36 @@ public class VentaController {
         for (ClienteModel c : clientes) {
             if (c.getTelefono().equals(clienteModel.getTelefono())) {
                 model.addAttribute("clienteModel", c);
+                log.info("Method: findCliente() -- Params: " + c.toString());
                 telefono = c.getTelefono();
                 break;
             }
         }
-        return ViewConstant.VENTA;
+        return ViewConstant.VENTA + " :: #cliente";
     }//end findCliente
+
+    @GetMapping(value = "/findCliente/{tel}")
+    public String findCliente(Model model, @PathVariable("tel")String tel){
+        List<ClienteModel> clientes = clienteService.listAllClientes();
+        for(ClienteModel c : clientes){
+            if(c.getTelefono().equals(tel)){
+                model.addAttribute("clienteModel",c);
+                telefono = c.getTelefono();
+                break;
+            }
+        }
+        return "fragments :: cliente";
+    }
 
     @PostMapping("/addVenta")
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
-        reciboModel.setCliente(clienteRepository.findByTelefono(telefono));
-        //reciboModel.setUsuario(usuarioRepository.findUsuarioByUsuario(usuario));
+        if(telefono != "")
+            reciboModel.setCliente(telefono);
 
-        //log.info("Method: addVenta() -- Params: " + reciboModel.toString());
+        reciboModel.setUsuario(securityService.findLoggedInUsername());
+
+        log.info("Method: addVenta() -- Params: " + reciboModel.toString());
+
         if(ventaService.addRecibo(reciboModel, contenidosRecibo) != null)
             model.addAttribute("result", 1);
         else

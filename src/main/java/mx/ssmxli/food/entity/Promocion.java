@@ -33,7 +33,7 @@ public class Promocion {
     @JoinTable(name = "alimento_promocion",
             joinColumns = @JoinColumn(name = "promocion_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "alimento_id", referencedColumnName = "id"))
-    private Set<Alimento> alimentos = new HashSet<>(); // Los productos que aplican en la promocion
+    private List<Alimento> alimentos; // Los productos que aplican en la promocion
 
     @ToString.Exclude
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

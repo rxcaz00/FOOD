@@ -68,4 +68,14 @@ public class AlimentoServiceImpl implements AlimentoService {
         }
         return alimentosModel;
     }
+
+    @Override
+    public AlimentoModel convertAlimento2AlimentoModel(Alimento alimento) {
+        return alimentoConverter.convertAlimento2AlimentoModel(alimento);
+    }
+
+    @Override
+    public Alimento convertAlimentoModel2Alimento(AlimentoModel alimentoModel) {
+        return alimentoConverter.convertAlimentoModel2Alimento(alimentoModel);
+    }
 }

@@ -2,6 +2,8 @@ package mx.ssmxli.food.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UsuarioModel {
     private String usuario;
@@ -13,6 +15,7 @@ public class UsuarioModel {
      */
     private String password;
     private String nivel;
+    private List<ReciboModel> recibos;
 
     public UsuarioModel(){
 

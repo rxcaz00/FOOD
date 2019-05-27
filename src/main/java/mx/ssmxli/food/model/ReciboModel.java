@@ -14,11 +14,12 @@ public class ReciboModel {
     private String notas;
     private double subtotal;
     private double total;
-    private Cliente cliente;
+    private String cliente;
     private char metodoPago;
-    private Usuario usuario;
+    private String usuario;
     private char tipoOrden;
     private List<ContenidoReciboModel> contenidosRecibo;
+    private int numeroMesa;
 
     public ReciboModel(){
 

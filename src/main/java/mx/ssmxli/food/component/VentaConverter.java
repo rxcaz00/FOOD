@@ -1,11 +1,15 @@
 package mx.ssmxli.food.component;
 
+import mx.ssmxli.food.entity.Comanda;
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Recibo;
+import mx.ssmxli.food.model.ComandaModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.AlimentoRepository;
 import mx.ssmxli.food.repository.ReciboRepository;
+import mx.ssmxli.food.service.ClienteService;
+import mx.ssmxli.food.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -18,11 +22,19 @@ import java.util.List;
 public class VentaConverter {
     @Autowired
     @Qualifier("reciboRepository")
-    ReciboRepository reciboRepository;
+    private ReciboRepository reciboRepository;
 
     @Autowired
     @Qualifier("alimentoRepository")
-    AlimentoRepository alimentoRepository;
+    private AlimentoRepository alimentoRepository;
+
+    @Autowired
+    @Qualifier("usuarioServiceImpl")
+    private UsuarioService usuarioService;
+
+    @Autowired
+    @Qualifier("clienteServiceImpl")
+    private ClienteService clienteService;
 
     /**
      *
@@ -37,7 +49,7 @@ public class VentaConverter {
         Recibo recibo = new Recibo();
         List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();
 
-        recibo.setCliente(reciboModel.getCliente());
+        recibo.setCliente(clienteService.findClienteByTelefono(reciboModel.getCliente()));
         recibo.setFecha(new Date());
         recibo.setId(reciboModel.getId());
         recibo.setMetodoPago(reciboModel.getMetodoPago());
@@ -45,7 +57,7 @@ public class VentaConverter {
         recibo.setNotas(reciboModel.getNotas());
         recibo.setSubtotal(reciboModel.getSubtotal());
         recibo.setTotal(reciboModel.getTotal());
-        recibo.setUsuario(reciboModel.getUsuario());
+        recibo.setUsuario(usuarioService.findUsuarioByUsuario(reciboModel.getUsuario()));
         try {
             for (ContenidoReciboModel contReciboModel : reciboModel.getContenidosRecibo()) {
                 contenidosRecibo.add(convertContenidoReciboModel2ContenidoRecibo(contReciboModel));
@@ -71,7 +83,7 @@ public class VentaConverter {
         ReciboModel reciboModel = new ReciboModel();
         List<ContenidoReciboModel> contenidoReciboModels = new ArrayList<>();
 
-        reciboModel.setCliente(recibo.getCliente());
+        reciboModel.setCliente(recibo.getCliente().getTelefono());
         reciboModel.setFecha(recibo.getFecha().toString());
         reciboModel.setId(recibo.getId());
         reciboModel.setMetodoPago(recibo.getMetodoPago());
@@ -79,7 +91,7 @@ public class VentaConverter {
         reciboModel.setNotas(recibo.getNotas());
         reciboModel.setSubtotal(recibo.getSubtotal());
         reciboModel.setTotal(recibo.getTotal());
-        reciboModel.setUsuario(recibo.getUsuario());
+        reciboModel.setUsuario(recibo.getUsuario().getUsuario());
         for (ContenidoRecibo contRecibo : recibo.getContenidosRecibo()) {
             contenidoReciboModels.add(convertContenidoRecibo2ContenidoReciboModel(contRecibo));
         }
@@ -108,5 +120,25 @@ public class VentaConverter {
         contenidoRecibo.setAlimento(alimentoRepository.findById(contenidoReciboModel.getIdAlimento()));
 
         return contenidoRecibo;
+    }
+
+    public ComandaModel convertComanda2ComandaModel(Comanda comanda){
+        ComandaModel comandaModel = new ComandaModel();
+
+        comandaModel.setId(comanda.getId());
+        comandaModel.setRecibo(convertRecibo2ReciboModel(comanda.getRecibo()));
+        comandaModel.setNumeroMesa(comanda.getNumeroMesa());
+
+        return comandaModel;
+    }
+
+    public Comanda convertComandaModel2Comanda(ComandaModel comandaModel){
+        Comanda comanda = new Comanda();
+
+        comanda.setId(comandaModel.getId());
+        comanda.setNumeroMesa(comandaModel.getNumeroMesa());
+        comanda.setRecibo(convertReciboModel2Recibo(comandaModel.getRecibo()));
+
+        return comanda;
     }
 }

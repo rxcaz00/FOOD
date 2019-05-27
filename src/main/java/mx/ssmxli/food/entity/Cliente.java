@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,25 +32,27 @@ public class Cliente {
     @Column(name = "RFC", length = 15, nullable = true)
     private String RFC;//El RFC del cliente, que puede ser opcional
     @Column(name = "puntos")
-    private int puntos;//Se obtiene un porcentaje de la compra como puntos.
+    private double puntos;//Se obtiene un porcentaje de la compra como puntos.
 
     @ToString.Exclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Recibo> recibos;//Las compras que ha realizado el cliente
+    private List<Recibo> recibos;//Las compras que ha realizado el cliente
 
-    public Cliente(String nombre, String direccion, String telefono, String correo, String RFC) {
+    public Cliente(String nombre, String direccion, String telefono, String correo, String RFC, double puntos) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
         this.RFC = RFC;
+        this.puntos = puntos;
     }
 
-    public Cliente(String nombre, String direccion, String correo, String telefono){
+    public Cliente(String nombre, String direccion, String correo, String telefono, double puntos){
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+        this.puntos = puntos;
     }
 
     public Cliente(){}

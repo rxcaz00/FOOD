@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +33,7 @@ public class PromocionController {
     @Qualifier("alimentoServiceImpl")
     private AlimentoService alimentoService;
 
-    private Set<Alimento> alimentos;
+    private List<AlimentoModel> alimentos;
     private static final Log log = LogFactory.getLog(PromocionController.class);
 
     @GetMapping("/cancel")
@@ -57,7 +58,7 @@ public class PromocionController {
      */
     public String inicio(Model model){
         PromocionModel promocionModel = new PromocionModel();
-        alimentos = new HashSet<>();
+        alimentos = new ArrayList<>();
         List<AlimentoModel> alimentoModels = alimentoService.listAllAlimentos();
         model.addAttribute("promocionModel",promocionModel);
         model.addAttribute("alimentoModels", alimentoModels);
@@ -69,7 +70,7 @@ public class PromocionController {
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de registrarPromocion
     public String addPromocion(@ModelAttribute(name = "promocionModel")PromocionModel promocionModel,
                               Model model) throws Exception {
-        log.info("Method: addPromocion() -- Params: "+promocionModel.toString());
+        log.info("Method: addPromocion() -- Params: " + promocionModel.toString());
         promocionModel.setAlimentos(alimentos);//sale alimento = 0
         if(promocionService.addPromocion(promocionModel) != null){
             model.addAttribute("result", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
@@ -83,7 +84,7 @@ public class PromocionController {
 
     @RequestMapping(value = "/addAlimento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody AlimentoModel addAlimento(@RequestBody int alimentoId){
-        Alimento alimento = alimentoService.findAlimentoById(alimentoId);
+        AlimentoModel alimento = alimentoService.findAlimentoByIdModel(alimentoId);
         alimentos.add(alimento);
         return alimentoService.findAlimentoByIdModel(alimento.getId());
     }

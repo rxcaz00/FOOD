@@ -4,6 +4,8 @@ import lombok.ToString;
 import mx.ssmxli.food.entity.sequence.CategoriaSequence;
 import mx.ssmxli.food.entity.sequence.NombreSequence;
 import mx.ssmxli.food.entity.sequence.TamanoSequence;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -46,10 +48,12 @@ public class Alimento {
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "alimentos", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Promocion> promociones;//Las promociones en las que aplica el alimento
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Promocion> promociones;//Las promociones en las que aplica el alimento
 
     @ToString.Exclude
     @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
 
     /*public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
@@ -61,7 +65,7 @@ public class Alimento {
         this.precio = precio;
     }*/
 
-    public Alimento(int id, String descripcion, double precio, boolean habilitado, CategoriaSequence categoriaSequence, NombreSequence nombreSequence, TamanoSequence tamanoSequence, Set<Promocion> promociones, List<ContenidoRecibo> contenidosRecibo) {
+    public Alimento(int id, String descripcion, double precio, boolean habilitado, CategoriaSequence categoriaSequence, NombreSequence nombreSequence, TamanoSequence tamanoSequence, List<Promocion> promociones, List<ContenidoRecibo> contenidosRecibo) {
         this.id = id;
         this.descripcion = descripcion;
         this.precio = precio;

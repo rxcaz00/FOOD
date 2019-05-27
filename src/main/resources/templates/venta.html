@@ -17,38 +17,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!--Este JS utiliza funciones de JQuery, por lo que se debe de importar despues de este-->
         <script type="text/javascript" src="../static/js/venta.js" th:src="@{'/js/venta.js'}"></script>
+
+        <script>
+
+        </script>
 	</head>
     <body>
     <nav th:replace="fragments.html :: nav"></nav>
 
-    <span th:if="${result==0}"> <script>alert("Funciono");</script></span>
         <div class="container">
         	<b class="titulo">Venta de alimentos</b>
             <div th:replace="fragments.html :: rol"></div>
             <hr size=4 color="#CCCCCC">
-
-            <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()">
-            	Número de teléfono:
-            	<input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" maxlength="10">
-                <button class="yellow" type="submit" size="20" name="action" value="buscar">Buscar</button>
-                <div class="registrar">
-                	<b>¿Cliente nuevo?</b>
-                    <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar()">¡Registralo!</button>
-                </div><br>
-                Nombre del cliente:
-                <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-                <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
-                Dirección:
-                <input id="dir" type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
-                Correo:
-                <input id="correo" type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
-                Puntos:
-                <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
-                RFC:
-                <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
-
-                <!--
-                <script>
+            <div id="clienteLoad">
+                <form th:replace="fragments.html :: cliente"></form>
+            </div>
+                <!-- <script>
                     function validar() {
                         var telefono, nombre, apellido, dir, correo, rfc, rfcConv;
                         telefono = document.getElementById("telefono").value;
@@ -80,65 +64,11 @@
                             return true;
                         }
                     }
-                </script>
-                -->
-            </form>
-
-            <form>
+                </script>-->
                 <hr size=4 color="#CCCCCC">
                 DETALLES DE LA ORDEN
                 <hr size=4 color="#CCCCCC">
-                <!--
-                <aside>
-                	<table>
-                		<thead>
-                    		RESUMEN DE LA ORDEN <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}">
-                    	</thead>
-                    	<hr size=4 color="#CCCCCC">
-                    	<tbody>
-                    		<tr>
-                    			<th>Cant</th>
-                            	<th>Descripción</th>
-                            	<th>Precio</th>
-                            	<th>Total</th>
-                                <th></th>
-                        	</tr>
-                        	<tr>
-                        		<td>2</td>
-                            	<td>Rebanada Peperonni</td>
-                            	<td>40.00</td>
-                            	<td>80.00</td>
-                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
-                        	</tr>
-                        	<tr>
-                        		<td>1</td>
-                            	<td>Pasta Alfredo</td>
-                            	<td>80.00</td>
-                            	<td>80.00</td>
-                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
-                        	</tr>
-                            <tr>
-                            	<td>1</td>
-                                <td>
-                                	<i>Dúo 2 X 1</i><br>
-                                    Personal carnes<br>
-                                    Agua del día
-                                </td>
-                                <td>100.00</td>
-                                <td>100.00</td>
-                                <td><img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
-                            </tr>
-                    	</tbody>
-                    	<tr>
-                        	<td></td>
-                           	<td></td>
-                           	<td>Total</td>
-                           	<td>$120.00</td>
-                        </tr>
-                	</table>
-                </aside>
-                -->
-            </form>
+                <aside th:replace="fragments.html :: contenidosRecibo"></aside>
 
             <!--AÑADIR ALIMENTO A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/dishes.png" th:src="@{/imgs/dishes.png}">
@@ -149,10 +79,8 @@
                 <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"
                         th:title="${'$'+alimento.precio}"></option>
             </select>
-            <br>
-            <input class="agregar" type="submit" value="Agregar alimento" id="addAlimento" onClick="addAlimento()">
+            <button type="button" class="agregar" id="addAlimento" onclick="addAlimento()" size="20">Agregar Alimento</button>
             <br><br>
-
             <!--AÑADIR PROMOCION A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/discount.png" th:src="@{/imgs/discount.png}">
             Promociones
@@ -160,47 +88,11 @@
             <select id="selectPromocion">
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
-            <input class="agregar" type="submit" value="Agregar promoción" id="addPromocion" onClick="findPromocion()">
-            <br><br>
+            <button type="button" class="agregar" id="addPromocion" onclick="findPromocion()">Agregar Promocion</button>
 
             <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
                 <table>
                     <tbody>
-                    <!--<tr>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Importe</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input class="precio" type="number">
-                        </td>
-                        <td>
-                            <input class="venta" type="text">
-                        </td>
-                        <td>
-                            <input class="precio" type="number">
-                        </td>
-                        <td>
-                            <input class="show_precio" type="number" readonly>
-                        </td>
-                        <td>
-                            <input class="show_precio" type="number" readonly>
-                        </td>
-                        <td>
-                            <img class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="total">Total: $</td>
-                        <td>100.00</td>
-                    </tr>-->
                     <tr>
                         <td colspan="3">
                             <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
@@ -209,6 +101,7 @@
                             <br>
                             <input type="radio" name="orden" value="L" th:field="*{tipoOrden}" required>Local
                             <input type="radio" name="orden" value="D" th:field="*{tipoOrden}">Domicilio
+                            <input type="radio" name="orden" value="R" th:field="*{tipoOrden}">Recoger
                         </td>
                         <td colspan="3">
                             <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
@@ -234,7 +127,7 @@
                     </tbody>
                 </table>
                 <input class="green" type="submit" value="Finalizar compra">
-                <input class="red" type="submit" value="Cancelar compra">
+                <input class="red" type="reset" value="Cancelar compra">
             </form>
         </div>
     </body>

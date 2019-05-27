@@ -1,13 +1,16 @@
 package mx.ssmxli.food.service.impl;
 
 import mx.ssmxli.food.component.VentaConverter;
-import mx.ssmxli.food.entity.ContenidoRecibo;
-import mx.ssmxli.food.entity.Recibo;
+import mx.ssmxli.food.entity.*;
+import mx.ssmxli.food.model.ClienteModel;
+import mx.ssmxli.food.model.ConfiguracionModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.ContenidoReciboRepository;
 import mx.ssmxli.food.repository.ReciboRepository;
+import mx.ssmxli.food.service.ClienteService;
 import mx.ssmxli.food.service.ConfiguracionService;
+import mx.ssmxli.food.service.SecurityService;
 import mx.ssmxli.food.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,6 +38,10 @@ public class VentaServiceImpl implements VentaService {
     @Qualifier("configuracionServiceImpl")
     private ConfiguracionService configuracionService;
 
+    @Autowired
+    @Qualifier("clienteServiceImpl")
+    private ClienteService clienteService;
+
     public ReciboModel addRecibo(ReciboModel reciboModel) {
         Recibo temp = ventaConverter.convertReciboModel2Recibo(reciboModel);
         Recibo recibo = reciboRepository.save(temp);
@@ -60,8 +67,12 @@ public class VentaServiceImpl implements VentaService {
     public ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo){
         Recibo temp = ventaConverter.convertReciboModel2Recibo(reciboModel);
         Recibo recibo = reciboRepository.save(temp);
+        Cliente cliente = recibo.getCliente();
+        ConfiguracionModel configuracion = configuracionService.findLastConfiguracion();
+
         double total = 0.0;
         double subtotal = 0.0;
+
         if(recibo.getContenidosRecibo()==null)
             recibo.setContenidosRecibo(new ArrayList<>());
 
@@ -70,10 +81,19 @@ public class VentaServiceImpl implements VentaService {
             contRecibo.setIdRecibo(recibo.getId());
             contenidoReciboRepository.save(ventaConverter.convertContenidoReciboModel2ContenidoRecibo(contRecibo));
         }
-        subtotal = total * (1-(configuracionService.findLastConfiguracion().getIva()/100));
+
+        if(cliente != null)
+            cliente.setPuntos(cliente.getPuntos() + (total * (configuracion.getRetribucion()/100) ));
+
+        //Calcula el subtotal
+        subtotal = total * (1-(configuracion.getIva()/100));
         recibo.setTotal(total);
         recibo.setSubtotal(subtotal);
+
         recibo = reciboRepository.save(recibo);
+
+        //Añade los puntos al cliente
+        ClienteModel clienteModel = clienteService.addCliente(clienteService.convertCliente2ClienteModel(cliente));
 
         return ventaConverter.convertRecibo2ReciboModel(recibo);
     }
