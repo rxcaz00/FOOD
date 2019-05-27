@@ -21,10 +21,10 @@ public class LoginController {
         model.addAttribute("usuarioModel",usuarioModel);
 
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Usuario o contraseña incorrecto");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "Has cerrado sesión");
 
         return ViewConstant.LOGIN;
     }

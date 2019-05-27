@@ -40,11 +40,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //A lo que puede entrar solo el Gerente
-                .antMatchers("/usuarios/*","/alimentos/*","/promociones/*").hasAuthority("GERENTE")
+                .antMatchers("/js/**",
+                        "/css/**",
+                        "/imgs/**").permitAll()
+                .antMatchers(
+                        "/usuarios/*",
+                        "/alimentos/*",
+                        "/promociones/*").hasAuthority("GERENTE")
                 .anyRequest().authenticated()
-                .and().formLogin()
-                .loginPage("/login").permitAll()
-                .and().logout().permitAll();
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/venta",true)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Bean
