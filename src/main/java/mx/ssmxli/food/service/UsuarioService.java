@@ -17,4 +17,8 @@ public interface UsuarioService {
     public abstract UsuarioModel findUsuarioByUsuarioModel(String usuario);
 
     public abstract void removeUsuario(String usuario);
+
+    public abstract UsuarioModel convertUsuario2UsuarioModel(Usuario usuario);
+
+    public abstract Usuario convertUsuarioModel2Usuario(UsuarioModel usuarioModel);
 }

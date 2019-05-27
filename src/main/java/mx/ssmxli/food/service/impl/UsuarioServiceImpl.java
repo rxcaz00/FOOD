@@ -25,6 +25,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UsuarioModel addUsuario(UsuarioModel usuarioModel)  {
         usuarioModel.setPassword(bCryptPasswordEncoder.encode(usuarioModel.getPassword()));
@@ -53,5 +54,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void removeUsuario(String  usuario) {
 
+    }
+
+    @Override
+    public UsuarioModel convertUsuario2UsuarioModel(Usuario usuario) {
+        return usuarioConverter.convertUsuario2UsuarioModel(usuario);
+    }
+
+    @Override
+    public Usuario convertUsuarioModel2Usuario(UsuarioModel usuarioModel) {
+        return usuarioConverter.convertUsuarioModel2Usuario(usuarioModel);
     }
 }
