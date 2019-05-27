@@ -28,7 +28,10 @@
             Password:
             <input id="password" type="password" class="app" th:field="*{password}" th:value="${password}" required><br>
             Nivel:
-            <input id="nivel" type="text" class="app" th:field="*{nivel}" th:value="${nivel}" placeholder="Nivel" required><br>
+            <select id="nivel" th:field="*{nivel}" required>
+                <option value="GERENTE">Gerente</option>
+                <option value="EMPLEADO">Empleado</option>
+            </select>
 
             <script>
                 function validar() {
