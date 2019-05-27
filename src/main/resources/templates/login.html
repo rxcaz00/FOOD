@@ -18,16 +18,15 @@
         <div class="central">
             <form action="#" th:action="@{/login}" method="post">
                 <b class="titulo">INICIO DE SESIÓN</b>
-                <br><br>
-                <hr size="5" color="#000000" width="100%">
                 <br>
-                <input type="text" name="username" placeholder="Usuario"  required>
-                <br/>
-                <input type="password" name="password" placeholder="Contraseña" required>
-                <br/>
-                <br/>
+                <hr size="5" color="#000000" width="100%">
                 <span th:text="${message}"></span>
                 <span th:text="${error}"></span>
+                <br>
+                <input type="text" name="username" placeholder="Usuario"  required>
+                <br>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <br><br>
                 <button class="ingresar" type="submit">Ingresar</button>
 
             </form>
