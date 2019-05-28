@@ -46,9 +46,11 @@ public class ClienteConverter {
         cliente.setRFC(clienteModel.getRFC());
         cliente.setPuntos(clienteModel.getPuntos());
 
-        for(ReciboModel reciboModel : clienteModel.getRecibos()){
-            recibos.add(ventaService.convertReciboModel2Recibo(reciboModel));
-        }
+        if(clienteModel.getRecibos() != null)
+            for(ReciboModel reciboModel : clienteModel.getRecibos()){
+                recibos.add(ventaService.convertReciboModel2Recibo(reciboModel));
+            }
+
         cliente.setRecibos(recibos);
 
         cliente.setTelefono(clienteModel.getTelefono());

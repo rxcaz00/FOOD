@@ -25,6 +25,8 @@ public class Recibo {
     private double total;//El total con IVA
     @Column(name = "subtotal")
     private double subtotal;//El total sin el IVA
+    @Column(name = "dineroRecibido")
+    private double dineroRecibido;
     @Column(name = "notas", nullable = true)
     private String notas;//Alguna indicacion especial en la entrega
     @Column(name = "metodoPago")
@@ -33,6 +35,8 @@ public class Recibo {
     private char tipoOrden;//Si es (L)ocal, a (D)omicilio o para (R)ecoger
     @Column(name = "numeroMesa", nullable = true)
     private int numeroMesa;
+    @Column(name = "direccionDeEnvio", nullable = true)
+    private String direccionDeEnvio;
 
 
     @ManyToOne(optional = true)
@@ -57,13 +61,15 @@ public class Recibo {
     @OneToOne(mappedBy = "recibo", fetch = FetchType.EAGER)
     private Comanda comanda;
 
-    public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente, int numeroMesa) {
+    public Recibo(Date fecha, double total, double subtotal, String notas, Cliente cliente, int numeroMesa, double dineroRecibido, String direccionDeEnvio) {
         this.fecha = fecha;
         this.total = total;
         this.subtotal = subtotal;
         this.notas = notas;
         this.cliente = cliente;
         this.numeroMesa = numeroMesa;
+        this.dineroRecibido = dineroRecibido;
+        this.direccionDeEnvio = direccionDeEnvio;
     }
 
     public Recibo(){}

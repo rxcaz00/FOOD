@@ -93,29 +93,25 @@
         <thead>
         <tr>RESUMEN DE LA ORDEN <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}"></tr>
         <tr>
-            <th>Cant</th>
             <th>Nombre</th>
             <th>Precio</th>
-            <th>Total</th>
             <th></th>
         </tr>
         </thead>
         <hr size=4 color="#CCCCCC">
         <tbody>
-        <tr>
-            <td>2</td>
-            <td>Rebanada Pepperoni</td>
-            <td>40.00</td>
-            <td>80.00</td>
-            <td><input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"><td>
+        <tr th:each="contRecibo : ${contenidosRecibo}">
+            <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
+            <td>$<span th:text="${contRecibo.precio}"></span></td>
+            <td><input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removeAlimento(\'' + ${contRecibo.id} + '\');'" >
+                <input type="image" class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+            </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td></td>
+            <td colspan="2">Total</td>
+            <td colspan="2">$<span th:text="${total}"></span></td>
         </tr>
         </tfoot>
     </table>
@@ -138,18 +134,20 @@
 <!--CLIENTES. Busqueda y Registro-->
 <form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()" th:fragment="cliente">
     Número de teléfono:
-    <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" maxlength="10">
+    <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" max="9999999999">
     <!--name="action" value="buscar"-->
     <button class="yellow" type="button" size="20" onclick="updateCliente()">Buscar</button>
+    <span th:if="${#strings.isEmpty(nombre) && found == false}">No se encontro el cliente</span>
+    <span th:if="${registrado == true}">Cliente Registrado</span>
     <div class="registrar">
         <b>¿Cliente nuevo?</b>
         <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar()">¡Registralo!</button>
     </div><br>
     Nombre del cliente:
-    <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)">
-    <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)"><br>
+    <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
+    <input id="apellido" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)" required><br>
     Dirección:
-    <input id="dir" type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia"><br>
+    <input id="dir" type="text" class="dir" th:field="*{direccion}" th:value="${direccion}" placeholder="Calle, Número, Colonia" required><br>
     Correo:
     <input id="correo" type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
     Puntos:

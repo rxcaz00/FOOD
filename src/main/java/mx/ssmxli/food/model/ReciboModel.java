@@ -17,9 +17,14 @@ public class ReciboModel {
     private String cliente;
     private char metodoPago;
     private String usuario;
+    private String nombreUsuario;
     private char tipoOrden;
     private List<ContenidoReciboModel> contenidosRecibo;
     private int numeroMesa;
+    private double dineroRecibido;
+    private String direccionDeEnvio;
+    private boolean direccionCliente;
+    private boolean recogerCliente;
 
     public ReciboModel(){
 

@@ -20,6 +20,10 @@ nav {
 	background-color: #C9C;
 }
 
+.hiddenDiv{
+	display:none;
+}
+
 .logo {
 	width: 100%;
 	margin-bottom: 20px;

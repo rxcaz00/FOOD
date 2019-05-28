@@ -1,8 +1,9 @@
 /**
+ * REEMPLAZADO POR UNA SOLUCION SIN JSON
  * Script AJAX para obtener un alimento a partir del alimento seleccionado en el SELECT #selectAlimento
  * @author Andrés
  * */
-function addAlimento() {
+/*function addAlimento() {
         $.ajax({
             url: '/venta/addAlimento',
             type: "POST",
@@ -21,13 +22,13 @@ function addAlimento() {
             }
         });
         event.preventDefault();
-}
+}*/
 
-/**
+/**REEMPLAZADO POR UNA SOLUCION SIN JSON
  * Script AJAX para obtener una promocion y sus alimentos a partir de la promocion seleccionada en el SELECT #selectPromocion
  * @author Andrés
  * */
-function addPromocion(){
+/*function addPromocion(){
     $.ajax({
        url: '/venta/findPromocion',
        type: 'POST',
@@ -46,15 +47,14 @@ function addPromocion(){
        }
     });
     event.preventDefault();
-}
+}*/
 
-
-/**
+/**REEMPLAZADO POR UNA SOLUCION SIN JSON
  * Script AJAX para obtener un alimento a partir del alimento seleccionado en el SELECT #selectAlimento
  * @author Diana
  * Es para promociones
  * */
-function addAlimento1() {
+/*function addAlimento1() {
     $.ajax({
         url: '/promociones/addAlimento',
         type: "POST",
@@ -73,9 +73,47 @@ function addAlimento1() {
         }
     });
     event.preventDefault();
-}
+}*/
 
-//Actualiza el form para mostrar el cliente al encontrarlo
+/**
+ * Revisa cuando le dan click a un radio button y si es el grupo con el nombre orden. Esconde todos los elemento
+ * con la clase hiddenDiv y solo muestra el elemento que tenga el ID indicado.
+ *
+ * @author Andrés
+ * */
+$(document).ready(function(){
+
+    $('input[name="orden"]').on("changed", function () {
+        var inputValue = $(this).val();
+        $("div.hiddenDiv").hide();
+        var targetDiv = "#show" + inputValue;
+        $(targetDiv).show();
+    });
+
+    $("#checkDir").change(function(){
+        if($(this).is(':checked')) {
+            $("#dirEnvio").attr('readonly',"");
+            $("#dirEnvio").val("");
+        }else
+            $("#dirEnvio").removeAttr('readonly');
+    });
+
+    $("#checkRec").change(function () {
+        if($(this).is(':checked')){
+            $('#recNombre').attr('readonly',"");
+            $('#recNombre').val("");
+        }else
+            $("#recNombre").removeAttr('readonly');
+    });
+
+});
+
+/**
+ * Toma el valor del input con el ID #telefono. Si no esta vacio concatena el telefono al URL.
+ * Recarga el contenedor que tiene el ID clienteLoad con el resultado del URL.
+ *
+ * @author Andrés
+ * */
 function updateCliente() {
     var url = '/venta/findCliente';
 
@@ -87,7 +125,27 @@ function updateCliente() {
     $("#clienteLoad").load(url);
 }
 
-function mostrarMaldad() {
+/**
+ * Concatena el valor del SELECT con el ID selectAlimento al URL.
+ * Carga el resultado del URL en el contenedor con el ID contenidosReciboLoad
+ *
+ * @author Andrés
+ * */
+function addAlimento(){
+    var url = '/venta/addAlimento/' + $('#selectAlimento').val();
 
-            alert(JSON.stringify($('#selectAlimento1').val()));
+    $("#contenidosReciboLoad").load(url);
 }
+
+/**
+ * Concatena el valor del ID del elemento del fragment contenidoRecibo seleccionado.
+ * Carga el resultado del URL en el contenedor con el ID contenidosReciboLoad.
+ *
+ * @author Andrés
+ * */
+function removeAlimento(id){
+    var url = '/venta/removeAlimento/' + id;
+
+    $("#contenidosReciboLoad").load(url);
+}
+

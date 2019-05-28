@@ -57,6 +57,9 @@ public class VentaConverter {
         recibo.setNotas(reciboModel.getNotas());
         recibo.setSubtotal(reciboModel.getSubtotal());
         recibo.setTotal(reciboModel.getTotal());
+        recibo.setDineroRecibido(reciboModel.getDineroRecibido());
+        recibo.setDireccionDeEnvio(reciboModel.getDireccionDeEnvio());
+        recibo.setNumeroMesa(reciboModel.getNumeroMesa());
         recibo.setUsuario(usuarioService.findUsuarioByUsuario(reciboModel.getUsuario()));
         try {
             for (ContenidoReciboModel contReciboModel : reciboModel.getContenidosRecibo()) {
@@ -78,12 +81,23 @@ public class VentaConverter {
      *
      * @return reciboModel
      * @author Roberto
+     * @author Andrés
      */
     public ReciboModel convertRecibo2ReciboModel(Recibo recibo) {
         ReciboModel reciboModel = new ReciboModel();
         List<ContenidoReciboModel> contenidoReciboModels = new ArrayList<>();
+        String telefono = "";
 
-        reciboModel.setCliente(recibo.getCliente().getTelefono());
+        //Si el cliente es diferente de null, osea si hay uno asignado al recibo, entonces...
+        if(recibo.getCliente() != null)
+            telefono = recibo.getCliente().getTelefono(); //Asignar el telefono del cliente a la variable cliente
+
+        /*
+        * Se realizo el codigo anterior para evitar un NullPointerException, ocasionado por querer acceder
+        * a un telefono de un cliente null
+        * */
+
+        reciboModel.setCliente(telefono);
         reciboModel.setFecha(recibo.getFecha().toString());
         reciboModel.setId(recibo.getId());
         reciboModel.setMetodoPago(recibo.getMetodoPago());
@@ -91,7 +105,11 @@ public class VentaConverter {
         reciboModel.setNotas(recibo.getNotas());
         reciboModel.setSubtotal(recibo.getSubtotal());
         reciboModel.setTotal(recibo.getTotal());
+        reciboModel.setDineroRecibido(recibo.getDineroRecibido());
+        reciboModel.setNumeroMesa(recibo.getNumeroMesa());
+        reciboModel.setDireccionDeEnvio(recibo.getDireccionDeEnvio());
         reciboModel.setUsuario(recibo.getUsuario().getUsuario());
+        reciboModel.setNombreUsuario(recibo.getUsuario().getNombre() + " " + recibo.getUsuario().getApellidos());
         for (ContenidoRecibo contRecibo : recibo.getContenidosRecibo()) {
             contenidoReciboModels.add(convertContenidoRecibo2ContenidoReciboModel(contRecibo));
         }
@@ -106,7 +124,8 @@ public class VentaConverter {
         contenidoReciboModel.setId(contenidoRecibo.getId());
         contenidoReciboModel.setPrecio(contenidoRecibo.getPrecio());
         contenidoReciboModel.setIdAlimento(contenidoRecibo.getAlimento().getId());
-        contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getNombreSequence().getNombre());
+        contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getCategoriaSequence().getNombre() + " " +
+                contenidoRecibo.getAlimento().getNombreSequence().getNombre() + " " + contenidoRecibo.getAlimento().getTamanoSequence().getNombre());
 
         return contenidoReciboModel;
     }
@@ -122,6 +141,8 @@ public class VentaConverter {
         return contenidoRecibo;
     }
 
+    /*Por no tener funcion ni atributos suficientes para diferenciarlo del Recibo, se decidio no incorporar la comanda.
+    Hay oportunidad de realizar cosas con la Comanda en un futuro, por lo que no se eliminan sus métodos
     public ComandaModel convertComanda2ComandaModel(Comanda comanda){
         ComandaModel comandaModel = new ComandaModel();
 
@@ -140,5 +161,5 @@ public class VentaConverter {
         comanda.setRecibo(convertReciboModel2Recibo(comandaModel.getRecibo()));
 
         return comanda;
-    }
+    }*/
 }

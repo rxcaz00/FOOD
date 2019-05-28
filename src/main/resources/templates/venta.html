@@ -15,12 +15,6 @@
         <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--Este JS utiliza funciones de JQuery, por lo que se debe de importar despues de este-->
-        <script type="text/javascript" src="../static/js/venta.js" th:src="@{'/js/venta.js'}"></script>
-
-        <script>
-
-        </script>
 	</head>
     <body>
     <nav th:replace="fragments.html :: nav"></nav>
@@ -68,7 +62,9 @@
                 <hr size=4 color="#CCCCCC">
                 DETALLES DE LA ORDEN
                 <hr size=4 color="#CCCCCC">
-                <aside th:replace="fragments.html :: contenidosRecibo"></aside>
+                <div id="contenidosReciboLoad">
+                    <aside th:replace="fragments.html :: contenidosRecibo"></aside>
+                </div>
 
             <!--AÑADIR ALIMENTO A LA LISTA DE COMPRA-->
             <img class="cat" src="/imgs/dishes.png" th:src="@{/imgs/dishes.png}">
@@ -89,46 +85,63 @@
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
             <button type="button" class="agregar" id="addPromocion" onclick="findPromocion()">Agregar Promocion</button>
-
+            <br><br>
+            <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
+            <br>
             <form action="#" th:action="@{/venta/addVenta}" th:object="${reciboModel}" method="post">
-                <table>
-                    <tbody>
-                    <tr>
-                        <td colspan="3">
-                            <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
-                            <br>
-                            Elija el tipo de orden:
-                            <br>
-                            <input type="radio" name="orden" value="L" th:field="*{tipoOrden}" required>Local
-                            <input type="radio" name="orden" value="D" th:field="*{tipoOrden}">Domicilio
-                            <input type="radio" name="orden" value="R" th:field="*{tipoOrden}">Recoger
-                        </td>
-                        <td colspan="3">
-                            <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
-                            <br>
-                            Elija el método de pago:
-                            <br>
-                            <input type="radio" name="metodo" value="E" th:field="*{metodoPago}" required>Efectivo
-                            <input type="radio" name="metodo" value="T" th:field="*{metodoPago}">Tarjeta
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
+                Tipo de orden:
+                <br>
+                <input type="radio" name="orden" value="L" th:field="*{tipoOrden}" required>Local
+                <input type="radio" name="orden" value="D" th:field="*{tipoOrden}">Domicilio
+                <input type="radio" name="orden" value="R" th:field="*{tipoOrden}">Recoger
 
-                        </td>
-                        <td colspan="3">
-                            Marca la casilla si el cliente requiere cambio
-                            <input type="checkbox" name="cambio" value="1">
-                            <br>
-                            Cantidad de cambio: $
-                            <input class="precio" type="number" name="dinero">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="hiddenDiv" id="showL">
+                    <br>
+                    <img class="cat" src="/imgs/number.png" th:src="@{/imgs/number.png}">
+                    <br>
+                    Número de Mesa: #
+                    <input type="number" class="precio" min="0" th:field="*{numeroMesa}">
+                </div>
+
+                <div class="hiddenDiv" id="showD">
+                    <br>
+                    <img class="cat" src="/imgs/house.png" th:src="@{/imgs/house.png}">
+                    <br>
+                    Dirección de Entrega:
+                    <input type="text" th:field="*{direccionDeEnvio}" size="20" id="dirEnvio">
+                    <br>
+                    Usar Dirección del Cliente:
+                    <input type="checkbox" th:field="*{direccionCliente}" id="checkDir">
+                </div>
+
+                <div class="hiddenDiv" id="showR">
+                    <br>
+                    <img class="cat" src="/imgs/woman.png" th:src="@{/imgs/woman.png}">
+                    <br>
+                    Pedido a Nombre de:
+                    <input type="text" th:field="*{notas}" size="20" id="recNombre">
+                    <br>
+                    Cliente pasara por el:
+                    <input type="checkbox" th:field="*{recogerCliente}" id="checkRec">
+                </div>
+
+                <br><br>
+                <img class="cat" src="/imgs/debit-card.png" th:src="@{/imgs/debit-card.png}">
+                <br>
+                Método de pago:
+                <br>
+                <input type="radio" name="metodo" value="E" th:field="*{metodoPago}" required>Efectivo
+                <input type="radio" name="metodo" value="T" th:field="*{metodoPago}">Tarjeta
+                <br><br>
+                <img class="cat" src="/imgs/cash.png" th:src="@{/imgs/cash.png}">
+                <br>
+                Dinero Recibido: $<input class="precio" type="number" name="dinero" th:field="*{dineroRecibido}" min="0" required>
+                <br><br>
                 <input class="green" type="submit" value="Finalizar compra">
                 <input class="red" type="reset" value="Cancelar compra">
             </form>
         </div>
+
+        <script type="text/javascript" src="../static/js/venta.js" th:src="@{'/js/venta.js'}"></script>
     </body>
 </html>

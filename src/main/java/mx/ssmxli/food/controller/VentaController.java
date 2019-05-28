@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/venta")
 public class VentaController {
-    private String telefono = "";
+
+    private String telefono = "";//Telefono del cliente actual
+    private double total = 0.0;//Total de la venta
     private List<ContenidoReciboModel> contenidosRecibo = new ArrayList<>();
     private ReciboModel reciboModel;
+    //Estos metodos se utilizan para añadir un ID temporal a los contenidosRecibo y contenidosPromocion
+    //Para poder ponerlos y quitarlos de el total
+    private int contadorContenidoRecibo = 1;
+    private int contadorContenidoPromocion = 1;
 
     @Autowired
     @Qualifier("ventaServiceImpl")
@@ -68,7 +75,14 @@ public class VentaController {
      * */
     @GetMapping("")
     public String venta(Model model) {
+        //Reinicializacion de variables globales
         reciboModel = new ReciboModel();
+        telefono = "";
+        contenidosRecibo = new ArrayList<>();
+        contadorContenidoRecibo = 1;
+        contadorContenidoPromocion = 1;
+        total = 0.0;
+
         ClienteModel clienteModel = new ClienteModel();
 
         List<AlimentoModel> alimentos = alimentoService.listAllAlimentosHabilitados();//Lista con TODOS los alimentos habilitados
@@ -78,22 +92,25 @@ public class VentaController {
         model.addAttribute("clienteModel",clienteModel);
         model.addAttribute("alimentos",alimentos);
         model.addAttribute("promociones",promociones);
+        model.addAttribute("found",true);
+        model.addAttribute("registrado",false);
         return ViewConstant.VENTA;
     }//end venta
 
-    @PostMapping(value = "/addCliente", params = "action=registrar")
+    @PostMapping(value = "/addCliente")
     public String addCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel, Model model){
         log.info("Method: addCliente() -- Params: "+clienteModel.toString());
         if(clienteService.addCliente(clienteModel) != null)
-            model.addAttribute("result", 1);//esto es para que se muestre un mensaje de que se agregó éxitosamente
+            model.addAttribute("registrado", true);//esto es para que se muestre un mensaje de que se agregó éxitosamente
         else
-            model.addAttribute("result", 0);
+            model.addAttribute("registrado", true);
 
-        return "fragments :: cliente";
+        return "redirect:/"+ViewConstant.VENTA;
     }//end addCliente
 
 
-    @PostMapping(value = "/addCliente", params = "action=buscar")
+   /* Reemplazado por la solucion con Fragments de abajo
+   @PostMapping(value = "/addCliente", params = "action=buscar")
     //El ModelAttribute corresponde con el th:object que utilizamos en la vista de clienteform
     public String findCliente(@ModelAttribute(name = "clienteModel")ClienteModel clienteModel, Model model) {
         List<ClienteModel> clientes = clienteService.listAllClientes();
@@ -106,33 +123,68 @@ public class VentaController {
             }
         }
         return ViewConstant.VENTA + " :: #cliente";
-    }//end findCliente
+    }//end findCliente*/
 
+
+
+   /**
+    * Realiza un GET en base al telefono ingresado como parametro.
+    * Busca al cliente al que pertenezca el telefono (si es que le pertence a alguien).
+    * Regresa el resultado al fragment cliente, actualizando solo ese fragmento.
+    *
+    *
+    * @param model
+    * @param tel
+    * @return "fragments :: cliente"
+    * @author Andrés
+    * */
     @GetMapping(value = "/findCliente/{tel}")
     public String findCliente(Model model, @PathVariable("tel")String tel){
+        boolean found = false;
         List<ClienteModel> clientes = clienteService.listAllClientes();
+        ClienteModel clienteModel = new ClienteModel();
+
         for(ClienteModel c : clientes){
             if(c.getTelefono().equals(tel)){
-                model.addAttribute("clienteModel",c);
+                clienteModel = c;
+                found = true;
                 telefono = c.getTelefono();
                 break;
             }
         }
+
+        if(!found)
+            clienteModel.setTelefono(tel);
+
+        model.addAttribute("found", found);
+        model.addAttribute("clienteModel", clienteModel);
+
         return "fragments :: cliente";
     }
 
+    /**
+     * POST que recibe un modelo del recibo, que contiene tipoOrden, metodoPago y dineroRecibido.
+     * Los demas atributos los recibe mediante otros métodos o los calcula en el Service.
+     * Al terminar redirecciona a
+     *
+     * @param model
+     * @param reciboModel
+     * @return "redirect:/venta"
+     * @author Andrés
+     * */
     @PostMapping("/addVenta")
     public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
-        if(telefono != "")
-            reciboModel.setCliente(telefono);
-
+        reciboModel.setCliente(telefono);
         reciboModel.setUsuario(securityService.findLoggedInUsername());
 
         log.info("Method: addVenta() -- Params: " + reciboModel.toString());
 
-        if(ventaService.addRecibo(reciboModel, contenidosRecibo) != null)
+        ReciboModel reciboModelGuardado = ventaService.addRecibo(reciboModel, contenidosRecibo);
+
+        if(reciboModelGuardado != null) {
             model.addAttribute("result", 1);
-        else
+            model.addAttribute("reciboModelResultado", reciboModelGuardado);
+        }else
             model.addAttribute("result",0);
 
         contenidosRecibo = new ArrayList<>();
@@ -141,27 +193,77 @@ public class VentaController {
     }//end addVenta
 
     /**
-     *
      * Añade el alimento seleccionado en el SELECT o INPUT TEXT de venta.html a la lista de compras.
-     * El id lo recibe del HTML en forma de JSON. De igual manera regresa un AlimentoModel en formato JSON.
+     * El id lo recibe a traves de una variable del Path. Retorna un String con la direccion al fragmento contenidosRecibo.
      *
-     * A partir de la informacion recibida construye la entidad contenidoRecibo y la añade a la variable global contenidosRecibo
+     * A partir de la informacion recibida construye la entidad contenidoRecibo y la añade a la variable global contenidosRecibo,
+     * además de añadir la versión más nueva al model
      *
-     * @param @RequestBody int
-     * @return @ResponseBody AlimentoModel
+     * @param alimentoId
+     * @param model
+     * @return "fragments :: contenidosRecibo"
      * @author Andrés
      * */
-    @RequestMapping(value = "/addAlimento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody AlimentoModel addAlimento(@RequestBody int alimentoId){
+    @GetMapping(value = "/addAlimento/{alimentoId}")
+    public String addAlimento(@PathVariable(name = "alimentoId")int alimentoId, Model model){
         Alimento alimento = alimentoService.findAlimentoById(alimentoId);
         ContenidoRecibo temporalContenidoRecibo = new ContenidoRecibo();
 
+        temporalContenidoRecibo.setId(contadorContenidoRecibo);
+        contadorContenidoRecibo++;
         temporalContenidoRecibo.setAlimento(alimento);
         temporalContenidoRecibo.setPrecio(alimento.getPrecio());
-        System.out.println(temporalContenidoRecibo.getAlimento().getNombreSequence() + " " + temporalContenidoRecibo.getPrecio());
+        total += temporalContenidoRecibo.getPrecio();
+        log.info("Method addAlimento() -- Values: ContenidoRecibo" + temporalContenidoRecibo.toString() + "| Total: " + total);
         contenidosRecibo.add(ventaService.convertContenidoRecibo2ContenidoReciboModel(temporalContenidoRecibo));
 
-        return alimentoService.findAlimentoByIdModel(alimento.getId());
+        model.addAttribute("contenidosRecibo", contenidosRecibo);
+        model.addAttribute("total", total);
+
+        return "fragments :: contenidosRecibo";
+    }
+
+    /**
+     * Elimina el contenidoRecibo de la lista de contenidosRecibo, ademas de restar su precio del total.
+     * Recibe el id de contenidoRecibo a traves de una variable de Path.
+     *
+     * @param model
+     * @param contenidoReciboId
+     * @author Andrés
+     * */
+    @GetMapping(value = "/removeAlimento/{contenidoReciboId}")
+    public String removeAlimento(@PathVariable(name = "contenidoReciboId")int contenidoReciboId, Model model){
+        ContenidoReciboModel tempCRM = new ContenidoReciboModel();
+        boolean found = false;
+        log.info("Method removeAlimento() -- Param: contenidoReciboId = " + contenidoReciboId);
+        //Itera en todos los ContenidoReciboModel en contenidosRecibo.
+        for(ContenidoReciboModel contenidoReciboModel : contenidosRecibo){
+            //Si el contenidoReciboID es igual al ID del contenidoReciboModel actual entonces...
+            if(contenidoReciboModel.getId() == contenidoReciboId) {
+                found = true;//La bandera cambia a true
+                tempCRM = contenidoReciboModel;//Se guarda el contenidoReciboModel actual en tempCRM
+                break;//Sale, porque ya encontro la coincidencia y no tiene sentido seguir
+            }
+        }
+
+        //Si la bandera found es verdad, entonces...
+        if(found){
+            total -= tempCRM.getPrecio();//Al total se le resta el precio de tempCRM
+            log.info("Method removeAlimento() -- Updated total = " + total);
+            contenidosRecibo.remove(tempCRM);//tempCRM se elimina de la lista contenidosRecibo
+            log.info("Method removeAlimento() -- Removed ContenidoReciboModel: " + tempCRM.toString());
+        }
+
+        /*
+        * ¿Por que no se elimina en el foreach en el momento que se encuentra la coincidencia de ID?
+        * Si se realizara de esa manera, saltaria la excepcion ConcurrentModification, que sale al modificar un objeto
+        * por el cual estamos iterando.
+        * */
+
+        model.addAttribute("contenidosRecibo", contenidosRecibo);
+        model.addAttribute("total", total);
+
+        return "fragments :: contenidosRecibo";
     }
 
     /**
