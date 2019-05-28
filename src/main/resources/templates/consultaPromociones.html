@@ -60,8 +60,8 @@
             <td th:text="${promocion.fechaF}"></td>
             <td th:text="${promocion.disponibilidad}"></td>
             <td>
-                <select th:each="alimento : ${promocion.alimentos}">
-                    <option th:text="${alimento.nombre}"></option>
+                <select>
+                    <option  th:each="alimento : ${promocion.alimentos}" th:text="${alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}"></option>
                 </select>
             </td>
             <td th:text="${promocion.precio}"></td>

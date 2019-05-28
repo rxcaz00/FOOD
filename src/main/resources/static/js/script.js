@@ -198,7 +198,6 @@ function addCategoria(){
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success: function(result){
-				alert("Categoria Registrada\nValor: " + result.valor + "\nNombre: " + result.nombre);
 				location.reload(true);
 			},
 			error: function(e){
@@ -236,7 +235,6 @@ function addNombre(){
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success: function(result){
-				alert("Nombre Registrado\nValor: " + result.valor + "\nNombre: " + result.nombre);
 				location.reload(true);
 			},
 			error: function(e){
@@ -278,7 +276,6 @@ function addTamano(){
 				xhr.setRequestHeader("Content-Type", "application/json");
 			},
 			success: function(result){
-				alert("Tamaño Registrado\nValor: " + result.valor + "\nNombre: " + result.nombre);
 				location.reload();
 			},
 			error: function(e){
@@ -291,6 +288,18 @@ function addTamano(){
 	/*}else{
 		redirectCategoria();
 	}*/
+}
+
+function addAlimentoPromocion(){
+	var url = '/promociones/addAlimento/' + $('#selectAlimento').val();
+
+	$("#contenidoPromocionLoad").load(url);
+}
+
+function removeAlimentoPromocion(id){
+	var url = '/promociones/removeAlimento/' + id;
+
+	$("#contenidoPromocionLoad").load(url);
 }
 
 /*Quite esta parte por problemas a la hora de mostrarlos por la categoria seleccionada

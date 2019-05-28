@@ -96,6 +96,16 @@ public class VentaServiceImpl implements VentaService {
             log.info("Method addRecibo() -- Updated Cliente: " + clienteModel.toString());
         }
 
+        switch(recibo.getTipoOrden()){
+            case 'L':
+
+                break;
+            case 'D':
+                break;
+            case 'R':
+                break;
+        }
+
         //Calcula el subtotal
         subtotal = total * (1-(configuracion.getIva()/100));
         recibo.setTotal(total);

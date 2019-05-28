@@ -117,6 +117,34 @@
     </table>
 </aside>
 
+<!--CONTENIDO PROMOCION. Muestra los alimentos que se van agregando-->
+<aside th:fragment="contenidoPromocion">
+    <table>
+        <thead>
+            <tr>
+                ALIMENTOS
+                <img class="list" src="/img/dishes.png" th:src="@{/imgs/dishes.png}">
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <hr size="4" color="#CCCCCC">
+        <tbody>
+            <tr th:each="alimento : ${alimentos}">
+                <td><span th:text="${alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}"></span></td>
+                <td><span th:text="${alimento.descripcion}"></span></td>
+                <td>
+                    <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}"
+                           th:onclick="'javascript:removeAlimentoPromocion(\''+${alimento.id}+'\');return false;'">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</aside>
+
 
 <script>
     function updateCliente() {
