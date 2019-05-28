@@ -46,7 +46,7 @@
             <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
             <br>
             Fecha Fin:
-            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
+            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" title="La fecha inicial debe ser menor que la fecha final" oninput="validate()">
             <br><br>
             Disponibilidad:
             <br>
