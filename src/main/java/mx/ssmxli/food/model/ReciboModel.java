@@ -1,6 +1,7 @@
 package mx.ssmxli.food.model;
 
 import lombok.Data;
+import lombok.ToString;
 import mx.ssmxli.food.entity.Cliente;
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Usuario;
@@ -19,6 +20,7 @@ public class ReciboModel {
     private String usuario;
     private String nombreUsuario;
     private char tipoOrden;
+    @ToString.Exclude
     private List<ContenidoReciboModel> contenidosRecibo;
     private int numeroMesa;
     private double dineroRecibido;

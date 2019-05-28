@@ -125,6 +125,12 @@ function updateCliente() {
     $("#clienteLoad").load(url);
 }
 
+function findCliente(id){
+    var url = '/venta/findCliente/' + id;
+
+    $("#clienteLoad").load(url);
+}
+
 /**
  * Concatena el valor del SELECT con el ID selectAlimento al URL.
  * Carga el resultado del URL en el contenedor con el ID contenidosReciboLoad
@@ -145,6 +151,30 @@ function addAlimento(){
  * */
 function removeAlimento(id){
     var url = '/venta/removeAlimento/' + id;
+
+    $("#contenidosReciboLoad").load(url);
+}
+
+/**
+ * Concatena el valor del SELECT con el ID selectPromocion con el URL.
+ * Carga el resultado del URL en el contenedor con el ID contenidosReciboLoad
+ *
+ * @author Andrés
+ * */
+function addPromocion(){
+    var url = '/venta/addPromocion/' + $('#selectPromocion').val();
+
+    $("#contenidosReciboLoad").load(url);
+}
+
+/**
+ * Concatena el parametro ID (Que corresponde al ID del elemento ContenidoPromocion seleccionado)
+ * Carga el resultado del URL en el contenedor con el ID contenidosReciboLoad
+ *
+ * @author Andrés
+ * */
+function removePromocion(id){
+    var url = '/venta/removePromocion/' + id;
 
     $("#contenidosReciboLoad").load(url);
 }
