@@ -238,17 +238,23 @@ th, td {
 	opacity: 0.6;
 }
 
-.viewer {
+.viewer, .viewer-client {
 	visibility: hidden;
 	background-color: #eaedf2;
 	text-align: center;
-	border: 1px solid black;
+	border: 2px solid gainsboro;
 	border-radius: 30px;
 	position: absolute;
 	top: 5px;
 	bottom: 5px;
 	left: 230px;
 	right: 5px;
+}
+
+.viewer-client {
+	font-size: 20px;
+	font-weight: bold;
+	bottom: 300px;
 }
 
 .viewer-button {
@@ -276,4 +282,13 @@ embed {
 	margin-left: 20px;
 	height: 92%;
 	width: 90%;
+}
+
+.last {
+	border-bottom: none;
+}
+
+.show-client {
+	border-top-left-radius: 30px;
+	letter-spacing: 5px;
 }

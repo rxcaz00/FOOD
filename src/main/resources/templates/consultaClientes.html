@@ -38,30 +38,12 @@
                 Apellidos
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
             </th>
-            <!--
-            <th onclick="sortTableText(3)">
-                Dirección
-                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>
-            <th onclick="sortTableText(4)">
-                Correo
-                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>
-            <th onclick="sortTableText(5)">
-                RFC
-                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>
-            <th onclick="sortTableNumber()">
-                Puntos
-                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>
-            -->
             <th onclick="sortTableNumber(3)">
                 Puntos
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
             </th>
-            <th></th>
-            <th></th>
+            <th><!--Columna para visualizar información--></th>
+            <th><!--Columna para modificar información--></th>
         </tr>
         </thead>
         <tbody>
@@ -69,35 +51,68 @@
             <td th:text="${cliente.telefono}"></td>
             <td th:text="${cliente.nombre}"></td>
             <td th:text="${cliente.apellidos}"></td>
-            <!--
-            <td th:text="${cliente.direccion}"></td>
-            <td th:text="${cliente.correo}"></td>
-            <td th:text="${cliente.RFC}"></td>
-            -->
             <td th:text="${cliente.puntos}"></td>
             <td>
-                <a href="#" th:href="@{/clientes/consultaInfo?id=__${cliente.telefono}__}">
-                    <img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}">
-                </a>
+                <img th:id="'v-' + ${cliente.telefono}" class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}" onclick="mostrar(this.id)">
             </td>
             <td>
                 <a href="#" th:href="@{/venta/modificarCliente?telefono=__${cliente.telefono}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
-            <!--
-            <td class="disabled" th:if="${alimento.habilitado == false}">
-                <a href="#" th:href="@{/alimentos/borrarAlimento?id=__${alimento.id}__}">
-                    <img class="cross" src="/imgs/rubbish-bin.png" th:src="@{/imgs/rubbish-bin.png}">
-                </a>
-            </td>
-            -->
         </tr>
         </tbody>
     </table>
     <a th:href="@{/venta}">
         <button type="submit" class="nuevo">Agregar Nuevo Cliente</button>
     </a>
+</div>
+<div class="viewer-client" th:each="cliente : ${clientes}" th:id="'v' + ${cliente.telefono}">
+    <button th:id="'v*' + ${cliente.telefono}" class="viewer-button" onclick="ocultar(this.id)">X</button>
+    <table>
+        <thead class="show-client">
+            <th class="show-client" colspan="7">
+                DATOS DEL CLIENTE
+            </th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Teléfono:</td>
+            <td colspan="6" th:text="${cliente.telefono}"></td>
+        </tr>
+
+        <tr>
+            <td>Nombre:</td>
+            <td colspan="6" th:text="${cliente.nombre} + ' ' + ${cliente.apellidos}"></td>
+        </tr>
+
+        <tr>
+            <td>Correo:</td>
+            <td colspan="6" th:text="${cliente.correo}"></td>
+        </tr>
+
+        <tr>
+            <td>Dirección:</td>
+            <td colspan="6" th:text="${cliente.direccion}"></td>
+        </tr>
+
+        <tr>
+            <td>RFC:</td>
+            <td colspan="4" th:text="${cliente.RFC}"></td>
+            <td>Puntos:</td>
+            <td th:text="${cliente.puntos}"></td>
+        </tr>
+        <tr>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+            <td class="last"><!--Celda para crear espacio--></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
