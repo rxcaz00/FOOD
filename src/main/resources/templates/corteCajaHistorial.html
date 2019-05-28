@@ -36,8 +36,7 @@
                             Revisión
                             <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                         </th>
-                        <th></th>
-                        <th></th>
+                        <th><!--Encabezado para visualizar--></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,16 +48,14 @@
                             <img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}">
                             <span class="important" th:text="${corteCaja.reviso}"></span>
                         </td>
-                        <td><img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}" onclick="mostrar()"></td>
-                        <td>
-                            <a>
-                                <img class="cross" src="/imgs/printer.png" th:src="@{/imgs/printer.png}">
-                            </a>
-                        </td>
+                        <td><img th:id="'v-' + ${corteCaja.id}" class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}" onclick="mostrar(this.id)"></td>
                     </tr>
                 </tbody>
             </table>
-
+    </div>
+    <div class="viewer" th:each="pdf : ${pdfs}" th:id="'v' + ${pdf.id}">
+        <button th:id="'v*' + ${pdf.id}" onclick="ocultar(this.id)" class="viewer-button">X</button>
+        <embed th:src="@{${pdf.ruta}}" type="application/pdf">
     </div>
 </body>
 </html>

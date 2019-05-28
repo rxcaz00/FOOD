@@ -299,3 +299,15 @@ function fillSelects(){
 	cat = $('#selectCategoria').val();
 	location.assign("/alimentos/registrarAlimento?cat=" + cat);
 }*/
+
+function mostrar(id) {
+	var ids = id.split("-");
+	var idc = ids[0] + ids[1];
+	document.getElementById(idc).style.visibility = "visible";
+}
+
+function ocultar(id) {
+	var ids = id.split("*");
+	var idc = ids[0] + ids[1];
+	document.getElementById(idc).style.visibility = "hidden";
+}

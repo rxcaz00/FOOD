@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class LoginController extends Thread {
     @Autowired
     @Qualifier("securityServiceImpl")
     private SecurityService securityService;
+
+
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
@@ -22,6 +24,7 @@ public class LoginController {
 
         if (error != null)
             model.addAttribute("error", "Usuario o contraseña incorrecto");
+
 
         if (logout != null)
             model.addAttribute("message", "Has cerrado sesión");
