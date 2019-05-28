@@ -33,7 +33,7 @@ public class CorteCajaConverter {
         corteCaja.setCompra(corteCajaModel.getCompra());
         //Borrar ya que se tengan las capas de usuario
         Usuario testUser = new Usuario();
-        testUser.setUsuario("robertoc");
+        testUser.setUsuario("danyaf");
         corteCaja.setElaboro(testUser);
         corteCaja.setReviso(testUser);
         /*Descomentar ya que se tengan las capas de usuario

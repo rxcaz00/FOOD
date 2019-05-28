@@ -18,7 +18,7 @@ import java.util.Set;
 @Qualifier("userDetailsServiceImpl")
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
-    @Qualifier("usuarioRepository")
+   @Qualifier("usuarioRepository")
     @Autowired
     private UsuarioRepository usuarioRepository;
 
