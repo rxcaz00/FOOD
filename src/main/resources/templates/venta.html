@@ -72,7 +72,7 @@
             <br>
             <select id="selectAlimento">
                 <!--<option th:if="${}"></option>-->
-                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.nombre + ' ' + alimento.tamano}"
+                <option th:each="alimento : ${alimentos}" th:value="${alimento.id}" th:text="${alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}"
                         th:title="${'$'+alimento.precio}"></option>
             </select>
             <button type="button" class="agregar" id="addAlimento" onclick="addAlimento()" size="20">Agregar Alimento</button>
@@ -84,7 +84,7 @@
             <select id="selectPromocion">
                 <option th:each="promocion : ${promociones}" th:value="${promocion.id}" th:text="${promocion.nombre}"></option>
             </select>
-            <button type="button" class="agregar" id="addPromocion" onclick="findPromocion()">Agregar Promocion</button>
+            <button type="button" class="agregar" id="addPromocion" onclick="addPromocion()">Agregar Promocion</button>
             <br><br>
             <img class="cat" src="/imgs/food.png" th:src="@{/imgs/food.png}">
             <br>

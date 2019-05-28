@@ -3,7 +3,9 @@ package mx.ssmxli.food.controller;
 import lombok.Data;
 import mx.ssmxli.food.constant.ViewConstant;
 import mx.ssmxli.food.entity.Alimento;
+import mx.ssmxli.food.entity.ContenidoPromocion;
 import mx.ssmxli.food.entity.ContenidoRecibo;
+import mx.ssmxli.food.entity.Promocion;
 import mx.ssmxli.food.model.*;
 import mx.ssmxli.food.repository.ClienteRepository;
 import mx.ssmxli.food.repository.UsuarioRepository;
@@ -29,6 +31,7 @@ public class VentaController {
     private String telefono = "";//Telefono del cliente actual
     private double total = 0.0;//Total de la venta
     private List<ContenidoReciboModel> contenidosRecibo = new ArrayList<>();
+    private List<ContenidoPromocionModel> contenidosPromocion = new ArrayList<>();
     private ReciboModel reciboModel;
     //Estos metodos se utilizan para añadir un ID temporal a los contenidosRecibo y contenidosPromocion
     //Para poder ponerlos y quitarlos de el total
@@ -79,6 +82,7 @@ public class VentaController {
         reciboModel = new ReciboModel();
         telefono = "";
         contenidosRecibo = new ArrayList<>();
+        contenidosPromocion = new ArrayList<>();
         contadorContenidoRecibo = 1;
         contadorContenidoPromocion = 1;
         total = 0.0;
@@ -179,7 +183,7 @@ public class VentaController {
 
         log.info("Method: addVenta() -- Params: " + reciboModel.toString());
 
-        ReciboModel reciboModelGuardado = ventaService.addRecibo(reciboModel, contenidosRecibo);
+        ReciboModel reciboModelGuardado = ventaService.addRecibo(reciboModel, contenidosRecibo, contenidosPromocion);
 
         if(reciboModelGuardado != null) {
             model.addAttribute("result", 1);
@@ -214,9 +218,10 @@ public class VentaController {
         temporalContenidoRecibo.setAlimento(alimento);
         temporalContenidoRecibo.setPrecio(alimento.getPrecio());
         total += temporalContenidoRecibo.getPrecio();
-        log.info("Method addAlimento() -- Values: ContenidoRecibo" + temporalContenidoRecibo.toString() + "| Total: " + total);
+        log.info("Method addAlimento() -- Values: ContenidoRecibo" + temporalContenidoRecibo.toString() + "| Updated Total: " + total);
         contenidosRecibo.add(ventaService.convertContenidoRecibo2ContenidoReciboModel(temporalContenidoRecibo));
 
+        model.addAttribute("contenidosPromocion", contenidosPromocion);
         model.addAttribute("contenidosRecibo", contenidosRecibo);
         model.addAttribute("total", total);
 
@@ -251,7 +256,7 @@ public class VentaController {
             total -= tempCRM.getPrecio();//Al total se le resta el precio de tempCRM
             log.info("Method removeAlimento() -- Updated total = " + total);
             contenidosRecibo.remove(tempCRM);//tempCRM se elimina de la lista contenidosRecibo
-            log.info("Method removeAlimento() -- Removed ContenidoReciboModel: " + tempCRM.toString());
+            log.info("Method removeAlimento() -- Removed ContenidoReciboModel: " + tempCRM.toString() + " from contenidosRecibo");
         }
 
         /*
@@ -260,23 +265,75 @@ public class VentaController {
         * por el cual estamos iterando.
         * */
 
+        model.addAttribute("contenidosPromocion", contenidosPromocion);
         model.addAttribute("contenidosRecibo", contenidosRecibo);
         model.addAttribute("total", total);
 
         return "fragments :: contenidosRecibo";
     }
 
-    /**
-     *
-     * @author Andrés
-     * */
-    @RequestMapping(value = "/findPromocion", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody PromocionModel addPromocion(@RequestBody int promocionID){
-        PromocionModel promocion = promocionService.findPromocionByIdModel(promocionID);
+    @GetMapping(value = "/addPromocion/{promocionId}")
+    public String addPromocion(Model model, @PathVariable("promocionId")int promocionId){
+        PromocionModel promocionTemp = promocionService.findPromocionByIdModel(promocionId);
+        ContenidoPromocionModel tempCPM = new ContenidoPromocionModel();
+        List<ContenidoReciboModel> contenidosReciboPromo = new ArrayList<>();
+        ContenidoReciboModel contenidoRecibo;
 
-        System.out.println(promocion.getNombre() + promocion.getAlimentos());
+        tempCPM.setId(contadorContenidoPromocion);
+        contadorContenidoPromocion++;
+        tempCPM.setIdPromocion(promocionTemp.getId());
+        tempCPM.setNombrePromocion(promocionTemp.getNombre());
+        tempCPM.setPrecio(promocionTemp.getPrecio());
 
-        return promocion;
+        for(AlimentoModel alimento : promocionTemp.getAlimentos()){
+            contenidoRecibo = new ContenidoReciboModel();
+            contenidoRecibo.setId(contadorContenidoRecibo);
+            contadorContenidoRecibo++;
+            contenidoRecibo.setIdAlimento(alimento.getId());
+            contenidoRecibo.setNombreAlimento(alimento.getCategoria() + ' ' + alimento.getNombre() + ' ' + alimento.getTamano());
+            contenidoRecibo.setDescripcionAlimento(alimento.getDescripcion());
+            contenidoRecibo.setPrecio(0.0);
+            contenidosReciboPromo.add(contenidoRecibo);
+        }
+        tempCPM.setContenidosRecibo(contenidosReciboPromo);
+
+        total += tempCPM.getPrecio();
+        contenidosPromocion.add(tempCPM);
+
+        model.addAttribute("contenidosPromocion", contenidosPromocion);
+        model.addAttribute("contenidosRecibo", contenidosRecibo);
+        model.addAttribute("total", total);
+
+        return "fragments :: contenidosRecibo";
+    }
+
+    @GetMapping(value = "/removePromocion/{promocionId}")
+    public String removePromocion(Model model,@PathVariable("promocionId")int promocionId){
+        ContenidoPromocionModel tempCPM = new ContenidoPromocionModel();
+        boolean found = false;//Bandera para verificar si tempCPM existe en contenidosPromocion
+        log.info("Method removePromocion() -- Params promocionId: " + promocionId);
+
+        for(ContenidoPromocionModel contenidoPromocionModel : contenidosPromocion){
+            //Si el contenidoReciboID es igual al ID del contenidoReciboModel actual entonces...
+            if(contenidoPromocionModel.getId() == promocionId) {
+                found = true;//La bandera cambia a true
+                tempCPM = contenidoPromocionModel;//Se guarda el contenidoPromocionModel actual en tempCPM
+                break;//Sale, porque ya encontro la coincidencia y no tiene sentido seguir
+            }
+        }
+
+        if(found){
+            total -= tempCPM.getPrecio();//Se reduce el precio del total
+            log.info("Method removeAlimento() -- Updated total = " + total);
+            contenidosPromocion.remove(tempCPM);//Se elimina el ContenidoPromocionModel de contenidosPromocion
+            log.info("Method removeAlimento() -- Removed ContenidoReciboModel: " + tempCPM.toString() + " from contenidosPromocion");
+        }
+
+        model.addAttribute("contenidosPromocion", contenidosPromocion);
+        model.addAttribute("contenidosRecibo", contenidosRecibo);
+        model.addAttribute("total", total);
+
+        return "fragments :: contenidosRecibo";
     }
 
 }

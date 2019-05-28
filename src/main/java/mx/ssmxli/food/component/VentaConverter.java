@@ -1,14 +1,17 @@
 package mx.ssmxli.food.component;
 
 import mx.ssmxli.food.entity.Comanda;
+import mx.ssmxli.food.entity.ContenidoPromocion;
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Recibo;
 import mx.ssmxli.food.model.ComandaModel;
+import mx.ssmxli.food.model.ContenidoPromocionModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.AlimentoRepository;
 import mx.ssmxli.food.repository.ReciboRepository;
 import mx.ssmxli.food.service.ClienteService;
+import mx.ssmxli.food.service.PromocionService;
 import mx.ssmxli.food.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +39,12 @@ public class VentaConverter {
     @Qualifier("clienteServiceImpl")
     private ClienteService clienteService;
 
+    @Autowired
+    @Qualifier("promocionServiceImpl")
+    private PromocionService promocionService;
+
+
+    //Recibo
     /**
      *
      * @param reciboModel
@@ -118,6 +127,7 @@ public class VentaConverter {
         return reciboModel;
     }
 
+    //Contenido Recibo
     public ContenidoReciboModel convertContenidoRecibo2ContenidoReciboModel(ContenidoRecibo contenidoRecibo){
         ContenidoReciboModel contenidoReciboModel = new ContenidoReciboModel();
 
@@ -126,6 +136,7 @@ public class VentaConverter {
         contenidoReciboModel.setIdAlimento(contenidoRecibo.getAlimento().getId());
         contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getCategoriaSequence().getNombre() + " " +
                 contenidoRecibo.getAlimento().getNombreSequence().getNombre() + " " + contenidoRecibo.getAlimento().getTamanoSequence().getNombre());
+        contenidoReciboModel.setDescripcionAlimento(contenidoRecibo.getAlimento().getDescripcion());
 
         return contenidoReciboModel;
     }
@@ -139,6 +150,39 @@ public class VentaConverter {
         contenidoRecibo.setAlimento(alimentoRepository.findById(contenidoReciboModel.getIdAlimento()));
 
         return contenidoRecibo;
+    }
+
+    public ContenidoPromocionModel convertContenidoPromocion2ContenidoPromocionModel(ContenidoPromocion contenidoPromocion){
+        ContenidoPromocionModel contenidoPromocionModel = new ContenidoPromocionModel();
+        List<ContenidoReciboModel> contenidoReciboModels = new ArrayList<>();
+
+        contenidoPromocionModel.setId(contenidoPromocion.getId());
+        contenidoPromocionModel.setIdRecibo(contenidoPromocion.getRecibo().getId());
+        contenidoPromocionModel.setIdPromocion(contenidoPromocion.getPromocion().getId());
+        contenidoPromocionModel.setNombrePromocion(contenidoPromocion.getPromocion().getNombre());
+        contenidoPromocionModel.setPrecio(contenidoPromocion.getPrecio());
+        for(ContenidoRecibo contenidoRecibo : contenidoPromocion.getContenidosRecibo()){
+            contenidoReciboModels.add(convertContenidoRecibo2ContenidoReciboModel(contenidoRecibo));
+        }
+        contenidoPromocionModel.setContenidosRecibo(contenidoReciboModels);
+
+        return contenidoPromocionModel;
+    }
+
+    public ContenidoPromocion convertContenidoPromocionModel2ContenidoPromcion(ContenidoPromocionModel contenidoPromocionModel){
+        ContenidoPromocion contenidoPromocion = new ContenidoPromocion();
+        List<ContenidoRecibo> contenidoRecibos = new ArrayList<>();
+
+        contenidoPromocion.setId(contenidoPromocionModel.getId());
+        contenidoPromocion.setPrecio(contenidoPromocionModel.getPrecio());
+        contenidoPromocion.setRecibo(reciboRepository.findReciboById(contenidoPromocionModel.getIdRecibo()));
+        contenidoPromocion.setPromocion(promocionService.findPromocionById(contenidoPromocionModel.getIdPromocion()));
+        for(ContenidoReciboModel contenidoReciboModel : contenidoPromocionModel.getContenidosRecibo()){
+            contenidoRecibos.add(convertContenidoReciboModel2ContenidoRecibo(contenidoReciboModel));
+        }
+        contenidoPromocion.setContenidosRecibo(contenidoRecibos);
+
+        return contenidoPromocion;
     }
 
     /*Por no tener funcion ni atributos suficientes para diferenciarlo del Recibo, se decidio no incorporar la comanda.

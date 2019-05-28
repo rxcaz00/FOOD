@@ -28,7 +28,7 @@
             <div id="contenidoPromocionLoad">
                 <aside th:replace="fragments.html :: contenidoPromocion"></aside>
             </div>
-            Alimentos:<p th:if="${repeat}">El Alimento esta repetido</p>
+            Alimentos:
                 <br>
                 <select id="selectAlimento">
                     <option id="alimento" th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${ alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}">

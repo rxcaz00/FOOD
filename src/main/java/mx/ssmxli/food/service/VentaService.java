@@ -2,6 +2,7 @@ package mx.ssmxli.food.service;
 
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Recibo;
+import mx.ssmxli.food.model.ContenidoPromocionModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,6 @@ public interface VentaService {
 
     public abstract ContenidoReciboModel convertContenidoRecibo2ContenidoReciboModel(ContenidoRecibo contenidoRecibo);
 
-    public abstract ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo);
+    public abstract ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo, List<ContenidoPromocionModel> contenidosPromocion);
 
 }

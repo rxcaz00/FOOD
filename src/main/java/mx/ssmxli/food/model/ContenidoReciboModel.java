@@ -8,6 +8,7 @@ public class ContenidoReciboModel {
     private double precio;
     private String nombreAlimento;
     private int idAlimento;
+    private String descripcionAlimento;
     private int idRecibo;
     private int idContenidoPromocion;
     private String nombreContenidoPromocion;

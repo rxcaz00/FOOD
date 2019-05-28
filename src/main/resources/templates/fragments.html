@@ -14,10 +14,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+    <script type="text/javascript" src="../static/js/venta.js" th:src="@{'js/venta.js'}"></script>
 
     <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 </head>
 <body>
+
 <!--
     PARA INSERTAR ESTE NAV SIMPLEMENTE ESCRIBE LO SIGUIENTE DENTRO DE UNAS ETIQUETAS NAV VACIAS:
     th:replace="fragments.html :: nav"
@@ -95,6 +97,7 @@
         <tr>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Contenido</th>
             <th></th>
         </tr>
         </thead>
@@ -103,8 +106,20 @@
         <tr th:each="contRecibo : ${contenidosRecibo}">
             <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
             <td>$<span th:text="${contRecibo.precio}"></span></td>
-            <td><input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removeAlimento(\'' + ${contRecibo.id} + '\');'" >
+            <td></td>
+            <td>
+                <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removeAlimento(\'' + ${contRecibo.id} + '\');'" >
                 <input type="image" class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+            </td>
+        </tr>
+        <tr th:each="contPromo : ${contenidosPromocion}">
+            <td><span th:text="${contPromo.nombrePromocion}"></span></td>
+            <td>$<span th:text="${contPromo.precio}"></span></td>
+            <td><select>
+                <option th:each="crPromo : ${contPromo.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
+            </select></td>
+            <td>
+                <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removePromocion(\'' + ${contPromo.id} + '\');'" >
             </td>
         </tr>
         </tbody>
@@ -119,6 +134,7 @@
 
 <!--CONTENIDO PROMOCION. Muestra los alimentos que se van agregando-->
 <aside th:fragment="contenidoPromocion">
+    <span th:if="${repeat}" onload="alert('El alimento ya esta registrado')"></span>
     <table>
         <thead>
             <tr>
@@ -165,8 +181,20 @@
     <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" max="9999999999">
     <!--name="action" value="buscar"-->
     <button class="yellow" type="button" size="20" onclick="updateCliente()">Buscar</button>
-    <span th:if="${#strings.isEmpty(nombre) && found == false}">No se encontro el cliente</span>
-    <span th:if="${registrado == true}">Cliente Registrado</span>
+    <span th:if="${#strings.isEmpty(nombre) and found == false}">No se encontro el cliente</span>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+            var flag = [[${registrado}]];
+            window.onload = function() {
+                if(!flag)
+                    return;
+
+                alert("El cliente se registro exitosamente");
+            };
+
+        /*]]>*/
+    </script>
     <div class="registrar">
         <b>¿Cliente nuevo?</b>
         <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar()">¡Registralo!</button>
