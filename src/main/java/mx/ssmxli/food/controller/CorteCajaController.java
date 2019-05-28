@@ -8,7 +8,6 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import mx.ssmxli.food.constant.ViewConstant;
-import mx.ssmxli.food.entity.Usuario;
 import mx.ssmxli.food.model.ConfiguracionModel;
 import mx.ssmxli.food.model.CorteCajaModel;
 import mx.ssmxli.food.model.PdfModel;
@@ -24,14 +23,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,6 +108,14 @@ public class CorteCajaController {
         return "redirect:/corteCaja/actual";
     }
 
+    /**
+     *
+     * Método que genera archivos PDF's individuales con la información del corte de caja
+     * @param cortes Recibe todos los cortes de caja
+     * @return Regresa una lista con las rutas de los PDF's
+     *
+     * @author Roberto
+     */
     public List<PdfModel> createPDF(List<CorteCajaModel> cortes) {
         log.info("Method: createPDF() -- Inicio");
 
@@ -178,7 +180,7 @@ public class CorteCajaController {
 
                 //Se instancía el documento
                 Document doc = new Document();
-                doc.setMargins(10, 10, 10, 10); //Se declaran los margenes
+                doc.setMargins(15, 15, 15, 15); //Se declaran los margenes
                 doc.setPageSize(new Rectangle(612,396)); //Se declara el tamaño
 
                 //Se crea el documento con el nombre "Corte0 + 'id del corte'.pdf"
@@ -355,9 +357,12 @@ public class CorteCajaController {
                 doc.add(footer); //Agregando pie de página
                 doc.close(); //Cerrando documento
 
-                //PdfModel pdf = new PdfModel();
-                //pdf.setRuta(file.getPath());
-                //pdfs.add(pdf);
+                //Se agrega una instancia de PdfModel que servirá
+                //para mandar la información y acceder al archivo.
+                PdfModel pdf = new PdfModel();
+                pdf.setId(corte.getId());
+                pdf.setRuta("/pdf/Corte0" + corte.getId() + ".pdf");
+                pdfs.add(pdf);
             }
         } catch (FileNotFoundException e) {
             log.error("Method: createPDF() -- File Not Found Exception");

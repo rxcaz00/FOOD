@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class PdfModel {
     private String ruta;
+    private int id;
 }
