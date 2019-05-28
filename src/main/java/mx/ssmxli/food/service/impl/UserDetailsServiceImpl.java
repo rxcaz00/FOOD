@@ -17,11 +17,12 @@ import org.springframework.web.context.request.RequestContextListener;
 import java.util.HashSet;
 import java.util.Set;
 
-@Qualifier("userDetailsServiceImpl")
-@Service
+
+@Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService{
-   @Qualifier("usuarioRepository")
+
     @Autowired
+    @Qualifier("usuarioRepository")
     private UsuarioRepository usuarioRepository;
 
     @Override
