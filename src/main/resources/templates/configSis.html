@@ -14,19 +14,34 @@
         	<b class="titulo">Configuración del Sistema</b>
 			<div th:replace="fragments.html :: rol"></div>
             <hr size=4 color="#CCCCCC">
-			<form action="#" th:action="@{/configuracion/addConfig}" th:object="${configuracionModel}" method="post">
+			<form action="#" th:action="@{/configuracion/addConfig}" th:object="${configuracionModel}" method="post" >
             	<input type="hidden" th:field="*{id}">
 				Introduzca el dinero inicial en caja:
-				<input class="precio" type="number" th:field="*{dineroInicial}" th:value="${dineroInicial}" min="0" required>
+				<input class="precio" id="dineroI" type="number" th:field="*{dineroInicial}" th:value="${dineroInicial}" min="0" required>
 				<br>
 				Introduzca el IVA actual:
-            	<input class="precio" type="number" th:field="*{iva}" th:value="${iva}" min="0" max="100" step=".01" required>%
+            	<input class="precio" id="iva" type="number" th:field="*{iva}" th:value="${iva}" min="0" max="100" step=".01" required>%
             	<br>
             	Introduzca el porcentaje de retribución de compra:
-            	<input class="precio" type="number" th:field="*{retribucion}" th:value="${retribucion}" min="0" max="100" step=".01" required>%
+            	<input class="precio"  id="porcentaje" type="number" th:field="*{retribucion}" th:value="${retribucion}" min="0" max="100" step=".01" required>%
             	<br>
 				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
-				<button class="green" name="action" value="guardar" type="submit">Guardar configuración</button>
+				<button class="green" name="action" value="guardar" type="submit"  onclick=validar()>Guardar configuración</button>
+
+				<script>
+					function validar() {
+						var dinero, iva,porcentaje;
+						dinero = document.getElementById("dineroI").value;
+						iva = document.getElementById("iva").value;
+						porcentaje = document.getElementById("porcentaje").value;
+
+						if (dinero.length!=0||iva.length!=0||porcentaje.length!=0){
+							alert("guardado exitosamente");
+							return true;
+						}
+
+					}
+				</script>
 			</form>
        	</div>
     </body>
