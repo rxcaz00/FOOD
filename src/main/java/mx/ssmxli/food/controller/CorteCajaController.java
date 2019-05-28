@@ -105,7 +105,7 @@ public class CorteCajaController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/corteCaja/actual";
+        return "redirect:/corteCaja/historial";
     }
 
     /**
