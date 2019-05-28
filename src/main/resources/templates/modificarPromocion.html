@@ -18,7 +18,7 @@
 <nav th:replace="fragments.html :: nav"></nav>
 
 <div class="container">
-    <b class="titulo">Registro de Promoción</b>
+    <b class="titulo">Modificar Promoción</b>
     <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
     <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit="return validar()">
