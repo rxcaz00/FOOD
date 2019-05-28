@@ -9,6 +9,7 @@ import mx.ssmxli.food.model.ContenidoPromocionModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
 import mx.ssmxli.food.repository.AlimentoRepository;
+import mx.ssmxli.food.repository.ContenidoPromocionRepository;
 import mx.ssmxli.food.repository.ReciboRepository;
 import mx.ssmxli.food.service.ClienteService;
 import mx.ssmxli.food.service.PromocionService;
@@ -30,6 +31,10 @@ public class VentaConverter {
     @Autowired
     @Qualifier("alimentoRepository")
     private AlimentoRepository alimentoRepository;
+
+    @Autowired
+    @Qualifier("contenidoPromocionRepository")
+    private ContenidoPromocionRepository contenidoPromocionRepository;
 
     @Autowired
     @Qualifier("usuarioServiceImpl")
@@ -137,6 +142,10 @@ public class VentaConverter {
         contenidoReciboModel.setNombreAlimento(contenidoRecibo.getAlimento().getCategoriaSequence().getNombre() + " " +
                 contenidoRecibo.getAlimento().getNombreSequence().getNombre() + " " + contenidoRecibo.getAlimento().getTamanoSequence().getNombre());
         contenidoReciboModel.setDescripcionAlimento(contenidoRecibo.getAlimento().getDescripcion());
+        if(contenidoRecibo.getRecibo() != null)
+            contenidoReciboModel.setIdRecibo(contenidoRecibo.getRecibo().getId());
+        if(contenidoRecibo.getContenidoPromocion() != null)
+            contenidoReciboModel.setIdContenidoPromocion(contenidoRecibo.getContenidoPromocion().getId());
 
         return contenidoReciboModel;
     }
@@ -146,8 +155,11 @@ public class VentaConverter {
 
         contenidoRecibo.setId(contenidoReciboModel.getId());
         contenidoRecibo.setPrecio(contenidoReciboModel.getPrecio());
-        contenidoRecibo.setRecibo(reciboRepository.findReciboById(contenidoReciboModel.getIdRecibo()));
         contenidoRecibo.setAlimento(alimentoRepository.findById(contenidoReciboModel.getIdAlimento()));
+        if(contenidoReciboModel.getIdRecibo() != -1)
+            contenidoRecibo.setRecibo(reciboRepository.findReciboById(contenidoReciboModel.getIdRecibo()));
+        if(contenidoReciboModel.getIdContenidoPromocion() != -1)
+            contenidoRecibo.setContenidoPromocion(contenidoPromocionRepository.findById(contenidoReciboModel.getIdContenidoPromocion()));
 
         return contenidoRecibo;
     }

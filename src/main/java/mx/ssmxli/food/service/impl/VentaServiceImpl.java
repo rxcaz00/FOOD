@@ -116,6 +116,7 @@ public class VentaServiceImpl implements VentaService {
                                 //Es necesario regresar este valor a 0 para que JPA pueda asignarle su ID automatico
             total += contRecibo.getPrecio();//Suma el precio del contenidoRecibo al total
             contRecibo.setIdRecibo(recibo.getId());//Le asigna el id del Recibo al contenidoRecibo
+            contRecibo.setIdContenidoPromocion(-1);//"Bandera" para ignorar este campo en el convertidor
             contenidoReciboRepository.save(ventaConverter.convertContenidoReciboModel2ContenidoRecibo(contRecibo));
         }
 
@@ -137,7 +138,8 @@ public class VentaServiceImpl implements VentaService {
             ContenidoPromocion contenidoPromocion = contenidoPromocionRepository.save(convertContenidoPromocionModel2ContenidoPromocion(contPromocion));
             //Ya teniendo el ID de ContenidoPromocion, se guardan todos sus ContenidoRecibo
             for(ContenidoReciboModel contRecibo : contenidoReciboModels){
-                contRecibo.setIdContenidoPromocion(contenidoPromocion.getId());
+                contRecibo.setIdContenidoPromocion(contenidoPromocion.getId());//Asigna el ID de ContenidoPromocion
+                contRecibo.setIdRecibo(-1);//Bandera para que el convertidor ignore este campo
                 contenidoReciboRepository.save(ventaConverter.convertContenidoReciboModel2ContenidoRecibo(contRecibo));
             }
         }
