@@ -4,6 +4,7 @@ import mx.ssmxli.food.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -28,9 +29,8 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     public String findLoggedGerenteInUsername() {
-        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("GERENTE")) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return user.getUsername();
+        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("GERENTE"))) {
+            return findLoggedInUsername();
         }
         else
             return "no se encontro";
