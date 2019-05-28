@@ -24,14 +24,28 @@
     <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
     <div class="jumbotron">
-        <form action="#" th:action="@{/idManager/addCategoria}" th:object="${categoriaModel}" method="post">
+        <form action="#" th:action="@{/idManager/addCategoria}" th:object="${categoriaModel}" method="post" onsubmit="return validar()">
             <input type="hidden" th:field="*{valor}"/>
             Nombre:
-            <input type="text" th:field="*{nombre}" th:value="${nombre}"/>
+            <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}" required/>
             Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
             <br>
             <input class="green" type="submit" value="Guardar">
+            <script>
+                function validar() {
+                    var nombre;
+                    nombre = document.getElementById("nombre").value;
+
+                    if (nombre!=""){
+                        alert("agregado exitosamente");
+                        return true;
+                    }
+
+                }
+            </script>
+
         </form>
+
 
         <a th:href="@{/idManager/cancelCategoria}">
             <button class="red" type="submit">Cancelar</button>

@@ -23,7 +23,7 @@
         <div th:replace="fragments.html :: rol"></div>
         <hr size=4 color="#CCCCCC">
         <div class="jumbotron">
-            <form action="#" th:action="@{/idManager/addTamano}" th:object="${tamanoModel}" method="post">
+            <form action="#" th:action="@{/idManager/addTamano}" th:object="${tamanoModel}" method="post" onsubmit="return validar()">
                 <input type="hidden" th:field="*{valor}">
                 <!--Quite esta parte por problemas a la hora de mostrarlos por la categoria seleccionada
                 Categoria:
@@ -33,10 +33,21 @@
                 <input class="invalido" th:value="${tamanoModel.nombre_Categoria}" th:if="${edit}">
                 <br>-->
                 Nombre:
-                <input type="text" th:field="*{nombre}" th:value="${nombre}"/>
+                <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}"/>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
                 <br>
                 <input class="green" type="submit" value="Guardar">
+                <script>
+                    function validar() {
+                        var nombre;
+                        nombre = document.getElementById("nombre").value;
+
+                        if (nombre!=""){
+                            alert("agregado exitosamente");
+                            return true;
+                        }
+                    }
+                </script>
             </form>
             <a th:href="@{/idManager/cancelTamano}">
                 <button class="red" type="submit">Cancelar</button>

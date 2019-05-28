@@ -320,11 +320,3 @@ function ocultar(id) {
 	var idc = ids[0] + ids[1];
 	document.getElementById(idc).style.visibility = "hidden";
 }
-
-/*Funcion para validar la fecha, La fecha inical no debe ser mayor a la fecha final del campo vigencia*/
-function validate() {
-	if(document.getElementById('ff').value<document.getElementById('fi').value)
-		document.getElementById('ff').setCustomValidity('Esta fecha debe ser mayor a la fecha inicial');
-	else
-		document.getElementById('ff').setCustomValidity('');
-}
