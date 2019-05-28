@@ -80,6 +80,7 @@
             <artifactId>jackson-core-asl</artifactId>
             <version>1.9.7</version>
         </dependency>
+        
     </dependencies>
 
     <build>
@@ -90,5 +91,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
