@@ -3,6 +3,10 @@ package mx.ssmxli.food.component;
 import mx.ssmxli.food.entity.CorteCaja;
 import mx.ssmxli.food.entity.Usuario;
 import mx.ssmxli.food.model.CorteCajaModel;
+import mx.ssmxli.food.service.SecurityService;
+import mx.ssmxli.food.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -10,6 +14,15 @@ import java.util.Date;
 
 @Component("corteCajaConverter")
 public class CorteCajaConverter {
+
+    @Autowired
+    @Qualifier("securityServiceImpl")
+    SecurityService securityService;
+
+    @Autowired
+    @Qualifier("usuarioServiceImpl")
+    UsuarioService usuarioService;
+
     /**
      *
      * @param corteCajaModel
@@ -31,14 +44,16 @@ public class CorteCajaConverter {
         corteCaja.setDiferencia(corteCajaModel.getDiferencia());
         corteCaja.setPago(corteCajaModel.getPago());
         corteCaja.setCompra(corteCajaModel.getCompra());
-        //Borrar ya que se tengan las capas de usuario
-        Usuario testUser = new Usuario();
-        testUser.setUsuario("robertoc");
-        corteCaja.setElaboro(testUser);
-        corteCaja.setReviso(testUser);
-        /*Descomentar ya que se tengan las capas de usuario
-        corteCaja.setElaboro(usuarioService.findByUsername(corteCajaModel.getElaboro()));
-        corteCaja.setReviso(usuarioService.findByUsername(corteCajaModel.getReviso()));*/
+
+        String currentUser;
+        currentUser = securityService.findLoggedInUsername();
+        corteCaja.setElaboro(usuarioService.findUsuarioByUsuario(currentUser));
+
+        currentUser = securityService.findLoggedGerenteInUsername();
+        if(!currentUser.equals("no se encontro"))
+            corteCaja.setReviso(usuarioService.findUsuarioByUsuario(currentUser));
+        else
+            corteCaja.setReviso(null);
         return corteCaja;
     }
 
@@ -64,8 +79,16 @@ public class CorteCajaConverter {
         corteCajaModel.setDiferencia(corteCaja.getDiferencia());
         corteCajaModel.setPago(corteCaja.getPago());
         corteCajaModel.setCompra(corteCaja.getCompra());
-        corteCajaModel.setElaboro(corteCaja.getElaboro().getUsuario());
-        corteCajaModel.setReviso(corteCaja.getReviso().getUsuario());
+
+        String nombre;
+        nombre = corteCaja.getElaboro().getNombre() + " " + corteCaja.getElaboro().getApellidos();
+        corteCajaModel.setElaboro(nombre);
+
+        if(corteCaja.getReviso() == null)
+            nombre = "Revisar";
+        else
+            nombre = corteCaja.getReviso().getNombre() + " " + corteCaja.getReviso().getApellidos();
+        corteCajaModel.setReviso(nombre);
         return corteCajaModel;
     }
 

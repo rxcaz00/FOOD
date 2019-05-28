@@ -1,6 +1,8 @@
 package mx.ssmxli.food.service;
 
 public interface SecurityService {
-    String findLoggedInUsername();
+   String findLoggedInUsername();
+
+   String findLoggedGerenteInUsername();
 }
 

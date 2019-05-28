@@ -165,7 +165,29 @@ public class VentaController {
 
         return "fragments :: cliente";
     }
+    /**
+     * @param model
+     * @param string (@RequestParam, name=string)
+     *
+     * Modifica el cliente en base al telefono.
+     * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los clientes.
+     *
+     *
+     * @return ModelAndView
+     *
+     * @author Diana
+     * */
+    @GetMapping("/modificarCliente")
+    public String redirectModificarCliente(Model model,
+                                           @RequestParam(name = "telefono") String telefono){
+        ClienteModel clienteModel = new ClienteModel();
+        if(telefono!= null){
+            clienteModel = clienteService.findClienteByTelefonoModel(telefono);
+        }
+        model.addAttribute("clienteModel", clienteModel);
+        return ViewConstant.CLIENTE_UPDATE;
 
+    }
     /**
      * POST que recibe un modelo del recibo, que contiene tipoOrden, metodoPago y dineroRecibido.
      * Los demas atributos los recibe mediante otros métodos o los calcula en el Service.
@@ -335,5 +357,8 @@ public class VentaController {
 
         return "fragments :: contenidosRecibo";
     }
+
+
+
 
 }

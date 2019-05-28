@@ -19,6 +19,7 @@ public class LoginController extends Thread {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+
         UsuarioModel usuarioModel = new UsuarioModel();
         model.addAttribute("usuarioModel",usuarioModel);
 

@@ -46,7 +46,7 @@
             <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
             <br>
             Fecha Fin:
-            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
+            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}"  >
             <br><br>
             Disponibilidad:
             <br>
@@ -66,10 +66,16 @@
                         alimento = document.getElementById("alimento").value;
                         fechaI = document.getElementById("fi").value;
                         fechaF = document.getElementById("ff").value;
+
+                        if(fechaI>fechaF){
+                            alert("fecha inicial debe ser menor a la fecha final")
+                            return false;
+                        }
                         if (precio.length!=0||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""){
                             alert("agregado exitosamente");
                             return true;
                         }
+
                     }
                 </script>
                 <input class="green" name="action" value="Guardar" type="submit" onclick="validar()">
