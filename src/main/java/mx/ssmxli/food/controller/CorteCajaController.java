@@ -105,7 +105,7 @@ public class CorteCajaController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/corteCaja/actual";
+        return "redirect:/corteCaja/historial";
     }
 
     /**
@@ -122,7 +122,7 @@ public class CorteCajaController {
         List<PdfModel> pdfs = new ArrayList();
 
         //Declarando las tablas para llenar la información
-        PdfPTable header = new PdfPTable(2); //Encabezado
+        PdfPTable header; //Encabezado
         PdfPTable table; //Contenido
         PdfPTable footer; //Pie de página
         PdfPCell cell; //Declarando la celda que se llenará con la información
@@ -134,23 +134,11 @@ public class CorteCajaController {
 
         try {
             //Se asigna el ancho de las columnas de la tabla
-            header.setWidths(columnWidths);
 
             //Se instancia la imagen del logo de la empresa
             Image img = Image.getInstance("src\\main\\resources\\static\\imgs\\logo.jpg");
             img.scaleToFit(100,100); //Se le agrega dimensión
             img.setAlignment(Element.ALIGN_LEFT); //Se le agrega alineación
-
-            header.setWidthPercentage(100); //Al encabezado se le agrega el ancho de acuerdo al tamaño de la página
-            header.setSpacingAfter(10); //Se agrega el espacio que habrá de separación antes del elemento
-
-            cell = new PdfPCell(); //Se instancía la celda
-            cell.setBorder(0); //Se elimina el borde de la celda
-            cell.setPaddingLeft(10); //La separación entre el borde y el texto
-            cell.setHorizontalAlignment(Element.ALIGN_LEFT); //Se alinea horizontalmente
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //Se alinea verticalmente
-            cell.addElement(img); //Se agrega la imagen
-            header.addCell(cell); //Se agrega la celda al encabezado
 
             //Se crean fuentes para dar formato al contenido
             Font font = FontFactory.getFont(FontFactory.HELVETICA,16);
@@ -163,20 +151,25 @@ public class CorteCajaController {
 
             //Empieza el ciclo que por cada corte de caja registrado llenará los datos
             for(CorteCajaModel corte : cortes) {
+                header = new PdfPTable(2);
                 table = new PdfPTable(2);
                 footer = new PdfPTable(2);
 
+                header.setWidths(columnWidths);
                 table.setWidths(columnWidths);
                 footer.setWidths(columnWidths);
 
-                footer.setWidthPercentage(100); //Al pie de página se le agrega el ancho de la página
-                footer.setSpacingAfter(0);
-                footer.setSpacingBefore(0);
+                header.setWidthPercentage(100); //Al encabezado se le agrega el ancho de acuerdo al tamaño de la página
+                header.setSpacingAfter(10); //Se agrega el espacio que habrá de separación antes del elemento
 
                 //A la tabla de contenido se le agregan propiedades
                 table.setWidthPercentage(70); //Procentaje de ancho
                 table.setSpacingBefore(10); //Espacio antes del elemento
                 table.setSpacingAfter(10); //Espacio después del elemento
+
+                footer.setWidthPercentage(100); //Al pie de página se le agrega el ancho de la página
+                footer.setSpacingAfter(0);
+                footer.setSpacingBefore(0);
 
                 //Se instancía el documento
                 Document doc = new Document();
@@ -185,6 +178,14 @@ public class CorteCajaController {
 
                 //Se crea el documento con el nombre "Corte0 + 'id del corte'.pdf"
                 PdfWriter.getInstance(doc, new FileOutputStream("src\\main\\resources\\static\\pdf\\Corte0" + corte.getId() + ".pdf"));
+
+                cell = new PdfPCell(); //Se instancía la celda
+                cell.setBorder(0); //Se elimina el borde de la celda
+                cell.setPaddingLeft(10); //La separación entre el borde y el texto
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT); //Se alinea horizontalmente
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //Se alinea verticalmente
+                cell.addElement(img); //Se agrega la imagen
+                header.addCell(cell); //Se agrega la celda al encabezado
 
                 nombre = new Paragraph(20); //Se instancia la variable para el texto con separación entre renglones de 20
                 nombre.setAlignment(Element.ALIGN_RIGHT); //Se alinea el texto

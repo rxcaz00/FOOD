@@ -24,15 +24,11 @@
                             Fecha
                             <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                         </th>
-                        <th onclick="sortTableNumber(1)">
-                            Corte
-                            <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-                        </th>
-                        <th onclick="sortTableText(2)">
+                        <th onclick="sortTableText(1)">
                             Elaboró
                             <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                         </th>
-                        <th onclick="sortTableText(3)">
+                        <th onclick="sortTableText(2)">
                             Revisión
                             <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
                         </th>
@@ -42,7 +38,6 @@
                 <tbody>
                     <tr th:each="corteCaja : ${cortes}">
                     	<td th:text="${corteCaja.fecha}"></td>
-                        <td th:text="${corteCaja.corte}"></td>
                         <td th:text="${corteCaja.elaboro}"></td>
                         <td>
                             <img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}">
