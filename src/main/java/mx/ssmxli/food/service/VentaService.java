@@ -29,4 +29,5 @@ public interface VentaService {
 
     public abstract ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo, List<ContenidoPromocionModel> contenidosPromocion);
 
+    public abstract double getTotal(char metodo);
 }
