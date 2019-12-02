@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service("ventaServiceImpl")
@@ -186,5 +188,21 @@ public class VentaServiceImpl implements VentaService {
 
     public ContenidoPromocionModel convertContenidoPromocion2ContenidoPromocionModel(ContenidoPromocion contenidoPromocion){
         return ventaConverter.convertContenidoPromocion2ContenidoPromocionModel(contenidoPromocion);
+    }
+
+    public double getTotal(char metodo) {
+        List<Recibo> recibos = reciboRepository.findAll();
+        double total = 0;
+        for(Recibo recibo : recibos) {
+            try {
+                if (new SimpleDateFormat("dd-MM-yyyy").format(new Date())
+                        .equals(new SimpleDateFormat("dd-MM-yyyy").format(recibo.getFecha()))
+                        && recibo.getMetodoPago() == metodo)
+                    total += recibo.getTotal();
+            } catch (Exception e) {
+
+            }
+        }
+        return total;
     }
 }

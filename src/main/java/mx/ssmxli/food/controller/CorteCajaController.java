@@ -14,6 +14,7 @@ import mx.ssmxli.food.model.PdfModel;
 import mx.ssmxli.food.service.CorteCajaService;
 import mx.ssmxli.food.service.ConfiguracionService;
 import mx.ssmxli.food.service.GastoService;
+import mx.ssmxli.food.service.VentaService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,10 @@ public class CorteCajaController {
     @Qualifier("gastoServiceImpl")
     private GastoService gastoService;
 
+    @Autowired
+    @Qualifier("ventaServiceImpl")
+    private VentaService ventaService;
+
     private static final Log log = LogFactory.getLog(CorteCajaController.class);
 
     @GetMapping("/cancel")
@@ -74,6 +79,8 @@ public class CorteCajaController {
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         ConfiguracionModel configuracionModel = configuracionService.findLastConfiguracion();
         corteCajaModel.setDineroInicial(configuracionModel.getDineroInicial());
+        corteCajaModel.setEfectivo(ventaService.getTotal('E'));
+        corteCajaModel.setTarjeta(ventaService.getTotal('T'));
         corteCajaModel.setCompra(gastoService.getTotal('C'));
         corteCajaModel.setPago(gastoService.getTotal('P'));
         model.addAttribute("corteCajaModel",corteCajaModel);
@@ -160,12 +167,12 @@ public class CorteCajaController {
                 footer.setWidths(columnWidths);
 
                 header.setWidthPercentage(100); //Al encabezado se le agrega el ancho de acuerdo al tamaño de la página
-                header.setSpacingAfter(10); //Se agrega el espacio que habrá de separación antes del elemento
+                header.setSpacingAfter(0); //Se agrega el espacio que habrá de separación despues del elemento
 
                 //A la tabla de contenido se le agregan propiedades
                 table.setWidthPercentage(70); //Procentaje de ancho
-                table.setSpacingBefore(10); //Espacio antes del elemento
-                table.setSpacingAfter(10); //Espacio después del elemento
+                table.setSpacingBefore(5); //Espacio antes del elemento
+                table.setSpacingAfter(5); //Espacio después del elemento
 
                 footer.setWidthPercentage(100); //Al pie de página se le agrega el ancho de la página
                 footer.setSpacingAfter(0);

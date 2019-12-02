@@ -57,8 +57,9 @@ public class GastoServiceImpl implements GastoService {
         double total = 0;
         for(Gasto gasto : gastos) {
             try {
-                if (new SimpleDateFormat("dd-MM-yyyy").format(gasto.getFecha()) == new SimpleDateFormat("dd-MM-yyyy").format(new Date())
-                        && gasto.getTipo() == tipo)
+                if (new SimpleDateFormat("dd-MM-yyyy").format(new Date())
+                        .equals(new SimpleDateFormat("dd-MM-yyyy").format(gasto.getFecha()))
+                && gasto.getTipo() == tipo)
                     total += gasto.getMonto();
             } catch (Exception e) {
 
