@@ -18,7 +18,7 @@ import org.springframework.web.servlet.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//17
 @Controller
 @RequestMapping("/idManager")
 public class IdManagerController {
@@ -152,7 +152,7 @@ public class IdManagerController {
 
         return idManagerService.addNombre(nombreModel);
     }
-
+//61
     //TAMAÑOS
         //Consulta
     @GetMapping("/consultaTamanos")
@@ -218,3 +218,6 @@ public class IdManagerController {
         return "redirect:/idManager/" + ViewConstant.ID_SHOW_TAMANO;
     }
 }
+//26
+
+//104

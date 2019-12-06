@@ -127,7 +127,7 @@ public class IdManagerServiceImpl implements IdManagerService {
         TamanoSequence tamano = tamanoSequenceRepository.save(tamanoTemp);
         return convertTamano2TamanoModel(tamano);
     }
-
+//63
     //FindByValor
         //Entidades
     @Override
@@ -392,3 +392,6 @@ public class IdManagerServiceImpl implements IdManagerService {
     }
 
 }
+
+//79
+//

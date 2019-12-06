@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//17
 @Controller
 @RequestMapping("/alimentos")
 public class AlimentoController {
@@ -34,6 +34,7 @@ public class AlimentoController {
     private static final Log log = LogFactory.getLog(AlimentoController.class);
 
     @GetMapping("/cancel")
+    //11
     /**
      * Te redirecciona a la direccion que indica el String de retorno
      *
@@ -83,7 +84,7 @@ public class AlimentoController {
         else
             return ViewConstant.ALIMENTO_UPDATE;
     }
-
+//18
     @PostMapping("/addAlimento")
     /**
      * @param AlimentoModel (@ModelAttribute)
@@ -121,7 +122,7 @@ public class AlimentoController {
         mav.addObject("alimentos", alimentoService.listAllAlimentos());//Añadir todos los alimentos al modelo
         return mav;
     }
-
+//17
 
 
     /*
@@ -142,3 +143,4 @@ public class AlimentoController {
     }
     */
 }
+//52
