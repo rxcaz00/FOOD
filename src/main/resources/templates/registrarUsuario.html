@@ -47,11 +47,20 @@
                     }
                 }
             </script>
+
+            <script>
+                function myFunction() {
+                    if(confirm("¿Seguro que desea cancelar?")){
+                    return true;
+                    }
+                    else{return false;}
+                }
+            </script>
             <input class="green" name="action" value="Guardar" type="submit" onclick="validar">
 
         </form>
     <a th:href="@{/usuarios/cancel}">
-        <button class="red" type="submit">Cancelar Registro</button>
+        <button class="red" type="submit" onclick="myFunction()">Cancelar Registro</button>
     </a>
 </div>
 </body>
