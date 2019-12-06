@@ -38,7 +38,7 @@
             <!--<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">-->
             <br>
             Precio: $
-                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
+                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="1" step=".01" required>
             <br><br>
             Vigencia:
             <br>
@@ -84,7 +84,7 @@
                         }
 
 
-                        if (precio=0||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
+                        if (precio>0||precio!=""||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
                             alert("agregado exitosamente");
                             return true;
                         }

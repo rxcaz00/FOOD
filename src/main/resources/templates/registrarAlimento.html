@@ -56,7 +56,7 @@
 						</div>
 						<div class="right">
                                 <!--IGNORAR EL ERROR -->
-								Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
+								Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="1" step=".01" required>
 						</div>
 
 						<script>
@@ -66,7 +66,7 @@
 								precio = document.getElementById("precio").value;
 								categoria = document.getElementById("categoria").value;
 								tamaño = document.getElementById("tamaño").value;
-								if (precio.length!=0&&descripcion!=""&&categoria!=""&&tamaño!=""&&nombre!=""){
+								if (precio>0||precio.length!=0&&descripcion!=""&&categoria!=""&&tamaño!=""&&nombre!=""){
 									alert("agregado exitosamente");
 									return true;
 								}
