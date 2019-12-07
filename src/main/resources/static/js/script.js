@@ -250,7 +250,7 @@ function addNombre(){
 	/*}else{
 		redirectCategoria();
 	}*/
-
+//36
 }
 
 //Añade el Tamaño desde la pagina de registro de Alimento.
@@ -308,7 +308,8 @@ function fillSelects(){
 	cat = $('#selectCategoria').val();
 	location.assign("/alimentos/registrarAlimento?cat=" + cat);
 }*/
-
+//19
+//55
 function mostrar(id) {
 	var ids = id.split("-");
 	var idc = ids[0] + ids[1];

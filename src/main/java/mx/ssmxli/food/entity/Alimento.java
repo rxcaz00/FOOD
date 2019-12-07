@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+//12
 @Data
 @Entity
 @Table(name="alimento")
@@ -55,7 +55,7 @@ public class Alimento {
     @OneToMany(mappedBy = "alimento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<ContenidoRecibo> contenidosRecibo;//Las veces que se ha vendido el alimento
-
+//30
     /*public Alimento(int id, String nombre, String descripcion, String categoria, String tamano, double precio) {
         this.id = id;
         this.nombre = nombre;
@@ -79,5 +79,6 @@ public class Alimento {
 
     public Alimento(){}
 }
+//12
 
-
+//54

@@ -22,7 +22,7 @@
             <input id="descripcion" class="nombre" type="text" th:field="*{descripcion}" th:value="${descripcion}" required>
             <br>
             Monto:
-            <input  id="monto" class="precio" type="number" th:field="*{monto}" th:value="${monto}" min="0" step=".01" required>
+            <input  id="monto" class="precio" type="number" th:field="*{monto}" th:value="${monto}" min="1" step=".01" required>
             <br>
 			Tipo:
 				<select id ="tipo" th:field="*{tipo}" required>
@@ -36,9 +36,14 @@
 						descripcion = document.getElementById("descripcion").value;
 						monto = document.getElementById("monto").value;
 						tipo = document.getElementById("tipo").value;
-						if (monto.length!=0&&descripcion!=""&&tipo!=""){
+
+						if (monto>0||monto!=""&&descripcion!=""&&tipo!=""){
 							alert("agregado exitosamente");
 							return true;
+						}
+						else{
+							alert("datos incorrectos");
+							return false;
 						}
 					}
 				</script>

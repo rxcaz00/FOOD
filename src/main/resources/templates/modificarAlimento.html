@@ -42,7 +42,7 @@
             </div>
             <div class="right">
                 <!--IGNORAR EL ERROR -->
-                Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="0.0" step=".01">
+                Precio: $<input id="precio" class="precio" type="number" th:value="${precio}" th:field="*{precio}" min="1" step=".01" required>
                 <br><br>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
             </div>
@@ -53,10 +53,15 @@
                     precio = document.getElementById("precio").value;
                     categoria = document.getElementById("categoria").value;
                     tamaño = document.getElementById("tamaño").value;
-                    if (precio.length!=0||descripcion!=""||categoria!=""||tamaño!=""||nombre!=""){
+                    if (precio>0||precio!=""|| descripcion!=""||categoria!=""||tamaño!=""||nombre!=""){
                         alert("agregado exitosamente");
                         return true;
                     }
+                    else{
+                        alert("datos incorrectos");
+                        return false;
+                    }
+
                 }
             </script>
 
@@ -70,3 +75,4 @@
 
 </body>
 </html>
+//61

@@ -67,3 +67,5 @@ public interface IdManagerService {
 
     public abstract TamanoSequence convertTamanoModel2Tamano(TamanoSequenceModel tamanoSequenceModel);
 }
+
+//34

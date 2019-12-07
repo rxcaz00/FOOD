@@ -38,7 +38,7 @@
             <!--<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">-->
             <br>
             Precio: $
-                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
+                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="1" step=".01" required>
             <br><br>
             Vigencia:
             <br>
@@ -49,32 +49,46 @@
             <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" >
             <br><br>
             Disponibilidad:
-            <br>
-            <input type="checkbox" th:field="*{dias[0]}">Lunes<br>
-            <input type="checkbox" th:field="*{dias[1]}">Martes<br>
-            <input type="checkbox" th:field="*{dias[2]}">Miércoles<br>
-            <input type="checkbox" th:field="*{dias[3]}">Jueves<br>
-            <input type="checkbox" th:field="*{dias[4]}">Viernes<br>
-            <input type="checkbox" th:field="*{dias[5]}">Sábado<br>
-            <input type="checkbox" th:field="*{dias[6]}">Domingo<br>
+            <br >
+            <input id="cb1" type="checkbox" th:field="*{dias[0]}">Lunes<br>
+            <input id="cb2" type="checkbox" th:field="*{dias[1]}">Martes<br>
+            <input id="cb3" type="checkbox" th:field="*{dias[2]}">Miércoles<br>
+            <input id="cb4" type="checkbox" th:field="*{dias[3]}">Jueves<br>
+            <input id="cb5" type="checkbox" th:field="*{dias[4]}">Viernes<br>
+            <input id="cb6" type="checkbox" th:field="*{dias[5]}">Sábado<br>
+            <input id="cb7" type="checkbox" th:field="*{dias[6]}">Domingo<br>
 
                 <script>
                     function validar() {
-                        var nombre, precio,fechaI,fechaF, alimento;
+                        var nombre, precio,fechaI,fechaF, alimento, c1,c2,c3,c4,c5,c6,c7;
                         nombre = document.getElementById("nombre").value;
                         precio = document.getElementById("precio").value;
                         alimento = document.getElementById("alimento").value;
                         fechaI = document.getElementById("fi").value;
                         fechaF = document.getElementById("ff").value;
+                        c1 = document.getElementById("cb1").checked;
+                        c2 = document.getElementById("cb2").checked;
+                        c3 = document.getElementById("cb3").checked;
+                        c4 = document.getElementById("cb4").checked;
+                        c5 = document.getElementById("cb5").checked;
+                        c6 = document.getElementById("cb6").checked;
+                        c7 = document.getElementById("cb7").checked;
 
+                        if(c1==false&&c2==false&&c3==false&&c4==false&&c5==false&&c6==false&&c7==false){
+                            alert("seleccione disponibilidad");
+                            return false;
+                        }
                         if(fechaI>fechaF){
                             alert("fecha inicial debe ser menor a la fecha final")
                             return false;
                         }
-                        if (precio.length!=0||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""){
+
+
+                        if (precio>0||precio!=""||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
                             alert("agregado exitosamente");
                             return true;
                         }
+
 
                     }
                 </script>
