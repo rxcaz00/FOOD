@@ -176,7 +176,7 @@
     }
 </script>
 <!--CLIENTES. Busqueda y Registro-->
-<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()" th:fragment="cliente">
+<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar(this.value)" th:fragment="cliente">
     Número de teléfono:
     <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" max="9999999999">
     <!--name="action" value="buscar"-->
@@ -197,7 +197,8 @@
     </script>
     <div class="registrar">
         <b>¿Cliente nuevo?</b>
-        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar()">¡Registralo!</button>
+        <!-- Agregue lo de validar (this.value)-->
+        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar(this.value)">¡Registralo!</button>
     </div><br>
     Nombre del cliente:
     <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
@@ -209,10 +210,36 @@
     Puntos:
     <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
     RFC:
-    <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
+    <!-- Agregue lo de validar (this.value)-->
+    <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="13" onblur="validar(this.value)"><br>
 
+    <script language="JavaScript">
 
-  <!-- <script>
+        function validar(rfcStr) {
+            var strCorrecta;
+            strCorrecta = rfcStr;
+            if (rfcStr.length == 12){
+                var valid = '^(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+            }else{
+                var valid = '^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+            }
+            var validRfc=new RegExp(valid);
+            var matchArray=strCorrecta.match(validRfc);
+            if (matchArray==null) {
+                alert('Cadena incorrectas');
+
+                return false;
+            }
+            else
+            {
+                alert('Cadena correcta:' + strCorrecta);
+                return true;
+            }
+
+        }
+
+    </script>
+  <!--<script>
         function validar() {
             var telefono, nombre, apellido, dir,  rfc, rfcConv;
             telefono = document.getElementById("telefono").value;
@@ -228,23 +255,23 @@
             if (isDigit(rfcChar)||isDigit(rfcChar1)||isDigit(rfcChar2)){
                 alert("los primero 3 caracteres deben ser letras")
                return false;
-            }-->
-            <!--if(rfc!=rfcConv){
+            }
+            if(rfc!=rfcConv){
                 alert("RFC debe ser en mayusculas")
                 return false;
-            }-->
+            }
 
-            <!--if(rfc.length>13 || rfc.length<12){
+            if(rfc.length>13 || rfc.length<12){
                 alert("RFC debe contener de 12 a 13 caracteres")
                 return false;
-            }-->
+            }
 
-            <!--if (telefono!=""||nombre!=""||apellido!=""||dir!=""||rfc.length>=12 && rfc.length<=13){
+            if (telefono!=""||nombre!=""||apellido!=""||dir!=""||rfc.length>=12 && rfc.length<=13){
                 alert("agregado exitosamente" );
                 return true;
-            }-->
+            }
         }
-    <!--</script> -->
+    </script>-->
 
 </form>
 </body>

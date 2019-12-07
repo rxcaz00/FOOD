@@ -24,9 +24,10 @@
             <div th:replace="fragments.html :: rol"></div>
             <hr size=4 color="#CCCCCC">
             <div id="clienteLoad">
-                <form th:replace="fragments.html :: cliente"></form>
+                <!-- Agregue lo de validar (this.value)-->
+                <form th:replace="fragments.html :: cliente" onsubmit="return validar(this.value)"></form>
             </div>
-           <!--  <script>
+             <!--<script>
                 function validar() {
                     var telefono, nombre, apellido, dir, rfc, rfcConv;
                     telefono = document.getElementById("telefono").value;
