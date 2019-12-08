@@ -21,7 +21,7 @@
 	<b class="titulo">Modificar Cliente</b>
 	<div th:replace="fragments.html :: rol"></div>
 	<hr size=4 color="#CCCCCC">
-	<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()">
+	<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar">
 		<input type="hidden" th:field="*{telefono}">
 		Nombre del cliente:
 		<input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
@@ -35,8 +35,10 @@
 		<input id="correo" type="text" class="dir" th:field="*{correo}" th:value="${correo}" placeholder="usuario@dominio"><br>
 		<br><br>
 		RFC:
-		<input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="15"><br>
+		<input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="13" pattern='[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}'><br>
 		<br><br>
+
+
 		<!--<script>
 			function validar() {
 				var telefono, nombre, apellido, dir, correo, rfc, rfcConv;

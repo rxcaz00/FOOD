@@ -176,7 +176,7 @@
     }
 </script>
 <!--CLIENTES. Busqueda y Registro-->
-<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar(this.value)" th:fragment="cliente">
+<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()" th:fragment="cliente">
     Número de teléfono:
     <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" max="9999999999">
     <!--name="action" value="buscar"-->
@@ -198,7 +198,7 @@
     <div class="registrar">
         <b>¿Cliente nuevo?</b>
         <!-- Agregue lo de validar (this.value)-->
-        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick="validar(this.value)">¡Registralo!</button>
+        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick=validar()>¡Registralo!</button>
     </div><br>
     Nombre del cliente:
     <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
@@ -211,9 +211,31 @@
     <input type="number" th:field="*{puntos}" th:value="${puntos}" readonly>
     RFC:
     <!-- Agregue lo de validar (this.value)-->
-    <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="13" onblur="validar(this.value)"><br>
+    <input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="13" pattern='[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}'><br>
 
-    <script language="JavaScript">
+    <script>
+        function validar() {
+            var nombre;
+            var apellidos;
+            var direccion;
+            var correo;
+            var RFC;
+
+            nombre = document.getElementById("nombre").value;
+            apellidos = document.getElementById("apellidos").value;
+            direccion = document.getElementById("direccion").value;
+            correo = document.getElementById("correo").value;
+            RFC = document.getElementById("RFC").value;
+
+
+            if (nombre!=""||apellidos!=""||direccion!=""||correo!=""||RFC!=""){
+                alert("agregado exitosamente");
+                return true;
+            }
+
+        }
+    </script>
+    <!--<script language="JavaScript">
 
         function validar(rfcStr) {
             var strCorrecta;
@@ -227,18 +249,17 @@
             var matchArray=strCorrecta.match(validRfc);
             if (matchArray==null) {
                 alert('Cadena incorrectas');
-
                 return false;
             }
             else
             {
-                alert('Cadena correcta:' + strCorrecta);
+                alert("El cliente se registro exitosamente");
                 return true;
             }
 
         }
 
-    </script>
+    </script> -->
   <!--<script>
         function validar() {
             var telefono, nombre, apellido, dir,  rfc, rfcConv;
