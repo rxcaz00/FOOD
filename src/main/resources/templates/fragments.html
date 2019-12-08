@@ -219,7 +219,7 @@
             var strCorrecta;
             strCorrecta = rfcStr;
             if (rfcStr.length == 12){
-                var valid = '^(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
+                var valid = '[A-Za-z]{3}[0-9]{6}[A-Za-z0-9]{3}';
             }else{
                 var valid = '^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))';
             }
