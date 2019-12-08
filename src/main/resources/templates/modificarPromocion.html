@@ -21,7 +21,7 @@
     <b class="titulo">Modificar Promoción</b>
     <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
-    <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit="return validar()">
+    <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" >
         <input type="hidden" th:field="*{id}">
         Nombre de la promoción:
         <input id="nombre" type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
@@ -76,17 +76,17 @@
                 c7 = document.getElementById("cb7").checked;
 
                 if(c1==false&&c2==false&&c3==false&&c4==false&&c5==false&&c6==false&&c7==false){
-                    alert("seleccione disponibilidad");
+                    alert("Seleccione disponibilidad");
                     return false;
                 }
                 if(fechaI>fechaF){
-                    alert("fecha inicial debe ser menor a la fecha final")
+                    alert("Fecha inicial debe ser menor a la fecha final")
                     return false;
                 }
 
 
                 if (precio>0||precio!=""||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
-                    alert("agregado exitosamente");
+                    alert("Modificado exitosamente");
                     return true;
                 }
 

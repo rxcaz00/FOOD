@@ -19,7 +19,7 @@
     <b class="titulo">Registro de Usuario</b>
     <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
-        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post" onsubmit="return validar()">
+        <form action="#" th:action="@{/usuarios/addUsuario}" th:object="${usuarioModel}" method="post" >
             Nombre del usuario:
             <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
             <input id="apellidos" type="text" class="app" th:field="*{apellidos}" th:value="${apellidos}" placeholder="Apellido(s)" required><br>
@@ -42,7 +42,7 @@
                     password = document.getElementById("password").value;
                     nivel = document.getElementById("nivel").value;
                     if (nombre!=""||apellidos!=""||usuario!=""||password!=""||nivel!=""){
-                        alert("agregado exitosamente");
+                        alert("Agregado exitosamente");
                         return true;
                     }
                 }

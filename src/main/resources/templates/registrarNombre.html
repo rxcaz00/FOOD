@@ -23,7 +23,7 @@
         <div th:replace="fragments.html :: rol"></div>
         <hr size=4 color="#CCCCCC">
         <div class="jumbotron">
-            <form action="#" th:action="@{/idManager/addNombre}" th:object="${nombreModel}" method="post" onsubmit="return validar()">
+            <form action="#" th:action="@{/idManager/addNombre}" th:object="${nombreModel}" method="post" >
                 <input type="hidden" th:field="*{valor}">
                 <!--Quite esta parte por problemas a la hora de mostrarlos por la categoria seleccionada
                 Categoria:
@@ -36,14 +36,14 @@
                 <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}" required/>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
                 <br>
-                <input class="green" type="submit" value="Guardar">
+                <input class="green" type="submit" value="Guardar"  onclick="validar">
                 <script>
                     function validar() {
                         var nombre;
                         nombre = document.getElementById("nombre").value;
 
                         if (nombre!=""){
-                            alert("agregado exitosamente");
+                            alert("Agregado exitosamente");
                             return true;
                         }
                     }

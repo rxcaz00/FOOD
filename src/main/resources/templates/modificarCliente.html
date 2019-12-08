@@ -21,7 +21,7 @@
 	<b class="titulo">Modificar Cliente</b>
 	<div th:replace="fragments.html :: rol"></div>
 	<hr size=4 color="#CCCCCC">
-	<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar">
+	<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post">
 		<input type="hidden" th:field="*{telefono}">
 		Nombre del cliente:
 		<input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>
@@ -38,6 +38,32 @@
 		<input id="rfc" type="text" th:field="*{RFC}" th:value="${RFC}" placeholder="XXXX000000" maxlength="13" pattern='[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}'><br>
 		<br><br>
 
+		<script>
+			function validar() {
+				var nombre;
+				var apellidos;
+				var direccion;
+				var correo;
+				var RFC;
+
+				nombre = document.getElementById("nombre").value;
+				apellidos = document.getElementById("apellido").value;
+				direccion = document.getElementById("dir").value;
+				correo = document.getElementById("correo").value;
+				RFC = document.getElementById("rfc").value;
+
+
+				if (nombre!=""&&apellidos!=""&&direccion!=""){
+					alert("Modificado exitosamente");
+					return true;
+				}
+				else{
+					alert("Datos incorrectos");
+					return false;
+				}
+
+			}
+		</script>
 
 		<!--<script>
 			function validar() {

@@ -21,7 +21,7 @@
 			<div th:replace="fragments.html :: rol"></div>
             <hr size=4 color="#CCCCCC">
 				<div class="jumbotron">
-					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST" onsubmit="return validar()">
+					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST" >
 						Categoria:
 						<select id="selectCategoria" th:field="*{categoria_Valor}" required>
 							<option th:each="categoria : ${categorias}" th:value="${categoria.valor}"
@@ -67,14 +67,14 @@
 								categoria = document.getElementById("categoria").value;
 								tamaño = document.getElementById("tamaño").value;
 								if (precio>0||precio.length!=0&&descripcion!=""&&categoria!=""&&tamaño!=""&&nombre!=""){
-									alert("agregado exitosamente");
+									alert("Agregado exitosamente");
 									return true;
 								}
 
 							}
 						</script>
 
-						<input class="green" type="submit" value="Registrar" onclick="validar">
+						<input class="green" type="submit" value="Registrar" onclick="validar()">
 					</form>
 					<a th:href="@{/alimentos/cancel}">
 						<button class="red" type="submit">Cancelar Registro</button>

@@ -176,7 +176,7 @@
     }
 </script>
 <!--CLIENTES. Busqueda y Registro-->
-<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" onsubmit="return validar()" th:fragment="cliente">
+<form action="#" th:action="@{/venta/addCliente}" th:object="${clienteModel}" method="post" th:fragment="cliente">
     Número de teléfono:
     <input id="telefono" type="number" size="20" th:field="*{telefono}" th:value="${telefono}" placeholder="1112223344" max="9999999999">
     <!--name="action" value="buscar"-->
@@ -222,15 +222,19 @@
             var RFC;
 
             nombre = document.getElementById("nombre").value;
-            apellidos = document.getElementById("apellidos").value;
-            direccion = document.getElementById("direccion").value;
+            apellidos = document.getElementById("apellido").value;
+            direccion = document.getElementById("dir").value;
             correo = document.getElementById("correo").value;
-            RFC = document.getElementById("RFC").value;
+            RFC = document.getElementById("rfc").value;
 
 
-            if (nombre!=""||apellidos!=""||direccion!=""||correo!=""||RFC!=""){
-                alert("agregado exitosamente");
+            if (nombre!=""&&apellidos!=""&&direccion!=""){
+                alert("Agregado exitosamente");
                 return true;
+            }
+            else{
+                alert("Datos incorrectos");
+                return false;
             }
 
         }

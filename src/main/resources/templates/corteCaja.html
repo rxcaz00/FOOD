@@ -14,7 +14,7 @@
         <b class="titulo">Generar Corte de Caja</b>
         <div th:replace="fragments.html :: rol"></div>
         <hr size=4 color="#CCCCCC">
-        <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post" onsubmit="return validar()">
+        <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post" >
             <input type="hidden" th:field="*{id}">
         Introduzca los campos marcados en color verde para gerenar el corte de caja:
         <br><br>
@@ -52,7 +52,7 @@
                     dineroInicial = document.getElementById("dineroInicial").value;
                     corte = document.getElementById("corte").value;
                     if (dineroInicial.length!=0&&corte.lenght!=0){
-                        alert("agregado exitosamente");
+                        alert("Agregado exitosamente");
                         return true;
                     }
                 }

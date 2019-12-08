@@ -13,7 +13,7 @@
         <div class="container">
         	<b class="titulo">Registro de Gastos</b>
 			<div th:replace="fragments.html :: rol"></div>
-			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post" onsubmit="return validar()">
+			<form action="#" th:action="@{/gasto/addgasto}" th:object="${gastoModel}" method="post" >
             <hr size=4 color="#CCCCCC">
 				<input type="hidden" th:field="*{id}">
             Ingrese los siguientes datos de los gastos
@@ -38,11 +38,11 @@
 						tipo = document.getElementById("tipo").value;
 
 						if (monto>0||monto!=""&&descripcion!=""&&tipo!=""){
-							alert("agregado exitosamente");
+							alert("Agregado exitosamente");
 							return true;
 						}
 						else{
-							alert("datos incorrectos");
+							alert("Datos incorrectos");
 							return false;
 						}
 					}

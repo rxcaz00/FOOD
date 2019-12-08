@@ -54,18 +54,18 @@
                     categoria = document.getElementById("categoria").value;
                     tamaño = document.getElementById("tamaño").value;
                     if (precio>0||precio!=""|| descripcion!=""||categoria!=""||tamaño!=""||nombre!=""){
-                        alert("agregado exitosamente");
+                        alert("Modificado exitosamente");
                         return true;
                     }
                     else{
-                        alert("datos incorrectos");
+                        alert("Datos incorrectos");
                         return false;
                     }
 
                 }
             </script>
 
-            <input class="green" type="submit" value="Guardar Cambios" onclick="validar">
+            <input class="green" type="submit" value="Guardar Cambios" onclick="validar()">
         </form>
         <a th:href="@{/alimentos/cancel}">
             <button class="red" type="submit">Cancelar Modificación</button>
