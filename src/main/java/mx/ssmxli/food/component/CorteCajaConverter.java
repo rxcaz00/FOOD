@@ -3,6 +3,7 @@ package mx.ssmxli.food.component;
 import mx.ssmxli.food.entity.CorteCaja;
 import mx.ssmxli.food.entity.Usuario;
 import mx.ssmxli.food.model.CorteCajaModel;
+import mx.ssmxli.food.service.CorteCajaService;
 import mx.ssmxli.food.service.SecurityService;
 import mx.ssmxli.food.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class CorteCajaConverter {
     @Qualifier("usuarioServiceImpl")
     UsuarioService usuarioService;
 
+    @Autowired
+    @Qualifier("corteCajaServiceImpl")
+    CorteCajaService corteCajaService;
+
     /**
      *
      * @param corteCajaModel
@@ -36,7 +41,6 @@ public class CorteCajaConverter {
     public CorteCaja convertCorteCajaModel2CorteCaja(CorteCajaModel corteCajaModel)throws Exception {
         CorteCaja corteCaja = new CorteCaja();
         corteCaja.setId(corteCajaModel.getId());
-        corteCaja.setFecha(new Date());
         corteCaja.setDineroInicial(corteCajaModel.getDineroInicial());
         corteCaja.setCorte(corteCajaModel.getCorte());
         corteCaja.setEfectivo(corteCajaModel.getEfectivo());
@@ -46,14 +50,28 @@ public class CorteCajaConverter {
         corteCaja.setCompra(corteCajaModel.getCompra());
 
         String currentUser;
-        currentUser = securityService.findLoggedInUsername();
-        corteCaja.setElaboro(usuarioService.findUsuarioByUsuario(currentUser));
+
+        if(corteCajaModel.getElaboro() == null) {
+            currentUser = securityService.findLoggedInUsername();
+            corteCaja.setElaboro(usuarioService.findUsuarioByUsuario(currentUser));
+
+            corteCaja.setFecha(new Date());
+        } else {
+            corteCaja.setElaboro(
+                    corteCajaService.findCorteCajaById(
+                            corteCaja.getId()).getElaboro());
+
+            corteCaja.setFecha(
+                    new SimpleDateFormat("dd/MM/yyyy")
+                            .parse(corteCajaModel.getFecha()));
+        }
 
         currentUser = securityService.findLoggedGerenteInUsername();
         if(!currentUser.equals("no se encontro"))
             corteCaja.setReviso(usuarioService.findUsuarioByUsuario(currentUser));
         else
             corteCaja.setReviso(null);
+
         return corteCaja;
     }
 
@@ -70,7 +88,7 @@ public class CorteCajaConverter {
         CorteCajaModel corteCajaModel = new CorteCajaModel();
         corteCajaModel.setId(corteCaja.getId());
         corteCajaModel.setFecha(
-                new SimpleDateFormat("yyyy-MM-dd")
+                new SimpleDateFormat("dd/MM/yyyy")
                         .format(corteCaja.getFecha()));
         corteCajaModel.setDineroInicial(corteCaja.getDineroInicial());
         corteCajaModel.setCorte(corteCaja.getCorte());

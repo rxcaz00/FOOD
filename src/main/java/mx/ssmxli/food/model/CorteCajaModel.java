@@ -1,7 +1,6 @@
 package mx.ssmxli.food.model;
 
 import lombok.Data;
-import mx.ssmxli.food.entity.Usuario;
 
 @Data
 public class CorteCajaModel {

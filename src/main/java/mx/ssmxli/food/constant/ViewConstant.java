@@ -35,6 +35,8 @@ public class ViewConstant {
     //Corte de Caja
     public static final String CORTE_CAJA = "corteCaja";
     public static final String CORTE_CAJA_HISTORIAL = "corteCajaHistorial";
+    public static final String CONSULTA_CORTE = "consultaCorteCaja";
+    public static final String EDITAR_CORTE = "editarCorteCaja";
 
     //Registro de Gastos
     public static final String GASTO_FORM = "gastos";

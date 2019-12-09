@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>FOOD - Modificar Corte de Caja</title>
+    <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+</head>
+<body>
+<nav th:replace="fragments.html :: nav"></nav>
+
+<div class="container">
+    <b class="titulo">Modificar Corte de Caja</b>
+    <div th:replace="fragments.html :: rol"></div>
+    <hr size=4 color="#CCCCCC">
+    <form action="#" th:action="@{/corteCaja/addcorteCaja}" th:object="${corteCajaModel}" method="post">
+        <input type="hidden" th:field="*{id}" th:value="${id}">
+        <input type="hidden" th:field="*{elaboro}" th:value="${elaboro}">
+        <input type="hidden" th:field="*{fecha}" th:value="${fecha}">
+        Introduzca los campos marcados en color verde par modificar el corte de caja:
+        <br><br>
+        <div class="left">
+            <table>
+                <tr>
+                    <td>Dinero Inicial:</td>
+                    <td>$<input class="solicitar" type="number" th:field="*{dineroInicial}" th:value="${dineroInicial}" min="0" step=".01" required></td>
+                </tr>
+                <tr>
+                    <td>Dinero Final:</td>
+                    <td>$<input class="solicitar" type="number"  th:field="*{corte}" th:value="${corte}" min="0" step=".01"  required></td>
+                </tr>
+                <tr>
+                    <td>Efectivo:</td>
+                    <td>$<input class="precio" type="number" readonly th:field="*{efectivo}" th:value="${efectivo}" step=".01"></td>
+                </tr>
+                <tr>
+                    <td>Tarjeta:</td>
+                    <td>$<input class="precio" type="number" readonly th:field="*{tarjeta}" th:value="${tarjeta}" step=".01"></td>
+                </tr>
+                <tr>
+                    <td>Pagos:</td>
+                    <td>$<input class="precio" type="number" readonly th:field="*{pago}" th:value="${pago}" step=".01"></td>
+                </tr>
+                <tr>
+                    <td>Compras:</td>
+                    <td>$<input class="precio" type="number" readonly th:field="*{compra}" th:value="${compra}" step=".01"></td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            function validar() {
+                var dineroInicial, corte;
+                dineroInicial = document.getElementById("dineroInicial").value;
+                corte = document.getElementById("corte").value;
+                if (dineroInicial.length!=0&&corte.lenght!=0){
+                    alert("agregado exitosamente");
+                    return true;
+                }
+            }
+        </script>
+        <button class="green" name="action" value="guardar" type="submit" onclick="validar()">Guardar</button>
+    </form>
+</div>
+</body>
+</html>

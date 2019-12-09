@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <title>FOOD - Historial de Corte de Caja</title>
@@ -39,18 +39,27 @@
                     <tr th:each="corteCaja : ${cortes}">
                     	<td th:text="${corteCaja.fecha}"></td>
                         <td th:text="${corteCaja.elaboro}"></td>
-                        <td>
+                        <td th:if="${corteCaja.reviso == 'Revisar'}">
                             <img class="cross" src="/imgs/exclamation-mark.png" th:src="@{/imgs/exclamation-mark.png}">
                             <span class="important" th:text="${corteCaja.reviso}"></span>
                         </td>
-                        <td><img th:id="'v-' + ${corteCaja.id}" class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}" onclick="mostrar(this.id)"></td>
+                        <td th:if="${corteCaja.reviso != 'Revisar'}">
+                            <span th:text="${corteCaja.reviso}"></span>
+                        </td>
+                        <td>
+                            <a href="#" th:href="@{/corteCaja/actual?id=__${corteCaja.id}__}" th:if="${corteCaja.reviso == 'Revisar'}">
+                                <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+                            </a>
+                            <a href="#" th:href="@{/corteCaja/aceptarCorte?id=__${corteCaja.id}__}" th:if="${corteCaja.reviso == 'Revisar'}" sec:authorize="hasAuthority('GERENTE')">
+                                <img class="cross" src="/imgs/accept-button.png" th:src="@{/imgs/accept-button.png}">
+                            </a>
+                            <a href="#" th:href="@{/corteCaja/consultaCorteCaja?id=__${corteCaja.id}__}">
+                                <img class="cross" src="/imgs/view.png" th:src="@{/imgs/view.png}">
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-    </div>
-    <div class="viewer" th:each="pdf : ${pdfs}" th:id="'v' + ${pdf.id}">
-        <button th:id="'v*' + ${pdf.id}" onclick="ocultar(this.id)" class="viewer-button">X</button>
-        <embed th:src="@{${pdf.ruta}}" type="application/pdf">
     </div>
 </body>
 </html>

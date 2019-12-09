@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>FOOD - Corte Caja</title>
+    <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="../static/css/cortecaja.css" th:href="@{/css/cortecaja.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+</head>
+<body>
+    <div class="cc-container" th:each="corteCaja : ${corte}">
+        <img class="cc-logo" src="/imgs/logo.jpg" th:src="@{/imgs/logo.jpg}">
+        <div class="cc-header">
+            <div class="cc-titulo">
+                <b>Corte Caja #<span th:text="${corteCaja.id}"></span></b>
+            </div>
+            <br><br>
+            <b>Fecha:</b> <span th:text="${corteCaja.fecha}"></span>
+        </div>
+        <div class="cc-options">
+            <img class="cc-cat" onclick="window.print()" src="/imgs/printer.png" th:src="@{/imgs/printer.png}">
+        </div>
+        <div class="cc-data">
+        <table>
+            <tr>
+                <td><b>Dinero Inicial:</b></td>
+                <td>$<span th:text="${corteCaja.dineroInicial}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Dinero Final:</b></td>
+                <td>$<span th:text="${corteCaja.corte}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Efectivo:</b></td>
+                <td>$<span th:text="${corteCaja.efectivo}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Tarjeta:</b></td>
+                <td>$<span th:text="${corteCaja.tarjeta}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Pagos:</b></td>
+                <td>$<span th:text="${corteCaja.pago}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Compras:</b></td>
+                <td>$<span th:text="${corteCaja.compra}"></span></td>
+            </tr>
+            <tr>
+                <td><b>Diferencia:</b></td>
+                <td>$<span th:text="${corteCaja.diferencia}"></span></td>
+            </tr>
+        </table>
+        </div>
+        <div class="cc-footer">
+            <b>Elaborado por:</b> <span th:text="${corteCaja.elaboro}"></span>
+            <br>
+            <span th:if="${corteCaja.reviso != 'Revisar'}">
+                <b>Revisado por:</b> <span th:text="${corteCaja.reviso}"></span>
+            </span>
+        </div>
+        <div class="cc-options" th:if="${corteCaja.reviso == 'Revisar'}">
+            <a href="#" th:href="@{/corteCaja/actual?id=__${corteCaja.id}__}">
+                <img class="cc-cat" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+            </a>
+            <a href="#" th:href="@{/corteCaja/aceptarCorte?id=__${corteCaja.id}__}" sec:authorize="hasAuthority('GERENTE')">
+                <img class="cc-cat" src="/imgs/accept-button.png" th:src="@{/imgs/accept-button.png}">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

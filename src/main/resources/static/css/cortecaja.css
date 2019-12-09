@@ -1,0 +1,32 @@
+.cc-container {
+    font-size: 15px;
+}
+
+.cc-logo {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.cc-titulo {
+    float: left;
+    font-size: 30px;
+}
+
+.cc-header, .cc-footer {
+    font-size: 20px;
+}
+
+.cc-data, .cc-footer {
+    margin-bottom: 20px;
+}
+
+.cc-options {
+    text-align: center;
+}
+
+.cc-cat {
+    width: 30px;
+    height: 30px;
+}
