@@ -1,105 +1,101 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8">
-		<title>FOOD - Registro de Promociones</title>
-		<link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
+<head>
+    <meta charset="utf-8">
+    <title>FOOD - Registro de Promociones</title>
+    <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="../static/imgs/icono-2.ico" th:href="@{/imgs/icono-2.ico}" rel="shortcut icon">
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--Este JS utiliza funciones de JQuery, por lo que se debe de importar despues de este-->
-        <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--Este JS utiliza funciones de JQuery, por lo que se debe de importar despues de este-->
+    <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
 
-	</head>
-	<body>
-    <nav th:replace="fragments.html :: nav"></nav>
+</head>
+<body>
+<nav th:replace="fragments.html :: nav"></nav>
 
-        <div class="container">
-        	<b class="titulo">Registro de Promoción</b>
-            <div th:replace="fragments.html :: rol"></div>
-            <hr size=4 color="#CCCCCC">
-            <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" >
-                <input type="hidden" th:field="*{id}">
-            Nombre de la promoción:
-                <input id="nombre" type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
-            <hr size=4 color="#CCCCCC">
-            <div id="contenidoPromocionLoad">
-                <aside th:replace="fragments.html :: contenidoPromocion"></aside>
-            </div>
-            Alimentos:
-                <br>
-                <select id="selectAlimento">
-                    <option id="alimento" th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${ alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}">
-                </select>
-                <button id="addAlimento" class="agregar" type="button" onClick="addAlimentoPromocion()">Agregar alimento</button>
+<div class="container">
+    <b class="titulo">Registro de Promoción</b>
+    <div th:replace="fragments.html :: rol"></div>
+    <hr size=4 color="#CCCCCC">
+    <form action="#" th:action="@{/promociones/addpromocion}" th:object="${promocionModel}" method="post" onsubmit="return validar()">
+        <input type="hidden" th:field="*{id}">
+        Nombre de la promoción:
+        <input id="nombre" type="text" size="70" th:field="*{nombre}" th:value="${nombre}" required>
+        <hr size=4 color="#CCCCCC">
+        <div id="contenidoPromocionLoad">
+            <aside th:replace="fragments.html :: contenidoPromocion"></aside>
+        </div>
+        Alimentos:
+        <br>
+        <select id="selectAlimento">
+            <option id="alimento" th:each="alimento : ${alimentoModels}" th:value="${alimento.id}" th:text="${ alimento.categoria + ' ' + alimento.nombre + ' ' + alimento.tamano}">
+        </select>
+        <button id="addAlimento" class="agregar" type="button" onClick="addAlimentoPromocion()">Agregar alimento</button>
 
-            <!--<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">-->
-            <br>
-            Precio: $
-                <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="1" step=".01" required>
-            <br><br>
-            Vigencia:
-            <br>
-            Fecha Inicio:
-            <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
-            <br>
-            Fecha Fin:
-            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
-            <br><br>
-            Disponibilidad:
-            <br >
-            <input id="cb1" type="checkbox" th:field="*{dias[0]}">Lunes<br>
-            <input id="cb2" type="checkbox" th:field="*{dias[1]}">Martes<br>
-            <input id="cb3" type="checkbox" th:field="*{dias[2]}">Miércoles<br>
-            <input id="cb4" type="checkbox" th:field="*{dias[3]}">Jueves<br>
-            <input id="cb5" type="checkbox" th:field="*{dias[4]}">Viernes<br>
-            <input id="cb6" type="checkbox" th:field="*{dias[5]}">Sábado<br>
-            <input id="cb7" type="checkbox" th:field="*{dias[6]}">Domingo<br>
+        <!--<img class="cross" src="/imgs/plus.png" th:src="@{/imgs/plus.png}">-->
+        <br>
+        Precio: $
+        <input id="precio" class="precio" type="number"th:field="*{precio}" th:value="${precio}" min="0" step=".01" required>
+        <br><br>
+        Vigencia:
+        <br>
+        Fecha Inicio:
+        <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
+        <br>
+        Fecha Fin:
+        <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" >
+        <br><br>
+        Disponibilidad:
+        <br >
+        <input id="cb1" type="checkbox" th:field="*{dias[0]}">Lunes<br>
+        <input id="cb2" type="checkbox" th:field="*{dias[1]}">Martes<br>
+        <input id="cb3" type="checkbox" th:field="*{dias[2]}">Miércoles<br>
+        <input id="cb4" type="checkbox" th:field="*{dias[3]}">Jueves<br>
+        <input id="cb5" type="checkbox" th:field="*{dias[4]}">Viernes<br>
+        <input id="cb6" type="checkbox" th:field="*{dias[5]}">Sábado<br>
+        <input id="cb7" type="checkbox" th:field="*{dias[6]}">Domingo<br>
 
-                <script>
-                    function validar() {
-                        var nombre, precio,fechaI,fechaF, alimento, c1,c2,c3,c4,c5,c6,c7;
-                        nombre = document.getElementById("nombre").value;
-                        precio = document.getElementById("precio").value;
-                        alimento = document.getElementById("alimento").value;
-                        fechaI = document.getElementById("fi").value;
-                        fechaF = document.getElementById("ff").value;
-                        c1 = document.getElementById("cb1").checked;
-                        c2 = document.getElementById("cb2").checked;
-                        c3 = document.getElementById("cb3").checked;
-                        c4 = document.getElementById("cb4").checked;
-                        c5 = document.getElementById("cb5").checked;
-                        c6 = document.getElementById("cb6").checked;
-                        c7 = document.getElementById("cb7").checked;
+        <script>
+            function validar() {
+                var nombre, precio,fechaI,fechaF, alimento, c1,c2,c3,c4,c5,c6,c7;
+                nombre = document.getElementById("nombre").value;
+                precio = document.getElementById("precio").value;
+                alimento = document.getElementById("alimento").value;
+                fechaI = document.getElementById("fi").value;
+                fechaF = document.getElementById("ff").value;
+                c1 = document.getElementById("cb1").checked;
+                c2 = document.getElementById("cb2").checked;
+                c3 = document.getElementById("cb3").checked;
+                c4 = document.getElementById("cb4").checked;
+                c5 = document.getElementById("cb5").checked;
+                c6 = document.getElementById("cb6").checked;
+                c7 = document.getElementById("cb7").checked;
 
-                        if(c1==false&&c2==false&&c3==false&&c4==false&&c5==false&&c6==false&&c7==false){
-                            alert("Seleccione disponibilidad");
-                            return false;
-                        }
-                        if(fechaI>fechaF){
-                            alert("Fecha inicial debe ser menor a la fecha final")
-                            return false;
-                        }
-
-
-                        if (precio>0&&precio!=""&&nombre!=""&&fechaI!=""&&fechaF!=""&&alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
-                            alert("Agregado exitosamente");
-                            return true;
-                        }
-                        else{
-                            alert("Datos incorrectos");
-                            return false;
-                        }
+                if(c1==false&&c2==false&&c3==false&&c4==false&&c5==false&&c6==false&&c7==false){
+                    alert("seleccione disponibilidad");
+                    return false;
+                }
+                if(fechaI>fechaF){
+                    alert("fecha inicial debe ser menor a la fecha final")
+                    return false;
+                }
 
 
-                    }
-                </script>
-                <input class="green" name="action" value="Guardar" type="submit" onclick="validar()">
-                <input class="red" type="button" value="Cancelar Registro" onclick="history.back()">
+                if (precio=0||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
+                    alert("agregado exitosamente");
+                    return true;
+                }
 
-            </form>
-       	</div>
-    </body>
+
+            }
+        </script>
+        <input class="green" name="action" value="Guardar" type="submit" onclick="validar()">
+        <input class="red" type="button" value="Cancelar Registro" onclick="history.back()">
+
+    </form>
+</div>
+</body>
 </html>
