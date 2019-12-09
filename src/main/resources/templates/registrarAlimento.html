@@ -61,12 +61,10 @@
 
 						<script>
 							function validar() {
-								var nombre, categoria, precio, tamaño,descripcion;
+								var precio,descripcion;
 								descripcion = document.getElementById("descripcion").value;
 								precio = document.getElementById("precio").value;
-								categoria = document.getElementById("categoria").value;
-								tamaño = document.getElementById("tamaño").value;
-								if (precio>0||precio.length!=0&&descripcion!=""&&categoria!=""&&tamaño!=""&&nombre!=""){
+								if (precio>0&&precio.length!=0&&descripcion!=""){
 									alert("Agregado exitosamente");
 									return true;
 								}

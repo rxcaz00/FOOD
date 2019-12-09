@@ -37,13 +37,9 @@
 						monto = document.getElementById("monto").value;
 						tipo = document.getElementById("tipo").value;
 
-						if (monto>0||monto!=""&&descripcion!=""&&tipo!=""){
+						if (monto>0&&precio.length!=0&&descripcion!=""&&tipo!=""){
 							alert("Agregado exitosamente");
 							return true;
-						}
-						else{
-							alert("Datos incorrectos");
-							return false;
 						}
 					}
 				</script>

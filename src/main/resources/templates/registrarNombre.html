@@ -36,12 +36,11 @@
                 <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}" required/>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
                 <br>
-                <input class="green" type="submit" value="Guardar"  onclick="validar">
+                <input class="green" type="submit" value="Guardar"  onclick="validar()">
                 <script>
                     function validar() {
                         var nombre;
                         nombre = document.getElementById("nombre").value;
-
                         if (nombre!=""){
                             alert("Agregado exitosamente");
                             return true;

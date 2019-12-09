@@ -33,10 +33,10 @@
                 <input class="invalido" th:value="${tamanoModel.nombre_Categoria}" th:if="${edit}">
                 <br>-->
                 Nombre:
-                <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}" required>/>
+                <input type="text" id="nombre" th:field="*{nombre}" th:value="${nombre}" required>
                 Habilitado: <input type="checkbox" th:value="${habilitado}" th:field="*{habilitado}">
                 <br>
-                <input class="green" type="submit" value="Guardar" onclick="validar">
+                <input class="green" type="submit" value="Guardar" onclick="validar()">
                 <script>
                     function validar() {
                         var nombre;

@@ -46,7 +46,7 @@
             <input id="fi" type="date" th:field="*{fechaI}" th:value="${fechaI}" required>
             <br>
             Fecha Fin:
-            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" >
+            <input  id="ff" type="date" th:field="*{fechaF}" th:value="${fechaF}" required>
             <br><br>
             Disponibilidad:
             <br >
@@ -84,9 +84,13 @@
                         }
 
 
-                        if (precio>0||precio!=""||nombre!=""||fechaI!=""||fechaF!=""||alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
+                        if (precio>0&&precio!=""&&nombre!=""&&fechaI!=""&&fechaF!=""&&alimento!=""||c1==true||c2==true||c3==true||c4==true||c5==true||c6==true||c7==true){
                             alert("Agregado exitosamente");
                             return true;
+                        }
+                        else{
+                            alert("Datos incorrectos");
+                            return false;
                         }
 
 
