@@ -37,7 +37,7 @@ public class ConfiguracionController {
         return "redirect:/configuracion/sistema";
     }
 
-    @PostMapping(value = "/addConfig", params = "action=guardar")
+    @PostMapping(value = "/addConfig")
     /**
      * @param configuracionModel
      * @param model
@@ -56,7 +56,7 @@ public class ConfiguracionController {
         return "redirect:/configuracion/sistema";
     }
 
-    @PostMapping(value = "/addConfig", params = "action=cargar")
+    @GetMapping(value = "/cargarConfig")
     /**
      * @param configuracionModel
      * @param model

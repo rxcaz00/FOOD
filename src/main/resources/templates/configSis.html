@@ -25,7 +25,6 @@
             	Introduzca el porcentaje de retribución de compra:
             	<input class="precio"  id="porcentaje" type="number" th:field="*{retribucion}" th:value="${retribucion}" min="1" max="100" step=".01" required>%
             	<br>
-				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
 				<button class="green" name="action" value="guardar" type="submit"  onclick=validar()>Guardar configuración</button>
 
 				<script>
@@ -45,6 +44,9 @@
 					}
 				</script>
 			</form>
+			<a href="#" th:href="@{/configuracion/cargarConfig}">
+				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
+			</a>
        	</div>
     </body>
 </html>
