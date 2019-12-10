@@ -213,11 +213,10 @@ public class VentaController {
 
         if(reciboModelGuardado != null) {
             redirectAttributes.addFlashAttribute("result", 1);
-            int id = reciboModelGuardado.getId();
+            //int id = reciboModelGuardado.getId();
             log.info("Method addVenta() -- Successful Venta: " + reciboModelGuardado);
-            reciboModelGuardado = ventaService.findReciboByIdModel(id);
+            //reciboModelGuardado = ventaService.findReciboByIdModel(id);
             redirectAttributes.addFlashAttribute("reciboModelResultado", reciboModelGuardado);
-            log.info("Method addVenta() -- Successful Venta - Contenido: " + reciboModelGuardado.getContenidosRecibo());
         }else
             redirectAttributes.addAttribute("result",0);
 

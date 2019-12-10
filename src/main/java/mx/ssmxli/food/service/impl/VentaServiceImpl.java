@@ -73,6 +73,8 @@ public class VentaServiceImpl implements VentaService {
         return ventaConverter.convertRecibo2ReciboModel(recibo);
     }
 
+
+
     /**
      * Obtiene todos los campos calculados del recibo (puntos, subtotal, total, etc..)
      * Guarda el Recibo en la Base de Datos
@@ -142,8 +144,11 @@ public class VentaServiceImpl implements VentaService {
 
         //Recorre cada uno de los ContenidoPromocionModel para asignarle el id de Recibo
         for(ContenidoPromocionModel contPromocion : contenidosPromocion){
+            List<ContenidoRecibo> cr = new ArrayList<>();
             //Se deben de pasar los ContenidoReciboModel de ContenidoPromocion a otro arreglo
             List<ContenidoReciboModel> contenidoReciboModels = contPromocion.getContenidosRecibo();
+
+
             //Despues de esto eliminamos la lista de ContenidoRecibo de contPromocion
             //ya que como los ContenidoRecibo no estan registrados, solamente haremos que salga un TransientValueException
             contPromocion.setContenidosRecibo(new ArrayList<>());
@@ -156,8 +161,9 @@ public class VentaServiceImpl implements VentaService {
             for(ContenidoReciboModel contRecibo : contenidoReciboModels){
                 contRecibo.setIdContenidoPromocion(contenidoPromocion.getId());//Asigna el ID de ContenidoPromocion
                 contRecibo.setIdRecibo(-1);//Bandera para que el convertidor ignore este campo
-                contenidoReciboRepository.save(ventaConverter.convertContenidoReciboModel2ContenidoRecibo(contRecibo));
+                contenidoPromocion.getContenidosRecibo().add(contenidoReciboRepository.save(ventaConverter.convertContenidoReciboModel2ContenidoRecibo(contRecibo)));
             }
+            contenidoPromocionRepository.save(contenidoPromocion);
         }
 
         //Calcula los puntos en base a lo ingresado en configuracion
@@ -175,6 +181,9 @@ public class VentaServiceImpl implements VentaService {
         double subtotal = total * (1-(configuracion.getIva()/100));
         recibo.setTotal(total);
         recibo.setSubtotal(subtotal);
+
+        recibo.setContenidosRecibo(findContenidosReciboByRecibo(recibo));
+        recibo.setContenidoPromociones(findContenidosPromocionByRecibo(recibo));
 
         //Actualiza el recibo ya con todos sus datos
         recibo = reciboRepository.save(recibo);
@@ -201,7 +210,7 @@ public class VentaServiceImpl implements VentaService {
     }
 
     public ContenidoPromocion convertContenidoPromocionModel2ContenidoPromocion(ContenidoPromocionModel contenidoPromocionModel){
-        return ventaConverter.convertContenidoPromocionModel2ContenidoPromcion(contenidoPromocionModel);
+        return ventaConverter.convertContenidoPromocionModel2ContenidoPromocion(contenidoPromocionModel);
     }
 
     public ContenidoPromocionModel convertContenidoPromocion2ContenidoPromocionModel(ContenidoPromocion contenidoPromocion){
@@ -222,5 +231,29 @@ public class VentaServiceImpl implements VentaService {
             }
         }
         return total;
+    }
+
+    @Override
+    public List<ContenidoRecibo> findContenidosReciboByRecibo(Recibo recibo) {
+        List<ContenidoRecibo> allContenidosRecibo = contenidoReciboRepository.findAll();
+        List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();
+        for (ContenidoRecibo cr : allContenidosRecibo) {
+            if(cr.getRecibo() == recibo)
+                contenidosRecibo.add(cr);
+        }
+        return contenidosRecibo;
+    }
+
+    @Override
+    public List<ContenidoPromocion> findContenidosPromocionByRecibo(Recibo recibo) {
+        List<ContenidoPromocion> allContenidosPromocion = contenidoPromocionRepository.findAll();
+        List<ContenidoPromocion> contenidosPromocion = new ArrayList<>();
+        for(ContenidoPromocion cp : allContenidosPromocion){
+            if(cp.getRecibo() == recibo){
+                contenidosPromocion.add(cp);
+            }
+        }
+
+        return contenidosPromocion;
     }
 }

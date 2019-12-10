@@ -53,6 +53,9 @@
 .table-container {
 	height: 350px;
 }
+.table-container2 {
+	height: 600px;
+}
 
 .table-recibo {
 	display: flex;

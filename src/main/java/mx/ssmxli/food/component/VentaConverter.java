@@ -69,6 +69,7 @@ public class VentaConverter {
     public Recibo convertReciboModel2Recibo(ReciboModel reciboModel) {
         Recibo recibo = new Recibo();
         List<ContenidoRecibo> contenidosRecibo = new ArrayList<>();
+        List<ContenidoPromocion> contenidosPromocion = new ArrayList<>();
 
         recibo.setCliente(clienteService.findClienteByTelefono(reciboModel.getCliente()));
         recibo.setFecha(new Date());
@@ -83,6 +84,7 @@ public class VentaConverter {
         recibo.setNumeroMesa(reciboModel.getNumeroMesa());
         recibo.setPuntos(reciboModel.getPuntos());
         recibo.setUsuario(usuarioService.findUsuarioByUsuario(reciboModel.getUsuario()));
+
         try {
             for (ContenidoReciboModel contReciboModel : reciboModel.getContenidosRecibo()) {
                 contenidosRecibo.add(convertContenidoReciboModel2ContenidoRecibo(contReciboModel));
@@ -90,7 +92,17 @@ public class VentaConverter {
         }catch(NullPointerException npe){
             contenidosRecibo = new ArrayList<>();
         }
+
+        try{
+            for(ContenidoPromocionModel contenidoPromocionModel : reciboModel.getContenidosPromocion()){
+                contenidosPromocion.add(convertContenidoPromocionModel2ContenidoPromocion(contenidoPromocionModel));
+            }
+        }catch(NullPointerException npe){
+            contenidosPromocion = new ArrayList<>();
+        }
+
         recibo.setContenidosRecibo(contenidosRecibo);
+        recibo.setContenidoPromociones(contenidosPromocion);
 
         return recibo;
     }
@@ -108,6 +120,7 @@ public class VentaConverter {
     public ReciboModel convertRecibo2ReciboModel(Recibo recibo) {
         ReciboModel reciboModel = new ReciboModel();
         List<ContenidoReciboModel> contenidoReciboModels = new ArrayList<>();
+        List<ContenidoPromocionModel> contenidoPromocionModels = new ArrayList<>();
         String telefono = "";
 
         //Si el cliente es diferente de null, osea si hay uno asignado al recibo, entonces...
@@ -133,12 +146,17 @@ public class VentaConverter {
         reciboModel.setPuntos(recibo.getPuntos());
         reciboModel.setUsuario(recibo.getUsuario().getUsuario());
         reciboModel.setNombreUsuario(recibo.getUsuario().getNombre() + " " + recibo.getUsuario().getApellidos());
+
         for (ContenidoRecibo contRecibo : recibo.getContenidosRecibo()) {
             contenidoReciboModels.add(convertContenidoRecibo2ContenidoReciboModel(contRecibo));
             log.info("Method convertRecibo2ReciboModel() -- contenido recibo added: "+contRecibo);
         }
+        for(ContenidoPromocion contPromocion : recibo.getContenidoPromociones()){
+            contenidoPromocionModels.add(convertContenidoPromocion2ContenidoPromocionModel(contPromocion));
+        }
 
         reciboModel.setContenidosRecibo(contenidoReciboModels);
+        reciboModel.setContenidosPromocion(contenidoPromocionModels);
 
         return reciboModel;
     }
@@ -192,7 +210,7 @@ public class VentaConverter {
         return contenidoPromocionModel;
     }
 
-    public ContenidoPromocion convertContenidoPromocionModel2ContenidoPromcion(ContenidoPromocionModel contenidoPromocionModel){
+    public ContenidoPromocion convertContenidoPromocionModel2ContenidoPromocion(ContenidoPromocionModel contenidoPromocionModel){
         ContenidoPromocion contenidoPromocion = new ContenidoPromocion();
         List<ContenidoRecibo> contenidoRecibos = new ArrayList<>();
 

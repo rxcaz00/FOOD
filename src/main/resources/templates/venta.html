@@ -146,56 +146,77 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Fecha de Venta: <span th:text="${reciboModelResultado.fecha}"></span></th>
-                                    <th></th>
-                                    <th>Atendio: <span th:text="${reciboModelResultado.nombreUsuario}"></span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Tipo de Orden: Local</td>
-                                    <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Mesa #<span th:text="${reciboModelResultado.numeroMesa}"></span></td>
-                                </tr>
-                                <tr th:if="${reciboModelResultado.tipoOrden == 'D'}">
-                                    <td>Tipo de Orden: A Domicilio</td>
-                                    <td>Dirección de Envio: <span th:text="${reciboModelResultado.direccionDeEnvio}"></span></td>
-                                </tr>
-                                <tr th:if="${reciboModelResultado.tipoOrden == 'R'}">
-                                    <td>Tipo de Orden: Para Recoger</td>
-                                    <td>A Nombre de: <span th:text="${reciboModelResultado.notas}"></span></td>
-                                </tr>
-                                <tr>
-                                    <td>Alimento</td>
-                                    <td></td>
-                                    <td>Precio</td>
-                                </tr>
-                                <tr th:each="contRecibo : ${reciboModelResultado.contenidosRecibo}">
-                                    <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
-                                    <td></td>
-                                    <td>$<span th:text="${contRecibo.precio}"></span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td>Subtotal:</td>
-                                    <td><span th:text="${reciboModelResultado.subtotal}"></span></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Total: </td>
-                                    <td><span th:text="${reciboModelResultado.total}"></span></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Puntos Generados: </td>
-                                    <td><span th:text="${reciboModelResultado.puntos}"></span></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="table-container2">
+                            <table class="table-recibo">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha de Venta: <span th:text="${reciboModelResultado.fecha}"></span></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Atendio: <span th:text="${reciboModelResultado.nombreUsuario}"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Tipo de Orden: Local</td>
+                                        <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Mesa #<span th:text="${reciboModelResultado.numeroMesa}"></span></td>
+                                    </tr>
+                                    <tr th:if="${reciboModelResultado.tipoOrden == 'D'}">
+                                        <td>Tipo de Orden: A Domicilio</td>
+                                        <td>Dirección de Envio: <span th:text="${reciboModelResultado.direccionDeEnvio}"></span></td>
+                                    </tr>
+                                    <tr th:if="${reciboModelResultado.tipoOrden == 'R'}">
+                                        <td>Tipo de Orden: Para Recoger</td>
+                                        <td>A Nombre de: <span th:text="${reciboModelResultado.notas}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Nombre</td>
+                                        <td>Precio</td>
+                                        <td>Contenido</td>
+                                    </tr>
+                                    <tr th:each="contRecibo : ${reciboModelResultado.contenidosRecibo}">
+                                        <td colspan="2"><span th:text="${contRecibo.nombreAlimento}"></span></td>
+                                        <td>$<span th:text="${contRecibo.precio}"></span></td>
+                                    </tr>
+                                    <tr th:each="contPromocion : ${reciboModelResultado.contenidosPromocion}">
+                                        <td colspan="2"><span th:text="${contPromocion.nombrePromocion}"></span></td>
+                                        <td>$<span th:text="${contPromocion.precio}"></span></td>
+                                        <td><select class="select-promo">
+                                            <option th:each="crPromo : ${contPromocion.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
+                                        </select></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>Subtotal: </td>
+                                        <td>$<span th:text="${reciboModelResultado.subtotal}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Total: </td>
+                                        <td>$<span th:text="${reciboModelResultado.total}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Dinero Recibido: </td>
+                                        <td>$<span th:text="${reciboModelResultado.dineroRecibido}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Cambio: </td>
+                                        <td th:with="cambio=${reciboModelResultado.dineroRecibido - reciboModelResultado.total}">
+                                             $<span th:text="${cambio}"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Puntos Generados: </td>
+                                        <td><span th:text="${reciboModelResultado.puntos}"></span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="red" data-dismiss="modal">Regresar</button>

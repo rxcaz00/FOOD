@@ -1,5 +1,6 @@
 package mx.ssmxli.food.service;
 
+import mx.ssmxli.food.entity.ContenidoPromocion;
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Recibo;
 import mx.ssmxli.food.model.ContenidoPromocionModel;
@@ -30,4 +31,8 @@ public interface VentaService {
     public abstract ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo, List<ContenidoPromocionModel> contenidosPromocion);
 
     public abstract double getTotal(char metodo);
+
+    public abstract List<ContenidoRecibo> findContenidosReciboByRecibo(Recibo recibo);
+
+    public abstract List<ContenidoPromocion> findContenidosPromocionByRecibo(Recibo recibo);
 }
