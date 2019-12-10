@@ -155,20 +155,22 @@
                                         <th></th>
                                         <th>Atendio: <span th:text="${reciboModelResultado.nombreUsuario}"></span></th>
                                     </tr>
+                                    <div th:switch="${reciboModelResultado.tipoOrden}">
+                                        <tr th:case="'L'">
+                                            <th colspan="2">Tipo de Orden: Local</th>
+                                            <th colspan="2">Mesa #<span th:text="${reciboModelResultado.numeroMesa}"></span></th>
+                                        </tr>
+                                        <tr th:case="'D'">
+                                            <th colspan="2">Tipo de Orden: A Domicilio</th>
+                                            <th colspan="2">Dirección de Envio: <span th:text="${reciboModelResultado.direccionDeEnvio}"></span></th>
+                                        </tr>
+                                        <tr th:case="'R'">
+                                            <th colspan="2">Tipo de Orden: Para Recoger</th>
+                                            <th colspan="2">A Nombre de: <span th:text="${reciboModelResultado.notas}"></span></th>
+                                        </tr>
+                                    </div>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Tipo de Orden: Local</td>
-                                        <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Mesa #<span th:text="${reciboModelResultado.numeroMesa}"></span></td>
-                                    </tr>
-                                    <tr th:if="${reciboModelResultado.tipoOrden == 'D'}">
-                                        <td>Tipo de Orden: A Domicilio</td>
-                                        <td>Dirección de Envio: <span th:text="${reciboModelResultado.direccionDeEnvio}"></span></td>
-                                    </tr>
-                                    <tr th:if="${reciboModelResultado.tipoOrden == 'R'}">
-                                        <td>Tipo de Orden: Para Recoger</td>
-                                        <td>A Nombre de: <span th:text="${reciboModelResultado.notas}"></span></td>
-                                    </tr>
                                     <tr>
                                         <td colspan="2">Nombre</td>
                                         <td>Precio</td>
@@ -188,21 +190,30 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <td>Metodo de Pago: </td>
+                                        <div th:switch="${reciboModelResultado.metodoPago}">
+                                            <td th:case="'E'">Efectivo</td>
+                                            <td th:case="'T'">Tarjeta</td>
+                                        </div>
                                         <td></td>
                                         <td>Subtotal: </td>
                                         <td>$<span th:text="${reciboModelResultado.subtotal}"></span></td>
                                     </tr>
                                     <tr>
+                                        <td>Cliente: </td>
+                                        <td th:text="${reciboModelResultado.cliente}"></td>
                                         <td></td>
                                         <td>Total: </td>
                                         <td>$<span th:text="${reciboModelResultado.total}"></span></td>
                                     </tr>
                                     <tr>
                                         <td></td>
+                                        <td></td>
                                         <td>Dinero Recibido: </td>
                                         <td>$<span th:text="${reciboModelResultado.dineroRecibido}"></span></td>
                                     </tr>
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td>Cambio: </td>
                                         <td th:with="cambio=${reciboModelResultado.dineroRecibido - reciboModelResultado.total}">
@@ -210,6 +221,7 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td>Puntos Generados: </td>
                                         <td><span th:text="${reciboModelResultado.puntos}"></span></td>

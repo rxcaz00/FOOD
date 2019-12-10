@@ -64,7 +64,7 @@
 								var precio,descripcion;
 								descripcion = document.getElementById("descripcion").value;
 								precio = document.getElementById("precio").value;
-								if (precio>0&&precio.length!=0&&descripcion!=""){
+								if (precio>0&&precio.length!=0||descripcion!=""){
 									alert("Agregado exitosamente");
 									return true;
 								}
