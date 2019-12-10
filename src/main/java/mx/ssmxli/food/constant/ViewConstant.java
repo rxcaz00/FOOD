@@ -13,15 +13,12 @@ public class ViewConstant {
         //Nombre
     public static final String ID_SHOW_NOMBRE = "consultaNombres";
     public static final String ID_NEW_NOMBRE = "registrarNombre";
-    public static final String ID_UPDATE_NOMBRE = "modificarNombre";
         //Categoria
     public static final String ID_SHOW_CATEGORIA = "consultaCategorias";
     public static final String ID_NEW_CATEGORIA = "registrarCategoria";
-    public static final String ID_UPDATE_CATEGORIA = "modificarCategoria";
         //Tamano
     public static final String ID_SHOW_TAMANO = "consultaTamanos";
     public static final String ID_NEW_TAMANO = "registrarTamano";
-    public static final String ID_UPDATE_TAMANO = "modificarTamano";
 
     //Promociones
     public static final String PROMOCION_NEW = "registrarPromocion";
@@ -43,7 +40,6 @@ public class ViewConstant {
 
     //Configuración
     public static final String CONFIG_SISTEMA = "configSis";
-    public static final String CONFIG_ACCESO = "configAcceso";
 
     //Login
     public static final String LOGIN = "login";

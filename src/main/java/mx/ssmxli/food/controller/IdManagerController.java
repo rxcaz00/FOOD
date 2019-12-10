@@ -158,7 +158,7 @@ public class IdManagerController {
     @GetMapping("/consultaTamanos")
     public ModelAndView showTamanos(){
         ModelAndView mav = new ModelAndView(ViewConstant.ID_SHOW_TAMANO);
-        mav.addObject("tamanos", idManagerService.listAllEnabledTamanos());
+        mav.addObject("tamanos", idManagerService.listAllTamanos());
         /*Quite esta parte por problemas a la hora de mostrarlos por la categoria seleccionada
         mav.addObject("exists", idManagerService.categoriaExists());*/
         mav.addObject("exists",true);/*Eliminar esta parte si se desea utilizar la version con relaciones*/

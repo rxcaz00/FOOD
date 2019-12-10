@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
@@ -18,7 +18,6 @@
 </head>
 <body>
 <nav th:replace="fragments.html :: nav"></nav>
-
 <div class="container">
     <b class="titulo">Consulta de Tamaños</b>
     <div th:replace="fragments.html :: rol"></div>
@@ -34,49 +33,34 @@
                 Nombre
                 <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
             </th>
-
-            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
-            <th onclick="sortTableText(2)">
-                Categoría
-                <img class="cross-right" src="/imgs/sort-arrows.png" th:src="@{/imgs/sort-arrows.png}">
-            </th>-->
-            <th></th>
+            <th><!-- Encabezado para las opciones --></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="tamano : ${tamanos}">
-
-            <td th:if="${tamano.habilitado == true}" th:text="${tamano.valor}"></td>
-            <td th:if="${tamano.habilitado == true}" th:text="${tamano.nombre}"></td>
-
-            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
-            <td th:if="${tamano.habilitado == true}" th:text="${tamano.nombre_Categoria}"></td>-->
-
-            <td th:if="${tamano.habilitado == true}">
-                <a href="#" th:href="@{/idManager/registrarTamano?valor=__${tamano.valor}__}">
+            <td th:if="${tamano.habilitado}" th:text="${tamano.valor}"></td>
+            <td th:if="${tamano.habilitado}" th:text="${tamano.nombre}"></td>
+            <td th:if="${tamano.habilitado}">
+                <a href="#" th:href="@{/igManager/registrarTamano?valor=__${tamano.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
 
-            <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.valor}"></td>
-            <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.nombre}"></td>
-
-            <!--Quite esa parte por problemas a la hora de mostrarlos por la categoria seleccionada
-            <td class="disabled" th:if="${tamano.habilitado == false}" th:text="${tamano.nombre_Categoria}"></td>-->
-
-            <td class="disabled" th:if="${tamano.habilitado == false}">
-                <a href="#" th:href="@{/idManager/registrarTamano?valor=__${tamano.valor}__}">
+            <td class="disabled" th:if="${!tamano.habilitado}" th:text="${tamano.valor}"></td>
+            <td class="disabled" th:if="${!tamano.habilitado}" th:text="${tamano.nombre}"></td>
+            <td class="disabled" th:if="${!tamano.habilitado}">
+                <a href="#" th:href="@{/igManager/registrarTamano?valor=__${tamano.valor}__}">
                     <img class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
                 </a>
             </td>
-            </td>
-
         </tr>
         </tbody>
     </table>
-    <div th:if="${exists}"><a href="#" th:href="@{/idManager/registrarTamano}">
-        <button type="submit" class="nuevo">Agregar Nuevo Tamaño</button>
-    </a></div>
+    <div th:if="${exists}">
+        <a href="#" th:href="@{/idManager/registrarTamano}">
+            <button type="submit" class="nuevo">Agregar Nuevo Tamaño</button>
+        </a>
+    </div>
     <div th:if="${!exists}">
         <button type="submit" class="nuevo btnDesactivado" onclick="redirectCategoria()">Agregar Nuevo Tamaño</button>
     </div>
