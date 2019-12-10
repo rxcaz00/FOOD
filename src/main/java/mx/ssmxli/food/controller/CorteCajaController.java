@@ -63,7 +63,7 @@ public class CorteCajaController {
      * @author Diana
      * */
     public String cancel(){
-        return "redirect:/corteCaja/actual";
+        return "redirect:/corteCaja/historial";
     }
 
     @GetMapping("/actual")
@@ -77,16 +77,21 @@ public class CorteCajaController {
      */
     public String inicio(Model model, @RequestParam(name = "id", required = false, defaultValue = "0") int id){
         CorteCajaModel corteCajaModel = new CorteCajaModel();
+        ConfiguracionModel configuracionModel = new ConfiguracionModel();
 
         if(id == 0) {
-            ConfiguracionModel configuracionModel = configuracionService.findLastConfiguracion();
-            corteCajaModel.setDineroInicial(configuracionModel.getDineroInicial());
-            corteCajaModel.setEfectivo(ventaService.getTotal('E'));
-            corteCajaModel.setTarjeta(ventaService.getTotal('T'));
-            corteCajaModel.setCompra(gastoService.getTotal('C'));
-            corteCajaModel.setPago(gastoService.getTotal('P'));
+            try {
+                configuracionModel = configuracionService.findLastConfiguracion();
+            } catch (Exception e) {
+                return "redirect:/configuracion/sistema";
+            }
+                corteCajaModel.setDineroInicial(configuracionModel.getDineroInicial());
+                corteCajaModel.setEfectivo(ventaService.getTotal('E'));
+                corteCajaModel.setTarjeta(ventaService.getTotal('T'));
+                corteCajaModel.setCompra(gastoService.getTotal('C'));
+                corteCajaModel.setPago(gastoService.getTotal('P'));
 
-            model.addAttribute("corteCajaModel", corteCajaModel);
+                model.addAttribute("corteCajaModel", corteCajaModel);
 
             return ViewConstant.CORTE_CAJA;
         }

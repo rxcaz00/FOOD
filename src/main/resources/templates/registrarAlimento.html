@@ -22,7 +22,7 @@
             <hr size=4 color="#CCCCCC">
 				<div class="jumbotron">
 					<form action="#" th:action="@{/alimentos/addAlimento}" th:object="${alimentoModel}" method="POST" >
-						Categoria:
+						Categoría:
 						<select id="selectCategoria" th:field="*{categoria_Valor}" required>
 							<option th:each="categoria : ${categorias}" th:value="${categoria.valor}"
 									th:text="${categoria.nombre}" th:title="${'Valor: '+categoria.valor}"></option>

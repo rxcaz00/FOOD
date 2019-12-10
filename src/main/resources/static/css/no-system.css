@@ -99,3 +99,8 @@ button:hover {
     width: 60px;
     height: 60px;
 }
+
+input[type=image], input[type=image]:hover {
+    border: none;
+    background: none;
+}

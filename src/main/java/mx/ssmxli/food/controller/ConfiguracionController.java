@@ -37,7 +37,7 @@ public class ConfiguracionController {
         return "redirect:/configuracion/sistema";
     }
 
-    @PostMapping(value = "/addConfig", params = "action=guardar")
+    @PostMapping(value = "/addConfig")
     /**
      * @param configuracionModel
      * @param model
@@ -53,10 +53,10 @@ public class ConfiguracionController {
             model.addAttribute("result",1);
         else
             model.addAttribute("result",0);
-        return "redirect:/configuracion/sistema";
+        return "redirect:/venta";
     }
 
-    @PostMapping(value = "/addConfig", params = "action=cargar")
+    @GetMapping(value = "/cargarConfig")
     /**
      * @param configuracionModel
      * @param model
@@ -85,6 +85,13 @@ public class ConfiguracionController {
     public String sistema(Model model) {
         ConfiguracionModel configuracionModel = new ConfiguracionModel();
         model.addAttribute("configuracionModel",configuracionModel);
+
+        try {
+            configuracionModel = configuracionService.findLastConfiguracion();
+            model.addAttribute("exists", true);
+        } catch (Exception e) {
+            model.addAttribute("exists", false);
+        }
         return ViewConstant.CONFIG_SISTEMA;
     }
 }
