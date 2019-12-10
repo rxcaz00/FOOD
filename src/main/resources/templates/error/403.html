@@ -19,11 +19,11 @@
         Acceso denegado
         <br><br>
         <img class="images" src="../static/imgs/access-denied.png" th:src="@{/imgs/access-denied.png}">
-        <a href="" onclick="history.back()">
+        <form th:action="@{/logout}" method="post">
             <div class="redirect">
-                <img class="cat" src="../static/imgs/back-arrow.png" th:src="@{/imgs/back-arrow.png}">
+                <input type="image" class="cat" src="../static/imgs/logout.png" th:src="@{/imgs/logout.png}">
             </div>
-        </a>
+        </form>
         <br><br><br><br><br>
         <a href="/../venta">
             <div class="redirect">
