@@ -5,7 +5,7 @@
 
 #MariaDB Config
 #driverClassName: org.mariadb.jdbc.Driver
-#url: jdbc:mariadb://localhost:3306/food?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#url: jdbc:mariadb://localhost:3305/food?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 #dialect: org.hibernate.dialect.MariaDB103Dialect
 
 spring:
