@@ -45,7 +45,9 @@ public class CorteCajaConverter {
         corteCaja.setCorte(corteCajaModel.getCorte());
         corteCaja.setEfectivo(corteCajaModel.getEfectivo());
         corteCaja.setTarjeta(corteCajaModel.getTarjeta());
-        corteCaja.setDiferencia(corteCajaModel.getEfectivo() - corteCajaModel.getCorte());
+        corteCaja.setDiferencia(corteCajaModel.getCorte() -
+                (corteCajaModel.getEfectivo() -
+                        (corteCajaModel.getPago() + corteCajaModel.getCompra())));
         corteCaja.setPago(corteCajaModel.getPago());
         corteCaja.setCompra(corteCajaModel.getCompra());
 
