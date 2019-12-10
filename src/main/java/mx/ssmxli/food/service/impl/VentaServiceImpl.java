@@ -64,14 +64,28 @@ public class VentaServiceImpl implements VentaService {
 
     @Override
     public Recibo findReciboById(int id) {
-        return null;
+        return reciboRepository.findReciboById(id);
     }
 
     @Override
     public ReciboModel findReciboByIdModel(int id) {
-        return null;
+        Recibo recibo = findReciboById(id);
+        return ventaConverter.convertRecibo2ReciboModel(recibo);
     }
 
+    /**
+     * Obtiene todos los campos calculados del recibo (puntos, subtotal, total, etc..)
+     * Guarda el Recibo en la Base de Datos
+     * Si hay un cliente involucrado en la venta, actualiza sus puntos.
+     *
+     * @param reciboModel
+     * @param contenidosRecibo
+     * @param contenidosPromocion
+     *
+     * @return ReciboModel
+     *
+     * @author Andrés
+     * */
     public ReciboModel addRecibo(ReciboModel reciboModel, List<ContenidoReciboModel> contenidosRecibo, List<ContenidoPromocionModel> contenidosPromocion){
         Recibo temp = ventaConverter.convertReciboModel2Recibo(reciboModel);
         ConfiguracionModel configuracion = configuracionService.findLastConfiguracion();
@@ -146,9 +160,13 @@ public class VentaServiceImpl implements VentaService {
             }
         }
 
+        //Calcula los puntos en base a lo ingresado en configuracion
+        double puntos = total * (configuracion.getRetribucion() / 100);
+        recibo.setPuntos(puntos);
+
         //Si cliente no es null, entonces...
         if(cliente != null) {
-            cliente.setPuntos(cliente.getPuntos() + (total * (configuracion.getRetribucion() / 100)));//Calcula los puntos en base a lo ingresado en configuracion
+            cliente.setPuntos(cliente.getPuntos() + puntos);//Le suma los puntos generados a los puntos actuales del Cliente
             ClienteModel clienteModel = clienteService.addCliente(clienteService.convertCliente2ClienteModel(cliente));//Añade los puntos al cliente
             log.info("Method addRecibo() -- Updated Cliente: " + clienteModel.toString());
         }

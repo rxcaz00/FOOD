@@ -37,7 +37,8 @@ public class Recibo {
     private int numeroMesa;
     @Column(name = "direccionDeEnvio", nullable = true)
     private String direccionDeEnvio;
-
+    @Column(name = "puntos")
+    private double puntos;
 
     @ManyToOne(optional = true)
     @JoinColumn

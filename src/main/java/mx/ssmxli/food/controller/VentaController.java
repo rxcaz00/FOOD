@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.text.View;
 import java.util.ArrayList;
@@ -167,7 +168,7 @@ public class VentaController {
     }
     /**
      * @param model
-     * @param string (@RequestParam, name=string)
+     * @param (@RequestParam, name=string)
      *
      * Modifica el cliente en base al telefono.
      * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los clientes.
@@ -191,15 +192,15 @@ public class VentaController {
     /**
      * POST que recibe un modelo del recibo, que contiene tipoOrden, metodoPago y dineroRecibido.
      * Los demas atributos los recibe mediante otros métodos o los calcula en el Service.
-     * Al terminar redirecciona a
+     * Al terminar redirecciona a la venta y envia los parametros de redirectAttributes
      *
-     * @param model
      * @param reciboModel
+     * @param redirectAttributes
      * @return "redirect:/venta"
      * @author Andrés
      * */
     @PostMapping("/addVenta")
-    public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, Model model) {
+    public String addVenta(@ModelAttribute(name = "reciboModel")ReciboModel reciboModel, RedirectAttributes redirectAttributes) {
         reciboModel.setCliente(telefono);
         reciboModel.setUsuario(securityService.findLoggedInUsername());
 
@@ -208,10 +209,14 @@ public class VentaController {
         ReciboModel reciboModelGuardado = ventaService.addRecibo(reciboModel, contenidosRecibo, contenidosPromocion);
 
         if(reciboModelGuardado != null) {
-            model.addAttribute("result", 1);
-            model.addAttribute("reciboModelResultado", reciboModelGuardado);
+            redirectAttributes.addFlashAttribute("result", 1);
+            int id = reciboModelGuardado.getId();
+            log.info("Method addVenta() -- Successful Venta: " + reciboModelGuardado);
+            reciboModelGuardado = ventaService.findReciboByIdModel(id);
+            redirectAttributes.addFlashAttribute("reciboModelResultado", reciboModelGuardado);
+            log.info("Method addVenta() -- Successful Venta - Contenido: " + reciboModelGuardado.getContenidosRecibo());
         }else
-            model.addAttribute("result",0);
+            redirectAttributes.addAttribute("result",0);
 
         contenidosRecibo = new ArrayList<>();
 
@@ -358,7 +363,16 @@ public class VentaController {
         return "fragments :: contenidosRecibo";
     }
 
+    /**
+    * */
+    @GetMapping(value = "/loadRecibo")
+    public String loadRecibo(Model model){
+        model.addAttribute("contenidosPromocion", contenidosPromocion);
+        model.addAttribute("contenidosRecibo", contenidosRecibo);
+        model.addAttribute("total", total);
 
+        return "fragments :: confirmacionRecibo";
+    }
 
 
 }

@@ -9,10 +9,14 @@
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
 
+
     <link href="../static/css/todo.css" th:href="@{/css/todo.css}" rel="stylesheet" type="text/css">
+    <link href="../static/css/venta.css" th:href="@{/css/venta.css}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../static/js/script.js" th:src="@{'/js/script.js'}"></script>
     <script type="text/javascript" src="../static/js/venta.js" th:src="@{'js/venta.js'}"></script>
 
@@ -91,46 +95,78 @@
 
 <!--CONTENIDO RECIBO. Muestra los alimentos que se van agregando-->
 <aside th:fragment="contenidosRecibo">
-    <table>
-        <thead>
-        <tr>RESUMEN DE LA ORDEN <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}"></tr>
-        <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Contenido</th>
-            <th></th>
-        </tr>
-        </thead>
-        <hr size=4 color="#CCCCCC">
-        <tbody>
-        <tr th:each="contRecibo : ${contenidosRecibo}">
-            <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
-            <td>$<span th:text="${contRecibo.precio}"></span></td>
-            <td></td>
-            <td>
-                <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removeAlimento(\'' + ${contRecibo.id} + '\');'" >
-                <input type="image" class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
-            </td>
-        </tr>
-        <tr th:each="contPromo : ${contenidosPromocion}">
-            <td><span th:text="${contPromo.nombrePromocion}"></span></td>
-            <td>$<span th:text="${contPromo.precio}"></span></td>
-            <td><select>
-                <option th:each="crPromo : ${contPromo.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
-            </select></td>
-            <td>
-                <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removePromocion(\'' + ${contPromo.id} + '\');'" >
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="2">Total</td>
-            <td colspan="2">$<span th:text="${total}"></span></td>
-        </tr>
-        </tfoot>
-    </table>
+    <div class="table-container">
+        <table class="table-recibo">
+            <thead>
+            <tr>RESUMEN DE LA ORDEN <img class="list" src="/imgs/check-list.png" th:src="@{/imgs/check-list.png}"></tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Contenido</th>
+                <th></th>
+            </tr>
+            </thead>
+            <hr size=4 color="#CCCCCC">
+            <tbody>
+            <tr th:each="contRecibo : ${contenidosRecibo}">
+                <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
+                <td>$<span th:text="${contRecibo.precio}"></span></td>
+                <td></td>
+                <td>
+                    <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removeAlimento(\'' + ${contRecibo.id} + '\');'" >
+                    <input type="image" class="cross" src="/imgs/pencil-edit-button.png" th:src="@{/imgs/pencil-edit-button.png}">
+                </td>
+            </tr>
+            <tr th:each="contPromo : ${contenidosPromocion}">
+                <td><span th:text="${contPromo.nombrePromocion}"></span></td>
+                <td>$<span th:text="${contPromo.precio}"></span></td>
+                <td><select class="select-promo">
+                    <option th:each="crPromo : ${contPromo.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
+                </select></td>
+                <td>
+                    <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removePromocion(\'' + ${contPromo.id} + '\');'" >
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2">Total</td>
+                <td colspan="2">$<span th:text="${total}"></span></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
 </aside>
+
+<!--CONFIRMACION DE VENTA. Muestra los datos finales de la venta. Utiliza una version modificada de Contenido Recibo-->
+<div th:fragment="confirmacionRecibo">
+    <div class="table-container">
+        <table class="table-recibo">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Contenido</th>
+            </tr>
+            </thead>
+            <hr size=4 color="#CCCCCC">
+            <tbody>
+            <tr th:each="contRecibo : ${contenidosRecibo}">
+                <td><span th:text="${contRecibo.nombreAlimento}"></span></td>
+                <td>$<span th:text="${contRecibo.precio}"></span></td>
+                <td></td>
+            </tr>
+            <tr th:each="contPromo : ${contenidosPromocion}">
+                <td><span th:text="${contPromo.nombrePromocion}"></span></td>
+                <td>$<span th:text="${contPromo.precio}"></span></td>
+                <td><select class="select-promo">
+                    <option th:each="crPromo : ${contPromo.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
+                </select></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!--CONTENIDO PROMOCION. Muestra los alimentos que se van agregando-->
 <aside th:fragment="contenidoPromocion">

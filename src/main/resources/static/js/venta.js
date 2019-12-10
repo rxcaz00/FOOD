@@ -81,9 +81,13 @@
  *
  * @author Andrés
  * */
+$(document).on( "change", "input[name=tipoOrden]",function(){
+
+});
+
 $(document).ready(function(){
 
-    $('input[name="orden"]').on("changed", function () {
+    $("input[name=tipoOrden]").change( function () {
         var inputValue = $(this).val();
         $("div.hiddenDiv").hide();
         var targetDiv = "#show" + inputValue;
@@ -177,6 +181,15 @@ function removePromocion(id){
     var url = '/venta/removePromocion/' + id;
 
     $("#contenidosReciboLoad").load(url);
+}
+
+/**
+ * Carga el recibo con sus datos mas actualizados y lo manda a la ventana emergente de confirmacion
+ *
+ * @author Andrés
+ */
+function loadContenidoRecibo(){
+    $("#contenidosReciboConfirm").load("/venta/loadRecibo");
 }
 
 

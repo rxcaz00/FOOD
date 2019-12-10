@@ -12,6 +12,7 @@ import mx.ssmxli.food.repository.AlimentoRepository;
 import mx.ssmxli.food.repository.ContenidoPromocionRepository;
 import mx.ssmxli.food.repository.ReciboRepository;
 import mx.ssmxli.food.service.ClienteService;
+import mx.ssmxli.food.service.ConfiguracionService;
 import mx.ssmxli.food.service.PromocionService;
 import mx.ssmxli.food.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class VentaConverter {
     @Qualifier("promocionServiceImpl")
     private PromocionService promocionService;
 
+    @Autowired
+    @Qualifier("configuracionServiceImpl")
+    private ConfiguracionService configuracionService;
 
     //Recibo
     /**
@@ -74,6 +78,7 @@ public class VentaConverter {
         recibo.setDineroRecibido(reciboModel.getDineroRecibido());
         recibo.setDireccionDeEnvio(reciboModel.getDireccionDeEnvio());
         recibo.setNumeroMesa(reciboModel.getNumeroMesa());
+        recibo.setPuntos(reciboModel.getPuntos());
         recibo.setUsuario(usuarioService.findUsuarioByUsuario(reciboModel.getUsuario()));
         try {
             for (ContenidoReciboModel contReciboModel : reciboModel.getContenidosRecibo()) {
@@ -122,6 +127,7 @@ public class VentaConverter {
         reciboModel.setDineroRecibido(recibo.getDineroRecibido());
         reciboModel.setNumeroMesa(recibo.getNumeroMesa());
         reciboModel.setDireccionDeEnvio(recibo.getDireccionDeEnvio());
+        reciboModel.setPuntos(recibo.getPuntos());
         reciboModel.setUsuario(recibo.getUsuario().getUsuario());
         reciboModel.setNombreUsuario(recibo.getUsuario().getNombre() + " " + recibo.getUsuario().getApellidos());
         for (ContenidoRecibo contRecibo : recibo.getContenidosRecibo()) {

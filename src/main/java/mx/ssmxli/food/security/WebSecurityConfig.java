@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
+        //http.authorizeRequests().anyRequest().permitAll();
         http.csrf().disable()
                 .authorizeRequests()
                 //A lo que puede entrar solo el Gerente
@@ -34,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/imgs/**").permitAll()
                 .antMatchers(
-                        "/usuarios/*",
+                        //"/usuarios/*",
                         "/alimentos/*",
                         "/promociones/*",
                         "/configuracion/*").hasAuthority("GERENTE")

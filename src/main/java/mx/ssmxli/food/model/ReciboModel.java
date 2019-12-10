@@ -22,11 +22,14 @@ public class ReciboModel {
     private char tipoOrden;
     @ToString.Exclude
     private List<ContenidoReciboModel> contenidosRecibo;
+    @ToString.Exclude
+    private List<ContenidoPromocionModel> contenidosPromocion;
     private int numeroMesa;
     private double dineroRecibido;
     private String direccionDeEnvio;
     private boolean direccionCliente;
     private boolean recogerCliente;
+    private double puntos;
 
     public ReciboModel(){
 

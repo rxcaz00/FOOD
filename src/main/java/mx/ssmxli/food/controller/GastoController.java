@@ -48,7 +48,7 @@ public class GastoController {
 
         return "redirect:/gasto/muestraGasto";
     }
- /* @param model
+ /** @param model
      *
              * Te redirecciona a la direccion que indica el String de retorno
      *

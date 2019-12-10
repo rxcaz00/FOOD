@@ -45,3 +45,338 @@
 .app {
 	width: 45%;
 }
+
+.select-promo {
+	width: 100%;
+}
+
+.table-container {
+	height: 350px;
+}
+
+.table-recibo {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+	width: 100%;
+}
+.table-recibo thead {
+	/* head takes the height it requires,
+    and it's not scaled when table is resized */
+	flex: 0 0 auto;
+	width: calc(100% - 0.9em);
+}
+.table-recibo tbody {
+	/* body takes all the remaining available space */
+	flex: 1 1 auto;
+	display: block;
+	overflow-y: scroll;
+}
+.table-recibo tbody tr {
+	width: 100%;
+}
+.table-recibo thead, table tbody tr {
+	display: table;
+	table-layout: fixed;
+}
+
+/*COPIA DE tod0.css
+	Se escribe con 0 ya que es palabra reservada, aun en comentarios
+*/
+
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	height: 100%;
+}
+
+.menu {
+	padding: 0px 10px 10px 10px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	width: 200px;
+	font-size: 20px;!important;
+	background-color: #C9C;
+}
+
+.hiddenDiv{
+	display:none;
+}
+
+.logo {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.menu-obj {
+	margin: 20px 5px;
+	display: block;
+	margin-top: -10px;
+	line-height: normal;
+}
+
+.menu-obj:hover, a:hover {
+	color: white;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul, li {
+	list-style: none;
+}
+
+ul {
+	padding-left: 10px;
+	margin-top: -20px;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	float: right;
+	margin-left: 20px;
+	margin-top: 3px;
+}
+
+.contenedor {
+	position: absolute;
+	top: 5px;
+	left: 230px;
+	right: 5px;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.titulo {
+	font-size: 30px;
+}
+
+.rol {
+	float: right;
+	margin-top: 1px;
+}
+
+.yellow, .green, .red, .agregar {
+	border-radius: 10px;
+	outline: none;
+}
+
+.yellow, .agregar {
+	background-color: #FC0;
+}
+
+.green {
+	background-color: #6C0;
+}
+
+.red {
+	background-color: #F33;
+}
+
+.list {
+	width: 50px;
+	height: 50px;
+	float: right;
+}
+
+.agregar {
+	float: right;
+	margin-right: 20px;
+}
+
+select {
+	margin-top: 10px;
+}
+
+input, select, textarea, button {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0px 5px 10px 5px;
+}
+
+.cross {
+	width: 20px;
+	height: 20px;
+	margin: 0px 10px;
+}
+
+.cross-right {
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+
+.precio, .solicitar {
+	width: 100px;
+}
+
+.solicitar {
+	border-color: #66CC00;
+}
+
+table {
+	width: 100%;
+}
+
+table, th, tr, td {
+	text-align: center;
+}
+
+.submenu {
+	visibility: hidden;
+	height: 10px;
+}
+
+.menu-separador {
+	margin-top: -10px;
+	margin-bottom: 20px;
+	border-color: #FFFF66;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.arrow {
+	width: 15px;
+	height: 15px;
+	float: right;
+}
+
+.nombre {
+	width: 30%;
+}
+
+.apellido {
+	width: 50%;
+}
+
+input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+
+aside {
+	border: 1px solid black;
+	border-radius: 30px;
+	float: right;
+	width: 500px;
+	min-height: 450px;
+	padding: 10px;
+}
+
+.left, .right {
+	position: relative;
+	width: 47%;
+	height: 450px;
+	float: left;
+	padding: 10px;
+}
+
+.important {
+	color: red;
+}
+
+thead {
+	background-color: gainsboro;
+}
+
+th, td {
+	padding: 10px;
+	border-bottom: 1px solid darkgray;
+}
+
+.disabled {
+	background-color: #fff792;
+}
+
+.nuevo {
+	width: 100%;
+	padding: 20px;
+	border-radius: 10px;
+	outline: none;
+	border: 1px solid darkgray;
+	background-color: gainsboro;
+	margin-top: 30px;
+}
+
+.nuevo:hover {
+	background-color: darkgray;
+	border: 1px solid #878787;
+}
+
+.mensaje{
+	background-color: #CC99CC;
+	color: #66CC00;
+}
+
+.invalido{
+	background-color: #eaedf2;
+	cursor: not-allowed;
+}
+
+.btnDesactivado{
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.viewer, .viewer-client {
+	visibility: hidden;
+	background-color: #eaedf2;
+	text-align: center;
+	border: 2px solid gainsboro;
+	border-radius: 30px;
+	position: absolute;
+	top: 5px;
+	bottom: 5px;
+	left: 230px;
+	right: 5px;
+}
+
+.viewer-client {
+	font-size: 20px;
+	font-weight: bold;
+	bottom: 300px;
+}
+
+.viewer-button {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size: 50px;
+	color: white;
+	background-color: #FF3333;
+	outline: none;
+	border: none;
+	padding: 5px 20px 5px 20px;
+	margin-right: 0px;
+	border-top-right-radius: 30px;
+	border-bottom-left-radius: 30px;
+}
+
+.viewer-button:hover {
+	color: black;
+}
+
+embed {
+	float: left;
+	margin-top: 20px;
+	margin-left: 20px;
+	height: 92%;
+	width: 90%;
+}
+
+.last {
+	border-bottom: none;
+}
+
+.show-client {
+	border-top-left-radius: 30px;
+	letter-spacing: 5px;
+}
