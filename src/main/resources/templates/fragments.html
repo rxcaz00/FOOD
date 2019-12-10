@@ -115,9 +115,12 @@
         <tr th:each="contPromo : ${contenidosPromocion}">
             <td><span th:text="${contPromo.nombrePromocion}"></span></td>
             <td>$<span th:text="${contPromo.precio}"></span></td>
-            <td><select>
-                <option th:each="crPromo : ${contPromo.contenidosRecibo}" th:text="${crPromo.nombreAlimento}"></option>
-            </select></td>
+            <td>
+                <div th:each="crPromo : ${contPromo.contenidosRecibo}">
+                    <span th:text="${crPromo.nombreAlimento}"></span>
+                    <br>
+                </div>
+            </td>
             <td>
                 <input type="image" class="cross" src="/imgs/cancel.png" th:src="@{/imgs/cancel.png}" th:onclick="'javascript:removePromocion(\'' + ${contPromo.id} + '\');'" >
             </td>
@@ -198,7 +201,7 @@
     <div class="registrar">
         <b>¿Cliente nuevo?</b>
         <!-- Agregue lo de validar (this.value)-->
-        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick=validar()>¡Registralo!</button>
+        <button class="yellow" type="submit" size="20" name="action" value="registrar" onclick=validar()>¡Regístralo!</button>
     </div><br>
     Nombre del cliente:
     <input id="nombre" type="text" class="nom" th:field="*{nombre}" th:value="${nombre}" placeholder="Nombre(s)" required>

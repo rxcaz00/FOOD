@@ -14,7 +14,7 @@
 <nav th:replace="fragments.html :: nav"></nav>
 
 <div class="container">
-    <b class="titulo">Modificacion de Alimentos</b>
+    <b class="titulo">Modificar de Alimentos</b>
     <div th:replace="fragments.html :: rol"></div>
     <hr size=4 color="#CCCCCC">
     <div class="jumbotron">
@@ -24,7 +24,7 @@
             <!--IGNORAR EL ERROR -->
             <input type="hidden" th:field="*{nombre_Valor}">
             <input id="nombre" class="invalido"  size="20" th:value="${nombre}" th:field="*{nombre}" readonly>
-            Categoria:
+            Categoría:
             <!--IGNORAR EL ERROR -->
             <input type="hidden" th:field="*{categoria_Valor}">
             <input id="categoria" class="invalido"  size="20" th:value="${categoria}" th:field="*{categoria}" readonly>
