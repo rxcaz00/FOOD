@@ -1,3 +1,13 @@
+#MySQL Config
+#driverClassName: com.mysql.cj.jdbc.Driver
+#url: jdbc:mysql://localhost:3306/food?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#MariaDB Config
+#driverClassName: org.mariadb.jdbc.Driver
+#url: jdbc:mariadb://localhost:3306/food?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#dialect: org.hibernate.dialect.MariaDB103Dialect
+
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -9,7 +19,6 @@ spring:
     minIdle: 2
     initialSize: 5
     removeAbandoned: true
-
 
   jpa:
     show-sql: true
