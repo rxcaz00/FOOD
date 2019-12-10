@@ -44,7 +44,7 @@
 					}
 				</script>
 			</form>
-			<a href="#" th:href="@{/configuracion/cargarConfig}">
+			<a href="#" th:href="@{/configuracion/cargarConfig}" th:if="${exists}">
 				<button class="yellow" name="action" value="cargar" type="submit">Cargar configuración anterior</button>
 			</a>
        	</div>

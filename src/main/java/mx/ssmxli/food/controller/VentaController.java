@@ -62,6 +62,10 @@ public class VentaController {
     @Qualifier("securityServiceImpl")
     private SecurityService securityService;
 
+    @Autowired
+    @Qualifier("configuracionServiceImpl")
+    private ConfiguracionService configuracionService;
+
     private static final Log log = LogFactory.getLog(VentaController.class);
 
     @GetMapping("/cancel")
@@ -87,17 +91,22 @@ public class VentaController {
         contadorContenidoPromocion = 1;
         total = 0.0;
 
-        ClienteModel clienteModel = new ClienteModel();
+        try {
+            ConfiguracionModel  configuracionModel = configuracionService.findLastConfiguracion();
+        } catch (Exception e) {
+            return "redirect:/configuracion/sistema";
+        }
+            ClienteModel clienteModel = new ClienteModel();
 
-        List<AlimentoModel> alimentos = alimentoService.listAllAlimentosHabilitados();//Lista con TODOS los alimentos habilitados
-        List<PromocionModel> promociones = promocionService.listAllPromocionesValidas();//Lista con TODAS las promociones validas
+            List<AlimentoModel> alimentos = alimentoService.listAllAlimentosHabilitados();//Lista con TODOS los alimentos habilitados
+            List<PromocionModel> promociones = promocionService.listAllPromocionesValidas();//Lista con TODAS las promociones validas
 
-        model.addAttribute("reciboModel",reciboModel);
-        model.addAttribute("clienteModel",clienteModel);
-        model.addAttribute("alimentos",alimentos);
-        model.addAttribute("promociones",promociones);
-        model.addAttribute("found",true);
-        model.addAttribute("registrado",false);
+            model.addAttribute("reciboModel", reciboModel);
+            model.addAttribute("clienteModel", clienteModel);
+            model.addAttribute("alimentos", alimentos);
+            model.addAttribute("promociones", promociones);
+            model.addAttribute("found", true);
+            model.addAttribute("registrado", false);
         return ViewConstant.VENTA;
     }//end venta
 
@@ -167,7 +176,7 @@ public class VentaController {
     }
     /**
      * @param model
-     * @param string (@RequestParam, name=string)
+     * @param telefono (@RequestParam, name=string)
      *
      * Modifica el cliente en base al telefono.
      * Regresa un ModelAndView, donde la vista es la constante de ViewConstant y el modelo es una lista de todos los clientes.

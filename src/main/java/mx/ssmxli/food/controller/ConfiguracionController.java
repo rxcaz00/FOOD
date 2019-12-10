@@ -53,7 +53,7 @@ public class ConfiguracionController {
             model.addAttribute("result",1);
         else
             model.addAttribute("result",0);
-        return "redirect:/configuracion/sistema";
+        return "redirect:/venta";
     }
 
     @GetMapping(value = "/cargarConfig")
@@ -85,6 +85,13 @@ public class ConfiguracionController {
     public String sistema(Model model) {
         ConfiguracionModel configuracionModel = new ConfiguracionModel();
         model.addAttribute("configuracionModel",configuracionModel);
+
+        try {
+            configuracionModel = configuracionService.findLastConfiguracion();
+            model.addAttribute("exists", true);
+        } catch (Exception e) {
+            model.addAttribute("exists", false);
+        }
         return ViewConstant.CONFIG_SISTEMA;
     }
 }
