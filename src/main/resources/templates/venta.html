@@ -156,6 +156,18 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Tipo de Orden: Local</td>
+                                    <td th:if="${reciboModelResultado.tipoOrden == 'L'}">Mesa #<span th:text="${reciboModelResultado.numeroMesa}"></span></td>
+                                </tr>
+                                <tr th:if="${reciboModelResultado.tipoOrden == 'D'}">
+                                    <td>Tipo de Orden: A Domicilio</td>
+                                    <td>Dirección de Envio: <span th:text="${reciboModelResultado.direccionDeEnvio}"></span></td>
+                                </tr>
+                                <tr th:if="${reciboModelResultado.tipoOrden == 'R'}">
+                                    <td>Tipo de Orden: Para Recoger</td>
+                                    <td>A Nombre de: <span th:text="${reciboModelResultado.notas}"></span></td>
+                                </tr>
+                                <tr>
                                     <td>Alimento</td>
                                     <td></td>
                                     <td>Precio</td>
@@ -168,14 +180,17 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td></td>
                                     <td>Subtotal:</td>
                                     <td><span th:text="${reciboModelResultado.subtotal}"></span></td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td>Total: </td>
                                     <td><span th:text="${reciboModelResultado.total}"></span></td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td>Puntos Generados: </td>
                                     <td><span th:text="${reciboModelResultado.puntos}"></span></td>
                                 </tr>
@@ -204,6 +219,17 @@
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();
             });
+        </script>
+
+    <!--Abre automaticamente el modal con el Recibo cuando carga la pagina Y result es igual a 1-->
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+            var result = /*[[${result}]]*/ 0;
+            $(document).ready(function () {
+                if(result == 1)
+                    $("#modalRecibo").modal('show');
+            })
+        /*]]>*/
         </script>
     </body>
 </html>

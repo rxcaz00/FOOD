@@ -3,24 +3,18 @@ package mx.ssmxli.food.controller;
 import lombok.Data;
 import mx.ssmxli.food.constant.ViewConstant;
 import mx.ssmxli.food.entity.Alimento;
-import mx.ssmxli.food.entity.ContenidoPromocion;
 import mx.ssmxli.food.entity.ContenidoRecibo;
-import mx.ssmxli.food.entity.Promocion;
 import mx.ssmxli.food.model.*;
-import mx.ssmxli.food.repository.ClienteRepository;
-import mx.ssmxli.food.repository.UsuarioRepository;
 import mx.ssmxli.food.service.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -308,6 +302,16 @@ public class VentaController {
         return "fragments :: contenidosRecibo";
     }
 
+    /**
+     * Añade una promocion del Recibo en progreso, sumandole el precio al total hasta ahora.
+     * Retorna el contenido recibo actualizado al fragmento contenidoRecibo.
+     *
+     * @param model
+     * @param promocionId
+     * @return "fragments :: contenidosRecibo"
+     *
+     * @author Andrés
+     * */
     @GetMapping(value = "/addPromocion/{promocionId}")
     public String addPromocion(Model model, @PathVariable("promocionId")int promocionId){
         PromocionModel promocionTemp = promocionService.findPromocionByIdModel(promocionId);
@@ -343,6 +347,16 @@ public class VentaController {
         return "fragments :: contenidosRecibo";
     }
 
+    /**
+     * Elimina una promocion del Recibo en progreso, restandole el precio al total hasta ahora.
+     * Retorna el contenido recibo actualizado al fragmento contenidoRecibo.
+     *
+     * @param model
+     * @param promocionId
+     * @return "fragments :: contenidosRecibo"
+     *
+     * @author Andrés
+     * */
     @GetMapping(value = "/removePromocion/{promocionId}")
     public String removePromocion(Model model,@PathVariable("promocionId")int promocionId){
         ContenidoPromocionModel tempCPM = new ContenidoPromocionModel();
@@ -373,6 +387,12 @@ public class VentaController {
     }
 
     /**
+     * Carga el recibo actual y lo manda a el fragmento confirmacionRecibo
+     *
+     * @param model
+     * @return "fragments :: confirmacionRecibo"
+     *
+     * @author Andrés
     * */
     @GetMapping(value = "/loadRecibo")
     public String loadRecibo(Model model){

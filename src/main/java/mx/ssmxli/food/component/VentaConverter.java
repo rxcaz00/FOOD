@@ -1,10 +1,9 @@
 package mx.ssmxli.food.component;
 
-import mx.ssmxli.food.entity.Comanda;
+import mx.ssmxli.food.controller.VentaController;
 import mx.ssmxli.food.entity.ContenidoPromocion;
 import mx.ssmxli.food.entity.ContenidoRecibo;
 import mx.ssmxli.food.entity.Recibo;
-import mx.ssmxli.food.model.ComandaModel;
 import mx.ssmxli.food.model.ContenidoPromocionModel;
 import mx.ssmxli.food.model.ContenidoReciboModel;
 import mx.ssmxli.food.model.ReciboModel;
@@ -15,6 +14,8 @@ import mx.ssmxli.food.service.ClienteService;
 import mx.ssmxli.food.service.ConfiguracionService;
 import mx.ssmxli.food.service.PromocionService;
 import mx.ssmxli.food.service.UsuarioService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -52,6 +53,8 @@ public class VentaConverter {
     @Autowired
     @Qualifier("configuracionServiceImpl")
     private ConfiguracionService configuracionService;
+
+    private static final Log log = LogFactory.getLog(VentaConverter.class);
 
     //Recibo
     /**
@@ -132,7 +135,9 @@ public class VentaConverter {
         reciboModel.setNombreUsuario(recibo.getUsuario().getNombre() + " " + recibo.getUsuario().getApellidos());
         for (ContenidoRecibo contRecibo : recibo.getContenidosRecibo()) {
             contenidoReciboModels.add(convertContenidoRecibo2ContenidoReciboModel(contRecibo));
+            log.info("Method convertRecibo2ReciboModel() -- contenido recibo added: "+contRecibo);
         }
+
         reciboModel.setContenidosRecibo(contenidoReciboModels);
 
         return reciboModel;
